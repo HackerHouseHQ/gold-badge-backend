@@ -35,16 +35,17 @@ class LoginController extends Controller
     {
         return view('auth/login');
     }
-    // public function logout(Request $request) {
+    public function logout(Request $request) {
+        // echo"dsf"; die;
 
-    //     $sessionKey = $this->guard()->getName();
+        $sessionKey = $this->guard()->getName();
 
-    //     $this->guard()->logout();
+        $this->guard()->logout();
 
-    //     $request->session()->forget($sessionKey);
-    //     return redirect()->route('login');
+        $request->session()->forget($sessionKey);
+        return redirect()->route('login');
 
-    //  }  
+     }  
 
        use AuthenticatesUsers;
 

@@ -12,7 +12,7 @@
 
             <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New Country</div>
              <div class="panel-body">
-              <form class="form-horizontal" method="GET" action="{{route('add_country')}}">
+              <form class="form-horizontal" method="POST" action="">
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   <div class="col-md-6">
                    <input type="text" class="form-control" name="counry_name" value="{{ old('counry_name') }}" required autofocus>

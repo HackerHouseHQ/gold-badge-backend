@@ -10,12 +10,25 @@
          <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
 
-            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New Country</div>
+            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New State</div>
              <div class="panel-body">
-              <form class="form-horizontal" method="GET" action="{{route('add_country')}}">
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+              <form class="form-horizontal" method="POST" action="">
+                {{-- <div class="form-group"> --}}
+                  {{-- <div class="col-md-6"> --}}
+                  <select>
+                    <option>country</option>
+                  </select>
+                  {{-- </div> --}}
+                 {{-- </div> --}}
+                 <div class="form-group">
                   <div class="col-md-6">
                    <input type="text" class="form-control" name="counry_name" value="{{ old('counry_name') }}" required autofocus>
+                  </div>
+                 </div>
+                    <br><p>or</p><br>
+                 <div class="form-group">
+                  <div class="col-md-6">
+                   <input type="file" class="form-control" name="city_file">
                   </div>
                  </div>
                  <div class="form-group">

@@ -60,7 +60,15 @@
          </a>
         </li>
        <li class="nav-item has-treeview nav_custom_item"> 
-         <a href="{{ route('countries') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='countries') active @endif" style="padding-bottom: 1px;">
+         <a href="{{ route('countries') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='countries') active
+                              @elseif(request()->route()->getName()=='ethnicity') active 
+                              @elseif(request()->route()->getName()=='gender') active 
+                              @elseif(request()->route()->getName()=='report') active 
+                              @elseif(request()->route()->getName()=='add_country_page') active
+                              @elseif(request()->route()->getName()=='add_state_page') active
+                              @elseif(request()->route()->getName()=='add_city_page') active
+                              @elseif(request()->route()->getName()=='add_ethnicity_page') active
+                              @endif" style="padding-bottom: 1px;">
            <p style="color:#505B7A;font-weight: 600;padding-left: 14px;">
                   Manage Data
           </p>

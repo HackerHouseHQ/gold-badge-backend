@@ -495,7 +495,7 @@ span.icons_add_team_pg {
     background-color: #fff;
 }
 a.btn.btn-link.forgot_link {
-    color: #59595B;
+    color: #ffffff;
     font-size: 11px;
     /* text-align: left; */
     /* float: left; */
@@ -511,6 +511,7 @@ a.btn.btn-link.forgot_link {
     outline: 0;
     box-shadow: none;
 }*/
+
 input.form-control.cstm_form_cls {
     background: #BBBDBE;
     border-radius: 0px;
@@ -522,24 +523,34 @@ input.form-control.cstm_form_cls {
     /* text-align: center; */
     margin: 0 auto;
 }
+.asc{
+    background: #73c5e0;
+}
 input.form-control.cstm_form_cls::placeholder {
     color: #575756;
     font-size: 13px;
 }
 button.btn.btn-primary.login_under {
     font-size: 17px;
-    color: #59595B;
+    color: #ffffff;
     border: none;
-    background: #FFDD14;
+    background: #1f1e17;
     border-radius: 7px;
     font-weight: 600;
     padding: 4px 37px;
   
-    margin: 0 auto;
+    /*margin: 9 auto;*/
+margin-top: 24px;
+    margin-right: auto;
+    margin-bottom: 9px;
+    margin-left: auto;
+ /*ds*/
+
+
     display: flex;
     outline: 0;
     box-shadow: none;
-      margin-top: 32px;
+      margin-top: 24px;
 }
 
 h4.forg_pass {

@@ -22,7 +22,7 @@
         <i class="far fa-bell" style="font-size: 23px;"></i>
        </a>
        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right custom_dropdown_clss">
-        <span class="dropdown-item dropdown-header"><a>Logout</a></span>
+        <span class="dropdown-item dropdown-header"><a href="{{ route('logout')}}">Logout</a></span>
         <div class="dropdown-divider"></div>
         <span class="dropdown-item dropdown-header"><a>Change Paswword</a></span>
         <div class="dropdown-divider"></div>

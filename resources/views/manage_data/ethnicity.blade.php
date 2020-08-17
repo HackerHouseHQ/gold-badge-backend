@@ -9,8 +9,8 @@
           <div class="row">
           <div class="main_menu_three_tabs">
            <ul class="nav nav-tabs abc">
-            <li class="active"><a href="{{route('countries')}}">Manage Countries</a></li>
-            <li><a href="{{route('ethnicity')}}">Manage Ethnicity</a></li>
+            <li><a href="{{route('countries')}}">Manage Countries</a></li>
+            <li class="active"><a href="{{route('ethnicity')}}">Manage Ethnicity</a></li>
            <li><a href="{{route('gender')}}">Gender</a></li>
            <li><a href="{{route('report')}}">Report Reason Type</a></li>
            </ul>
