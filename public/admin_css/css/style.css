@@ -1,0 +1,68 @@
+
+.main_menu_three_tabs {
+    margin: 4px auto;
+    display: flex;
+    justify-content: center;
+    width: 808px;
+    margin-top: 30px;
+    border: 1px solid #000000;
+    border-radius: 282px;
+    background-color: #ffffff;
+}
+.main_menu_add_tabs {
+    margin: 0px auto;
+    /*display: flex;*/
+    /*justify-content: center;*/
+    width: 821px;
+    margin-top: 14px;
+    /*border: 1px solid #000000;*/
+    border-radius: 233px;
+    /*background-color: #ffffff;*/
+}
+
+.nav-tabs.abc>li.active>a,
+ .nav-tabs.abc>li.active>a:focus, 
+ .nav-tabs.abc>li.active>a:hover {
+    color: #ffffff;
+    cursor: default;
+    background-color: #007bff;
+    border: none;
+    border-radius: 1px;
+    border-bottom: 2px solid #01AFAA;
+}
+.nav-tabs.abc>li>a {
+    color: #000;
+    font-size: 16px;
+    padding: 3px 36px;
+    font-family: Roboto;
+    margin: 0px 13px;
+}
+.space_in_li.xyy>li>a {
+    color: #000;
+    font-size: 17px;
+    padding: 3px 18px;
+    font-family: Roboto;
+    margin: 0px 5px;
+}
+
+.nav-tabs.abc {
+    border-bottom: none;
+}
+   .tab-content_class_cstm {
+      margin-top: 41px;
+}
+.tab-content_class_cstm {
+   
+    text-align: center;
+    margin: 0 auto;
+    margin-top: 125px;
+    width: 100%;
+    max-width: 75%;
+
+}
+.tab-content {
+    margin: 0 auto;
+}
+ul.pagination {
+    width: 165px;
+}

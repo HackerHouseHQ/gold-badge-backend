@@ -1,0 +1,58 @@
+
+@media(max-width: 1300px){
+.nav-tabs.abc>li>a {
+    padding: 1px 77px;
+}
+/*img.img-fluid.cam_filee_cls_featured_ads.intro_screen {
+    width: 164px;
+}*/
+}
+@media(max-width: 1200px){
+
+}
+
+@media(max-width: 991px){
+.field-icon {
+    right: 130px;
+}
+a.btn.btn-link.forgot_link {
+    width: 53%;
+}
+input.form-control.cstm_form_cls {
+    margin-top: -37px;
+}
+}
+@media(max-width: 768px){
+.form-control.formn_custom_class_add_form{
+    width: 100%;
+}
+
+}
+@media(max-width: 575px){
+.field-icon {
+    right: 89px;
+}
+
+a.btn.btn-link.forgot_link {
+    width: 68%;
+}
+.form-group.custom_form_class_name {
+    width: 100%;
+}
+h4.forg_pass {
+    font-size: 30px;
+}
+p.para_below_pass {
+    font-size: 12px;
+}
+}
+@media (max-width: 400px){
+.field-icon {
+    right: 68px;
+}
+button.btn.btn-default.logout_default_btn {
+   
+    font-size: 11px;
+    padding: 4px 13px;
+    }
+}
