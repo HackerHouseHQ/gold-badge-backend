@@ -10,26 +10,12 @@
          <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
 
-            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New State</div>
+            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New Country</div>
              <div class="panel-body">
-              <form class="form-horizontal" method="POST" action="{{route('add_state')}}"          enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <?php $countryList =  App\Country::get();?>
-                  <select>
-                    <option>Select Country</option>
-                    @foreach($countryList as $counntryList)
-                    <option>{{$counntryList->country_name}}</option>
-                    @endforeach
-                  </select>
-                  <div class="form-group">
+              <form class="form-horizontal" method="POST" action="">
+                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                   <div class="col-md-6">
-                   <input type="text" class="form-control" name="counry_name" value="{{ old('state_name') }}" required autofocus>
-                  </div>
-                 </div>
-                    <br><p>or</p><br>
-                 <div class="form-group">
-                  <div class="col-md-6">
-                   <input type="file" class="form-control" name="city_file">
+                   <input type="text" class="form-control" name="counry_name" value="{{ old('counry_name') }}" required autofocus>
                   </div>
                  </div>
                  <div class="form-group">

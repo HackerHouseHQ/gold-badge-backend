@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Country;
+use App\CountryState;
 
 class ManageDataController extends Controller
 {
@@ -36,8 +37,15 @@ class ManageDataController extends Controller
     }
 // end add country 
 // add state
+    
     public function add_state_page(){
-    	return view('manage_data.add_state');
+        return view('manage_data.add_state');
+    }
+    public function add_state(){
+  	  print_r($request->all()); die;
+      $data['country_id'] = $request->counry_name;
+      $data['state_name'] = $request->counry_name;
+        $insertCountry = CountryState::create($data);
     }
 // end add state 
  // add city

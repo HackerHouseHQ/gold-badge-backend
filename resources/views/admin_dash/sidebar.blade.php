@@ -46,14 +46,17 @@
          </a>
         </li>
        <li class="nav-item has-treeview nav_custom_item"> 
-         <a href="{{ route('home') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='home') active @endif" style="padding-bottom: 1px;">
+         <a href="{{ route('notification') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='notification') active @endif" style="padding-bottom: 1px;">
            <p style="color:#505B7A;font-weight: 600;padding-left: 14px;">
                   Notifications
           </p>
          </a>
         </li>
        <li class="nav-item has-treeview nav_custom_item"> 
-         <a href="{{ route('home') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='home') active @endif" style="padding-bottom: 1px;">
+         <a href="{{ route('about_us') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr @if(request()->route()->getName()=='about_us') active
+                              @elseif(request()->route()->getName()=='terms') active 
+                              @elseif(request()->route()->getName()=='privacy') active 
+                              @endif" style="padding-bottom: 1px;">
            <p style="color:#505B7A;font-weight: 600;padding-left: 14px;">
                   CMS
           </p>
