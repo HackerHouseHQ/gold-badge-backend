@@ -1,4 +1,12 @@
 @extends('admin_dash.main')
+<style type="text/css">
+  .addstateSave{
+    margin: 10px;
+    margin-left: 211px;
+    padding: 16px;
+
+  }
+</style>
  @section('content')
     <div class="col-sm-12">
      <div class="content-wrapper custom-content-wrapper">
@@ -10,15 +18,19 @@
          <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
 
-            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New Country</div>
+            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New State</div>
              <div class="panel-body">
-              <form class="form-horizontal" method="POST" action="">
-                <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                  <div class="col-md-6">
-                   <input type="text" class="form-control" name="counry_name" value="{{ old('counry_name') }}" required autofocus>
-                  </div>
+              <form class="form-horizontal" method="POST" action="{{route('add_ethnicity')}}"          enctype="multipart/form-data">
+                {{ csrf_field() }}
+                <br>
+                  <div class="orm-control formn_custom_class_add_form">
+                   <input type="text" class="form-control" placeholder="Enter Ethnicity Name" name="ethnicity_name" value="{{ old('ethnicity_name') }}">
                  </div>
-                 <div class="form-group">
+                 <p><b>OR</b></p><br>
+                  <div class="col-md-6">
+                   <input type="file" class="form-control"placeholder="fghj" name="ethnicity_file" style="display: block;">
+                  </div>
+                 <div class="form-group addstateSave">
                   <div class="col-md-8 col-md-offset-4">
                    <button type="submit" class="btn btn-primary">
                     Save

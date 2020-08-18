@@ -29,11 +29,79 @@
           </div>
          </div>
          {{-- close --}}
+         {{-- table data --}}
+         <br>
+         <div class="row">
+          <div class="col-md-12">
+            <div class="card table_cardd class_scroll">
+             <div class="card-body p-0">
+             <table class="table table-bordered" id="data1">
+               <thead>
+                <tr>
+                  <th><span class="tbl_row">Country NAME</span></th>
+                  <th><span class="tbl_row">State Name</span></th>
+                  <th><span class="tbl_row">City Names</span></th>
+                  <th></th>
+                 </tr>
+                </thead>
+                <tbody></tbody>
+               </table>
+              </div>
+             </div>
+            </div>
+           </div>
+         {{--   <div class="container">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Firstname</th>
+                  <th>Lastname</th>
+                  <th>Email</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>John</td>
+                  <td>Doe</td>
+                  <td>john@example.com</td>
+                </tr>
+                
+              </tbody>
+            </table>
+          </div> --}}
+          {{-- close table --}}
+
           </div>
         </section>
+
       </div>
       </div>
     </div>
   @endsection
   @section('script')
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var dataTable = $('#data1').DataTable({
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+    "bFilter": true,
+    "bInfo": false,
+    "lengthChange": false,
+    "bAutoWidth": false,
+    'ajax': {
+       'url':"{{route('countryList')}}",
+       'data': function(data){
+        
+       }
+    },
+    'columns': [
+        { data: 'country_name' } ,
+        { data: 'state_name' },
+        { data: 'city_name' },
+        { data: 'view' },
+    ]
+  });
+});
+</script>
 @endsection

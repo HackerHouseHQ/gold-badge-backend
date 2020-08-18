@@ -18,14 +18,14 @@
          {{-- close --}}
          <div class="row">
          <div class="col-md-12">
-           <form  action="#" method="GET">
+           <form  action="{{ route('edit_terms')}}" method="GET">
               <div class="mb-3">
                <div class="wrapper_both">
                 <div class="row_customm">
                   <div class="textarea_divv">
                 <span>
                 <textarea  placeholder="Place some text here"
-                          style="width: 100%; height: 200px; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;" name="messsage" >dfghj dhsg hjdsajgshf </textarea>
+                          style="width: 100%; height: 200px; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;" name="terms" >{{$Terms->terms}} </textarea>
              </span>
            </div>
              </div>

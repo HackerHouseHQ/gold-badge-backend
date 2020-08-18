@@ -3,30 +3,44 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\InformationData;
 
 class InformationManagementController extends Controller
 {
 
     public function about_us(){
-       return view ('cms.about_us');
+       $GetAboutUs = InformationData::first();
+       $data['data'] = $GetAboutUs;      
+       return view ('cms.about_us',$data);
     }
     public function edit_about_us(Request $req){
-       return redirect ('/cms/about_us');
+       $data['about_us'] = $req->AboutUs;
+       $updateAboutUs = InformationData::where('id',1)->update($data);
+       return redirect('/cms/about_us');
     }
 
     public function privacy(){
-       return view ('cms.privacy_policy');
+       $GetPrivacy = InformationData::first();
+       $data['privacy'] = $GetPrivacy;      
+       return view ('cms.privacy_policy',$data);
     }
      public function edit_privacy(Request $req){
-       return view ('cms/privacy');
+      // print_r($req->all()); die;
+       $data['privacy'] = $req->privacy;
+       $updatePrivacy = InformationData::where('id',1)->update($data);
+       return redirect('/cms/privacy');
     }
 
 
     public function terms(){
-       return view ('cms.terms');
+      $GetTerms = InformationData::first();
+      $data['Terms'] = $GetTerms;
+       return view ('cms.terms',$data);
     }  
     public function edit_terms(Request $req){
-       return view ('cms/terms');
+       $data['terms'] = $req->terms;
+       $updateTerms = InformationData::where('id',1)->update($data);
+       return redirect('/cms/terms');
     }
 
     public function notification(){

@@ -1,4 +1,12 @@
 @extends('admin_dash.main')
+<style type="text/css">
+  .addstateSave{
+    margin: 10px;
+    margin-left: 211px;
+    padding: 16px;
+
+  }
+</style>
  @section('content')
     <div class="col-sm-12">
      <div class="content-wrapper custom-content-wrapper">
@@ -15,24 +23,22 @@
               <form class="form-horizontal" method="POST" action="{{route('add_state')}}"          enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <?php $countryList =  App\Country::get();?>
-                  <select>
+                  <br>
+                  <select name="country_id" id="country_id" class="form-control formn_custom_class_add_form"  required>
                     <option>Select Country</option>
                     @foreach($countryList as $counntryList)
-                    <option>{{$counntryList->country_name}}</option>
+                    <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
                     @endforeach
                   </select>
-                  <div class="form-group">
-                  <div class="col-md-6">
-                   <input type="text" class="form-control" name="counry_name" value="{{ old('state_name') }}" required autofocus>
-                  </div>
+                  <br>
+                  <div class="orm-control formn_custom_class_add_form">
+                   <input type="text" class="form-control" placeholder="Enter State Name" name="state_name" value="{{ old('state_name') }}">
                  </div>
-                    <br><p>or</p><br>
-                 <div class="form-group">
+                 <p><b>OR</b></p><br>
                   <div class="col-md-6">
-                   <input type="file" class="form-control" name="city_file">
+                   <input type="file" class="form-control"placeholder="fghj" name="state_file" style="display: block;">
                   </div>
-                 </div>
-                 <div class="form-group">
+                 <div class="form-group addstateSave">
                   <div class="col-md-8 col-md-offset-4">
                    <button type="submit" class="btn btn-primary">
                     Save
