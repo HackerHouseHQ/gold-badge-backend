@@ -42,6 +42,7 @@
                   <th><span class="tbl_row">State Name</span></th>
                   <th><span class="tbl_row">City Names</span></th>
                   <th></th>
+                  <th></th>
                  </tr>
                 </thead>
                 <tbody></tbody>
@@ -100,6 +101,7 @@
         { data: 'state_name' },
         { data: 'city_name' },
         { data: 'view' },
+        // { data: 'view' },
     ]
   });
 });

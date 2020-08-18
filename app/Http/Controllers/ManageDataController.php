@@ -57,7 +57,7 @@ class ManageDataController extends Controller
             
             $arr[$key]['city_name'] = "<td><span class='tbl_row_new'>".$array_city."</span></td>";
             // group_concat(ss.sub_services_name) as sub_services_name')
-             $arr[$key]['view'] = 'view';
+             $arr[$key]['view'] = '<td><span class="tbl_row_new"><a href="#">view country department/edit city list</a></span></td>';
           }
          return $arr;
     }
