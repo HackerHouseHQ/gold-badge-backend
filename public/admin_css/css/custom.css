@@ -741,14 +741,22 @@ img.add_ppl_imgg {
 }.table-striped tbody tr.tr_under_body:nth-of-type(even) {
     background-color: red;
 }*/
-.card.table_cardd {
+/*.card.table_cardd {
     box-shadow: none;
     margin: 0 auto;
     border: none;
     border-radius: 12px;
     padding-top: 30px;
    /* height: 50vh;*/
-    width: 100%;
+    /*width: 100%;*/
+    /*text-align: center;*/
+}*/
+.card.table_cardd {
+    box-shadow: none;
+    margin: 8px -46px;
+    padding-top: 28px;
+    /* height: 50vh; */
+    width: 112%;
     text-align: center;
 }
 span.tbl_row_new {
