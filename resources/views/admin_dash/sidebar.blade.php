@@ -27,7 +27,10 @@
          </a>
         </li>
        <li class="nav-item has-treeview nav_custom_item"> 
-         <a href="#" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr" style="padding-bottom: 1px;">
+         <a href="{{ route('department') }}" class="nav-link custom_navv_linkk homee_divv class_inside_anchorr
+              @if(request()->route()->getName()=='department') active
+              @elseif(request()->route()->getName()=='badge') active
+              @endif" style="padding-bottom: 1px;">
            <p style="color:#505B7A;font-weight: 600;padding-left: 14px;">
                   Department/Badge Management
           </p>

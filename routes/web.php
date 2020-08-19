@@ -23,6 +23,14 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
   });
 
+
+  Route::group(['prefix' => 'department_management'], function () {
+    Route::get('/department', 'DepartmentController@department')->name('department');
+    Route::get('/badge', 'DepartmentController@badge')->name('badge');
+  });
+
+
+
   Route::group(['prefix' => 'manage_data'], function () {
     Route::get('/countries', 'ManageDataController@countries')->name('countries');
     Route::get('/countries_list', 'ManageDataController@countries_list')->name('countryList');
