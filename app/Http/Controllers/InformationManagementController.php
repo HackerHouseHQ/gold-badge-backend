@@ -95,8 +95,10 @@ class InformationManagementController extends Controller
         $i = 0;
         foreach($data as $key=>$data){
           $arr[$key]['message'] = "<td><span class='tbl_row_new'>".$data->title."</span></td>";
-           // $arr[$key]['message'] = "<td><span class='tbl_row_new'>".$data->title."</span></td>";
-          $arr[$key]['time'] = "<td><span class='tbl_row_new'>".date("h:i a", strtotime($data->created_at))."</span></td>";
+          $timestamp = strtotime($data->created_at) + 330*60;
+          $time = date('h:i A', $timestamp);
+          $arr[$key]['time'] = "<td><span class='tbl_row_new'>".$time."</span></td>";
+
           $arr[$key]['date'] = "<td><span class='tbl_row_new'>".date("Y-m-d", strtotime($data->created_at))."</span></td>";
         }
           return $arr;
