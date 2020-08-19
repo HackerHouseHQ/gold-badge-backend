@@ -185,6 +185,17 @@ button.apply_btnn {
     float: right;
     margin-right: 50px;
 }
+button.apply_btnn1 {
+    color: #59595B;
+    font-size: 11px;
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: 600;
+    background: #03c7e6;
+    border: none;
+    float: right;
+    margin-right: 220px;
+}
 i.far.fa-circle.nav-icon.circle_iconn {
     font-size: 10px;
 }

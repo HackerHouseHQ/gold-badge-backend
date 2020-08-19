@@ -78,7 +78,9 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/terms', 'InformationManagementController@terms')->name('terms');
     Route::get('/edit_terms', 'InformationManagementController@edit_terms')->name('edit_terms');
     Route::get('/notification', 'InformationManagementController@notification')->name('notification');
-    // Route::post('/send_notification', 'InformationManagementController@send_notification')->name('send_notification');
+    Route::get('/sendNotification', 'InformationManagementController@sendNotification')->name('sendNotification');
+    Route::get('/notificationList', 'InformationManagementController@notificationList')->name('notificationList');
+    Route::post('/downloadNotification', 'InformationManagementController@downloadNotification')->name('downloadNotification');
   });
 
 });

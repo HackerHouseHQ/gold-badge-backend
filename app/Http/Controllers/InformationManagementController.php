@@ -4,9 +4,21 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\InformationData;
+use App\SendNotification;
+
+use DB;
+use Auth;
+use Storage;
+use Session;
+use Validator;
 
 class InformationManagementController extends Controller
 {
+
+  function __construct()
+        {
+            $this->user = new SendNotification;
+        }
 
     public function about_us(){
        $GetAboutUs = InformationData::first();
@@ -46,5 +58,64 @@ class InformationManagementController extends Controller
     public function notification(){
        return view ('cms/notification');
     }
+
+    public function sendNotification(Request $req){
+      // echo"<pre>"; print_r($req->all()); die;  
+      $data['title'] = $req->title;
+      $data['message'] = $req->desscription;
+      $insertNotification = SendNotification::create($data);
+       return redirect('cms/notification');
+    }
+    public function notificationList(Request $request){
+         // echo"<pre>"; print_r($request->all()); die;
+        $order_by = $_GET['order'][0]['dir'];
+        $columnIndex = $_GET['order'][0]['column'];
+        $columnName = $_GET['columns'][$columnIndex]['data'];
+        $columnName =  ($columnName=='username') ? 'first_name' : 'created_at';
+        $offset = $_GET['start'] ? $_GET['start'] :"0";
+        $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
+        $draw = $_GET['draw'];
+        $date1 = $_GET['date1'];
+        $fromdate = $_GET['fromdate'];
+        $todate = $_GET['todate'];
+
+        $data = $this->user->getdata_table($order_by, $offset, $limit_t,$date1,$todate,$fromdate);
+        $count = $this->user->getdata_count($order_by,$date1,$todate,$fromdate);
+        $getuser = $this->manage_data($data);
+        $results = ["draw" => intval($draw),
+            "iTotalRecords" => $count,
+            "iTotalDisplayRecords" => $count,
+            "aaData" => $getuser ];
+            echo json_encode($results);
+     
+    }
+    
+   public function manage_data($data){
+        $arr = array();
+        $i = 0;
+        foreach($data as $key=>$data){
+          $arr[$key]['message'] = "<td><span class='tbl_row_new'>".$data->title."</span></td>";
+           // $arr[$key]['message'] = "<td><span class='tbl_row_new'>".$data->title."</span></td>";
+          $arr[$key]['time'] = "<td><span class='tbl_row_new'>".date("h:i a", strtotime($data->created_at))."</span></td>";
+          $arr[$key]['date'] = "<td><span class='tbl_row_new'>".date("Y-m-d", strtotime($data->created_at))."</span></td>";
+        }
+          return $arr;
+    }
+   public function downloadNotification(Request $r){
+   // print_r($r->all()); die;
+     if(isset($_POST["Export"])){
+        header('Content-Type: text/csv; charset=utf-8');  
+        header('Content-Disposition: attachment; filename=data.csv');  
+        $output = fopen("php://output", "w");  
+        fputcsv($output, array('title','message','created_at'));  
+        // echo $output;  die;
+        $result = SendNotification::select('title','message','created_at')->get()->toArray();
+        foreach ($result as $key => $arr) {
+            fputcsv($output, $arr);
+        }
+        fclose($output);  
+     } 
+  }
+
 
 }

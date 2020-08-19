@@ -9,7 +9,7 @@
           <table class="table table-striped">
            <thead>
             <tr>
-              <span class="div_cover_sell">
+             {{--  <span class="div_cover_sell">
               <span>
             <select name="user_id" id="user_id" >
               <option value = "">Recipients</option>
@@ -18,14 +18,14 @@
               <option value = "">A month</option>
             </select>
           </span>
-          </span>
+          </span> --}}
           <span class="div_cover_sell">
             <span>
              <select name="date1" id="date1">
-              <option value = "">Today</option>
-              <option value = "">A week</option>
-              <option value = "">A month</option>
-             
+              {{-- <option value = "1">Today</option> --}}
+              <option value = "1">Today</option>
+              <option value = "2">A week</option>
+              <option value = "3">A month</option>
             </select>
           </span>
           </span>
@@ -37,14 +37,14 @@
               <input type="date" class="from_control" name="todate" id="todate" style="-webkit-appearance: media-slider;">
             </span>
             <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
-            <button type="button" id="search_data1" class="apply_btnn">Apply</button>
+            <button type="button" id="search_data1" class="apply_btnn1">Apply</button>
 
             
             </tr>
            </thead>
           </table>
         </form>
-         <form class="form-horizontal" action = "#" method="POST" enctype="multipart/form-data" name="upload_excel" >
+         <form class="form-horizontal" action = "#" method="post" enctype="multipart/form-data" name="upload_excel" >
             {{ csrf_field() }}
          <button type="submit" name="Export"  value="export to excel" class="down_btn_new_clss"/>
             <img src="{{ asset('admin_css/images/download_icon.png') }}" alt="icon" class="img-fluid down_icon_cls">
@@ -63,7 +63,7 @@
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                    <div class="modal-body">
-                   <form action ="#" method="get">
+                   <form action ="{{route('sendNotification')}}" method="get">
                     <br><br>
                     <div class="form-group">
                      <input type="title" name="title" placeholder="Notification Title" value=""><br>
@@ -87,22 +87,27 @@
          <br>
          <br>
 
-        <table id="data" class="table table-striped">
-         <thead>
-          <tr>
-           <th><span class="tbl_row"></span></th>
-           <th><span class="tbl_row"></span></th>
-           <th><span class="tbl_row"></span></th>
-          </tr>
-          </thead>
-          <tbody>
-            <tr>
-             <td>sdf</td>
-             <td>sdf</td>
-             <td>sdf</td>
-            </tr>
-           </tbody>
-          </table>
+         {{--start table --}}
+          <br>
+         <div class="row">
+          <div class="col-md-12">
+            <div class="card table_cardd class_scroll">
+             <div class="card-body p-0">
+             <table class="table table-bordered" id="data1">
+               <thead>
+                <tr>
+                  <th><span class="tbl_row">Notification Title</span></th>
+                  <th><span class="tbl_row">Time</span></th>
+                  <th><span class="tbl_row">Date</span></th>
+                 </tr>
+                </thead>
+                <tbody></tbody>
+               </table>
+              </div>
+             </div>
+            </div>
+           </div>
+         {{-- end table --}}
           </div>
         </section>
       </div>
@@ -110,4 +115,36 @@
     </div>
   @endsection
   @section('script')
+    <script type="text/javascript">
+  $(document).ready(function(){
+  var dataTable = $('#data1').DataTable({
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+     "bFilter": true,
+     "bInfo": false,
+     "lengthChange": false,
+     "bAutoWidth": false,
+     'ajax': {
+        'url':"{{route('notificationList')}}",
+        'data': function(data){
+           var date1 = $('#date1').val();
+          data.date1 = date1;
+           var fromdate = $('#fromdate').val();
+          data.fromdate = fromdate;
+          var todate = $('#todate').val();
+          data.todate = todate;
+        }
+       },
+    'columns': [
+        { data: 'message' } ,
+        { data: 'time' },
+        { data: 'date' },
+    ]
+  });
+ $('#search_data1').click(function(){
+     dataTable.draw();
+  });
+});
+</script>
 @endsection
