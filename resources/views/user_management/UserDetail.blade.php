@@ -21,6 +21,20 @@
       float: right;
       border-collapse: collapse;
     }
+    .img-r{
+      /*height: 200px; */
+      /*width: 200px; */
+      /*margin:0 auto;*/
+      height: 136px;
+      width: 147px;
+      margin-top: 0px;
+      margin-bottom: 38px;
+      margin-left: 35px;
+      border-radius: 100px;
+      overflow: hidden; 
+      border: 7px solid #f6f6f6;
+    }
+  
 
 </style>
  @section('content')
@@ -37,7 +51,12 @@
                  <div class="card-body p-0">
                   
                     <div class="leftpane">
-                      <h1>Test Page</h1>
+{{--                        <div class="img-responsive text-center" style="height: 200px; width: 200px; margin:0 auto; border-radius: 100px; overflow: hidden; border: 7px solid #f6f6f6;">
+                                    <img src="{{$data->image}}" alt="" style="width: 300px;">
+                                </div>
+ --}}                       <div class="img-r">
+                                    <img src="{{$data->image}}" alt="" style="width: 100px;">
+                                </div>
                     </div>
                     <div class="middlepane">
                        <div class="key_value_box">
