@@ -13,12 +13,12 @@ use App\ReportReasson;
 
 class ManageDataController extends Controller
 {
-	// show country
     function __construct()
         {
             $this->state = new CountryState;
         }
 
+	// show country
 
     public function countries(){
     	return view('manage_data.countries');
