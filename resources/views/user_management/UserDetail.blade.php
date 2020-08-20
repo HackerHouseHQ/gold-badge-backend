@@ -1,7 +1,7 @@
 @extends('admin_dash.main')
 <style type="text/css">
      .leftpane {
-        width: 30%;
+        width: 20%;
         height: 100%;
         float: left;
         border-collapse: collapse;
@@ -15,7 +15,7 @@
     }
 
     .rightpane {
-      width: 30%;
+      width: 40%;
       height: 100%;
       position: relative;
       float: right;
@@ -25,11 +25,11 @@
       /*height: 200px; */
       /*width: 200px; */
       /*margin:0 auto;*/
-      height: 136px;
-      width: 147px;
+      height: 118px;
+      width: 119px;
       margin-top: 0px;
       margin-bottom: 38px;
-      margin-left: 35px;
+      margin-left: -14px;
       border-radius: 100px;
       overflow: hidden; 
       border: 7px solid #f6f6f6;
@@ -48,7 +48,8 @@
              <div class="row">
               <div class="col-md-12">
                 <div class="card table_cardd">
-                 <div class="card-body p-0">
+                 {{-- <div class="card-body p-0"> --}}
+                 <div class="card-body ">
                   
                     <div class="leftpane">
 {{--                        <div class="img-responsive text-center" style="height: 200px; width: 200px; margin:0 auto; border-radius: 100px; overflow: hidden; border: 7px solid #f6f6f6;">

@@ -51,13 +51,20 @@
              </div>
             </div>
            </div> --}}
-         <div class="row">
+        {{--  <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="card-body">
               <table id="data1" class="table table-bordered table-hover">
-                <thead>
+                <thead> --}}
+        <div class="row">
+        <div class="col-12">
+          <div class="card class_scroll ">
+            <div class="card-body p-0">
+              <table id="data1" class="table table-bordered table-hover">
+               <thead>
                 <tr>
+                  <th><span class="tbl_row">SN.</span></th>
                   <th><span class="tbl_row">Country NAME</span></th>
                   <th><span class="tbl_row">State Name</span></th>
                   <th><span class="tbl_row">City Names</span></th>
@@ -73,6 +80,31 @@
        </div>
           </div>
         </section>
+
+                 {{-- model view city --}}
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title text-capitalize" id="businessName"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <div id="businessDetails">
+                      </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+        {{-- end model view city --}}
 
       </div>
       </div>
@@ -96,6 +128,7 @@
        }
     },
     'columns': [
+        { data: 'SN' } ,
         { data: 'country_name' } ,
         { data: 'state_name' },
         { data: 'city_name' },
@@ -104,5 +137,42 @@
     ]
   });
 });
+</script>
+<script type="text/javascript">
+  function viewCityModel(id){
+    alert(id);
+     $.ajax({
+          url: "{{ route('viewCityModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+          if(response.data.length) {
+              $('#businessDetails').html('');
+              $.each(response.data, function(key, value){
+                let row = `
+                <tr>
+                  <td> ${response.from++} </td>
+                  <td class="text-capitalize"> ${value.business_name} </td>
+                  <td></td>
+                 </tr>
+                `;
+                $('#businessDetails').append(row)
+              })
+                        
+            } else {
+              let row = `
+                <tr>
+                  <td colspan="7"> Record not found! </td>
+                </tr>
+                `;
+                $('#businessDetails').html(row);
+            }
+
+          
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
 </script>
 @endsection

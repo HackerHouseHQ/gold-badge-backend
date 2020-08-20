@@ -1,7 +1,11 @@
 @extends('admin_dash.main')
 <style type="text/css">
   .show{
-    margin-left: 1px;
+    margin-left: 31px;
+        margin-right: 92px;
+}
+  .active2{
+background: red;
 }
 </style>
  @section('content')
@@ -16,11 +20,22 @@
            <ul class="nav nav-tabs abc">
             <li class="active show"><a href="{{route('department')}}">Department List</a>
             </li>
-            <li class="show"><a href="{{route('badge')}}">Badge List</a></li>
+            <li class="  show"><a href="{{route('badge')}}">Badge List</a></li>
            </ul>
          </div>
          </div>
          {{-- close --}}
+         {{-- add --}}
+          <div class="row">
+          <div class="main_menu_add_tabs">
+           <ul class="nav space_in_li xyy">
+            <li><a href="#"  data-toggle="modal" data-target="#department" class="data2">Add Department<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+            <li><a href="#"  data-toggle="modal" data-target="#badge" class="data2">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+
+          </ul>
+          </div>
+         </div>
+         {{-- add --}}
          <form action="" id="search_data" class="search_data_row_class">
           <table class="table table-striped">
            <thead>
@@ -51,6 +66,13 @@
             </select>
           </span>
           </span>
+           <span class="div_cover_sell">
+            <span>
+             <select name="city_id" id="city_id">
+              <option value = "">City</option>
+            </select>
+          </span>
+          </span>
             <span class="from_to_select">
              <label for="from_text" class="serach_by_text">From</label>
              
@@ -76,11 +98,11 @@
          <br>
          {{--start table --}}
           <br>
-         <div class="row">
-          <div class="col-md-12">
-            <div class="card table_cardd class_scroll">
-             <div class="card-body p-0">
-             <table class="table table-bordered" id="data1">
+           <div class="row">
+        <div class="col-12">
+          <div class="card class_scroll ">
+            <div class="card-body p-0">
+              <table id="data1" class="table table-bordered table-hover">
                <thead>
                 <tr>
                   <th><span class="tbl_row">NAME</span></th>
@@ -94,15 +116,79 @@
                   <th></th>
                  </tr>
                 </thead>
-                <tbody></tbody>
-               </table>
-              </div>
+                <tbody>
+                </tbody>
+              </table>
              </div>
-            </div>
            </div>
+         </div>
+       </div>
          {{-- end table --}}
           </div>
         </section>
+
+        {{-- start add department model view --}}
+            <div id="department" class="modal">
+             <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+               
+                 <div class="modal-header">
+                  <h4 class="modal-title text-capitalize" id="userName"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+                  <div class="modal-body">
+                   <div class="row">
+                    <div class="col-md-12">
+                     <div class="table-responsive">
+                      <form action="{{route('AddReport')}}" method ="GET">
+                       <div>
+                          <b>Add New Department</b><br>
+                           <label>Department Name</label>
+                            <input type="text" name="name" placeholder="Enter Name"><label>Department Image</label>
+                            <input type="file" name="image" placeholder="Enter Name">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Save</button>
+                       </form>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               {{-- end add department  --}}
+               {{-- start add badge model view --}}
+            <div id="badge" class="modal">
+             <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+               
+                 <div class="modal-header">
+                  <h4 class="modal-title text-capitalize" id="userName"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+                  <div class="modal-body">
+                   <div class="row">
+                    <div class="col-md-12">
+                     <div class="table-responsive">
+                      <form action="{{route('AddReport')}}" method ="GET">
+                       <div>
+                          <b>Add New Report Reason Name</b>
+                            <input type="text" name="name" placeholder="Enter Name">
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-secondary">Save</button>
+                       </form>
+                      </div>
+                     </div>
+                    </div>
+                   </div>
+                  </div>
+                 </div>
+                </div>
+               {{-- end add badge  --}}
       </div>
       </div>
     </div>

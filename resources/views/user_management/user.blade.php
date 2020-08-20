@@ -60,7 +60,7 @@
          <br>
          {{--start table --}}
           <br>
-         <div class="row">
+         {{-- <div class="row">
           <div class="col-md-12">
             <div class="card table_cardd class_scroll">
              <div class="card-body p-0">
@@ -83,7 +83,32 @@
               </div>
              </div>
             </div>
+           </div> --}}
+            <div class="row">
+        <div class="col-12">
+          <div class="card class_scroll ">
+            <div class="card-body p-0">
+              <table id="data1" class="table table-bordered table-hover">
+               <thead>
+                <tr>
+                  <th><span class="tbl_row">NAME</span></th>
+                  <th><span class="tbl_row">Contact No.</span></th>
+                  <th><span class="tbl_row">Email</span></th>
+                  <th><span class="tbl_row">Username</span></th>
+                  <th><span class="tbl_row">Registered On</span></th>
+                  <th><span class="tbl_row">Total Reviews</span></th>
+                  <th><span class="tbl_row"></span></th>
+                  <th></th>
+                  <th></th>
+                 </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+             </div>
            </div>
+         </div>
+       </div>
          {{-- end table --}}
           </div>
         </section>

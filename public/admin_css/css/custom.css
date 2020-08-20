@@ -782,6 +782,11 @@ span.tbl_row_new1 {
     display: flex;
     justify-content: center;
 }
+/*span.tbl_row_new1 {
+    color: #000000;
+    font-size: 15px;
+    font-weight: 500;
+}*/
 tr.tdcalss td {
     color: #000;
     font-size: 13px;
@@ -1445,7 +1450,7 @@ label.tbl_row.labell {
     float: left;
 }
 .key_value_box {
-    width: 100%;
+    width: 87%;
     display: block;
     float: left;
     line-height: 8px;
@@ -1536,6 +1541,7 @@ span.tbl_row_new.view_modd_dec {
 }span.tbl_row_new1.view_modd_dec {
     padding-left: 10px;
     font-size: 10px;
+    color: blue;
 }
 span.tbl_row_new.view_modd_delete {
     /* padding-left: 10px; */
@@ -2185,11 +2191,11 @@ img.img-fluid.team_formm_cityy {
     top: 18px;
     position: absolute;
 }
-span.tbl_row_new1 {
-    color: #007bff;
+/*span.tbl_row_new1 {
+    color: #000000;
     font-size: 15px;
     font-weight: 500;
-}
+}*/
 a.page-link {
     background: #FFDD14;
     background: 1px solid #fff;

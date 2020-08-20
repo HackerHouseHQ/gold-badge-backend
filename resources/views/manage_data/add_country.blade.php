@@ -10,7 +10,7 @@
          <div class="col-md-8 col-md-offset-2">
           <div class="panel panel-default">
 
-            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/cross_icon.png') }}"></a>Enter New Country</div>
+            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/back_icon@2x.png') }}"></a>Enter New Country</div>
              <div class="panel-body">
               <form class="form-horizontal" method="GET" action="{{route('add_country')}}">
                 <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

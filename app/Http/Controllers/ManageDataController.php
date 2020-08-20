@@ -13,6 +13,10 @@ use App\ReportReasson;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Pagination\Paginator;
 
+ // use Excel;
+ use Exporter;
+ use Importer;
+
 class ManageDataController extends Controller
 {
     function __construct()
@@ -48,6 +52,11 @@ class ManageDataController extends Controller
           $arr = array();
           $i = 0;
           foreach($data as $key=>$data){
+            $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
+            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
+            $EditCity = "<a href='javascript:void(0)' onclick ='viewCityModel(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
+
+            $arr[$key]['SN'] = "<td><span class='line_heightt'>".++$i.".</span></td>";
             $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_data->country_name."</span></td>";
             $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>".$data->state_name."</span></td>";
             $array_city = array();
@@ -57,9 +66,12 @@ class ManageDataController extends Controller
             $array_city = implode(",",$array_city);
 
             
-            $arr[$key]['city_name'] = "<td class='tdcalss'><span class='tbl_row_new1'>".$array_city."</span></td>";
-            // group_concat(ss.sub_services_name) as sub_services_name')
-             $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';
+            $arr[$key]['city_name'] = "<td class='tdcalss'><span class='tbl_row_new1'>".$viewCity."</span></td>";
+
+             $view1= $view.$EditCity;
+             // $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';
+            $arr[$key]['view'] = "<td class='tdcalss'><span class='line_heightt'>".$view1."</span></td>";
+             
           }
          return $arr;
     }
@@ -73,15 +85,32 @@ class ManageDataController extends Controller
         $insertCountry = Country::create($data);
         return redirect('/manage_data/countries');
     }
+    public function viewCityModel($id){
+        $genderData = ReportReasson::where('country_id',$id)->get();
+        return response()->json($genderData, 200);
+
+    }
     public function add_state_page(){
         return view('manage_data.add_state');
     }
             // insert state
     public function add_state(Request $request){
-     // echo"<pre>"; print_r($request->all()); die;
      if(!empty($request->state_file)){
-        echo"sdf"; die;
+       $path = $request->file('state_file')->getRealPath();
+
+       $data1 =  Importer::make('Csv')->load($path)->getCollection();
+       $datacount = count($data1);
+        for ($i=1; $i <$datacount ; $i++) { 
+       // echo"<pre>"; print_r($data[$i][0]); 
+         $data['country_id'] = $request->country_id;
+         $data['state_name'] = $data1[$i][0];
+         $insertCountry = CountryState::create($data);
+
+        }
+         return redirect('/manage_data/countries');
+        // die;
      }
+
      else {
        $data['country_id'] = $request->country_id;
       $data['state_name'] = $request->state_name;
@@ -106,8 +135,19 @@ class ManageDataController extends Controller
         echo json_encode($state_arr);
     }
     public function add_city(Request $request){
-      if(!empty($request->state_file)){
-        echo"sdf"; die;
+      if(!empty($request->city_file)){
+        $path = $request->file('city_file')->getRealPath();
+         $data1 =  Importer::make('Csv')->load($path)->getCollection();
+       $datacount = count($data1);
+        for ($i=1; $i <$datacount ; $i++) { 
+        // echo"sdf"; die;
+          $data['country_id'] = $request->country_id;
+       $data['state_id'] = $request->state_id;
+         $data['city_name'] = $data1[$i][0];
+        $insertCountry = City::create($data);
+
+        }
+         return redirect('/manage_data/countries');
      } else {
        $data['country_id'] = $request->country_id;
        $data['state_id'] = $request->state_id;
