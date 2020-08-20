@@ -119,7 +119,7 @@
         {{-- model Edit city --}}
           <div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
+              <div class="modal-content" style="width:150%">
                 <div class="modal-header">
                   <h4 class="modal-title text-capitalize" id="businessName"></h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -143,7 +143,7 @@
                           <tbody id="EditCity">
                             
                           </tbody>
-                          <button type="submit" class="btn btn-secondary">Save</button>
+                          {{-- <button type="submit" class="btn btn-secondary">Save</button> --}}
                         </table>
                       </form>
 
@@ -157,6 +157,50 @@
             </div>
           </div>
         {{-- end model Edit city --}}
+         {{-- model view department --}}
+          <div class="modal fade" id="viewDepartmentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content" style="width:150%">
+                <div class="modal-header">
+                  <h4 class="modal-title text-capitalize" id="businessName"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <div>
+                        <table  class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th><span class="tbl_row">SN.</span></th>
+                              <th> <span class="tbl_row">Department Name</span> </th>
+                              <th> <span class="tbl_row">State</span> </th>
+                              <th> <span class="tbl_row">City</span> </th>
+                              <th> <span class="tbl_row">Avg Rating</span> </th>
+                              <th> <span class="tbl_row">Reviews</span> </th>
+                              <th> <span class="tbl_row">No. of badges</span> </th>
+                            </tr>
+                          </thead>
+                          <tbody id="viewDepartment">
+                            
+                          </tbody>
+                         
+                        </table>
+              
+
+                         
+                      </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+        {{-- end model view department --}}
 
       </div>
       </div>
@@ -225,7 +269,8 @@
           console.log(err);
         }
       });
-  }
+  }  
+
     function EditCityModel1(id){
     // alert(id);
      $.ajax({
@@ -263,5 +308,75 @@
         }
       });
   }
+   function viewDepartmentModel1(id){
+    alert(id);
+      $('#viewDepartment').html('');
+        var i = 0;
+        let row = `
+          <tr>
+             <td> 1 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+          <tr>
+             <td> 2 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+          <tr>
+             <td> 3 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+          <tr>
+             <td> 4 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+          <tr>
+             <td> 5 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+          <tr>
+             <td> 6 </td>
+             <td class="text-capitalize"> India</td>
+             <td class="text-capitalize">UP</td>
+             <td class="text-capitalize">Varanasi</td>
+             <td class="text-capitalize">Rating 4</td>
+             <td class="text-capitalize">120 reviews</td>
+             <td class="text-capitalize">10 badges</td>
+             <td></td>
+          </tr>
+
+        `;
+        $('#viewDepartment').append(row)
+        $('#viewDepartmentModel').modal('show');
+      }
 </script>
 @endsection
