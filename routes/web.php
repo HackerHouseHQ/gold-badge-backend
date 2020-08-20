@@ -37,6 +37,7 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/add_country', 'ManageDataController@add_country_page')->name('add_country_page');
     Route::get('/insert_country', 'ManageDataController@add_country')->name('add_country');
     Route::get('/viewCityModel/{id?}', 'ManageDataController@viewCityModel')->name('viewCityModel');
+    Route::get('/editCityModelView', 'ManageDataController@editCityModelView')->name('editCityModelView');
 
 
     Route::get('/add_state', 'ManageDataController@add_state_page')->name('add_state_page');

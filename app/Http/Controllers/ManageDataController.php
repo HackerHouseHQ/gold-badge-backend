@@ -53,8 +53,8 @@ class ManageDataController extends Controller
           $i = 0;
           foreach($data as $key=>$data){
             $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
-            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
-            $EditCity = "<a href='javascript:void(0)' onclick ='viewCityModel(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
+            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
+            $EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
 
             $arr[$key]['SN'] = "<td><span class='line_heightt'>".++$i.".</span></td>";
             $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_data->country_name."</span></td>";
@@ -88,8 +88,11 @@ class ManageDataController extends Controller
     public function viewCityModel($id){
         $genderData = City::where('country_id',$id)->get();
         return response()->json($genderData, 200);
-
     }
+    public function editCityModelView(Request $request){
+        echo"<pre>"; print_r($request->all()); die;   
+    }
+
     public function add_state_page(){
         return view('manage_data.add_state');
     }

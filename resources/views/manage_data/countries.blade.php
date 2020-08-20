@@ -116,6 +116,47 @@
             </div>
           </div>
         {{-- end model view city --}}
+        {{-- model Edit city --}}
+          <div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+           <div class="modal-dialog modal-dialog-centered" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title text-capitalize" id="businessName"></h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                 </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive">
+                      <div>
+                        <form action="{{route('editCityModelView')}}" method ="GET">
+                        <table  class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th><span class="tbl_row">SN.</span></th>
+                              <th> <span class="tbl_row">City Name</span> </th>
+                              <th></th>
+                            </tr>
+                          </thead>
+                          <tbody id="EditCity">
+                            
+                          </tbody>
+                          <button type="submit" class="btn btn-secondary">Save</button>
+                        </table>
+                      </form>
+
+                         
+                      </div>
+                     </div>
+                  </div>
+                </div>
+              </div>
+             </div>
+            </div>
+          </div>
+        {{-- end model Edit city --}}
 
       </div>
       </div>
@@ -150,30 +191,26 @@
 });
 </script>
 <script type="text/javascript">
-  function viewCityModel(id){
-    alert(id);
+  function viewCityModel1(id){
+    // alert(id);
      $.ajax({
           url: "{{ route('viewCityModel') }}/" + id, 
           type: 'get',
           success: function (response) {
             console.log(response);
-            // console.log(response.data.length);
           if(response) {
               $('#businessDetails').html('');
               var i = 0;
-              $.each(response.data, function(key, value){
+              $.each(response, function(key, value){
                 let row = `
                 <tr>
                   <td> ${++i} </td>
-                  
                   <td class="text-capitalize">${value.city_name}</td>
                   <td></td>
                  </tr>
                 `;
                 $('#businessDetails').append(row)
-              // ${value->links()}
               })
-
             } else {
               let row = `
                 <tr>
@@ -183,16 +220,47 @@
                 $('#businessDetails').html(row);
             }
              $('#exampleModalCenter').modal('show');
-
-
-
-          
         },
         error: function(err) {
           console.log(err);
         }
-               {{-- <?php echo response->links(); ?> --}}
-
+      });
+  }
+    function EditCityModel1(id){
+    // alert(id);
+     $.ajax({
+          url: "{{ route('viewCityModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            console.log(response);
+          if(response) {
+              $('#EditCity').html('');
+              var i = 0;
+              $.each(response, function(key, value){
+                let row = `
+                <tr>
+                  <td> ${++i} </td>
+                  <input type="hidden" value="${value.id}" name="city_id">
+                  <td class="text-capitalize"><input type="text" class="input_tag" value="${value.city_name}" name="city_name"></td>
+                  <td><button type="submit" class="btn btn-secondary">Save</button></td>
+                      
+                 </tr>
+                `;
+                $('#EditCity').append(row)
+              })
+            } else {
+              let row = `
+                <tr>
+                  <td colspan="7"> Record not found! </td>
+                </tr>
+                `;
+                $('#EditCity').html(row);
+            }
+             $('#EditCitymodel1').modal('show');
+        },
+        error: function(err) {
+          console.log(err);
+        }
       });
   }
 </script>

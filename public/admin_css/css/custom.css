@@ -2431,12 +2431,13 @@ a.down_arrow_stats {
     padding-left: 21px;
 }
 .input_tag {
-    width: 8rem;
+    width: 21rem;
     color: #000;
     font-weight: 500;
     padding: 0 8px;
     text-align: center;
-    font-size: 13px;
+    font-size: 16px;
+        border: hidden;
 }
 select.please_sel_boxX {
     font-size: 12PX;
