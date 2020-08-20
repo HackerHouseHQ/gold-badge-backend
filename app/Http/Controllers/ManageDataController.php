@@ -86,7 +86,7 @@ class ManageDataController extends Controller
         return redirect('/manage_data/countries');
     }
     public function viewCityModel($id){
-        $genderData = ReportReasson::where('country_id',$id)->get();
+        $genderData = City::where('country_id',$id)->get();
         return response()->json($genderData, 200);
 
     }

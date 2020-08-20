@@ -95,7 +95,18 @@
                 <div class="row">
                   <div class="col-md-12">
                     <div class="table-responsive">
-                      <div id="businessDetails">
+                      <div>
+                        <table  class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th><span class="tbl_row">SN.</span></th>
+                              <th> <span class="tbl_row">City Name</span> </th>
+                            </tr>
+                          </thead>
+                          <tbody id="businessDetails">
+                            
+                          </tbody>
+                        </table>
                       </div>
                      </div>
                   </div>
@@ -145,19 +156,24 @@
           url: "{{ route('viewCityModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-          if(response.data.length) {
+            console.log(response);
+            // console.log(response.data.length);
+          if(response) {
               $('#businessDetails').html('');
+              var i = 0;
               $.each(response.data, function(key, value){
                 let row = `
                 <tr>
-                  <td> ${response.from++} </td>
-                  <td class="text-capitalize"> ${value.business_name} </td>
+                  <td> ${++i} </td>
+                  
+                  <td class="text-capitalize">${value.city_name}</td>
                   <td></td>
                  </tr>
                 `;
                 $('#businessDetails').append(row)
+              // ${value->links()}
               })
-                        
+
             } else {
               let row = `
                 <tr>
@@ -166,12 +182,17 @@
                 `;
                 $('#businessDetails').html(row);
             }
+             $('#exampleModalCenter').modal('show');
+
+
 
           
         },
         error: function(err) {
           console.log(err);
         }
+               {{-- <?php echo response->links(); ?> --}}
+
       });
   }
 </script>
