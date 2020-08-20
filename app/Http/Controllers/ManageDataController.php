@@ -10,6 +10,8 @@ use App\City;
 use App\Ethnicity;
 use App\GenderOption;
 use App\ReportReasson;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
 
 class ManageDataController extends Controller
 {
@@ -55,7 +57,7 @@ class ManageDataController extends Controller
             $array_city = implode(",",$array_city);
 
             
-            $arr[$key]['city_name'] = "<td><span class='tbl_row_new'>".$array_city."</span></td>";
+            $arr[$key]['city_name'] = "<td class='tdcalss'><span class='tbl_row_new1'>".$array_city."</span></td>";
             // group_concat(ss.sub_services_name) as sub_services_name')
              $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';
           }
@@ -118,7 +120,7 @@ class ManageDataController extends Controller
 
     // show enthcity
     public function ethnicity(){
-        $ethnicityData = Ethnicity::get();
+        $ethnicityData = Ethnicity::simplePaginate(20);
         $data['data'] = $ethnicityData;
     	return view('manage_data.ethnicity',$data);
     }
@@ -149,7 +151,7 @@ class ManageDataController extends Controller
     
     // show option to give user gender
     public function gender(){
-        $genderData = GenderOption::get();
+        $genderData = GenderOption::simplePaginate(20);
         $data['data'] = $genderData;
     	return view('manage_data.gender',$data);
     }
@@ -175,7 +177,7 @@ class ManageDataController extends Controller
 
     // // show report reason option page
     public function report(){
-        $reportData = ReportReasson::get();
+        $reportData = ReportReasson::simplePaginate(20);
         $data['data'] = $reportData;
     	return view('manage_data.report',$data);
     }

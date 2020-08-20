@@ -31,7 +31,7 @@
          {{-- close --}}
          {{-- table data --}}
          <br>
-         <div class="row">
+{{--          <div class="row">
           <div class="col-md-12">
             <div class="card table_cardd class_scroll">
              <div class="card-body p-0">
@@ -50,28 +50,27 @@
               </div>
              </div>
             </div>
+           </div> --}}
+         <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <table id="data1" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th><span class="tbl_row">Country NAME</span></th>
+                  <th><span class="tbl_row">State Name</span></th>
+                  <th><span class="tbl_row">City Names</span></th>
+                  <th><span class="tbl_row"></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+             </div>
            </div>
-         {{--   <div class="container">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                </tr>
-                
-              </tbody>
-            </table>
-          </div> --}}
-          {{-- close table --}}
-
+         </div>
+       </div>
           </div>
         </section>
 

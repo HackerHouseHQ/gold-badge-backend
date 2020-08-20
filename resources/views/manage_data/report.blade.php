@@ -21,16 +21,19 @@
          <div class="row">
           <div class="main_menu_add_tabs">
            <ul class="nav space_in_li xyy">
-            <li><a href="{{route('add_country_page')}}">add new country<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
-            <li><a href="{{route('add_state_page')}}">add new state<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
-           <li><a href="{{route('add_city_page')}}">add new city<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
-           <li><a href="{{route('add_ethnicity_page')}}">add new ethnicity<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+            <li><a href="{{route('add_country_page')}}">Add new country<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+            <li><a href="{{route('add_state_page')}}">Add new state<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+           <li><a href="{{route('add_city_page')}}">Add new city<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+           <li><a href="{{route('add_ethnicity_page')}}">Add new ethnicity<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+
+            <li><a href="#"  data-toggle="modal" data-target="#Privacy" class="data2">Add Report Reason Type<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+
           </ul>
           </div>
          </div>
          <br>
             {{-- table --}}
-       <div class="container">
+      {{--  <div class="container">
         <table class="table table-striped">
          <thead>
             <tr>
@@ -49,9 +52,36 @@
             @endforeach
           </tbody>
          </table>
-        </div>
+        </div> --}}
+        <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <table id="data1" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th><span class="tbl_row">Report Reason</span></th>
+                  <th><span class="tbl_row"></span></th>
+                    <th><span class="tbl_row"></span></th>
+                </tr>
+                </thead>
+              <tbody>
+            @foreach($data as $reportData)
+            <tr>
+              <td><span class='tbl_row_new'>{{$reportData->name}}</span></td>
+              <td><span class='tbl_row_new'> <button class="btn btn-xs btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" onclick="openModal({{$reportData->id}})"> Edit</button><span class='tbl_row_new'></td>
+              <td><span class='tbl_row_new'><a href="{{route('DeleteReport',$reportData->id)}}">Delete</a><span class='tbl_row_new'></td>
+            </tr>
+            @endforeach
+          </tbody>
+              </table>
+              {{ $data->links() }}
+             </div>
+           </div>
+         </div>
+       </div>
             {{-- table --}}
-         <a href="#" data-toggle="modal" data-target="#Privacy" class="data2"><img src="{{ asset('admin_css/images/add_people.png') }}" class="add_ppl_imgg"></a>
+         {{-- <a href="#" data-toggle="modal" data-target="#Privacy" class="data2"><img src="{{ asset('admin_css/images/add_people.png') }}" class="add_ppl_imgg"></a> --}}
 
          {{-- close --}}
           </div>
@@ -78,6 +108,7 @@
                           <b>Add New Report Reason Name</b>
                             <input type="text" name="name" placeholder="Enter Name">
                         </div>
+                        <br>
                         <button type="submit" class="btn btn-secondary">Save</button>
                        </form>
                       </div>

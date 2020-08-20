@@ -743,15 +743,15 @@ img.add_ppl_imgg {
     font-weight: 600;
     display: flex;
     justify-content: center;
+}.tbl_row1 {
+    font-size: 19px;
+    color: #505B7A;
+    font-weight: 600;
+    display: flex;
+    justify-content: center;
 }
 /*.tr_under_body{
-    background-color: #DADADA;
-}*/
-/*.table-striped tbody tr.tr_under_body:nth-of-type(odd) {
-    background-color: red;
-}.table-striped tbody tr.tr_under_body:nth-of-type(even) {
-    background-color: red;
-}*/
+
 .card.table_cardd {
     box-shadow: none;
     margin: 0 auto;
@@ -769,6 +769,20 @@ img.add_ppl_imgg {
 
 
 span.tbl_row_new {
+    color: #000;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+span.tbl_row_new1 {
+    color: #000;
+    font-size: 13px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+tr.tdcalss td {
     color: #000;
     font-size: 13px;
     font-weight: 500;
@@ -2037,11 +2051,14 @@ img.img-fluid.down_iconn_arrow_selectt {
     /* font-size: 10px; */
 }
 .page-item.active .page-link{
-    background-color: #000;
+    /*background-color: #e9ecef;*/
     border: 1px solid #fff;
     outline: 0;
     box-shadow: none;
-    color: #FFDD14;
+    /*color: #FFDD14;*/
+     color: #000;
+    background: #e9ecef;
+    }
 }.page-item .page-link{
    color: #000;
 }
@@ -2072,7 +2089,7 @@ img.img-fluid.edit_deact_picc{
 }
 .page-item.disabled .page-link {
     color: #000;
-    background: #FFDD14;
+    background: #e9ecef;
     }
     div.btn.btn-default.save_intro_scrn.delete_view_usrr{
     color: #fff;

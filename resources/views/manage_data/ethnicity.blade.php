@@ -30,7 +30,7 @@
          </div>
          <br>
             {{-- table --}}
-       <div class="container">
+  {{--      <div class="container">
         <table class="table table-striped">
          <thead>
             <tr>
@@ -49,7 +49,34 @@
             @endforeach
           </tbody>
          </table>
-        </div>
+        </div> --}}
+               <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <table id="data1" class="table table-bordered table-hover">
+                <thead>
+                <tr>
+                  <th><span class="tbl_row">ETHNICITY NAME</span></th>
+                  <th><span class="tbl_row"></span></th>
+                    <th><span class="tbl_row"></span></th>
+                </tr>
+                </thead>
+              <tbody>
+            @foreach($data as $ethnicityData)
+            <tr>
+              <td><span class='tbl_row_new'>{{$ethnicityData->ethnicity_name}}</span></td>
+              <td><span class='tbl_row_new'> <button class="btn btn-xs btn btn-link" data-toggle="modal" data-target="#exampleModalCenter" onclick="openModal({{$ethnicityData->id}})"> Edit</button><span class='tbl_row_new'></td>
+              <td><span class='tbl_row_new'><a href="{{route('DeleteEthnicity',$ethnicityData->id)}}">Delete</a><span class='tbl_row_new'></td>
+            </tr>
+            @endforeach
+          </tbody>
+              </table>
+              {{ $data->links() }}
+             </div>
+           </div>
+         </div>
+       </div>
             {{-- table --}}
 
          {{-- close --}}
