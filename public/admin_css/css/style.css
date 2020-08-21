@@ -9,6 +9,20 @@
     border-radius: 282px;
     background-color: #ffffff;
 }
+
+.main_menu_three_tabs1 {
+    margin: 4px auto;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-bottom: 4px;
+    margin-left: auto;
+    display: flex;
+    justify-content: center;
+    width: 602px;
+    margin-top: 30px;
+    border: 1px solid #000000;
+    background-color: #ffffff;
+}
 .main_menu_add_tabs {
     margin: 0px auto;
     /*display: flex;*/
