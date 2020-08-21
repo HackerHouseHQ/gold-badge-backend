@@ -1,4 +1,26 @@
 @extends('admin_dash.main')
+<style type="text/css">
+  .a1{
+    width: 37px;
+      margin-top: -19px;
+
+  }
+  .a2{
+       
+    width: 335px;
+    margin-top: -19px;
+
+
+  }
+  .a3{
+       
+    width: 747;
+    margin-top: -19px;
+
+
+  }
+   
+</style>
  @section('content')
     <div class="col-sm-12">
      <div class="content-wrapper custom-content-wrapper">
@@ -119,7 +141,7 @@
         {{-- model Edit city --}}
           <div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
            <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content" style="width:150%">
+              <div class="modal-content" style="width:113%">
                 <div class="modal-header">
                   <h4 class="modal-title text-capitalize" id="businessName"></h4>
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -131,8 +153,8 @@
                   <div class="col-md-12">
                     <div class="table-responsive">
                       <div>
-                        <form action="{{route('editCityModelView')}}" method ="GET">
-                        <table  class="table table-bordered table-hover">
+                        {{-- <form action="{{route('editCityModelView')}}" method ="GET"> --}}
+                      {{--   <table  class="table table-bordered table-hover">
                           <thead>
                             <tr>
                               <th><span class="tbl_row">SN.</span></th>
@@ -143,9 +165,21 @@
                           <tbody id="EditCity">
                             
                           </tbody>
-                          {{-- <button type="submit" class="btn btn-secondary">Save</button> --}}
-                        </table>
-                      </form>
+                         
+                        </table> --}}
+                              <div class="a1">
+                                 <span class="tbl_row">SN.</span>
+                              </div>
+                              <div class="a2">
+                                <span class="tbl_row">City Name</span> 
+                              </div>
+                              <div class="a3">
+                                <span class="tbl_row">Action</span> 
+                              </div>
+                              <br>
+                               <div id="EditCity"></div>
+                          
+                      {{-- </form> --}}
 
                          
                       </div>
@@ -283,13 +317,14 @@
               var i = 0;
               $.each(response, function(key, value){
                 let row = `
-                <tr>
-                  <td> ${++i} </td>
+                
+                    <form action="{{route('editCityModelView')}}" method ="GET">
+                   ${++i} 
                   <input type="hidden" value="${value.id}" name="city_id">
-                  <td class="text-capitalize"><input type="text" class="input_tag" value="${value.city_name}" name="city_name"></td>
-                  <td><button type="submit" class="btn btn-secondary">Save</button></td>
-                      
-                 </tr>
+                  <input type="text" class="input_tag" value="${value.city_name}" name="city_name">
+                  <button type="submit" class="btn btn-secondary">Save</button>
+                  </form>
+                
                 `;
                 $('#EditCity').append(row)
               })
