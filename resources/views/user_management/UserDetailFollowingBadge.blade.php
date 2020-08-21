@@ -155,8 +155,8 @@
             <div class="card-header">
               <div class="main_menu_three_tabs1">
            <ul class="nav nav-tabs abc">
-            <li><a href="{{ route('UserDetail',['id' => $data->id])}}">{{$data->first_name}} Reviews</a></li>
-            <li class="active"><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">{{$data->first_name}} Followings</a></li>
+            <li><a href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a></li>
+            <li class="active"><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">Followings</a></li>
           </ul>
          </div>
        </div>
@@ -164,8 +164,8 @@
             <div class="card-header2">
          <div class="main_menu_three_tabs1">
            <ul class="nav nav-tabs abc">
-            <li><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">{{$data->first_name}} Department</a></li>
-            <li  class="active"><a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">{{$data->first_name}} Badge</a></li>
+            <li><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Department</a></li>
+            <li  class="active"><a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">Badge</a></li>
           </ul>
          </div>
        </div>
