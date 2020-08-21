@@ -83,5 +83,17 @@ class UserController extends Controller
     	return view('user_management.UserDetail',$data);
 
     }
+     public function UserDetailFollowing(Request $req){
+      // echo"<pre>"; print_r($req->all()); die;
+      $data['data'] = User::where('id',$req->id)->first();
+      return view('user_management.UserDetailFollowing',$data);
+
+    }
+    public function UserDetailFollowingBadge(Request $req){
+      // echo"<pre>"; print_r($req->all()); die;
+      $data['data'] = User::where('id',$req->id)->first();
+      return view('user_management.UserDetailFollowingBadge',$data);
+
+    }
 
 }

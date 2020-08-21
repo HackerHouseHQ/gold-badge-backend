@@ -15,12 +15,16 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::group(['middleware'=>['auth:admin']], function(){
+
   Route::get('/home', 'HomeController@index')->name('home');
+  
   Route::group(['prefix' => 'user_management'], function () {
     Route::get('/user', 'UserController@index')->name('user');
     Route::get('/user_list', 'UserController@user_list')->name('userList');
     Route::post('/change_status', 'UserController@change_status')->name('change_status');
     Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
+    Route::get('/UserDetailFollowing', 'UserController@UserDetailFollowing')->name('UserDetailFollowing');
+    Route::get('/UserDetailFollowingBadge', 'UserController@UserDetailFollowingBadge')->name('UserDetailFollowingBadge');
   });
 
 

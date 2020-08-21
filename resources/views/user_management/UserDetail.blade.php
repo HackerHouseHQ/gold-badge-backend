@@ -142,8 +142,9 @@
             <div class="card-header">
               <div class="main_menu_three_tabs1">
            <ul class="nav nav-tabs abc">
-            <li class="active"><a href="#">{{$data->first_name}} Reviews</a></li>
-            <li><a href="#">{{$data->first_name}} Followings</a></li>
+            <li class="active"><a href="{{ route('UserDetail',['id' => $data->id])}}">{{$data->first_name}} Reviews</a></li>
+            <li ><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">{{$data->first_name}} Followings</a></li>
+          </ul>
           
          </div>
               {{-- <h3 class="card-title"></h3> --}}

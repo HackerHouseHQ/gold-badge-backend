@@ -34,7 +34,7 @@
       overflow: hidden; 
       border: 7px solid #f6f6f6;
     }
-        .card-header1 {
+    .card-header1 {
     padding: .75rem 1.25rem;
     margin-bottom: 0;
     background-color: #a6a392;
@@ -152,8 +152,7 @@
          {{-- start datatable --}}
           <div class="card">
             {{-- <div class="card-header"> --}}
-               <div class="card-header">
-
+            <div class="card-header">
               <div class="main_menu_three_tabs1">
            <ul class="nav nav-tabs abc">
             <li><a href="{{ route('UserDetail',['id' => $data->id])}}">{{$data->first_name}} Reviews</a></li>
@@ -161,17 +160,15 @@
           </ul>
          </div>
        </div>
-
          {{-- <br> --}}
-          <div class="card-header2">
+            <div class="card-header2">
          <div class="main_menu_three_tabs1">
            <ul class="nav nav-tabs abc">
-            <li class="active"><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">{{$data->first_name}} Department</a></li>
-            <li ><a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">{{$data->first_name}} Badge</a></li>
+            <li><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}">{{$data->first_name}} Department</a></li>
+            <li  class="active"><a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">{{$data->first_name}} Badge</a></li>
           </ul>
          </div>
        </div>
-       <br>
 
             {{-- </div> --}}
             <!-- /.card-header -->
@@ -179,6 +176,7 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
+                  <th>Badge Number</th>
                   <th>Department Name</th>
                   <th>Number of reviews</th>
                   <th>Rating</th>
@@ -188,6 +186,7 @@
                 <tbody>
                 <tr>
                   <td>Trident</td>
+                  <td>Trident</td>
                   
                   <td>Win 95+</td>
                   <td> 4</td>
@@ -196,12 +195,14 @@
                 </tr>
                 <tr>
                   <td>Trident</td>
+                  <td>Trident</td>
                   
                   <td>Win 95+</td>
                   
                   <td>View post<br>Delete</td>
                 </tr>
                 <tr>
+                  <td>Trident</td>
                   <td>Trident</td>
                  
                   <td>Win 95+</td>
