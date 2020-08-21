@@ -143,43 +143,50 @@ background: red;
                      <div class="table-responsive">
                        <form class="form-horizontal">
                 <div class="card-body">
-                  <div class="form-group row">
-                   
-                    <div class="col-sm-10">
-                       <select name="city_id" id="city_id">
-                          <option value = "">City</option>
-                          <option value = "">City</option>
-                          <option value = "">City</option>
-                         </select>
-                    </div>
-                  </div>
-
+                                  
                    <div class="form-group row">
-                   
-                    <div class="col-sm-10">
-                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                    </div>
+                    <div class="form-group">
+                    {{-- <label for="exampleInputEmail1">Email address</label> --}}
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Department Name">
+                  </div>
                   </div>
                   <div class="form-group row">
                   
-                    <div class="col-sm-10">
-                       <select name="city_id" id="city_id">
-                          <option value = "">City</option>
-                          <option value = "">City</option>
-                          <option value = "">City</option>
-                         </select>
-                    </div>
+                     {{-- <label>Disabled</label> --}}
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">Country name</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
+                  </div>
+                   <div class="form-group row">
+                  
+                     {{-- <label>Disabled</label> --}}
+                  <select class="form-control select2" style="width: 100%;">
+                    <option selected="selected">State Name</option>
+                    <option>Alaska</option>
+                    <option>California</option>
+                    <option>Delaware</option>
+                    <option>Tennessee</option>
+                    <option>Texas</option>
+                    <option>Washington</option>
+                  </select>
                   </div>
                   <div class="form-group row">
-                    <div class="offset-sm-2 col-sm-10">
-                     
+                     <div class="custom-file">
+                      <input type="file" class="custom-file-input" id="customFile">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
                   </div>
+                 
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
-                  <button type="submit" class="btn btn-info">Sign in</button>
-                  <button type="submit" class="btn btn-default float-right">Cancel</button>
+                  <button type="submit" class="btn btn-info float-right">Add</button>
                 </div>
                 <!-- /.card-footer -->
               </form>

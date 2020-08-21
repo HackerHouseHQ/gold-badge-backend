@@ -141,16 +141,46 @@ background: red;
                    <div class="row">
                     <div class="col-md-12">
                      <div class="table-responsive">
-                      <form action="{{route('AddReport')}}" method ="GET">
-                       <div>
-                          <b>Add New Department</b><br>
-                           <label>Department Name</label>
-                            <input type="text" name="name" placeholder="Enter Name"><label>Department Image</label>
-                            <input type="file" name="image" placeholder="Enter Name">
+                      <form class="form-horizontal">
+                        <div class="card-body">
+                         <div class="form-group row">
+                          <div class="form-group">
+                           <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Department Name">
+                          </div>
+                         </div>
+                         <div class="form-group row">
+                          <select class="form-control select2" style="width: 100%;">
+                            <option selected="selected">Country name</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                          </select>
+                          </div>
+                          <div class="form-group row">
+                            <select class="form-control select2" style="width: 100%;">
+                              <option selected="selected">State Name</option>
+                              <option>Alaska</option>
+                              <option>California</option>
+                              <option>Delaware</option>
+                              <option>Tennessee</option>
+                              <option>Texas</option>
+                              <option>Washington</option>
+                            </select>
+                          </div>
+                          <div class="form-group row">
+                           <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                           </div>
+                          </div>
                         </div>
-                        <br>
-                        <button type="submit" class="btn btn-secondary">Save</button>
-                       </form>
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-info float-right">Add</button>
+                        </div>
+                      </form>
                       </div>
                      </div>
                     </div>
