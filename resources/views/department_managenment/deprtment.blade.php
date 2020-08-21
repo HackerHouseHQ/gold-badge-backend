@@ -141,16 +141,48 @@ background: red;
                    <div class="row">
                     <div class="col-md-12">
                      <div class="table-responsive">
-                      <form action="{{route('AddReport')}}" method ="GET">
-                       <div>
-                          <b>Add New Department</b><br>
-                           <label>Department Name</label>
-                            <input type="text" name="name" placeholder="Enter Name"><label>Department Image</label>
-                            <input type="file" name="image" placeholder="Enter Name">
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-secondary">Save</button>
-                       </form>
+                       <form class="form-horizontal">
+                <div class="card-body">
+                  <div class="form-group row">
+                   
+                    <div class="col-sm-10">
+                       <select name="city_id" id="city_id">
+                          <option value = "">City</option>
+                          <option value = "">City</option>
+                          <option value = "">City</option>
+                         </select>
+                    </div>
+                  </div>
+
+                   <div class="form-group row">
+                   
+                    <div class="col-sm-10">
+                      <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                  
+                    <div class="col-sm-10">
+                       <select name="city_id" id="city_id">
+                          <option value = "">City</option>
+                          <option value = "">City</option>
+                          <option value = "">City</option>
+                         </select>
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="offset-sm-2 col-sm-10">
+                     
+                    </div>
+                  </div>
+                </div>
+                <!-- /.card-body -->
+                <div class="card-footer">
+                  <button type="submit" class="btn btn-info">Sign in</button>
+                  <button type="submit" class="btn btn-default float-right">Cancel</button>
+                </div>
+                <!-- /.card-footer -->
+              </form>
                       </div>
                      </div>
                     </div>

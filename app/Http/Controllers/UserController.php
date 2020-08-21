@@ -29,9 +29,14 @@ class UserController extends Controller
         $offset = $_GET['start'] ? $_GET['start'] :"0";
         $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
         $draw = $_GET['draw'];
-        $search= $request->role;
-        $data = $this->user->getdata_table($order_by, $offset, $limit_t);
-        $count = $this->user->getdata_count($order_by);
+        $status_id = $_GET['status_id'];
+        $state_id = $_GET['state_id'];
+        $country_id = $_GET['country_id'];
+
+        $fromdate = $_GET['fromdate'];
+        $todate = $_GET['todate'];
+        $data = $this->user->getdata_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate);
+        $count = $this->user->getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate);
         $getuser = $this->manage_data($data);
         $results = ["draw" => intval($draw),
             "iTotalRecords" => $count,

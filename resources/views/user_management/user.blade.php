@@ -152,6 +152,16 @@
      'ajax': {
         'url':"{{route('userList')}}",
         'data': function(data){
+            var status_id = $('#status_id').val();
+          data.status_id = status_id;
+          var state_id = $('#state_id').val();
+          data.state_id = state_id;
+          var country_id = $('#country_id').val();
+          data.country_id = country_id;
+           var fromdate = $('#fromdate').val();
+          data.fromdate = fromdate;
+          var todate = $('#todate').val();
+          data.todate = todate;
         }
        },
     'columns': [
@@ -163,6 +173,9 @@
         { data: 'review' },
         { data: 'view' },
     ]
+  });
+   $('#search_data1').click(function(){
+     dataTable.draw();
   });
 });
 </script>
