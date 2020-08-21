@@ -31,6 +31,7 @@ Route::group(['middleware'=>['auth:admin']], function(){
   Route::group(['prefix' => 'department_management'], function () {
     Route::get('/department', 'DepartmentController@department')->name('department');
     Route::get('/badge', 'DepartmentController@badge')->name('badge');
+    Route::post('/AddDepartment', 'DepartmentController@AddDepartment')->name('AddDepartment');
   });
 
 

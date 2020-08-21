@@ -43,6 +43,7 @@ background: red;
             <span class="div_cover_sell">
               <span>
             <select name="status_id" id="status_id" >
+              <option value = "">Status</option>
               <option value = "1">Active</option>
               <option value = "2">Inactive</option>
             </select>
@@ -141,41 +142,33 @@ background: red;
                    <div class="row">
                     <div class="col-md-12">
                      <div class="table-responsive">
-                       <form class="form-horizontal">
+                       <form class="form-horizontal" action="{{route('AddDepartment')}}" enctype="multipart/form-data" method="POST">
+                         {{ csrf_field() }}
                 <div class="card-body">
                                   
                    <div class="form-group row">
                     <div class="form-group">
-                    {{-- <label for="exampleInputEmail1">Email address</label> --}}
-                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Department Name">
+                    <input type="text" class="form-control" placeholder="Department Name" name="department_name">
                   </div>
                   </div>
                   <div class="form-group row">
-                  
-                     {{-- <label>Disabled</label> --}}
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">Country name</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
+                   <select class="form-control select2" style="width: 100%;" id="country1" name="country">
+                     <option value="">Country name</option>
+                      @foreach($countryList as $counntryList)
+                           <option value="{{$counntryList->id}}">{{$counntryList->country_name}} </option>
+                          @endforeach
+                     </select>
                   </div>
                    <div class="form-group row">
-                  
-                     {{-- <label>Disabled</label> --}}
-                  <select class="form-control select2" style="width: 100%;">
-                    <option selected="selected">State Name</option>
-                    <option>Alaska</option>
-                    <option>California</option>
-                    <option>Delaware</option>
-                    <option>Tennessee</option>
-                    <option>Texas</option>
-                    <option>Washington</option>
-                  </select>
-                  </div>
+                    <select class="form-control select2" style="width: 100%;" id="state" name="state">
+                      <option selected="selected">State Name</option>
+                    </select>
+                    </div>
+                    <div class="form-group row">
+                    <select class="form-control select2" style="width: 100%;" id="state" name="city">
+                      <option selected="selected">City Name</option>
+                    </select>
+                    </div>
                   <div class="form-group row">
                      <div class="custom-file">
                       <input type="file" class="custom-file-input" id="customFile">
@@ -293,5 +286,49 @@ background: red;
         }
     });
   }
+</script>
+ <script type="text/javascript">
+  $(document).ready(function(){
+    $("#country1").change(function(){
+        var country_id = $(this).val();
+        $.ajax({
+            url: '{{route('get_state')}}',
+            type: 'get',
+            data: {country_id:country_id},
+            dataType: 'json',
+            success:function(response){
+            var len = response.length;
+            $("#state").empty();
+              for( var i = 0; i<len; i++){
+                var id = response[i]['id'];
+                var name = response[i]['name'];
+                $("#state").append("<option value='"+id+"'>"+name+"</option>");
+              }
+            }
+        });
+    });
+  });
+</script>
+ <script type="text/javascript">
+  $(document).ready(function(){
+    $("#state").change(function(){
+        var state_id = $(this).val();
+        $.ajax({
+            url: '{{route('get_state')}}',
+            type: 'get',
+            data: {country_id:country_id},
+            dataType: 'json',
+            success:function(response){
+            var len = response.length;
+            $("#city").empty();
+              for( var i = 0; i<len; i++){
+                var id = response[i]['id'];
+                var name = response[i]['city_name'];
+                $("#city").append("<option value='"+id+"'>"+name+"</option>");
+              }
+            }
+        });
+    });
+  });
 </script>
 @endsection

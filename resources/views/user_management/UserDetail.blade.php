@@ -109,25 +109,25 @@
                            <label class="tbl_row labell">Following Department:</label>:
                          </div>
                          <div class="key_value_box_div">
-                           <p class="tbl_row value">10</p>
+                           <p class="tbl_row value">0</p>
                          </div>
                          <div class="key_value_box_div">
                            <label class="tbl_row labell">Following Badge:</label>
                          </div>
                           <div class="key_value_box_div">
-                           <p class="tbl_row value">20</p>
+                           <p class="tbl_row value">0</p>
                          </div>
                          <div class="key_value_box_div">
                            <label class="tbl_row labell">Total Reviews:</label>
                          </div>
                          <div class="key_value_box_div">
-                           <p class="tbl_row value">30</p>
+                           <p class="tbl_row value">0</p>
                          </div>
                          <div class="key_value_box_div">
                            <label class="tbl_row labell">Reported Reviews:</label>
                          </div>
                           <div class="key_value_box_div">
-                           <p class="tbl_row value">40</p>
+                           <p class="tbl_row value">0</p>
                          </div>
                        </div>
                     </div>
@@ -167,53 +167,36 @@
                 <tbody>
                 <tr>
                   <td>Trident</td>
-                  <td>Internet
-                    Explorer 4.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td> 4</td>
-                  <td>X</td>
-                  <td>X</td>
-                  <td>X</td>
+                  <td>#46fsdh4</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                   <td>View post<br>Delete</td>
                 </tr>
                 <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.0
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5</td>
-                  <td>C</td>
-                   <td>X</td>
-                  <td>X</td>
+                   <td>Trident</td>
+                  <td>#46fsdh4</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                   <td>View post<br>Delete</td>
                 </tr>
                 <tr>
-                  <td>Trident</td>
-                  <td>Internet
-                    Explorer 5.5
-                  </td>
-                  <td>Win 95+</td>
-                  <td>5.5</td>
-                  <td>A</td>
-                   <td>X</td>
-                  <td>X</td>
+                   <td>Trident</td>
+                  <td>#46fsdh4</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
+                  <td>0</td>
                   <td>View post<br>Delete</td>
                 </tr>
                  </tbody>
-              {{--   <tfoot>
-                <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
-                   <td>X</td>
-                  <td>X</td>
-                  <td>View post<br>Delete</td>
-                </tr>
-                </tfoot> --}}
+            
               </table>
             </div>
             <!-- /.card-body -->

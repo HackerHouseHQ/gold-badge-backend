@@ -14,4 +14,8 @@ class DepartmentController extends Controller
     {
         return view('department_managenment.badge');
     }
+    public function AddDepartment(Request $req){
+    	echo"<pre>"; print_r($req->all()); die;
+
+    }
 }

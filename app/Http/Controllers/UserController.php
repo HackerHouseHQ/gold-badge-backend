@@ -59,7 +59,7 @@ class UserController extends Controller
             $arr[$key]['email'] = "<td><span class='tbl_row_new'>".$data->email."</span></td>";
             $arr[$key]['username'] = "<td><span class='tbl_row_new'>".$data->user_name."</span></td>";
             $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>".date("Y-m-d", strtotime($data->created_at))."</span></td>";
-            $arr[$key]['review'] = "<td><span class='tbl_row_new'>20</span></td>";
+            $arr[$key]['review'] = "<td><span class='tbl_row_new'>0</span></td>";
              // $arr[$key]['view'] = '<a href="#"><span class="line_heightt">view Detailes/<br>Inactive</a>';
             // $arr[$key]['view'] = $view;
 	        if($data->status == 1){
