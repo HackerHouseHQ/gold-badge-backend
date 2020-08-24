@@ -86,10 +86,10 @@
               <table id="data1" class="table table-bordered table-hover">
                <thead>
                 <tr>
-                  <th><span class="tbl_row">SN.</span></th>
-                  <th><span class="tbl_row">Country NAME</span></th>
-                  <th><span class="tbl_row">State Name</span></th>
-                  <th><span class="tbl_row">City Names</span></th>
+                  <th><span class="tbl_row">#</span></th>
+                  <th><span class="tbl_row">Country</span></th>
+                  <th><span class="tbl_row">State</span></th>
+                  <th><span class="tbl_row">City</span></th>
                   <th><span class="tbl_row"></span></th>
                 </tr>
                 </thead>
@@ -344,7 +344,7 @@
       });
   }
    function viewDepartmentModel1(id){
-    alert(id);
+    // alert(id);
       $('#viewDepartment').html('');
         var i = 0;
         let row = `

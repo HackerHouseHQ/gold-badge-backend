@@ -16,6 +16,11 @@ use Illuminate\Pagination\Paginator;
  // use Excel;
  use Exporter;
  use Importer;
+ use DB;
+use Auth;
+use Storage;
+use Session;
+use Validator;
 
 class ManageDataController extends Controller
 {
@@ -57,7 +62,7 @@ class ManageDataController extends Controller
             $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
             $EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
 
-            $arr[$key]['SN'] = "<td><span class='line_heightt'>".++$i.".</span></td>";
+            $arr[$key]['SN'] = "<td><span class='line_heightt'>#</span></td>";
             $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_data->country_name."</span></td>";
             $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>".$data->state_name."</span></td>";
             $array_city = array();
@@ -82,6 +87,10 @@ class ManageDataController extends Controller
     }
              // insert country
     public function add_country(Request $request){
+         // $request->validate([
+         //        'country_name'  => 'required|unique:countries',
+         //   ]);
+         
         $data['country_name'] = $request->counry_name;
         $insertCountry = Country::create($data);
         return redirect('/manage_data/countries');
@@ -91,7 +100,10 @@ class ManageDataController extends Controller
         return response()->json($genderData, 200);
     }
     public function editCityModelView(Request $request){
-        echo"<pre>"; print_r($request->all()); die;   
+        // echo"<pre>"; print_r($request->all()); die;  
+        $data['city_name'] = $request->city_name;
+        $updatedata = City::where('id',$request->city_id)->update($data);
+        return redirect('/manage_data/countries');
     }
 
     public function add_state_page(){
