@@ -138,6 +138,17 @@ class ManageDataController extends Controller
         }
         echo json_encode($state_arr);
     }
+    public function get_city(Request $request){
+        $state_id =$request->state_id;   
+        $state_data = City::where('state_id',$state_id)->get()->toArray();
+        $state_arr = array();
+        foreach ($state_data as $key => $value) {
+            $stateid = $value['id'];
+            $name = $value['city_name'];
+            $state_arr[] = array("id" => $stateid, "name" => $name);
+        }
+        echo json_encode($state_arr);
+    }
     public function add_city(Request $request){
       if(!empty($request->city_file)){
         $path = $request->file('city_file')->getRealPath();

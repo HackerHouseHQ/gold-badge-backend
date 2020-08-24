@@ -14,6 +14,14 @@ background: red;
       <div class="below_content_clss">
         <section class="content home_conntent">
           <div class="container-fluid">
+
+         {{--    <div class="col-md-12">
+           <div class="card">  --}}
+             <div class="card-body">
+               <input class="form-control form-control-sm" id="search" type="text" placeholder="Search By Name.Badge,Department,Country,State,City....">
+             </div>
+           {{-- </div>
+         </div> --}}
             {{-- main header for show list --}}
           <div class="row">
           <div class="main_menu_three_tabs">
@@ -30,7 +38,7 @@ background: red;
           <div class="main_menu_add_tabs">
            <ul class="nav space_in_li xyy">
             <li><a href="#"  data-toggle="modal" data-target="#department" class="data2">Add Department<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
-            <li><a href="#"  data-toggle="modal" data-target="#badge" class="data2">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+            {{-- <li><a href="#"  data-toggle="modal" data-target="#badge" class="data2">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li> --}}
 
           </ul>
           </div>
@@ -89,12 +97,12 @@ background: red;
            </thead>
           </table>
         </form>
-         <form class="form-horizontal" action = "#" method="POST" enctype="multipart/form-data" name="upload_excel" >
+       {{--   <form class="form-horizontal" action = "#" method="POST" enctype="multipart/form-data" name="upload_excel" >
             {{ csrf_field() }}
          <button type="submit" name="Export"  value="export to excel" class="down_btn_new_clss"/>
             <img src="{{ asset('admin_css/images/download_icon.png') }}" alt="icon" class="img-fluid down_icon_cls">
           </button>
-        </form>  
+        </form>   --}}
          <br>
          <br>
          {{--start table --}}
@@ -106,12 +114,12 @@ background: red;
               <table id="data1" class="table table-bordered table-hover">
                <thead>
                 <tr>
-                  <th><span class="tbl_row">NAME</span></th>
-                  <th><span class="tbl_row">Contact No.</span></th>
-                  <th><span class="tbl_row">Email</span></th>
-                  <th><span class="tbl_row">Username</span></th>
-                  <th><span class="tbl_row">Registered On</span></th>
+                  <th><span class="tbl_row">Department Name</span></th>
                   <th><span class="tbl_row">Total Reviews</span></th>
+                  <th><span class="tbl_row">Rating</span></th>
+                  {{-- <th><span class="tbl_row">Username</span></th> --}}
+                  <th><span class="tbl_row">Registered On</span></th>
+                  {{-- <th><span class="tbl_row">Total Reviews</span></th> --}}
                   <th><span class="tbl_row"></span></th>
                   <th></th>
                   <th></th>
@@ -165,14 +173,18 @@ background: red;
                     </select>
                     </div>
                     <div class="form-group row">
-                    <select class="form-control select2" style="width: 100%;" id="state" name="city">
+                    <select class="form-control select2" style="width: 100%;" id="city1" name="city">
                       <option selected="selected">City Name</option>
                     </select>
                     </div>
-                  <div class="form-group row">
-                     <div class="custom-file">
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Department Icon</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="exampleInputFile" name="departmentImage">
+                        <label class="custom-file-label" for="exampleInputFile">Pick Icon</label>
+                      </div>
+                     
                     </div>
                   </div>
                  
@@ -205,14 +217,28 @@ background: red;
                    <div class="row">
                     <div class="col-md-12">
                      <div class="table-responsive">
-                      <form action="{{route('AddReport')}}" method ="GET">
-                       <div>
-                          <b>Add New Report Reason Name</b>
-                            <input type="text" name="name" placeholder="Enter Name">
+                       <form class="form-horizontal" action="{{route('AddBadge')}}" method="GET">
+                         {{ csrf_field() }}
+                       <div class="card-body">
+                        <?php $departmentName = App\Department::where('status',1)->get(); ?>
+                        <div class="form-group row">
+                         <select class="form-control select2" style="width: 100%;" id="department_id" name="department_id">
+                           <option value="">Department Name</option>
+                            @foreach($departmentName as $value)
+                                 <option value="{{$value->id}}">{{$value->department_name}} </option>
+                                @endforeach
+                           </select>
+                         </div>
+                         <div class="form-group row">
+                         <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Badge Number" name="badge_number">
+                         </div>
                         </div>
-                        <br>
-                        <button type="submit" class="btn btn-secondary">Save</button>
-                       </form>
+                        </div>
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-info float-right">Add</button>
+                        </div>
+                      </form>
                       </div>
                      </div>
                     </div>
@@ -241,6 +267,7 @@ background: red;
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
+                $("#state_id").append("<option value=''>Please Select</option>");
                 $("#state_id").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
@@ -259,26 +286,39 @@ background: red;
      "lengthChange": false,
      "bAutoWidth": false,
      'ajax': {
-        'url':"{{route('userList')}}",
-        'data': function(data){
+        'url':"{{route('department_list')}}",
+       'data': function(data){
+            var status_id = $('#status_id').val();
+          data.status_id = status_id;
+          var state_id = $('#state_id').val();
+          data.state_id = state_id;
+          var country_id = $('#country_id').val();
+          data.country_id = country_id;
+           var fromdate = $('#fromdate').val();
+          data.fromdate = fromdate;
+          var todate = $('#todate').val();
+          data.todate = todate;
         }
        },
     'columns': [
         { data: 'name' } ,
-        { data: 'contact' },
-        { data: 'email' },
-        { data: 'username' },
+        { data: 'reviews' },
+        { data: 'rating' },
+        // { data: 'username' },
         { data: 'registered_on' },
-        { data: 'review' },
+        // { data: 'review' },
         { data: 'view' },
     ]
+  });
+  $('#search_data1').click(function(){
+     dataTable.draw();
   });
 });
 </script>
 <script type="text/javascript">
   function status(id){
        $.ajax({
-      url: "{{route('change_status')}}",
+      url: "{{route('department_status')}}",
       type: "post",
       data: {'user_id':id ,'_token': "{{ csrf_token() }}"},
         success: function (data) {
@@ -291,6 +331,7 @@ background: red;
   $(document).ready(function(){
     $("#country1").change(function(){
         var country_id = $(this).val();
+        // alert(country_id);
         $.ajax({
             url: '{{route('get_state')}}',
             type: 'get',
@@ -302,6 +343,7 @@ background: red;
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
+                $("#state").append("<option value=''>Please Select</option>");
                 $("#state").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
@@ -312,19 +354,22 @@ background: red;
  <script type="text/javascript">
   $(document).ready(function(){
     $("#state").change(function(){
+      // alert('dfshj');
         var state_id = $(this).val();
+        // alert(state_id);
         $.ajax({
-            url: '{{route('get_state')}}',
+            url: '{{route('get_city')}}',
             type: 'get',
-            data: {country_id:country_id},
+            data: {state_id:state_id},
             dataType: 'json',
             success:function(response){
             var len = response.length;
-            $("#city").empty();
+            $("#city1").empty();
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
-                var name = response[i]['city_name'];
-                $("#city").append("<option value='"+id+"'>"+name+"</option>");
+                var name = response[i]['name'];
+                $("#city1").append("<option value=''>Please Select</option>");
+                $("#city1").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
         });

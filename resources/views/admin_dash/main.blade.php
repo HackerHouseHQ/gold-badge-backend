@@ -58,6 +58,9 @@
         <script src="{{ asset('admin_css/plugins/datatables-bs4/js/dataTables.bootstrap4.js')}}"></script>
         <script src="{{ asset('admin_css/dist/js/pages/dashboard3.js')}}"></script>
         <script src="{{ asset('admin_css/dist/sweetalert/sweetalert.min.js') }}"></script>
+        <script src="{{ asset('admin_css/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+        <script src="{{ asset('admin_css/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+        <!-- bs-custom-file-input -->
      @yield('script')
    </body>
  </html>
