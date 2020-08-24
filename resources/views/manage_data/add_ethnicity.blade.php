@@ -20,6 +20,15 @@
 
             <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/back_icon@2x.png') }}"></a>Enter New State</div>
              <div class="panel-body">
+                @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="form-horizontal" method="POST" action="{{route('add_ethnicity')}}"          enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <br>

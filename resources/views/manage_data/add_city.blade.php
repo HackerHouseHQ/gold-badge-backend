@@ -20,6 +20,15 @@
 
             <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/back_icon@2x.png') }}"></a>Add New City</div>
              <div class="panel-body">
+                @if ($errors->any())
+              <div class="alert alert-danger">
+                <ul>
+                  @foreach ($errors->all() as $error)
+                  <li>{{ $error }}</li>
+                  @endforeach
+                </ul>
+              </div>
+              @endif
               <form class="form-horizontal" method="POST" action="{{route('add_city')}}"          enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <?php $countryList =  App\Country::get();?>
@@ -28,7 +37,7 @@
                    <label for="text" class="ttl_bnr addteam promo">Select Country</label>
                     <div class="col-10 col-sm-10 col-md-8 col-lg-4">
                      <div class="to_display_inline">
-                      <select name="country_id" id="country_id" class="form-control formn_custom_class_add_form" style="-webkit-appearance: none;">
+                      <select name="country_id" id="country_id" class="form-control formn_custom_class_add_form" style="-webkit-appearance: none; " required>
                         <option value="">Select Country</option>
                         @foreach($countryList as $counntryList)
                             <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
@@ -42,7 +51,7 @@
                    <label for="text" class="ttl_bnr addteam promo">Select State</label>
                    <div class="col-10 col-sm-10 col-md-8 col-lg-4">
                     <div class="to_display_inline">
-                     <select name="state_id" id="state_id" class="form-control formn_custom_class_add_form">
+                     <select name="state_id" id="state_id" class="form-control formn_custom_class_add_form" required>
                       <option value="">Select State</option>
                      </select>
                      <img src="{{asset('admin_css/images/down_icon.png')}}" class="img-fluid team_formm_cityy">

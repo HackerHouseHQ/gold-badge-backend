@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+
+use App\Department;
+use App\DepartmentBadge;
 
 class HomeController extends Controller
 {
@@ -23,6 +27,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $usercount = User::count();
+        $data['UserCount'] = $usercount;
+        $departmentcount = Department::count();
+        $data['DepartmentCount'] = $departmentcount;
+        $badgecount = DepartmentBadge::count();
+        $data['BadgeCount'] = $badgecount;
+        return view('home',$data);
     }
 }

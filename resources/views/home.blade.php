@@ -10,7 +10,7 @@
           <div class="col-lg-4 col-7">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3 class="no-margins">10</h3>
+                <h3 class="no-margins">{{$UserCount}}</h3>
 
                 <p>Registered Users</p>
               </div>
@@ -22,7 +22,7 @@
           <div class="col-lg-4 col-7">
             <div class="small-box bg-success">
               <div class="inner">
-              <h3>100<sup style="font-size: 20px"></sup></h3>
+              <h3>1<sup style="font-size: 20px"></sup></h3>
                 <p>Guest Login </p>
               </div>
               <div class="icon">
@@ -33,7 +33,7 @@
           <div class="col-lg-4 col-7">
             <div class="small-box bg-info">
               <div class="inner">
-                <h3 class="no-margins">10</h3>
+                <h3 class="no-margins">{{$DepartmentCount}}</h3>
 
                 <p>Total Departments</p>
               </div>
@@ -45,7 +45,7 @@
           <div class="col-lg-4 col-6">
             <div class="small-box bg-success">
               <div class="inner">
-              <h3>100<sup style="font-size: 20px"></sup></h3>
+              <h3>{{$BadgeCount}}<sup style="font-size: 20px"></sup></h3>
                 <p>Total badge </p>
               </div>
               <div class="icon">
