@@ -43,9 +43,10 @@ class ManageDataController extends Controller
         $offset = $_GET['start'] ? $_GET['start'] :"0";
         $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
         $draw = $_GET['draw'];
-        $search= $request->role;
-        $data = $this->state->getdata_table($order_by, $offset, $limit_t);
-        $count = $this->state->getdata_count($order_by);
+        $search = $_GET['search'];
+        // $search= $request->role;
+        $data = $this->state->getdata_table($order_by, $offset, $limit_t,$search);
+        $count = $this->state->getdata_count($order_by,$search);
         $getuser = $this->manage_data($data);
         $results = ["draw" => intval($draw),
             "iTotalRecords" => $count,

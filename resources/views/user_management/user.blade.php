@@ -12,6 +12,7 @@
             <span class="div_cover_sell">
               <span>
             <select name="status_id" id="status_id" >
+              <option value = "">status</option>
               <option value = "1">Active</option>
               <option value = "2">Inactive</option>
             </select>

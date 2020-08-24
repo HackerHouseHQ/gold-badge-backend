@@ -79,6 +79,10 @@
             <div class="card-body">
               <table id="data1" class="table table-bordered table-hover">
                 <thead> --}}
+               
+                  <div class="card-body">
+               <input class="form-control form-control-sm" id="search" type="text" placeholder="Search  Country">
+             </div>
         <div class="row">
         <div class="col-12">
           <div class="card class_scroll ">
@@ -254,6 +258,8 @@
     'ajax': {
        'url':"{{route('countryList')}}",
        'data': function(data){
+        var search = $('#search').val();
+          data.search = search;
         
        }
     },
@@ -265,6 +271,9 @@
         { data: 'view' },
         // { data: 'view' },
     ]
+  });
+  $('#search').keyup(function(){
+     dataTable.draw();
   });
 });
 </script>

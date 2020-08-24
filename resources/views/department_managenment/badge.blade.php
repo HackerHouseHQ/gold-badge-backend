@@ -338,6 +338,8 @@ background: red;
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
+           var search = $('#search').val();
+          data.search = search;
         }
        },
     'columns': [

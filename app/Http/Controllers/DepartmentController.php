@@ -155,8 +155,9 @@ class DepartmentController extends Controller
         $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
 
 
-        $arr[$key]['badge_name'] = "<td><span class='tbl_row_new'>".$data->department_data->department_name."</span></td>";
-        $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>".$data->badge_number."</span></td>";
+        
+        $arr[$key]['badge_name'] = "<td><span class='tbl_row_new'>".$data->badge_number."</span></td>";
+        $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>".$data->department_data->department_name."</span></td>";
         $arr[$key]['badge_rating'] = "<td><span class='tbl_row_new'>0</span></td>";
         $arr[$key]['department_rating'] = "<td><span class='tbl_row_new'>0</span></td>";
         $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>".date("Y-m-d", strtotime($data->created_at))."</span></td>";

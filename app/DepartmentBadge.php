@@ -51,10 +51,15 @@ class DepartmentBadge extends Model
      
             });
           }
+
            if(!empty($search)){
-             // $query->whereHas('department_data',function($q) use($search){
-             //    $q->orwhere('department_name','like','%'.$search.'%');
-             //  });
+             $query->whereHas('department_data',function($q) use($search){
+                $q->where('department_name','like','%'.$search.'%');
+              });
+             $query->Where(function($q) use($search){
+               $q->orwhere('badge_number','like','%'.$search.'%');
+     
+            });
             }
          
         
@@ -62,8 +67,8 @@ class DepartmentBadge extends Model
          $query->take($limit_t);
          $data = $query->get();
         // $data = $query->get()->toArray();
-          // $data = DB::getQueryLog();
-         // echo"<pre>";print_r($data);  die;
+        //   $data = DB::getQueryLog();
+        //  echo"<pre>";print_r($data);  die;
          return $data;
       }
       public function getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id){
@@ -100,6 +105,16 @@ class DepartmentBadge extends Model
             });
           // });
           }
+          if(!empty($search)){
+             $query->whereHas('department_data',function($q) use($search){
+                $q->where('department_name','like','%'.$search.'%');
+              });
+             $query->Where(function($q) use($search){
+               $q->orwhere('badge_number','like','%'.$search.'%');
+     
+            });
+            }
+
          // $que
          $data = $query->get();
          $total = $data->count();
