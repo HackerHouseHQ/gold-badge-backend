@@ -7,6 +7,24 @@
   .active2{
 background: red;
 }
+
+#status_id{
+    padding-right: 67px;
+}
+#country_id{
+    padding-right: 67px;
+}
+#state_id{
+    padding-right: 67px;
+}
+#city_id{
+    padding-right: 67px;
+}
+#sideshow{
+      /*background-color: aqua;*/
+    margin-left: 637px;
+}
+
 </style>
  @section('content')
     <div class="col-sm-12">
@@ -33,7 +51,7 @@ background: red;
           <div class="main_menu_add_tabs">
            <ul class="nav space_in_li xyy">
            {{--  <li><a href="#"  data-toggle="modal" data-target="#department" class="data2">Add Department<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li> --}}
-            <li><a href="#"  data-toggle="modal" data-target="#badge" class="data2">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
+            <li><a href="#"  data-toggle="modal" data-target="#badge" id="sideshow">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
 
           </ul>
           </div>
@@ -77,6 +95,7 @@ background: red;
             </select>
           </span>
           </span>
+          <br><br>
             <span class="from_to_select">
              <label for="from_text" class="serach_by_text">From</label>
              
@@ -244,9 +263,11 @@ background: red;
     </div>
   @endsection
   @section('script')
+   {{-- filter --}}
    <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){
+                $("#state_id").append("<option value=''>Please Select</option>");
         var country_id = $(this).val();
         $.ajax({
             url: '{{route('get_state')}}',
@@ -259,7 +280,6 @@ background: red;
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
-                $("#state_id").append("<option value=''>Please Select</option>");
                 $("#state_id").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
@@ -267,6 +287,32 @@ background: red;
     });
   });
 </script>
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#state_id").change(function(){
+      // alert('dfshj');
+        $("#city_id").append("<option value=''>Please Select</option>");
+        var state_id = $(this).val();
+        // alert(state_id);
+        $.ajax({
+            url: '{{route('get_city')}}',
+            type: 'get',
+            data: {state_id:state_id},
+            dataType: 'json',
+            success:function(response){
+            var len = response.length;
+            $("#city_id").empty();
+              for( var i = 0; i<len; i++){
+                var id = response[i]['id'];
+                var name = response[i]['name'];
+                $("#city_id").append("<option value='"+id+"'>"+name+"</option>");
+              }
+            }
+        });
+    });
+  });
+</script>
+{{-- end filter --}}
   <script type="text/javascript">
   $(document).ready(function(){
   var dataTable = $('#data1').DataTable({

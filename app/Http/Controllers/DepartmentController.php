@@ -28,6 +28,7 @@ class DepartmentController extends Controller
          return view('department_managenment.deprtment');
      }
     public function department_list(Request $request){
+        // echo"<pre>"; print_r($request->all()); die;
         $order_by = $_GET['order'][0]['dir'];
         $columnIndex = $_GET['order'][0]['column'];
         $columnName = $_GET['columns'][$columnIndex]['data'];
@@ -38,11 +39,11 @@ class DepartmentController extends Controller
         $status_id = $_GET['status_id'];
         $state_id = $_GET['state_id'];
         $country_id = $_GET['country_id'];
-
         $fromdate = $_GET['fromdate'];
         $todate = $_GET['todate'];
-        $data = $this->user->getdata_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate);
-        $count = $this->user->getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate);
+        $search = $_GET['search'];
+        $data = $this->user->getdata_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
+        $count = $this->user->getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
         $getuser = $this->manage_data($data);
         $results = ["draw" => intval($draw),
             "iTotalRecords" => $count,

@@ -4,18 +4,35 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class Department extends Model
 {
         protected $table = 'departments';
     
     protected $fillable = ['country_id','state_id','city_id','department_name','image','status'];
 
-        public function getdata_table($order_by,$offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate){
-         $query = self::query()->orderBy('created_at', 'asc');
+        public function getdata_table($order_by,$offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search){
+           // DB::enableQueryLog();
+         $query = self::query()->with('country_data')->with('state_data')->with('city_data')->orderBy('created_at', 'asc');
          if(!empty($fromdate) &&  !empty($todate)){
             $query->Where(function($q) use($fromdate,$todate){
                $q->wheredate('created_at','>=',$fromdate);
               $q->wheredate('created_at','<=',$todate);
+            });
+          }
+          if(!empty($search)){
+            $query->whereHas('country_data',function($q) use($search){
+               $q->orwhere('country_name','like','%'.$search.'%');
+            });
+            $query->whereHas('state_data',function($q) use($search){
+               $q->orwhere('state_name','like','%'.$search.'%');
+            });
+            $query->whereHas('city_data',function($q) use($search){
+               $q->orwhere('city_name','like','%'.$search.'%');
+            });
+            $query->Where(function($q) use($search){
+             $q->orwhere('department_name','like','%'.$search.'%');
             });
           }
           if(!empty($status_id)){
@@ -40,16 +57,31 @@ class Department extends Model
          $query->take($limit_t);
          $data = $query->get();//->toArray();
          // $data = $query->get()->toArray();
+          // $data = DB::getQueryLog();
          // echo"<pre>";print_r($data);  die;
          return $data;
       }
-      public function getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate){
+      public function getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search){
          $query = self::query()->orderBy('created_at', 'asc');
 
          if(!empty($fromdate) &&  !empty($todate)){
             $query->Where(function($q) use($fromdate,$todate){
                $q->wheredate('created_at','>=',$fromdate);
               $q->wheredate('created_at','<=',$todate);
+            });
+          }
+          if(!empty($search)){
+            $query->whereHas('country_data',function($q) use($search){
+               $q->orwhere('country_name','like','%'.$search.'%');
+            });
+            $query->whereHas('state_data',function($q) use($search){
+               $q->orwhere('state_name','like','%'.$search.'%');
+            });
+            $query->whereHas('city_data',function($q) use($search){
+               $q->orwhere('city_name','like','%'.$search.'%');
+            });
+            $query->Where(function($q) use($search){
+             $q->orwhere('department_name','like','%'.$search.'%');
             });
           }
           if(!empty($status_id)){
