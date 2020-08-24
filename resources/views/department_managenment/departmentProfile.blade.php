@@ -167,7 +167,7 @@
 @section('script')  
 <script type="text/javascript">
   function viewDepartmentBadgeModel1(id){
-   alert(id); 
+   // alert(id); 
 
        $.ajax({
           url: "{{ route('viewDepartmentBadgeModel') }}/" + id, 

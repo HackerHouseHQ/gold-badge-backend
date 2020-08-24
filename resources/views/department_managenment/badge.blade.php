@@ -332,6 +332,8 @@ background: red;
           data.state_id = state_id;
           var country_id = $('#country_id').val();
           data.country_id = country_id;
+          var city_id = $('#city_id').val();
+          data.city_id = city_id;
            var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
@@ -348,6 +350,9 @@ background: red;
     ]
   });
   $('#search_data1').click(function(){
+     dataTable.draw();
+  });
+   $('#search').keyup(function(){
      dataTable.draw();
   });
 });

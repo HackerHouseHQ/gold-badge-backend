@@ -64,8 +64,8 @@
                     <span>
                   <select name="status_id" id="status_id" >
                     <option value = "">UserName</option>
-                    <option value = "1">Active</option>
-                    <option value = "2">Inactive</option>
+                    <option value = "1">no user</option>
+                    {{-- <option value = "2">Inactive</option> --}}
                   </select>
                 </span>
                 </span>

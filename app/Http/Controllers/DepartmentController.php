@@ -131,11 +131,13 @@ class DepartmentController extends Controller
         $status_id = $_GET['status_id'];
         $state_id = $_GET['state_id'];
         $country_id = $_GET['country_id'];
-
         $fromdate = $_GET['fromdate'];
         $todate = $_GET['todate'];
-        $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate);
-        $count = $this->badge->getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate);
+        $search = $_GET['search'];
+        $city_id = $_GET['city_id'];
+        $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
+
+        $count = $this->badge->getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
         $getuser = $this->manage_badge_data($data);
         $results = ["draw" => intval($draw),
             "iTotalRecords" => $count,
@@ -181,7 +183,6 @@ class DepartmentController extends Controller
     }
       // **add badge data
     public function AddBadge(Request $req){
-        // echo"<pre>";print_r($req->all()); die;
          $data['department_id'] = $req->department_id;
          $data['badge_number'] = $req->badge_number;
          $insertBadge = DepartmentBadge::create($data);
@@ -189,9 +190,7 @@ class DepartmentController extends Controller
     }
     // ***badgeprofile data page
     public function BadgeDetail(Request $req){
-        // print_r($req->id); die;
        $getDetail = DepartmentBadge::with('department_data.country_data')->with('department_data.state_data')->with('department_data.city_data')->whereId($req->id)->first();
-       // echo"<pre>"; print_r($getDetail); die;
        $data['data'] = $getDetail;
        return view('department_managenment.badgeProfile',$data);
 
