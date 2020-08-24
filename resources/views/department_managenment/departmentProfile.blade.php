@@ -180,7 +180,7 @@
               $.each(response, function(key, value){
 
                 var url = '{{ route("BadgeDetail", ":id") }}';
-                 url = url.replace(':id', value.id);
+                 url = url.replace(':id','id='+value.id);
 
                 let row = `
                 <tr>

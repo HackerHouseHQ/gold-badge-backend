@@ -188,6 +188,7 @@ class DepartmentController extends Controller
     }
     // ***badgeprofile data page
     public function BadgeDetail(Request $req){
+        // print_r($req->id); die;
        $getDetail = DepartmentBadge::with('department_data.country_data')->with('department_data.state_data')->with('department_data.city_data')->whereId($req->id)->first();
        // echo"<pre>"; print_r($getDetail); die;
        $data['data'] = $getDetail;
