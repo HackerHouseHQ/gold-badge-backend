@@ -5,34 +5,34 @@
       <div class="container-fluid">
         <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
                   <img class="profile-user-img img-fluid img-circle"
-                       src="{{asset('storage/'.$data->image)}}"
+                       src="{{asset('storage/'.$data->department_data->image)}}"
                        alt="User profile picture">
                 </div>
 
              
                 <ul class="list-group list-group-unbordered mb-3">
                   <li class="list-group-item">
-                    Department <a class="float-right">{{$data->department_name}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    Country <a class="float-right">{{$data->country_data->country_name}}</a>
-                  </li>
-                  <li class="list-group-item">
-                    State <a class="float-right">{{$data->state_data->state_name}}</a>
+                    Badge Number <a class="float-right">{{$data->badge_number}}</a>
                   </li>
                    <li class="list-group-item">
-                    City <a class="float-right">{{$data->city_data->city_name}}</a>
+                    Department <a class="float-right">{{$data->department_data->department_name}}</a>
                   </li>
                   <li class="list-group-item">
-                    Avg. Rating <a class="float-right">0</a>
+                    Country <a class="float-right">{{$data->department_data->country_data->country_name}}</a>
                   </li>
                   <li class="list-group-item">
-                    No. of badge <a class="float-right">0</a>
+                    State <a class="float-right">{{$data->department_data->state_data->state_name}}</a>
+                  </li>
+                   <li class="list-group-item">
+                    City <a class="float-right">{{$data->department_data->city_data->city_name}}</a>
+                  </li>
+                  <li class="list-group-item">
+                    Department Rating <a class="float-right">0</a>
                   </li>
                    <li class="list-group-item">
                     Badge Rating <a class="float-right">0</a>
@@ -48,12 +48,10 @@
                   </li>
                 </ul>
 
-                {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
-                <a href='javascript:void(0)' onclick ='viewDepartmentBadgeModel1({{$data->id}})'><span class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span></a>
               </div>
             </div>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-8">
            <div class="card"> 
              <div class="card-body">
                <input class="form-control form-control-sm" type="text" placeholder="Search By User Name">
@@ -124,86 +122,8 @@
       </div>
     </section>
 
-                 {{-- model view badge --}}
-          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-           <div class="modal-dialog modal-dialog-centered" role="document">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <h4 class="modal-title text-capitalize" id="businessName"></h4>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                  </button>
-                 </div>
-              <div class="modal-body">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="table-responsive">
-                      <div>
-                        <table  class="table table-bordered table-hover">
-                          <thead>
-                            <tr>
-                              <th><span class="tbl_row">SN.</span></th>
-                              <th> <span class="tbl_row">Badge Number</span> </th>
-                              <th> <span class="tbl_row">Rating</span> </th>
-                              <th> <span class="tbl_row">Reviews</span> </th>
-                              <th> <span class="tbl_row"></span> </th>
-                            </tr>
-                          </thead>
-                          <tbody id="businessDetails">
-                            
-                          </tbody>
-                        </table>
-                      </div>
-                     </div>
-                  </div>
-                </div>
-              </div>
-             </div>
-            </div>
-          </div>
-        {{-- end model view badge --}}
   </div>
 @endsection
 @section('script')  
-<script type="text/javascript">
-  function viewDepartmentBadgeModel1(id){
-   alert(id); 
 
-       $.ajax({
-          url: "{{ route('viewDepartmentBadgeModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            // console.log(response);
-          if(response[0]) {
-              $('#businessDetails').html('');
-              var i = 0;
-              $.each(response, function(key, value){
-                let row = `
-                <tr>
-                  <td> ${++i} </td>
-                  <td class="text-capitalize">${value.badge_number}</td>
-                  <td class="text-capitalize">0</td>
-                  <td class="text-capitalize">0</td>
-                  <td class="text-capitalize"><a href="#">View Profile</a></td>
-                  <td></td>
-                 </tr>
-                `;
-                $('#businessDetails').append(row)
-              })
-            } else {
-              let row = `
-                <tr>
-                  <td colspan="7"> Record not found! </td>
-                </tr>
-                `;
-                $('#businessDetails').html(row);
-            }
-             $('#exampleModalCenter').modal('show');
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
-  }
-</script>
 @endsection

@@ -5,7 +5,7 @@
       <div class="container-fluid">
         <div class="row">
 
-          <div class="col-md-3">
+          <div class="col-md-4">
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
@@ -53,7 +53,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-9">
+          <div class="col-md-8">
            <div class="card"> 
              <div class="card-body">
                <input class="form-control form-control-sm" type="text" placeholder="Search By User Name">
@@ -178,13 +178,17 @@
               $('#businessDetails').html('');
               var i = 0;
               $.each(response, function(key, value){
+
+                var url = '{{ route("BadgeDetail", ":id") }}';
+                 url = url.replace(':id', value.id);
+
                 let row = `
                 <tr>
                   <td> ${++i} </td>
                   <td class="text-capitalize">${value.badge_number}</td>
                   <td class="text-capitalize">0</td>
                   <td class="text-capitalize">0</td>
-                  <td class="text-capitalize"><a href="#">View Profile</a></td>
+                  <td class="text-capitalize"><a href="${url}">View Profile</a></td>
                   <td></td>
                  </tr>
                 `;
@@ -206,4 +210,5 @@
       });
   }
 </script>
+
 @endsection
