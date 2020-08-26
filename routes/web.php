@@ -29,6 +29,8 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
     Route::get('/UserDetailFollowing', 'UserController@UserDetailFollowing')->name('UserDetailFollowing');
     Route::get('/UserDetailFollowingBadge', 'UserController@UserDetailFollowingBadge')->name('UserDetailFollowingBadge');
+    Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
+    Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
 
   });
   
