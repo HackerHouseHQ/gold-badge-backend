@@ -1,7 +1,7 @@
 @include('admin_dash.header')
 <aside class="main-sidebar elevation-1 custom_class_sdbr">
   <a href="#" class="brand-link custom_brand_link">
-    <img src="{{ asset('admin_css/images/Login_logo.png') }}" class="brand-image" style="opacity: .8"><span
+    <img src="{{ asset('admin_css/images/follow_logo.png') }}" class="brand-image" style="opacity: .8"><span
       class="brand-text font-weight-light heading_mainn"><span class="admin_text">
         admin</span><span class="panel_text">panel</span></span>
   </a>
