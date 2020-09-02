@@ -35,7 +35,7 @@ class SendNotification extends Model
                $q->wheredate('created_at','>=',$fromdate1);
               $q->wheredate('created_at','<=',$todate1);
             });
-         } else {
+         } else {            
          if(!empty($fromdate) &&  !empty($todate)){
             $query->Where(function($q) use($fromdate,$todate){
                $q->wheredate('created_at','>=',$fromdate);
@@ -47,7 +47,7 @@ class SendNotification extends Model
          $query->take($limit_t);
          $data = $query->get();//->toArray();
          // $data = $query->get()->toArray();
-         // echo"<pre>";print_r($data);  die;
+       //   echo"<pre>";print_r($data);  die;
          return $data;
       }
       public function getdata_count($order_by,$date1,$todate,$fromdate){

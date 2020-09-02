@@ -25,11 +25,15 @@ Route::group(['middleware'=>['auth:admin']], function(){
 
     Route::get('/user', 'UserController@index')->name('user');
     Route::get('/user_list', 'UserController@user_list')->name('userList');
+    Route::get('/userReviewList', 'UserController@userReviewList')->name('userReviewList');
     Route::post('/change_status', 'UserController@change_status')->name('change_status');
     Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
     Route::get('/UserDetailFollowing', 'UserController@UserDetailFollowing')->name('UserDetailFollowing');
     Route::get('/UserDetailFollowingBadge', 'UserController@UserDetailFollowingBadge')->name('UserDetailFollowingBadge');
     Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
+    Route::get('/deprtmentPendingRequest', 'UserController@deprtmentPendingRequest')->name('deprtmentPendingRequest');
+    Route::get('/deprtmentRejectRequest', 'UserController@deprtmentRejectRequest')->name('deprtmentRejectRequest');
+    Route::post('/acceptDepartmentRequest', 'UserController@acceptDepartmentRequest')->name('acceptDepartmentRequest');
     Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
 
   });
@@ -45,18 +49,23 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/DepartmentDetail', 'DepartmentController@DepartmentDetail')->name('DepartmentDetail');
     Route::get('/viewDepartmentBadgeModel/{id?}', 'DepartmentController@viewDepartmentBadgeModel')->name('viewDepartmentBadgeModel');
     Route::post('/department_status', 'DepartmentController@department_status')->name('department_status');
+    Route::get('/department_profile_list', 'DepartmentController@department_profile_list')->name('department_profile_list');
 
    Route::get('/AddBadge', 'DepartmentController@AddBadge')->name('AddBadge');
    Route::get('/badge_list', 'DepartmentController@badge_list')->name('badge_list');
    Route::post('/badge_status', 'DepartmentController@badge_status')->name('badge_status');
    Route::get('/BadgeDetail', 'DepartmentController@BadgeDetail')->name('BadgeDetail');
-
-
+   //Route::get('/departmentNewRequest', 'DepartmentController@department_new_request')->name('departmentNewRequest');
 
   });
-
-
-
+  
+  Route::group(['prefix' => 'post'], function () {
+    Route::get('/posts', 'PostController@posts')->name('post-list');
+    Route::get('/post-list', 'PostController@post_list')->name('postData');
+    Route::get('/postViewDetail', 'PostController@postViewDetail')->name('postViewDetail');
+    Route::get('/PostDepartmentDetail', 'PostController@PostDepartmentDetail')->name('PostDepartmentDetail');
+    Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
+    });
 
 
   Route::group(['prefix' => 'manage_data'], function () {
@@ -102,11 +111,11 @@ Route::group(['middleware'=>['auth:admin']], function(){
 
   Route::group(['prefix' => 'cms'], function () {
     Route::get('/about_us', 'InformationManagementController@about_us')->name('about_us');
-    Route::get('/edit_about_us', 'InformationManagementController@edit_about_us')->name('edit_about_us');
+    Route::post('/edit_about_us', 'InformationManagementController@edit_about_us')->name('edit_about_us');
     Route::get('/privacy', 'InformationManagementController@privacy')->name('privacy');
-    Route::get('/edit_privacy', 'InformationManagementController@edit_privacy')->name('edit_privacy');
+    Route::post('/edit_privacy', 'InformationManagementController@edit_privacy')->name('edit_privacy');
     Route::get('/terms', 'InformationManagementController@terms')->name('terms');
-    Route::get('/edit_terms', 'InformationManagementController@edit_terms')->name('edit_terms');
+    Route::post('/edit_terms', 'InformationManagementController@edit_terms')->name('edit_terms');
     Route::get('/notification', 'InformationManagementController@notification')->name('notification');
     Route::get('/sendNotification', 'InformationManagementController@sendNotification')->name('sendNotification');
     Route::get('/notificationList', 'InformationManagementController@notificationList')->name('notificationList');

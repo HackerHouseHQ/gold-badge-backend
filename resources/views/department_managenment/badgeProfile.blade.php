@@ -1,5 +1,51 @@
 @extends('admin_dash.main')
  @section('content')
+<style>
+    p.number_ratings_grey {
+        color: grey;
+    }
+
+    .number_star {
+        display: flex;
+    }
+    .fas.fa-star.custom_star_iconn{
+        color: orangered;
+    }
+    .number_star.new_div {
+        display: flex;
+        justify-content: space-evenly;
+        width: 56px;
+    }
+    p.number_ratings_black_new {
+        font-size: 12px;
+    }
+    .vertical_baar {
+        margin-top: -3px;
+        color: grey;
+    }
+    .main_div_five_rows {
+        line-height: 3px;
+        width: 100%;
+        margin-bottom: -17px;
+    }
+    .wrapper_ratings_review {
+        border: 1px solid #eee;
+        padding: 16px 16px;
+    }
+    .main_div_five_rows {
+        line-height: 15px;
+    }
+    .fas.fa-star.custom_star_iconn {
+        color: orangered;
+        /* width: 10px; */
+        font-size: 10px;
+        margin-top: -6px;
+    }
+    #data1_paginate{
+        display: none;
+    }
+ 
+</style>
   <div class="content-wrapper">
     <section class="content">
       <div class="container-fluid">
@@ -85,6 +131,60 @@
                  </thead>
                 </table>
               </form>
+                  <div class="wrapper_ratings_review">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <div  class="number_star" style="margin-top:17px;">
+                                            <p class="number_ratings_black">4.1</p>
+
+                                            <span class="star_icon">
+                                                <i class="fas fa-star custom_star_iconn" style="margin:3px;"></i>
+                         <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
+                                            </span>
+                                        </div>
+                                        <p class="number_ratings_grey" style="margin-top:-20px;">672</p>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="main_div_five_rows">
+                                            <div class="row_one">
+                                                <div  class="number_star new_div">
+                                                    <p class="number_ratings_black_new">Honesty</p>
+
+                                                    <span class="star_icon">
+                                                        <i class="fas fa-star custom_star_iconn"></i>
+                                                    </span>
+                                                    <span class="vertical_baar">|</span>
+                                                    <p class="number_ratings_black_new">230</p>
+                                                </div>
+                                            </div>
+                                            <div class="row_one">
+                                                <div  class="number_star new_div">
+                                                    <p class="number_ratings_black_new">Communication</p>
+
+                                                    <span class="star_icon">
+                                                        <i class="fas fa-star custom_star_iconn"></i>
+                                                    </span>
+                                                    <span class="vertical_baar">|</span>
+                                                    <p class="number_ratings_black_new">230</p>
+                                                </div>
+                                            </div>
+                                            <div class="row_one">
+                                                <div  class="number_star new_div">
+                                                    <p class="number_ratings_black_new">Respect</p>
+
+                                                    <span class="star_icon">
+                                                        <i class="fas fa-star custom_star_iconn"></i>
+                                                    </span>
+                                                    <span class="vertical_baar">|</span>
+                                                    <p class="number_ratings_black_new">230</p>
+                                                </div>
+                                            </div>
+                                                                                  
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
              </div>
            </div>
             <div class="card">
@@ -92,26 +192,16 @@
                 <div class="tab-content">
                   <div class="active tab-pane" id="activity">
                     <div class="post">
-                     {{--  <div class="user-block">
-                        <img class="img-circle img-bordered-sm" src="../../dist/img/user1-128x128.jpg" alt="user image">
-                        <span class="username">
-                          <a href="#">Jonathan Burke Jr.</a>
-                          <a href="#" class="float-right btn-tool"></a>
-                        </span>
-                        <span class="description">Shared publicly - 7:30 PM today</span>
-                      </div>
-                      <p>
-                       No Post Available !
-                      </p>
-                      <p>
-                        <a href="#" class="link-black text-sm mr-2">View Post</a>
-                      </p> --}}
-
-                       <p>
-                       No Post Available !
-                      </p>
-
-
+                  <div class="row">
+                                            <div class="col-12">
+                                                <div class="card class_scroll ">
+                                                    <div class="card-body p-0">
+                                                        <table id="data1" class="table table-hover">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                     </div>
                   </div>
                 </div>
@@ -125,5 +215,48 @@
   </div>
 @endsection
 @section('script')  
-
+<script type="text/javascript">
+  $(document).ready(function(){
+  var dataTable = $('#data1').DataTable({
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+     "bFilter": true,
+     "bInfo": false,
+     "lengthChange": false,
+     "bAutoWidth": false,
+     'ajax': {
+        'url':"{{route('department_profile_list')}}",
+       'data': function(data){
+//            var status_id = $('#status_id').val();
+//          data.status_id = status_id;
+//          var state_id = $('#state_id').val();
+//          data.state_id = state_id;
+//          var country_id = $('#country_id').val();
+//          data.country_id = country_id;
+//           var fromdate = $('#fromdate').val();
+//          data.fromdate = fromdate;
+//          var todate = $('#todate').val();
+//          data.todate = todate;
+//          var search = $('#search').val();
+//          data.search = search;
+          
+        }
+       },
+    'columns': [
+        { data: 'rating' } ,
+        { data: 'reviews' }
+    ],
+     "columnDefs": [
+    { "width": "10%", "targets": 0 }
+  ]
+  });
+//  $('#search_data1').click(function(){
+//     dataTable.draw();
+//  });
+//  $('#search').keyup(function(){
+//     dataTable.draw();
+//  });
+});
+</script>
 @endsection

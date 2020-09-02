@@ -20,15 +20,15 @@
         <section class="content home_conntent">
           <div class="container-fluid">
              <div class="card-body">
-               <input class="form-control form-control-sm" id="search" type="text" placeholder="Search By Department...">
+               <input class="form-control form-control-sm" id="search" type="text" placeholder="Search By Name.Badge,Department,Country,State,City....">
              </div>
             {{-- main header for show list --}}
           <div class="row">
           <div class="main_menu_three_tabs">
            <ul class="nav nav-tabs abc">
-            <li class="show active"><a href="#" id="approve">Approve</a></li>
+            <li class="show"><a href="{{route('departmentRequest')}}" id="approve">Approve</a></li>
             <li class="show"><a href="{{route('deprtmentPendingRequest')}}" id="pending">Pending</a></li>
-            <li class="  show"><a href="" id="reject">Reject</a></li>
+            <li class="show active"><a href="#" id="reject">Reject</a></li>
            </ul>
          </div>
          </div>
@@ -72,7 +72,7 @@
                   <th><span class="tbl_row">Name</span></th>
                   <th><span class="tbl_row">Email</span></th>
                   <th><span class="tbl_row">Contact No.</span></th>
-                  <!--<th><span class="tbl_row">Action</span></th>-->
+                  <!--<th><span class="tbl_row"></span></th>-->
                   <th></th>
                   <th></th>
                  </tr>
@@ -106,7 +106,7 @@
      'ajax': {
        'url':"{{route('UserRequestData')}}",
        'data': function(data){
-            data.type = 1;
+            data.type = 2;
             var search = $('#search').val();
             data.search = search; 
         }
@@ -120,16 +120,15 @@
         { data: 'reg_date' },
         { data: 'u_name' },
         { data: 'email' },
-        { data: 'contact' }
+        { data: 'contact' },
+       // { data: 'view' },
     ]
   });
-  $('#search').keyup(function(){
+   $('#search').keyup(function(){
      dataTable.draw();
   });
 });
 </script> 
-
-
 {{--
 <script type="text/javascript">
   $(document).ready(function(){

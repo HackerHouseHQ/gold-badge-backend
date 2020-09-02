@@ -151,7 +151,7 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-              <table id="example1" class="table table-bordered table-striped">
+              <table id="userDetails" class="table table-bordered table-striped">
                 <thead>
                 <tr>
                   <th>Department Name</th>
@@ -159,42 +159,13 @@
                   <th>Rating</th>
                   <th>Likes</th>
                   <th>Share</th>
-                  <th>Commennt</th>
+                  <th>Comment</th>
                   <th>Report</th>
-                  <th></th>
+                  <th>Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Trident</td>
-                  <td>#46fsdh4</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>View post<br>Delete</td>
-                </tr>
-                <tr>
-                   <td>Trident</td>
-                  <td>#46fsdh4</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>View post<br>Delete</td>
-                </tr>
-                <tr>
-                   <td>Trident</td>
-                  <td>#46fsdh4</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>View post<br>Delete</td>
-                </tr>
+               
                  </tbody>
             
               </table>
@@ -209,5 +180,36 @@
     </div>
   @endsection
   @section('script')
-
+<script type="text/javascript">
+  $(document).ready(function(){
+  var dataTable = $('#userDetails').DataTable({
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+     "bFilter": true,
+     "bInfo": false,
+     "lengthChange": false,
+     "bAutoWidth": false,
+     'ajax': {
+        'url':"{{route('userReviewList')}}",
+        'data': function(data){
+         
+        }
+       },
+    'columns': [
+        { data: 'departmentName' } ,
+        { data: 'BadgeNumber' },
+        { data: 'rating' },
+        { data: 'like' },
+        { data: 'share' },
+        { data: 'comment' },
+        { data: 'report' },
+        { data: 'action' },
+    ]
+  });
+   $('#search_data1').click(function(){
+     dataTable.draw();
+  });
+});
+</script>
   @endsection

@@ -120,6 +120,45 @@ class DepartmentController extends Controller
      {
         return view('department_managenment.badge');
      }
+    public function department_profile_list(Request $request){
+        $order_by = $_GET['order'][0]['dir'];
+        $columnIndex = $_GET['order'][0]['column'];
+        $columnName = $_GET['columns'][$columnIndex]['data'];
+        $columnName =  ($columnName=='username') ? 'first_name' : 'created_at';
+        $offset = $_GET['start'] ? $_GET['start'] :"0";
+        $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
+        $draw = $_GET['draw'];
+//        $status_id = $_GET['status_id'];
+//        $state_id = $_GET['state_id'];
+//        $country_id = $_GET['country_id'];
+//        $fromdate = $_GET['fromdate'];
+//        $todate = $_GET['todate'];
+//        $search = $_GET['search'];
+//        $city_id = $_GET['city_id'];
+      //  $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
+
+        //$count = $this->badge->getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
+        $data = array(1,2,3);
+        $count =1;
+        $getuser = $this->pro_data($data);
+        $results = ["draw" => intval($draw),
+            "iTotalRecords" => $count,
+            "iTotalDisplayRecords" => $count,
+            "aaData" => $getuser ];
+            echo json_encode($results);
+    }
+    public function pro_data($data){
+        $arr = array();
+      $i = 0;
+     
+      foreach($data as $key=>$data){
+        $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>5  <i class='fas fa-star custom_star_iconn' style='margin:3px;'></i></span></span></td>";
+        $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>test hjgdfjgsdhh huddhfjuhjdsh usddhsh  </span> <span style='    display: flex;
+    justify-content: space-between;'><span>view post</span> <span>     John | 18 sept,20202</span></span></td>";
+        
+      }
+     return $arr;
+    }
     public function badge_list(Request $request){
         $order_by = $_GET['order'][0]['dir'];
         $columnIndex = $_GET['order'][0]['column'];

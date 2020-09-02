@@ -115,9 +115,9 @@
               <table id="data1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th>Contact Number</th>
-                  <th>Email</th>
-                  <th>Rank</th>
+                  <th>Message</th>
+                  <th>Time</th>
+                  <th>Date</th>
                 </tr>
                 </thead>
                 <tbody>

@@ -26,7 +26,9 @@ class InformationManagementController extends Controller
        return view ('cms.about_us',$data);
     }
     public function edit_about_us(Request $req){
+     //  echo "dscds"; die;
        $data['about_us'] = $req->AboutUs;
+     //  echo $data['about_us']; die;
        $updateAboutUs = InformationData::where('id',1)->update($data);
        return redirect('/cms/about_us');
     }

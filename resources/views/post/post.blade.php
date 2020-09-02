@@ -47,30 +47,7 @@
           </div>
           {{-- </div>
          </div> --}}
-          {{-- main header for show list --}}
-          <div class="row">
-            <div class="main_menu_three_tabs">
-              <ul class="nav nav-tabs abc">
-                <li class="active show"><a href="{{route('department')}}">Department List</a>
-                </li>
-                <li class="  show"><a href="{{route('badge')}}">Badge List</a></li>
-              </ul>
-            </div>
-          </div>
-          {{-- close --}}
-          {{-- add --}}
-          <div class="row">
-            <div class="main_menu_add_tabs">
-              <ul class="nav space_in_li xyy">
-                <li><a href="#" data-toggle="modal" data-target="#department" id="sideshow">Add Department<img
-                      src="{{ asset('admin_css/images/add_people.png')}}"></a></li>
-                {{-- <li><a href="#"  data-toggle="modal" data-target="#badge" class="data2">Add Badge<img src="{{ asset('admin_css/images/add_people.png')}}"></a>
-                </li> --}}
-
-              </ul>
-            </div>
-          </div>
-          {{-- add --}}
+      
           <form action="" id="search_data" class="search_data_row_class">
             <table class="table table-striped">
               <thead>
@@ -81,6 +58,24 @@
                         <option value="">Status</option>
                         <option value="1">Active</option>
                         <option value="2">Inactive</option>
+                      </select>
+                    </span>
+                  </span>
+                  <span class="div_cover_sell">
+                    <span>
+                      <select name="department_id" id="department_id">
+                        <option value="">Department</option>
+                        <option value="1">Department1</option>
+                        <option value="2">Department2</option>
+                      </select>
+                    </span>
+                  </span>
+                  <span class="div_cover_sell">
+                    <span>
+                      <select name="badge_id" id="badge_id">
+                        <option value="">Badge</option>
+                        <option value="1">Badge1</option>
+                        <option value="2">Badge2</option>
                       </select>
                     </span>
                   </span>
@@ -144,14 +139,15 @@
                   <table id="data1" class="table table-bordered table-hover">
                     <thead>
                       <tr>
-                        <th><span class="tbl_row">Department Name</span></th>
-                        <th><span class="tbl_row">Total Reviews</span></th>
+                        <th><span class="tbl_row">Username</span></th>
+                        <th><span class="tbl_row">Full Name</span></th>
+                        <th><span class="tbl_row">Posted on </span></th>
+                        <th><span class="tbl_row">posted About</span></th>
                         <th><span class="tbl_row">Rating</span></th>
                         {{-- <th><span class="tbl_row">Username</span></th> --}}
-                        <th><span class="tbl_row">Registered On</span></th>
-                        {{-- <th><span class="tbl_row">Total Reviews</span></th> --}}
                         <th><span class="tbl_row">Action</span></th>
-                        
+                        <th></th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -171,7 +167,7 @@
           <div class="modal-content">
 
             <div class="modal-header">
-              <h4 class="modal-title text-capitalize" id="userName">Add Department</h4>
+              <h4 class="modal-title text-capitalize" id="userName"></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
                   aria-hidden="true">&times;</span>
               </button>
@@ -186,9 +182,10 @@
                       <div class="card-body">
 
                         <div class="form-group row">
-
-                          <input type="text" class="form-control" placeholder="Department Name" name="department_name">
-
+                          <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Department Name"
+                              name="department_name">
+                          </div>
                         </div>
                         <div class="form-group row">
                           <select class="form-control select2" style="width: 100%;" id="country1" name="country">
@@ -215,13 +212,14 @@
                               <input type="file" class="custom-file-input" id="exampleInputFile" name="departmentImage">
                               <label class="custom-file-label" for="exampleInputFile">Pick Icon</label>
                             </div>
+
                           </div>
                         </div>
 
                       </div>
                       <!-- /.card-body -->
-                      <div class="card-footer btn-add">
-                        <button type="submit" class="btn btn-info float-right ">Add</button>
+                      <div class="card-footer">
+                        <button type="submit" class="btn btn-info float-right">Add</button>
                       </div>
                       <!-- /.card-footer -->
                     </form>
@@ -239,7 +237,7 @@
           <div class="modal-content">
 
             <div class="modal-header">
-              <h4 class="modal-title text-capitalize" id="userName">Add Badge</h4>
+              <h4 class="modal-title text-capitalize" id="userName"></h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
                   aria-hidden="true">&times;</span>
               </button>
@@ -288,6 +286,7 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){
+                $("#state_id").append("<option value=''>Please Select</option>");
         var country_id = $(this).val();
         $.ajax({
             url: '{{route('get_state')}}',
@@ -297,8 +296,6 @@
             success:function(response){
             var len = response.length;
             $("#state_id").empty();
-            $("#state_id").append("<option value=''>Please Select</option>");
-
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
@@ -313,6 +310,7 @@
   $(document).ready(function(){
     $("#state_id").change(function(){
       // alert('dfshj');
+        $("#city_id").append("<option value=''>Please Select</option>");
         var state_id = $(this).val();
         // alert(state_id);
         $.ajax({
@@ -323,8 +321,6 @@
             success:function(response){
             var len = response.length;
             $("#city_id").empty();
-       $("#city_id").append("<option value=''>Please Select</option>");
-
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
@@ -347,7 +343,7 @@
      "lengthChange": false,
      "bAutoWidth": false,
      'ajax': {
-        'url':"{{route('department_list')}}",
+        'url':"{{route('postData')}}",
        'data': function(data){
             var status_id = $('#status_id').val();
           data.status_id = status_id;
@@ -355,6 +351,12 @@
           data.state_id = state_id;
           var country_id = $('#country_id').val();
           data.country_id = country_id;
+          var city_id = $('#city_id').val();
+          data.city_id = city_id;
+          var department_id = $('#department_id').val();
+          data.department_id = department_id;
+          var badge_id = $('#badge_id').val();
+          data.badge_id = badge_id;
            var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
@@ -365,13 +367,12 @@
         }
        },
     'columns': [
-        { data: 'name' } ,
-        { data: 'reviews' },
+        { data: 'userName' } ,
+        { data: 'fullName' },
+        { data: 'postedOn' },
+        { data: 'postedAbout' },
         { data: 'rating' },
-        // { data: 'username' },
-        { data: 'registered_on' },
-        // { data: 'review' },
-        { data: 'view' },
+         { data: 'action' },
     ]
   });
   $('#search_data1').click(function(){
@@ -399,8 +400,6 @@
     $("#country1").change(function(){
         var country_id = $(this).val();
         // alert(country_id);
-       // $("#state").append("<option value=''>Please Select</option>");
-
         $.ajax({
             url: '{{route('get_state')}}',
             type: 'get',
@@ -409,10 +408,10 @@
             success:function(response){
             var len = response.length;
             $("#state").empty();
-            $("#state").append("<option value=''>Please Select</option>");
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
+                $("#state").append("<option value=''>Please Select</option>");
                 $("#state").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
@@ -434,10 +433,10 @@
             success:function(response){
             var len = response.length;
             $("#city1").empty();
-            $("#city1").append("<option value=''>Please Select</option>");
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
+                $("#city1").append("<option value=''>Please Select</option>");
                 $("#city1").append("<option value='"+id+"'>"+name+"</option>");
               }
             }
