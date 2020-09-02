@@ -5,7 +5,6 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Department;
 
 class User extends Authenticatable
 {
@@ -20,32 +19,7 @@ class User extends Authenticatable
       'email_verified_at' => 'datetime',
    ];
 
-   public function getdepdata_table($order_by, $offset, $limit_t)
-   {
-       $query = Department::query()
-               
-            ->leftjoin("department_badges as ds", function ($join) {
-                $join->on('ds.department_id', '=', 'departments.id');
-            });
-               
-              // ->orderBy('created_at', 'asc');
-   
-      $query->skip($offset);
-      $query->take($limit_t);
-      $data = $query->get(); //->toArray();
-      // $data = $query->get()->toArray();
-      // echo"<pre>";print_r($data);  die;
-      return $data;
-}
-  public function getdepdata_count($order_by)
-   {
-      $query = Department::query()->orderBy('created_at', 'asc');
-
-      $data = $query->get();
-      $total = $data->count();
-      return $total;
-   }
-public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id)
+   public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate)
    {
       $query = self::query()->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
@@ -95,5 +69,114 @@ public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, 
       $data = $query->get();
       $total = $data->count();
       return $total;
+   }
+   public static function getPostDepartment($user_id, $search, $offset, $limit_t)
+   {
+      $query = Post::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name'
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })->where('posts.user_id', $user_id)->where('posts.flag', 1);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+         });
+      }
+      $query->skip($offset);
+      $query->take($limit_t);
+      $query = $query->latest('posts.created_at')->get();
+
+      return $query;
+   }
+   public static function getPostBadge($user_id, $search, $offset, $limit_t)
+   {
+      $query = Post::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+         'posts.badge_id',
+         'department_badges.badge_number'
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })
+         ->leftjoin("department_badges", function ($join) {
+            $join->on('posts.badge_id', '=', 'department_badges.id');
+         })
+         ->where('posts.user_id', $user_id)->where('posts.flag', 2);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+            $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+         });
+      }
+
+      $query->skip($offset);
+      $query->take($limit_t);
+      $query = $query->latest('posts.created_at')->get();
+
+      return $query;
+   }
+   public static function getPost($user_id, $offset, $limit_t)
+   {
+      $query = Post::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         'departments.image',
+         'departments.created_at',
+         'reason_id',
+         'posts.badge_id',
+         'posts.created_at',
+         'department_badges.badge_number'
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })->leftjoin("department_badges", function ($join) {
+            $join->on('posts.badge_id', '=', 'department_badges.id');
+         })
+         ->where('user_id', $user_id);
+
+
+      $query->skip($offset);
+      $query->take($limit_t);
+      $query = $query->latest('posts.created_at')->get();
+      $arr = [];
+      $post_data = [];
+      foreach ($query as $key => $value) {
+         if ($value->badge_id == null) {
+            array_push($arr, $value->badge_id);
+            array_push($post_data, $value);
+         } else {
+            if (!in_array($value->badge_id, $arr)) {
+               array_push($arr, $value->badge_id);
+               array_push($post_data, $value);
+
+               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+                  ->avg('rating');
+            }
+         }
+      }
+      return $post_data;
    }
 }

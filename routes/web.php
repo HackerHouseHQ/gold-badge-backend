@@ -21,21 +21,42 @@ Route::group(['middleware'=>['auth:admin']], function(){
 
 
   
+  // Route::group(['prefix' => 'user_management'], function () {
+
+  //   Route::get('/user', 'UserController@index')->name('user');
+  //   Route::get('/user_list', 'UserController@user_list')->name('userList');
+  //   Route::get('/userReviewList', 'UserController@userReviewList')->name('userReviewList');
+  //   Route::post('/change_status', 'UserController@change_status')->name('change_status');
+  //   Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
+  //   Route::get('/UserDetailFollowing', 'UserController@UserDetailFollowing')->name('UserDetailFollowing');
+  //   Route::get('/UserDetailFollowingBadge', 'UserController@UserDetailFollowingBadge')->name('UserDetailFollowingBadge');
+  //   Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
+  //   Route::get('/deprtmentPendingRequest', 'UserController@deprtmentPendingRequest')->name('deprtmentPendingRequest');
+  //   Route::get('/deprtmentRejectRequest', 'UserController@deprtmentRejectRequest')->name('deprtmentRejectRequest');
+  //   Route::post('/acceptDepartmentRequest', 'UserController@acceptDepartmentRequest')->name('acceptDepartmentRequest');
+  //   Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
+
+  // });
+
   Route::group(['prefix' => 'user_management'], function () {
 
     Route::get('/user', 'UserController@index')->name('user');
     Route::get('/user_list', 'UserController@user_list')->name('userList');
-    Route::get('/userReviewList', 'UserController@userReviewList')->name('userReviewList');
     Route::post('/change_status', 'UserController@change_status')->name('change_status');
     Route::get('/UserDetail', 'UserController@UserDetail')->name('UserDetail');
+    Route::get('/UserDetailData', 'UserController@UserDetailData')->name('UserDetailData');
     Route::get('/UserDetailFollowing', 'UserController@UserDetailFollowing')->name('UserDetailFollowing');
+    Route::get('/UserDetailFollowingData', 'UserController@UserDetailFollowingData')->name('UserDetailFollowingData');
     Route::get('/UserDetailFollowingBadge', 'UserController@UserDetailFollowingBadge')->name('UserDetailFollowingBadge');
-    Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
+    Route::get('/UserDetailFollowingBadgeData', 'UserController@UserDetailFollowingBadgeData')->name('UserDetailFollowingBadgeData');
+
     Route::get('/deprtmentPendingRequest', 'UserController@deprtmentPendingRequest')->name('deprtmentPendingRequest');
     Route::get('/deprtmentRejectRequest', 'UserController@deprtmentRejectRequest')->name('deprtmentRejectRequest');
     Route::post('/acceptDepartmentRequest', 'UserController@acceptDepartmentRequest')->name('acceptDepartmentRequest');
+    Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
     Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
-
+    Route::get('/viewUserDetailModel/{id?}', 'UserController@viewUserDetailModel')->name('viewUserDetailModel');
+    Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
   });
   
 

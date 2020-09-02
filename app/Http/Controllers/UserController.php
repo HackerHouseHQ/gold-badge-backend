@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Department;
+use App\Post;
 use Illuminate\Http\Request;
 use App\UserDepartmentRequest;
 use Illuminate\Support\Facades\Storage;
@@ -75,6 +76,18 @@ class UserController extends Controller
     }
     return $arr;
   }
+   public function viewUserDetailModel(Request $req)
+  {
+    $data = Post::with('users')->with('departments')->where('id', $req->id)->first();
+    // return response()->json($data, 200);
+    // return htmlspecialchars($data);
+    return $data;
+  }
+   public function delete_post(Request $request)
+  {
+    $deletePost = Post::where('id', $request->post_id)->delete();
+    return $deletePost;
+  }
   public function userReviewList(Request $req)
   {
     $order_by = $_GET['order'][0]['dir'];
@@ -137,11 +150,81 @@ public function change_status(Request $req)
     }
     return redirect('/user_management/user');
   }
+  public function UserDetailData(Request $req)
+  {
+    $order_by = $_GET['order'][0]['dir'];
+    $columnIndex = $_GET['order'][0]['column'];
+    $columnName = $_GET['columns'][$columnIndex]['data'];
+    $columnName = ($columnName == 'username') ? 'first_name' : 'created_at';
+    $offset = $_GET['start'] ? $_GET['start'] : "0";
+    $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
+    $draw = $_GET['draw'];
+    $user_id = $_GET['user_id'];
+    // $search = $_GET['search'];
+    // $type = $_GET['type'];
+    $data = User::getPost($user_id, $offset, $limit_t);
+    $count = 1;
+    $arr = array();
+    foreach ($data as $key => $data) {
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
+      $active = "<a href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
+      $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
+      $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
+      $arr[$key]['date'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
+
+      $arr[$key]['likes'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['share'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['comment'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['report'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $view1 = $view . $active;
+      $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
+    }
+    $results = [
+      "draw" => intval($draw),
+      "iTotalRecords" => $count,
+      "iTotalDisplayRecords" => $count,
+      "aaData" => $arr
+    ];
+    echo json_encode($results);
+  }
   public function UserDetail(Request $req)
   {
     // echo"<pre>"; print_r($req->all()); die;
     $data['data'] = User::where('id', $req->id)->first();
     return view('user_management.UserDetail', $data);
+  }
+   public function UserDetailFollowingData(Request $req)
+  {
+    $order_by = $_GET['order'][0]['dir'];
+    $columnIndex = $_GET['order'][0]['column'];
+    $columnName = $_GET['columns'][$columnIndex]['data'];
+    $columnName = ($columnName == 'username') ? 'first_name' : 'created_at';
+    $offset = $_GET['start'] ? $_GET['start'] : "0";
+    $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
+    $draw = $_GET['draw'];
+    $user_id = $_GET['user_id'];
+    $search = $_GET['search'];
+    // $type = $_GET['type'];
+    $data = User::getPostDepartment($user_id, $search, $offset, $limit_t);
+    $count = $data->count();
+    $arr = array();
+    foreach ($data as $key => $data) {
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
+      $active = "<a href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
+      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
+      $view1 = $view . $active;
+      $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
+    }
+    $results = [
+      "draw" => intval($draw),
+      "iTotalRecords" => $count,
+      "iTotalDisplayRecords" => $count,
+      "aaData" => $arr
+    ];
+    echo json_encode($results);
   }
   public function UserDetailFollowing(Request $req)
   {
@@ -154,6 +237,41 @@ public function change_status(Request $req)
     // echo"<pre>"; print_r($req->all()); die;
     $data['data'] = User::where('id', $req->id)->first();
     return view('user_management.UserDetailFollowingBadge', $data);
+  }
+  public function UserDetailFollowingBadgeData(Request $req)
+  {
+    $order_by = $_GET['order'][0]['dir'];
+    $columnIndex = $_GET['order'][0]['column'];
+    $columnName = $_GET['columns'][$columnIndex]['data'];
+    $columnName = ($columnName == 'username') ? 'first_name' : 'created_at';
+    $offset = $_GET['start'] ? $_GET['start'] : "0";
+    $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
+    $draw = $_GET['draw'];
+    $user_id = $_GET['user_id'];
+    $search = $_GET['search'];
+
+    // $type = $_GET['type'];
+    $data = User::getPostBadge($user_id, $search, $offset, $limit_t);
+    $count = $data->count();
+    $arr = array();
+    foreach ($data as $key => $data) {
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
+      $active = "<a href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
+      $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
+      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
+      $view1 = $view . $active;
+
+      $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
+    }
+    $results = [
+      "draw" => intval($draw),
+      "iTotalRecords" => $count,
+      "iTotalDisplayRecords" => $count,
+      "aaData" => $arr
+    ];
+    echo json_encode($results);
   }
   public function departmentRequest()
   {
