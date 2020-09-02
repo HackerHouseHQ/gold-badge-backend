@@ -70,7 +70,7 @@
              <table class="table table-bordered" id="data1">
                <thead>
                 <tr>
-                  <th><span class="tbl_row">NAME</span></th>
+                  <th><span class="tbl_row">Name</span></th>
                   <th><span class="tbl_row">Contact No.</span></th>
                   <th><span class="tbl_row">Email</span></th>
                   <th><span class="tbl_row">Username</span></th>

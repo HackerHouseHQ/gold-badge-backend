@@ -171,7 +171,7 @@
           <div class="modal-content">
 
             <div class="modal-header">
-              <h4 class="modal-title text-capitalize" id="userName">Add Department</h4>
+              <h4 class="modal-title text-capitalize" id="userName">Add Department1</h4>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
                   aria-hidden="true">&times;</span>
               </button>
@@ -179,15 +179,16 @@
             <div class="modal-body">
               <div class="row">
                 <div class="col-md-12">
+                    <span style="color:red">*</span>All fields are mandatory 
                   <div class="table-responsive">
-                    <form class="form-horizontal" action="{{route('AddDepartment')}}" enctype="multipart/form-data"
+                    <form id="formId" class="form-horizontal" action="{{route('AddDepartment')}}" enctype="multipart/form-data"
                       method="POST">
                       {{ csrf_field() }}
                       <div class="card-body">
 
                         <div class="form-group row">
 
-                          <input type="text" class="form-control" placeholder="Department Name" name="department_name">
+                          <input type="text" id="department_name" class="form-control" placeholder="Department Name" name="department_name">
 
                         </div>
                         <div class="form-group row">
@@ -221,7 +222,7 @@
                       </div>
                       <!-- /.card-body -->
                       <div class="card-footer btn-add">
-                        <button type="submit" class="btn btn-info float-right ">Add</button>
+                          <button id="depart" type="button" class="btn btn-info float-right ">Add</button>
                       </div>
                       <!-- /.card-footer -->
                     </form>
@@ -285,6 +286,21 @@
 @endsection
 @section('script')
 {{-- filter --}}
+<script type="text/javascript">
+  $(document).ready(function(){
+       $("#depart").click(function(){
+          var department_name=  $('#department_name').val();
+       //   var city=  $('#city1').val();
+         if(department_name == null || department_name == '' ){
+         // if(city == null && city == ''){
+              alert('Please fill all fields. All fields are mandatory');
+              return false;
+          }else{
+                 $("#formId").submit();
+          }           
+  })
+  })
+ </script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){

@@ -59,9 +59,12 @@ class ManageDataController extends Controller
           $i = 0;
           foreach($data as $key=>$data){
             // $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
-            $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
-            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
-            $EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
+          //  $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
+            $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='view_modd_dec'>View Country Department</span></a><br>";
+          //  $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
+            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class=' view_modd_dec'>View City List</span></a>";
+            //$EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
+            $EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='view_modd_dec'>Edit City List</span></a>";
 
             $arr[$key]['SN'] = "<td><span class='line_heightt'>#".++$i ."</span></td>";
             $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_data->country_name."</span></td>";
@@ -73,7 +76,7 @@ class ManageDataController extends Controller
             $array_city = implode(",",$array_city);
 
             
-            $arr[$key]['city_name'] = "<td class='tdcalss'><span class='tbl_row_new1'>".$viewCity."</span></td>";
+            $arr[$key]['city_name'] = "<td class='tdcalss'><span>".$viewCity."</span></td>";
 
              $view1= $view.$EditCity;
              // $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';

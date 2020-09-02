@@ -94,7 +94,7 @@
                   <th><span class="tbl_row">Country</span></th>
                   <th><span class="tbl_row">State</span></th>
                   <th><span class="tbl_row">City</span></th>
-                  <th><span class="tbl_row"></span></th>
+                  <th><span class="tbl_row">Action</span></th>
                 </tr>
                 </thead>
                 <tbody>

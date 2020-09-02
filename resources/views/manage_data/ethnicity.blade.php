@@ -57,9 +57,9 @@
               <table id="data1" class="table table-bordered table-hover">
                 <thead>
                 <tr>
-                  <th><span class="tbl_row">ETHNICITY NAME</span></th>
-                  <th><span class="tbl_row"></span></th>
-                    <th><span class="tbl_row"></span></th>
+                  <th><span class="tbl_row">Ethnicity Name</span></th>
+                  <th><span class="tbl_row">Edit</span></th>
+                    <th><span class="tbl_row">Delete</span></th>
                 </tr>
                 </thead>
               <tbody>

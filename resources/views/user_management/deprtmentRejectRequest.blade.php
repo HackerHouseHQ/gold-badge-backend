@@ -26,9 +26,9 @@
           <div class="row">
           <div class="main_menu_three_tabs">
            <ul class="nav nav-tabs abc">
-            <li class="show"><a href="{{route('departmentRequest')}}" id="approve">Approve</a></li>
+            <li class="show"><a href="{{route('departmentRequest')}}" id="approve">Approved</a></li>
             <li class="show"><a href="{{route('deprtmentPendingRequest')}}" id="pending">Pending</a></li>
-            <li class="show active"><a href="#" id="reject">Reject</a></li>
+            <li class="show active"><a href="#" id="reject">Rejected</a></li>
            </ul>
          </div>
          </div>
