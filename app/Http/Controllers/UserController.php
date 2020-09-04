@@ -362,8 +362,8 @@ class UserController extends Controller
       // $active = "<a href='javascript:void(0)' onclick ='status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
       // $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
       if ($type == 0) {
-        $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>Accept</button></a><br><br>";
-        $reject = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>Reject</button></a><br>";
+        $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>Accept</button></a>";
+        $reject = "<a style='margin-left:5px' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>Reject</button></a>";
         $arr[$key]['action'] = $accept . $reject;       
       }
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";

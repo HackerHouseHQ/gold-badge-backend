@@ -11,12 +11,11 @@
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
-  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
+  <!--<link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">-->
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
     type="text/css">
   
-   <!-- summernote -->
-   <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
+
    
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
@@ -31,6 +30,8 @@
   <link rel="stylesheet"
     href="{{asset('admin_new/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <!-- Google Tag Manager -->
+     <!-- summernote -->
+   <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
   <script>
     (function (w, d, s, l, i) {
               w[l] = w[l] || [];

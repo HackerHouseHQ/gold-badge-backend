@@ -62,6 +62,8 @@
 
 @endsection
 @section('script')
+
+ <script src="{{asset('admin_new/assets/tinymce/js/tinymce/tinymce.min.js')}}"></script>
 <script>
   $(document).ready(function() {
   var t = $('#summernote').summernote(
@@ -73,4 +75,9 @@
  
 });
 </script>
+<!--<script type="text/javascript">
+	tinymce.init({
+	    selector: '#content'
+	});
+</script>-->
 @endsection

@@ -115,7 +115,7 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Contact No.</th>
-                <th>Action</th>
+                <!--<th>Action</th>-->
               </tr>
             </thead>
 
