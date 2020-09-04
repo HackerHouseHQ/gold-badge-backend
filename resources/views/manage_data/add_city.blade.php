@@ -1,94 +1,107 @@
 @extends('admin_dash.main')
-<style type="text/css">
-  .addstateSave{
-    margin: 10px;
-    margin-left: 211px;
-    padding: 16px;
+@section('content')
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Manage Report</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item active" aria-current="page">City</li>
+            </ol>
+          </nav>
+        </div>
 
-  }
-</style>
- @section('content')
-    <div class="col-sm-12">
-     <div class="content-wrapper custom-content-wrapper">
-      <div class="below_content_clss">
-        <section class="content home_conntent">
-          <div class="container-fluid">
-         {{-- add country --}}
-        <div class="row">
-         <div class="col-md-8 col-md-offset-2">
-          <div class="panel panel-default">
-
-            <div class="panel-heading"> <a href="{{ route('countries')}}"><img src="{{ asset('admin_css/images/back_icon@2x.png') }}"></a>Add New City</div>
-             <div class="panel-body">
-                @if ($errors->any())
-              <div class="alert alert-danger">
-                <ul>
-                  @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                  @endforeach
-                </ul>
-              </div>
-              @endif
-              <form class="form-horizontal" method="POST" action="{{route('add_city')}}"          enctype="multipart/form-data">
-                {{ csrf_field() }}
-                <?php $countryList =  App\Country::get();?>
-                  <br>
-                 <div class="form-group row one_key_pairr">
-                   <label for="text" class="ttl_bnr addteam promo">Select Country</label>
-                    <div class="col-10 col-sm-10 col-md-8 col-lg-4">
-                     <div class="to_display_inline">
-                      <select name="country_id" id="country_id" class="form-control formn_custom_class_add_form" style="-webkit-appearance: none; " required>
-                        <option value="">Select Country</option>
-                        @foreach($countryList as $counntryList)
-                            <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
-                          @endforeach
-                      </select>
-                      <img src="{{asset('admin_css/images/down_icon.png')}}" class="img-fluid team_formm_cityy">
-                     </div>
-                    </div>
-                  </div>  
-                  <div class="form-group row one_key_pairr">
-                   <label for="text" class="ttl_bnr addteam promo">Select State</label>
-                   <div class="col-10 col-sm-10 col-md-8 col-lg-4">
-                    <div class="to_display_inline">
-                     <select name="state_id" id="state_id" class="form-control formn_custom_class_add_form" required>
-                      <option value="">Select State</option>
-                     </select>
-                     <img src="{{asset('admin_css/images/down_icon.png')}}" class="img-fluid team_formm_cityy">
-                    </div>
-                   </div>
-                  </div>
-                 <br>
-                  <div class="orm-control formn_custom_class_add_form">
-                   <input type="text" class="form-control" placeholder="Enter City Name" name="city_name" value="{{ old('state_name') }}">
-                 </div>
-                 <p><b>OR</b></p><br>
-                  <div class="col-md-6">
-                   <input type="file" class="form-control"placeholder="fghj" name="city_file" style="display: block;">
-                  </div>
-                 <div class="form-group addstateSave">
-                  <div class="col-md-8 col-md-offset-4">
-                   <button type="submit" class="btn btn-primary">
-                    Save
-                   </button>
-                  </div>
-                 </div>
-                </form>
-               </div>
-              </div>
-             </div>
-            </div>
-      
-       
-         {{-- close --}}
-          </div>
-        </section>
-      </div>
       </div>
     </div>
-  @endsection
-  @section('script')
-  <script type="text/javascript">
+  </div>
+</div>
+<div class="container-fluid mt--6">
+  <div class="container-fluid mt--6">
+      
+     
+        <div class="col-lg-12">
+          <div class="card-wrapper">
+            <!-- Form controls -->
+            <div class="card">
+              <!-- Card header -->
+              <div class="card-header">
+                <h3 class="mb-0">Add City</h3>
+              </div>
+              <!-- Card body -->
+              <div class="card-body">
+                <form class="form-horizontal" method="POST" action="{{route('add_city')}}"  enctype="multipart/form-data">
+                      {{ csrf_field() }}
+                <?php $countryList =  App\Country::get();?>
+                  <div class="form-group">
+                      <label class="form-control-label" for="exampleFormControlInput1">County</label>
+                   <select class="form-control" name="country_id" id="country_id" required="required">
+                      <option value="">Select Country</option>
+                     @foreach($countryList as $counntryList)
+                    <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                    @endforeach
+                    </select>
+                  </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="exampleFormControlInput1">State</label>
+                   <select class="form-control" name="state_id" id="state_id" required="required">
+                      <option value="">Select State</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="exampleFormControlInput1">City Name</label>
+                    <input type="text" class="form-control" name="city_name" required="required"  value="{{ old('city_name') }}" required placeholder="Enter City Name">
+                  </div>
+               
+                 <div class="form-group text-center">                    
+                     <button type="submit" class="btn btn-primary">Save</button>
+                     <button type="button" class="btn btn btn-info"><a style="color : white;"
+                                    href="{{route('countries')}}">Back</a></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+         
+          </div>
+        </div>
+      
+      </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center  text-lg-left  text-muted">
+              © 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+</div>
+
+
+@endsection
+@section('script')
+ <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){
         var country_id = $(this).val();

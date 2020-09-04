@@ -43,7 +43,8 @@ class ManageDataController extends Controller
         $offset = $_GET['start'] ? $_GET['start'] :"0";
         $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
         $draw = $_GET['draw'];
-        $search = $_GET['search'];
+       $search_arr = $request->get('search');
+        $search = $search_arr['value'];
         // $search= $request->role;
         $data = $this->state->getdata_table($order_by, $offset, $limit_t,$search);
         $count = $this->state->getdata_count($order_by,$search);
@@ -60,19 +61,17 @@ class ManageDataController extends Controller
           foreach($data as $key=>$data){
             // $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
           //  $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
-            $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='view_modd_dec'>View Country Department</span></a><br>";
+            $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><button type='button' class='btn btn-info btn-sm'>View Country Department</button></a>";
           //  $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
-            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class=' view_modd_dec'>View City List</span></a>";
+            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>View City List</button></a>";
             //$EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
-            $EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='view_modd_dec'>Edit City List</span></a>";
+            $EditCity = "<a  style='margin:5px;' href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><button type='button' class='btn btn-primary btn-sm'>Edit City List</button></a>";
 
             $arr[$key]['SN'] = "<td><span class='line_heightt'>#".++$i ."</span></td>";
-            $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_data->country_name."</span></td>";
-            $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>".$data->state_name."</span></td>";
+            $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_name."</span></td>";
+            $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>".($data->state_name)?? ""."</span></td>";
             $array_city = array();
-            foreach ($data->city_data as $key1 => $cityData) {
-               array_push($array_city, $cityData->city_name);
-            }
+               array_push($array_city, $data->city_name);
             $array_city = implode(",",$array_city);
 
             
@@ -118,6 +117,7 @@ class ManageDataController extends Controller
      if(!empty($request->state_file)){
 
        $path = $request->file('state_file')->getRealPath();
+    //  echo "<pre>"; print_r($request->state_file); die;
 
        $data1 =  Importer::make('Csv')->load($path)->getCollection();
        $datacount = count($data1);

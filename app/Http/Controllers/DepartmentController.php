@@ -40,8 +40,10 @@ class DepartmentController extends Controller
         $state_id = $_GET['state_id'];
         $country_id = $_GET['country_id'];
         $fromdate = $_GET['fromdate'];
-        $todate = $_GET['todate'];
-        $search = $_GET['search'];
+        $todate = $_GET['todate'];        
+        $search_arr = $request->get('search');
+        $search = $search_arr['value'];
+        
         $data = $this->user->getdata_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
         $count = $this->user->getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
         $getuser = $this->manage_data($data);
@@ -55,10 +57,13 @@ class DepartmentController extends Controller
     public function manage_data($data){
       $arr = array();
       $i = 0;
+
+  
+
       foreach($data as $key=>$data){
-        $view = "<a href='".route('DepartmentDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>VIEWDETAIL</span></a><br>";
-        $active = "<a href='javascript:void(0)' onclick ='status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
-        $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
+        $view = "<a href='".route('DepartmentDetail',['id' => $data->id])."'> <button type='button' class='btn btn-primary btn-sm'>VIEWDETAIL</button></a>";
+        $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>ACTIVATE</button></a>";
+        $inactive = "<a style='margin-left:5px;' href='javascript:void(0)' onclick = 'status(".$data->id.")'><button type='button' class='btn btn-danger btn-sm's>INACTIVATE</button></a>";
 
 
         $arr[$key]['name'] = "<td><span class='tbl_row_new'>".$data->department_name."</span></td>";
@@ -172,7 +177,8 @@ class DepartmentController extends Controller
         $country_id = $_GET['country_id'];
         $fromdate = $_GET['fromdate'];
         $todate = $_GET['todate'];
-        $search = $_GET['search'];
+        $search_arr = $request->get('search');
+    $search = $search_arr['value'];
         $city_id = $_GET['city_id'];
         $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
 

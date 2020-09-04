@@ -17,9 +17,9 @@ use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
 {
-// use Authenticatable;;
- 
-       protected function guard()
+    // use Authenticatable;;
+
+    protected function guard()
     {
         // echo"sdf"; die;
         return Auth::guard('admin');
@@ -27,15 +27,17 @@ class LoginController extends Controller
 
     public function __construct()
     {
-          // $this->middleware('adminMiddlerware');
+        // $this->middleware('adminMiddlerware');
         $this->middleware('guest:admin')->except('logout');
     }
 
     public function index()
     {
+
         return view('auth/login');
     }
-    public function logout(Request $request) {
+    public function logout(Request $request)
+    {
         // echo"dsf"; die;
 
         $sessionKey = $this->guard()->getName();
@@ -44,12 +46,11 @@ class LoginController extends Controller
 
         $request->session()->forget($sessionKey);
         return redirect()->route('login');
+    }
 
-     }  
+    use AuthenticatesUsers;
 
-       use AuthenticatesUsers;
+    //echo"asdfghj"; die;
 
-        // echo"asdfghj"; die;
-
-       protected $redirectTo = '/home';//'/home';
+    protected $redirectTo = '/home'; //'/home';
 }
