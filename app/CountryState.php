@@ -12,12 +12,15 @@ class CountryState extends Model
 
 
 	 public function getdata_table($order_by, $offset, $limit_t,$search){
-        // print_r($search); die;
-         $query = self::query()->with('country_data')->with('city_data')->orderBy('created_at', 'asc');
-          if(!empty($search)){
-            $query->whereHas('country_data',function($q) use($search){
-               $q->where('country_name','like','%'.$search.'%');
-            });
+       $query = Country::leftjoin("country_states", function ($join) {
+        $join->on('countries.id', '=', 'country_states.country_id');
+        })
+        ->leftjoin("cities", function ($join) {
+        $join->on('country_states.id', '=', 'cities.state_id');
+        });
+        if ($search) {
+        $query->orwhere('country_name', 'like', '%' . $search . '%');
+        $query->orwhere('state_name', 'like', '%' . $search . '%');
         }
          $query->skip($offset);
          $query->take($limit_t);
@@ -27,11 +30,15 @@ class CountryState extends Model
          return $data;
 	  }
 	  public function getdata_count($order_by,$search){
-         $query = self::query()->orderBy('created_at', 'asc');
-          if(!empty($search)){
-            $query->whereHas('country_data',function($q) use($search){
-               $q->where('country_name','like','%'.$search.'%');
-            });
+         $query = Country::leftjoin("country_states", function ($join) {
+        $join->on('countries.id', '=', 'country_states.country_id');
+        })
+        ->leftjoin("cities", function ($join) {
+        $join->on('country_states.id', '=', 'cities.state_id');
+        });
+        if ($search) {
+        $query->orwhere('country_name', 'like', '%' . $search . '%');
+        $query->orwhere('state_name', 'like', '%' . $search . '%');
         }
          $data = $query->get();
          $total = $data->count();

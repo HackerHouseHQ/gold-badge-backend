@@ -39,7 +39,7 @@ class UserController extends Controller
     $fromdate = $_GET['fromdate'];
     $todate = $_GET['todate'];
     $data = $this->user->getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id);
-    $count = $this->user->getdata_count($order_by,  $fromdate, $todate);
+    $count = $this->user->getdata_count($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id);
     $getuser = $this->manage_data($data);
     $results = [
       "draw" => intval($draw),
@@ -54,10 +54,13 @@ class UserController extends Controller
     $arr = array();
     $i = 0;
     foreach ($data as $key => $data) {
-      $view = "<a href='" . route('UserDetail', ['id' => $data->id]) . "'><span class='tbl_row_new1 view_modd_dec'>VIEWDETAIL</span></a><br>";
-      $active = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
-      $inactive = "<a href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
 
+       $view = "<a href='".route('UserDetail',['id' => $data->id])."'> <button type='button' class='btn btn-primary btn-sm'>VIEW</button></a>";
+       $active = "<a style='margin-left:5px' href='javascript:void(0)' onclick ='status(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>ACTIVATE</button></a>";
+       $inactive = "<a style='margin-left:5px' href='javascript:void(0)' onclick = 'status(".$data->id.")'><button type='button' class='btn btn-danger btn-sm's>INACTIVATE</button></a>";
+
+      
+      
 
       $arr[$key]['name'] = "<td><span class='tbl_row_new'>" . $data->first_name . " " . $data->last_name . "</span></td>";
       $arr[$key]['contact'] = "<td><span class='tbl_row_new'>" . $data->mobile_country_code . "-" . $data->mobil_no . "</span></td>";
@@ -76,14 +79,14 @@ class UserController extends Controller
     }
     return $arr;
   }
-   public function viewUserDetailModel(Request $req)
+  public function viewUserDetailModel(Request $req)
   {
     $data = Post::with('users')->with('departments')->where('id', $req->id)->first();
     // return response()->json($data, 200);
     // return htmlspecialchars($data);
     return $data;
   }
-   public function delete_post(Request $request)
+  public function delete_post(Request $request)
   {
     $deletePost = Post::where('id', $request->post_id)->delete();
     return $deletePost;
@@ -97,7 +100,7 @@ class UserController extends Controller
     $offset = $_GET['start'] ? $_GET['start'] : "0";
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
-  
+
     $data = $this->user->getdepdata_table($order_by, $offset, $limit_t);
     //dd($data);
     $count = $this->user->getdepdata_count($order_by);
@@ -138,7 +141,7 @@ class UserController extends Controller
     }
     return $arr;
   }
-public function change_status(Request $req)
+  public function change_status(Request $req)
   {
     $user_id = $req->user_id;
     $status_data = User::where('id', $user_id)->first();
@@ -166,8 +169,8 @@ public function change_status(Request $req)
     $count = 1;
     $arr = array();
     foreach ($data as $key => $data) {
-      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
-      $active = "<a href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
+      $active = "<a style='margin-left: 5px;' href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
@@ -194,7 +197,7 @@ public function change_status(Request $req)
     $data['data'] = User::where('id', $req->id)->first();
     return view('user_management.UserDetail', $data);
   }
-   public function UserDetailFollowingData(Request $req)
+  public function UserDetailFollowingData(Request $req)
   {
     $order_by = $_GET['order'][0]['dir'];
     $columnIndex = $_GET['order'][0]['column'];
@@ -204,14 +207,15 @@ public function change_status(Request $req)
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
     $user_id = $_GET['user_id'];
-    $search = $_GET['search'];
+     $search_arr = $req->get('search');
+    $search = $search_arr['value'];
     // $type = $_GET['type'];
     $data = User::getPostDepartment($user_id, $search, $offset, $limit_t);
     $count = $data->count();
     $arr = array();
     foreach ($data as $key => $data) {
-      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
-      $active = "<a href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
+      $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
@@ -248,15 +252,16 @@ public function change_status(Request $req)
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
     $user_id = $_GET['user_id'];
-    $search = $_GET['search'];
+     $search_arr = $req->get('search');
+    $search = $search_arr['value'];
 
     // $type = $_GET['type'];
     $data = User::getPostBadge($user_id, $search, $offset, $limit_t);
     $count = $data->count();
     $arr = array();
     foreach ($data as $key => $data) {
-      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>VIEW POST</span></a><br>";
-      $active = "<a href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><span class='tbl_row_new1 view_modd_dec'>Delete</span></a>";
+      $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
+      $active = "<a style='margin-left:5px' href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>Delete</button></a>";
       $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
@@ -285,36 +290,38 @@ public function change_status(Request $req)
   {
     return view('user_management.deprtmentRejectRequest');
   }
-  public function acceptDepartmentRequest(Request $request)
-  {
-    dd($request->all());
-    $deprtmentRequestId = $request->departId;
-    //print_r($deprtmentRequestId);die;
-    // $status_data = UserDepartmentRequest::where('id',$deprtmentRequestId)->first();
-    // $status = $status_data->status;
-    $user = UserDepartmentRequest::where('id', $deprtmentRequestId)->update(['status' => $request->status]);
-    $requestData = UserDepartmentRequest::where('id', $deprtmentRequestId)->first();
-    //print_r($requestData);die;
-    if ($user) {
-      $data['department_name'] = $requestData->department_name;
-      $data['country_id'] = $requestData->country_id;
-      $data['state_id'] = $requestData->state_id;
-      $data['city_id'] = $requestData->city_id;
-      if ($request->departmentImage) {
-        $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
-        $data['image'] = $departmentImage;
-      }
-      $insertData = Department::create($data);
-      //return redirect('/department_management/department');
+  public function acceptDepartmentRequest(Request $request) {
+        $deprtmentRequestId = $request->departId;
+//print_r($deprtmentRequestId);die;
+// $status_data = UserDepartmentRequest::where('id',$deprtmentRequestId)->first();
+// $status = $status_data->status;
+        $user = UserDepartmentRequest::where('id', $deprtmentRequestId)->update(['status' => $request->status]);
+        $requestData = UserDepartmentRequest::where('id', $deprtmentRequestId)->first();
+//print_r($requestData);die;
+        if ($request->status == 1) {
+            if ($user) {
+                $data['department_name'] = $requestData->department_name;
+                $data['country_id'] = $requestData->country_id;
+                $data['state_id'] = $requestData->state_id;
+                $data['city_id'] = $requestData->city_id;
+                if ($request->departmentImage) {
+                    $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+                    $data['image'] = $departmentImage;
+                }
+                $insertData = Department::create($data);
+                return redirect('/user_management/departmentRequest');
+            }
+        } else {
+            return redirect('/user_management/deprtmentRejectRequest');
+        }
+// if($status == 1){
+// $user = Department::where('id', $user_id)->update(['status' => 2]);
+// } else {
+// $user = Department::where('id', $user_id)->update(['status' => 1]);
+// }
     }
-    // if($status == 1){
-    // $user = Department::where('id', $user_id)->update(['status' => 2]);
-    // } else {
-    // $user = Department::where('id', $user_id)->update(['status' => 1]);
-    // }
-    return redirect('/user_management/departmentRequest');
-  }
-  public function UserRequestData(Request $request)
+
+    public function UserRequestData(Request $request)
   {
     // echo"<pre>"; print_r($request->all()); die;
     $order_by = $_GET['order'][0]['dir'];
@@ -325,7 +332,8 @@ public function change_status(Request $req)
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
     $type = $_GET['type'];
-    $search = $_GET['search'];
+    $search_arr = $request->get('search');
+    $search = $search_arr['value'];
     $fromdate = (@$_GET['fromdate']) ? date('Y-m-d H:i:s', strtotime($_GET['fromdate'] . ' 00:00:00')) : '';
     $todate = (@$_GET['todate']) ? date('Y-m-d H:i:s', strtotime($_GET['todate'] . ' 00:00:00')) : '';
     /// $from = date('Y-m-d H:i:s' , strtotime($fromdate));
@@ -354,9 +362,9 @@ public function change_status(Request $req)
       // $active = "<a href='javascript:void(0)' onclick ='status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
       // $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
       if ($type == 0) {
-        $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><span class='tbl_row_new1 view_modd_dec'>Accept</span></a><br>";
-        $reject = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><span class='tbl_row_new1 view_modd_dec'>Reject</span></a><br>";
-        $arr[$key]['action'] = $accept . $reject;
+        $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>ACCEPT</button></a>";
+        $reject = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>REJECT</button></a>";
+        $arr[$key]['action'] = $accept . $reject;       
       }
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['country'] = "<td><span class='tbl_row_new'>" . $data->country->country_name . "</span></td>";

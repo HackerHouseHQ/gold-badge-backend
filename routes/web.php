@@ -1,26 +1,30 @@
 <?php
 
-Route::group(['prefix'=>'admin'], function (){
-   Route::get('/login', 'Auth\LoginController@index');
+use Illuminate\Support\Facades\Route;
+
+Route::group(['prefix' => 'admin'], function () {
+  Route::get('/login', 'Auth\LoginController@index');
 });
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/', function () {
-    return view('welcome');
+  return view('welcome');
 });
-
-
+Route::get('/forgot-password', 'Auth\ForgotPasswordController@forgotPasswordPage')->name('forgot-password');
+Route::post('/forgot-mail', 'Auth\ForgotPasswordController@forgot_password')->name('forgot-mail');
 
 Auth::routes();
 
-Route::group(['middleware'=>['auth:admin']], function(){
+Route::group(['middleware' => ['auth:admin']], function () {
 
   Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/change-password', 'HomeController@change_password')->name('change-password');
+  Route::post('/changePassword', 'HomeController@change_password_save')->name('changePassword');
 
 
 
-  
+
   // Route::group(['prefix' => 'user_management'], function () {
 
   //   Route::get('/user', 'UserController@index')->name('user');
@@ -58,7 +62,7 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/viewUserDetailModel/{id?}', 'UserController@viewUserDetailModel')->name('viewUserDetailModel');
     Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
   });
-  
+
 
 
 
@@ -72,28 +76,31 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::post('/department_status', 'DepartmentController@department_status')->name('department_status');
     Route::get('/department_profile_list', 'DepartmentController@department_profile_list')->name('department_profile_list');
 
-   Route::get('/AddBadge', 'DepartmentController@AddBadge')->name('AddBadge');
-   Route::get('/badge_list', 'DepartmentController@badge_list')->name('badge_list');
-   Route::post('/badge_status', 'DepartmentController@badge_status')->name('badge_status');
-   Route::get('/BadgeDetail', 'DepartmentController@BadgeDetail')->name('BadgeDetail');
-   //Route::get('/departmentNewRequest', 'DepartmentController@department_new_request')->name('departmentNewRequest');
+    Route::post('/AddBadge', 'DepartmentController@AddBadge')->name('AddBadge');
+    Route::get('/badge_list', 'DepartmentController@badge_list')->name('badge_list');
+    Route::post('/badge_status', 'DepartmentController@badge_status')->name('badge_status');
+    Route::get('/BadgeDetail', 'DepartmentController@BadgeDetail')->name('BadgeDetail');
+    Route::get('/departmentExport', 'DepartmentController@departmentExport')->name('export');
+    Route::get('/badgeExport', 'DepartmentController@badgeExport')->name('badgeExport');
+
+    //Route::get('/departmentNewRequest', 'DepartmentController@department_new_request')->name('departmentNewRequest');
 
   });
-  
+
   Route::group(['prefix' => 'post'], function () {
     Route::get('/posts', 'PostController@posts')->name('post-list');
     Route::get('/post-list', 'PostController@post_list')->name('postData');
     Route::get('/postViewDetail', 'PostController@postViewDetail')->name('postViewDetail');
     Route::get('/PostDepartmentDetail', 'PostController@PostDepartmentDetail')->name('PostDepartmentDetail');
     Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
-    });
+  });
 
 
   Route::group(['prefix' => 'manage_data'], function () {
     Route::get('/countries', 'ManageDataController@countries')->name('countries');
     Route::get('/countries_list', 'ManageDataController@countries_list')->name('countryList');
     Route::get('/add_country', 'ManageDataController@add_country_page')->name('add_country_page');
-    Route::get('/insert_country', 'ManageDataController@add_country')->name('add_country');
+    Route::post('/insert_country', 'ManageDataController@add_country')->name('add_country');
     Route::get('/viewCityModel/{id?}', 'ManageDataController@viewCityModel')->name('viewCityModel');
     Route::get('/editCityModelView', 'ManageDataController@editCityModelView')->name('editCityModelView');
 
@@ -111,7 +118,7 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/ethnicity', 'ManageDataController@ethnicity')->name('ethnicity');
     Route::get('/DeleteEthnicity/{id}', 'ManageDataController@DeleteEthnicity')->name('DeleteEthnicity');
     Route::get('/Show_edit_ethnicity/{id?}', 'ManageDataController@Show_edit_ethnicity')->name('Show_edit_ethnicity');
-     Route::get('/updatEthnicity', 'ManageDataController@updatEthnicity')->name('updatEthnicity');
+    Route::get('/updatEthnicity', 'ManageDataController@updatEthnicity')->name('updatEthnicity');
 
     Route::get('/gender', 'ManageDataController@gender')->name('gender');
     Route::get('/Show_edit_gender/{id?}', 'ManageDataController@Show_edit_gender')->name('Show_edit_gender');
@@ -121,12 +128,15 @@ Route::group(['middleware'=>['auth:admin']], function(){
 
     Route::get('/report', 'ManageDataController@report')->name('report');
     Route::get('/Show_edit_report/{id?}', 'ManageDataController@Show_edit_report')->name('Show_edit_report');
-    Route::get('/AddReport', 'ManageDataController@AddReport')->name('AddReport');
+    Route::post('/AddReport', 'ManageDataController@AddReport')->name('AddReport');
+    Route::get('/add-report', 'ManageDataController@showAddReportform')->name('showAddReportform');
     Route::get('/updatReport', 'ManageDataController@updatReport')->name('updatReport');
     Route::get('/DeleteReport/{id}', 'ManageDataController@DeleteReport')->name('DeleteReport');
-
-
-
+    Route::get('/countryExport', 'ManageDataController@countryExport')->name('countryExport');
+    Route::get('/cityExport', 'ManageDataController@cityExport')->name('cityExport');
+    Route::get('/stateExport', 'ManageDataController@stateExport')->name('stateExport');
+    Route::get('/reportExport', 'ManageDataController@reportExport')->name('reportExport');
+    Route::get('/ethnicityExport', 'ManageDataController@ethnicityExport')->name('ethnicityExport');
   });
 
 
@@ -141,8 +151,6 @@ Route::group(['middleware'=>['auth:admin']], function(){
     Route::get('/sendNotification', 'InformationManagementController@sendNotification')->name('sendNotification');
     Route::get('/notificationList', 'InformationManagementController@notificationList')->name('notificationList');
     Route::post('/downloadNotification', 'InformationManagementController@downloadNotification')->name('downloadNotification');
+    Route::get('/viewNotificationModel/{id?}', 'InformationManagementController@getNotificationDetail')->name('viewNotificationModel');
   });
-
-
 });
-

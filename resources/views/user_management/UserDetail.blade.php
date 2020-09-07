@@ -37,179 +37,159 @@
   }
 </style>
 @section('content')
-<div class="col-sm-12">
-  <div class="content-wrapper custom-content-wrapper">
-    <div class="below_content_clss">
-      <section class="content home_conntent">
-        <div class="container-fluid">
-          {{--start table --}}
-          <br>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card table_cardd">
-
-                <div class="card-body ">
-
-                  <div class="leftpane">
-                    <div class="img-r">
-                      <img src="{{$data->image}}" alt="" style="width: 100px;">
-                    </div>
-                  </div>
-                  <div class="middlepane">
-                    <div class="key_value_box">
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Full Name:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->first_name}} {{$data->last_name}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Username:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->username}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">MOB. NO.:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->mobile_country_code}}-{{$data->mobile_no}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Email:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->email}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Gender:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->gender}}</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="rightpane">
-                    <div class="key_value_box">
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Ethnicity:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">{{$data->ethnicity}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">DOB:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
-                        <p class="tbl_row value">{{$r_date}}</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Following Department:</label>:
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">0</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Following Badge:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">0</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Total Reviews:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">0</p>
-                      </div>
-                      <div class="key_value_box_div">
-                        <label class="tbl_row labell">Reported Reviews:</label>
-                      </div>
-                      <div class="key_value_box_div">
-                        <p class="tbl_row value">0</p>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-          </div>
-          {{-- end table --}}
-          {{-- start datatable --}}
-          <div class="card">
-            <div class="card-header">
-              <div class="main_menu_three_tabs1">
-                <ul class="nav nav-tabs abc">
-                  <li class="active"><a href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a></li>
-                  <li><a href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Followings</a></li>
-                </ul>
-
-              </div>
-              {{-- <h3 class="card-title"></h3> --}}
-            </div>
-            <!-- /.card-header -->
-            <input type="hidden" value="{{$data->id}}" id="user_id">
-
-            <div class="card-body">
-
-              <table id="example1" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th>Department Name</th>
-                    <th>Badge Number</th>
-                    <th>Date</th>
-                    <th>Rating</th>
-                    <th>Likes</th>
-                    <th>Share</th>
-                    <th>Commennt</th>
-                    <th>Report</th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Trident</td>
-                    <td>#46fsdh4</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>View post<br>Delete</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>#46fsdh4</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>View post<br>Delete</td>
-                  </tr>
-                  <tr>
-                    <td>Trident</td>
-                    <td>#46fsdh4</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>0</td>
-                    <td>View post<br>Delete</td>
-                  </tr>
-                </tbody>
-
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
-          {{-- end end datatable --}}
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Datatables</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="#">Tables</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Datatables</li>
+            </ol>
+          </nav>
         </div>
-      </section>
+<!--
+        <div class="col-lg-6 col-5 text-right">
+          <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
+          <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Followings</a>
+
+        </div>-->
+      </div>
     </div>
   </div>
 </div>
+<div class="container-fluid mt--6">
+  <!-- Table -->
+  <input type="hidden" value="{{$data->id}}" id="user_id">
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-body ">
+
+          <div class="leftpane">
+            <div class="img-r">
+              <img src="{{$data->image}}" alt="" style="width: 100px;">
+            </div>
+          </div>
+          <div class="middlepane">
+            <div class="key_value_box">
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Full Name:</label>
+                 <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
+              </div>             
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Username:</label>
+                 <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
+              </div>             
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">MOB. NO.:</label>
+                 <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
+              </div>             
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Email:</label>
+                 <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
+              </div>
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Gender:</label>
+                <span class="tbl_row value userDetailsColor">{{$data->gender}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="rightpane">
+            <div class="key_value_box">
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Ethnicity:</label>
+                <span class="tbl_row value userDetailsColor">{{$data->ethnicity}}</span>
+              </div>
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">DOB:</label>
+                 <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
+                <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
+              </div>
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Following Department:</label>
+                <span class="tbl_row value userDetailsColor">0</span>                
+              </div>
+              
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Following Badge:</label>
+                 <span class="tbl_row value userDetailsColor">0</span>
+              </div>
+              <div class="key_value_box_div">
+               
+              </div>
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Total Reviews:</label>
+                 <span class="tbl_row value userDetailsColor">0</span>
+              </div>
+              <div class="key_value_box_div">
+                <label class="tbl_row labell">Reported Reviews:</label>
+                 <span class="tbl_row value userDetailsColor">0</span>
+              </div>
+            </div>
+          </div>           
+          <div>
+             </div>   
+            
+        </div>
+            <!-- tab-->
+            <div class="row">
+                 <div class="col-3">
+          </div>
+              <div class="col-3">
+              <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Reviews</a>
+          </div>
+                 <div class="col-3">
+              <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
+          </div>
+          <div class="col-3">
+          </div>
+          </div>
+<!--            <div class="tab-content">
+            <div id="nav-pills-component" class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="nav-pills-component-tab">
+              <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="tabs-text" role="tablist">
+                  <li class="nav-item">
+                  <a class="nav-link mb-sm-3 mb-md-0" href="{{ route('UserDetail',['id' => $data->id])}}"  style="color:#fff;background-color:#2dce89" >Reviews</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link mb-sm-3 mb-md-0 active"  href="{{ route('UserDetailFollowing',['id' => $data->id])}}" >Followings</a>
+                </li>
+              </ul>
+            </div>
+          </div>-->
+            
+            
+            
+        <div class="table-responsive py-4">
+          <table class="table table-flush" id="datatable-basic">
+            <thead class="thead-light">
+              <tr>
+                <th>Department Name</th>
+                <th>Badge Number</th>
+                <th>Date</th>
+                <th>Rating</th>
+                <th>Likes</th>
+                <th>Share</th>
+                <th>Comment</th>
+                <th>Report</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 {{-- model view department --}}
 <div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
   aria-hidden="true">
@@ -270,21 +250,33 @@
 @section('script')
 <script type="text/javascript">
   $(document).ready(function(){
-    var dataTable = $('#example1').DataTable({
-       "searching": false,
-       'processing': true,
-       'serverSide': true,
-       "bFilter": true,
-       "bInfo": false,
-       "lengthChange": false,
-       "bAutoWidth": false,
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+      paginate: {
+          previous: '<i class="fas fa-angle-left"></i>',
+          next:     '<i class="fas fa-angle-right"></i>'
+      },
+      aria: {
+          paginate: {
+              previous: 'Previous',
+              next:     'Next'
+          }
+      }
+  },
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+     "bFilter": true,
+     "bInfo": true,
+     "lengthChange": true,
+     "bAutoWidth": true,
        'ajax': {
           'url':"{{route('UserDetailData')}}",
           'data': function(data){
               var user_id = $('#user_id').val();
             data.user_id = user_id;
-               var search = $('#search').val();
-            data.search = search;
+            //    var search = $('#search').val();
+            // data.search = search;
             //   var status_id = $('#status_id').val();
             // data.status_id = status_id;
             // var state_id = $('#state_id').val();

@@ -1,125 +1,160 @@
 @extends('admin_dash.main')
 @section('content')
-<div class="col-sm-12">
-  <div class="content-wrapper custom-content-wrapper">
-    <div class="below_content_clss">
-      <section class="content home_conntent">
-        <div class="container-fluid">
-          <form action="" id="search_data" class="search_data_row_class">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <span class="div_cover_sell">
-                    <span>
-                      <select name="status_id" id="status_id">
-                        <option value="">status</option>
-                        <option value="1">Active</option>
-                        <option value="2">Inactive</option>
-                      </select>
-                    </span>
-                  </span>
-                  <span class="div_cover_sell">
-                    <span>
-                      <?php $countryList =  App\Country::get();?>
-                      <select name="country_id" id="country_id">
-                        <option value="">Country</option>
-                        @foreach($countryList as $counntryList)
-                        <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
-                        @endforeach
-                      </select>
-                    </span>
-                  </span>
-                  <span class="div_cover_sell">
-                    <span>
-                      <select name="state_id" id="state_id">
-                        <option value="">State</option>
-                      </select>
-                    </span>
-                  </span>
-                  <span class="from_to_select">
-                    <label for="from_text" class="serach_by_text">From</label>
-
-                    <input type="date" class="from_control" name="fromdate" id="fromdate"
-                      style="-webkit-appearance: media-slider;">
-                    <label for="to_text" class="serach_by_text">To</label>
-                    <input type="date" class="from_control" name="todate" id="todate"
-                      style="-webkit-appearance: media-slider;">
-                  </span>
-                  <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
-                  <button type="button" id="search_data1" class="apply_btnn">Apply</button>
-
-
-                </tr>
-              </thead>
-            </table>
-          </form>
-          <form class="form-horizontal" action="#" method="GET" enctype="multipart/form-data" name="upload_excel">
-            {{ csrf_field() }}
-            <button type="submit" name="Export" value="export to excel" class="down_btn_new_clss" />
-            <img src="{{ asset('admin_css/images/download_icon.png') }}" alt="icon" class="img-fluid down_icon_cls">
-            </button>
-          </form>
-          <br>
-          <br>
-          {{--start table --}}
-          <br>
-          {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="card table_cardd class_scroll">
-             <div class="card-body p-0">
-             <table class="table table-bordered" id="data1">
-               <thead>
-                <tr>
-                  <th><span class="tbl_row">Name</span></th>
-                  <th><span class="tbl_row">Contact No.</span></th>
-                  <th><span class="tbl_row">Email</span></th>
-                  <th><span class="tbl_row">Username</span></th>
-                  <th><span class="tbl_row">Registered On</span></th>
-                  <th><span class="tbl_row">Total Reviews</span></th>
-                  <th><span class="tbl_row"></span></th>
-                  <th></th>
-                  <th></th>
-                 </tr>
-                </thead>
-                <tbody></tbody>
-               </table>
-              </div>
-             </div>
-            </div>
-           </div> --}}
-          <div class="row">
-            <div class="col-12">
-              <div class="card class_scroll ">
-                <div class="card-body p-0">
-                  <table id="data1" class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">NAME</span></th>
-                        <th><span class="tbl_row">Contact No.</span></th>
-                        <th><span class="tbl_row">Email</span></th>
-                        <th><span class="tbl_row">Username</span></th>
-                        <th><span class="tbl_row">Registered On</span></th>
-                        <th><span class="tbl_row">Total Reviews</span></th>
-                        <th><span class="tbl_row">Action</span></th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
-          {{-- end table --}}
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">User Management</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
+              <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
+              <li class="breadcrumb-item active" aria-current="page">User</li>
+            </ol>
+          </nav>
         </div>
-      </section>
+       
+      </div>
     </div>
   </div>
 </div>
+<div class="container-fluid mt--6">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
+        <!-- <div class="card-header">
+          <form action="" id="search_data" class="search_data_row_class">
+         
+                  <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
+                  <button type="button" id="search_data1" class="apply_btnn">Apply</button>
+           
+          </form>
+ -->
+ <!-- Card body -->
+ <div class="card-body">
+     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
+   <form>
+   <div class='row'>
+      <div class='col-4'>
+      <div class="form-group">
+                    <select class="form-control" name="status_id" id="status_id">
+                    <option value="">status</option>
+                        <option value="1">Active</option>
+                        <option value="2">Inactive</option>
+                    </select>
+                  </div>
+      </div>
+      <div class='col-4'>
+      <?php $countryList =  App\Country::get();?>
+      <div class="form-group">
+                    <select class="form-control" name="country_id" id="country_id">
+                    <option value="">Select Country</option>
+                        @foreach($countryList as $counntryList)
+                        <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                        @endforeach
+                    </select>
+                  </div>
+      </div>
+      <div class='col-4'>
+      <div class="form-group">
+                    <select class="form-control" name="state_id" id="state_id">
+                    <option value="">Select State</option>
+                    </select>
+                  </div>
+      </div>
+      <div class='col-5'>
+      <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>
+                  <input class="form-control datepicker" placeholder="Select date form date" type="text" value="" name="fromdate" id ="fromdate">
+                </div>
+              </div>
+      </div>
+      <div class='col-5'>
+      <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                  </div>
+                  <input class="form-control datepicker" placeholder="Select date to date" type="text" value="" name="todate" id ="todate">
+                </div>
+              </div>      
+      </div>
+      <div class='col-2'>
+      <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+  
+      </div>
+    </div>
+   </form>
+    
+  </div>
+        </div>
+        <div class="table-responsive py-4">
+          <table class="table table-flush" id="datatable-basic">
+            <thead class="thead-light">
+              <tr>
+                <th><span class="tbl_row">NAME</span></th>
+                <th><span class="tbl_row">Contact No.</span></th>
+                <th><span class="tbl_row">Email</span></th>
+                <th><span class="tbl_row">Username</span></th>
+                <th><span class="tbl_row">Registered On</span></th>
+                <th><span class="tbl_row">Total Reviews</span></th>
+                <th><span class="tbl_row">Action</span></th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  {{-- <footer class="footer pt-0">
+    <div class="row align-items-center justify-content-lg-between">
+      <div class="col-lg-6">
+        <div class="copyright text-center  text-lg-left  text-muted">
+          &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+            Tim</a>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+          </li>
+          <li class="nav-item">
+            <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+          </li>
+          <li class="nav-item">
+            <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer> --}}
+</div>
 @endsection
 @section('script')
+<noscript>
+  <img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
+</noscript>
+<script>
+  
+  </script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){
@@ -144,14 +179,26 @@
 </script>
 <script type="text/javascript">
   $(document).ready(function(){
-  var dataTable = $('#data1').DataTable({
+  var dataTable = $('#datatable-basic').DataTable({
+    language: {
+      paginate: {
+          previous: '<i class="fas fa-angle-left"></i>',
+          next:     '<i class="fas fa-angle-right"></i>'
+      },
+      aria: {
+          paginate: {
+              previous: 'Previous',
+              next:     'Next'
+          }
+      }
+  },
      "searching": false,
      'processing': true,
      'serverSide': true,
      "bFilter": true,
-     "bInfo": false,
-     "lengthChange": false,
-     "bAutoWidth": false,
+     "bInfo": true,
+     "lengthChange": true,
+     "bAutoWidth": true,
      'ajax': {
         'url':"{{route('userList')}}",
         'data': function(data){
@@ -194,4 +241,31 @@
     });
   }
 </script>
+{{-- <script>
+  $(document).ready(function () {
+          $('#datatable-basic').DataTable({
+            language: {
+      paginate: {
+          previous: '<i class="fas fa-angle-left"></i>',
+          next:     '<i class="fas fa-angle-right"></i>'
+      },
+      aria: {
+          paginate: {
+              previous: 'Previous',
+              next:     'Next'
+          }
+      }
+  },
+              "columns": [
+                  { "data": "name" },
+                  { "data": "position" },
+                  { "data": "office" },
+                  { "data": "age" },
+                  { "data": "start_date" },
+                  { "data": "salary" }
+              ]
+          });
+      });
+</script> --}}
+
 @endsection
