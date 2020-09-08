@@ -165,13 +165,22 @@
                   <div class="col-md-6">
                     <input id="email" type="email" class="form-control cstm_form_cls_login"
                       placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
+<<<<<<< HEAD
                   </div>
                 </div>
                 @if ($errors->has('email'))
+=======
+                    @if ($errors->has('email'))
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                     <span class="help-block">
                       <strong>{{ $errors->first('email') }}</strong>
                     </span>
                     @endif
+<<<<<<< HEAD
+=======
+                  </div>
+                </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                   <label for="password" class="col-md-3 control-label"></label>
                   <div class="col-md-6">
@@ -192,6 +201,7 @@
                 </div>
               </div>
               </form> --}}
+<<<<<<< HEAD
                @if ($errors->has('email'))
                <span class="help-block" style="color:red">
                       <strong>{{ $errors->first('email') }}</strong>
@@ -201,6 +211,10 @@
               <form role="form" method="POST" action="{{route('login')}}">
                 {{ csrf_field() }}
                 
+=======
+              <form role="form" method="POST" action="{{route('login')}}">
+                {{ csrf_field() }}
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <div class="form-group mb-3">
                   <div class="input-group input-group-merge input-group-alternative">
                     <div class="input-group-prepend">
@@ -208,7 +222,16 @@
                     </div>
                     <input id="email" type="email" class="form-control " placeholder="Enter your email" name="email"
                       value="{{ old('email') }}" required autofocus>
+<<<<<<< HEAD
                    
+=======
+                    @if ($errors->has('email'))
+                    <span class="help-block">
+                      <strong>{{ $errors->first('email') }}</strong>
+                    </span>
+                    @endif
+
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                   </div>
                 </div>
                 <div class="form-group">
@@ -216,7 +239,11 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
+<<<<<<< HEAD
                     <input id="password" type="password" placeholder="Enter your password" class="form-control "
+=======
+                    <input id="password" type="text" placeholder="Enter your password" class="form-control "
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                       name="password" required>
                     {{-- <input class="form-control" placeholder="Password" type="password"> --}}
                   </div>
@@ -233,9 +260,15 @@
               </form>
             </div>
           </div>
+<<<<<<< HEAD
           <div class="row text-center">
             <div class="col-12">
               <a href="{{route('forgot-password')}}" class="text-light"><small>Forgot password?</small></a>
+=======
+          <div class="row mt-3">
+            <div class="col-6">
+              <a href="#" class="text-light"><small>Forgot password?</small></a>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             </div>
 
           </div>

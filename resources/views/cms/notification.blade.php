@@ -50,6 +50,12 @@
                     </select>
                   </div>
                 </div>
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <div class='col-3'>
                   <div class="form-group">
                     <div class="input-group">
@@ -58,6 +64,7 @@
                       </div>
                       <input class="form-control datepicker" placeholder="Select date" type="text" value=""
                         name="fromdate" id="fromdate">
+<<<<<<< HEAD
                     </div>
                   </div>
                 </div>
@@ -72,6 +79,22 @@
                     </div>
                   </div>
                 </div>
+=======
+                    </div>
+                  </div>
+                </div>
+                <div class='col-3'>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
+                        name="todate" id="todate">
+                    </div>
+                  </div>
+                </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                 <div class='col-3'>
                   <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
@@ -80,6 +103,7 @@
               </div>
             </form>
 
+<<<<<<< HEAD
           </div>
         </div>
 
@@ -111,6 +135,39 @@
               Tim</a>
           </div>
         </div>
+=======
+          </div>
+        </div>
+
+        <div class="table-responsive py-4">
+          <table class="table table-flush" id="datatable-basic">
+            <thead class="thead-light">
+              <tr>
+                <th>Message</th>
+                <th>Time</th>
+                <th>Date</th>
+
+              </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  {{-- <footer class="footer pt-0">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-lg-6">
+          <div class="copyright text-center  text-lg-left  text-muted">
+            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+              Tim</a>
+          </div>
+        </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         <div class="col-lg-6">
           <ul class="nav nav-footer justify-content-center justify-content-lg-end">
             <li class="nav-item">
@@ -127,6 +184,7 @@
             </li>
           </ul>
         </div>
+<<<<<<< HEAD
       </div>
     </footer> --}}
 </div>
@@ -189,12 +247,53 @@
 
         </form>
 
+=======
       </div>
+    </footer> --}}
+</div>
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <br><br>
+    <div class="modal-content">
+      <div class="modal-header">
+        <center>
+          <h4 class="modal-title">New Notification</h4>
+        </center>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+      </div>
+      <div class="modal-body">
+        <form action="{{route('sendNotification')}}" method="get">
+          <div class="form-group">
+            <input class="form-control" type="title" name="title" placeholder="Notification Title" value=""><br>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" name="desscription" placeholder="Desscription"
+              style="width: 100%; height: 159; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;"></textarea>
+          </div>
+          <div class="form-group notifiction_send_btn text-center">
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+        </form>
+      </div>
+
+
+
     </div>
+<<<<<<< HEAD
   </div>
 </div>
 </div>
 {{-- end model view city --}}
+=======
+
+  </div>
+</div>
+{{-- close model --}}
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
 @endsection
 @section('script')

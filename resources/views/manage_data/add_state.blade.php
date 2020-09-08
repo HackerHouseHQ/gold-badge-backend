@@ -13,6 +13,7 @@
             </ol>
           </nav>
         </div>
+<<<<<<< HEAD
 
       </div>
     </div>
@@ -111,10 +112,89 @@
             <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
           </li>
         </ul>
+=======
+
       </div>
     </div>
+  </div>
+</div>
+<div class="container-fluid mt--6">
+  <div class="container-fluid mt--6">
+      
+     
+        <div class="col-lg-12">
+          <div class="card-wrapper">
+            <!-- Form controls -->
+            <div class="card">
+              <!-- Card header -->
+              <div class="card-header">
+                <h3 class="mb-0">Add State</h3>
+              </div>
+              <!-- Card body -->
+              <div class="card-body">
+                <form class="form-horizontal" method="POST" action="{{route('add_state')}}"  enctype="multipart/form-data">
+                      {{ csrf_field() }}
+                <?php $countryList =  App\Country::get();?>
+                  <div class="form-group">
+                      <label class="form-control-label" for="exampleFormControlInput1">County</label>
+                   <select class="form-control" name="country_id" id="country_id" required="required">
+                      <option value="">Select Country</option>
+                     @foreach($countryList as $counntryList)
+                    <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                    @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label class="form-control-label" for="exampleFormControlInput1">State Name</label>
+                    <input type="text" class="form-control" name="state_name" required="required"  value="{{ old('state_name') }}" required placeholder="Enter State Name">
+                  </div>
+               
+                 <div class="form-group text-center">                    
+                     <button type="submit" class="btn btn-primary">Save</button>
+                     <button type="button" class="btn btn btn-info"><a style="color : white;"
+                                    href="{{route('countries')}}">Back</a></button>
+                  </div>
+                </form>
+              </div>
+            </div>
+         
+          </div>
+        </div>
+      
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+      </div>
+      <!-- Footer -->
+      <footer class="footer pt-0">
+        <div class="row align-items-center justify-content-lg-between">
+          <div class="col-lg-6">
+            <div class="copyright text-center  text-lg-left  text-muted">
+              © 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative Tim</a>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+              </li>
+              <li class="nav-item">
+                <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+              </li>
+              <li class="nav-item">
+                <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+<<<<<<< HEAD
   </footer> --}}
 </div>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
 </div>
 

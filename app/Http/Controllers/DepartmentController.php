@@ -21,6 +21,7 @@ class DepartmentController extends Controller
 {
 
    function __construct()
+<<<<<<< HEAD
    {
       $this->user = new Department;
       $this->badge = new DepartmentBadge;
@@ -78,6 +79,103 @@ class DepartmentController extends Controller
          $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->created_at)) . "</span></td>";
          if ($data->status == 1) {
             $view1 = $view . $inactive;
+=======
+    {
+         $this->user = new Department;
+         $this->badge = new DepartmentBadge;
+     }
+
+    public function department()
+     {
+         return view('department_managenment.deprtment');
+     }
+    public function department_list(Request $request){
+        // echo"<pre>"; print_r($request->all()); die;
+        $order_by = $_GET['order'][0]['dir'];
+        $columnIndex = $_GET['order'][0]['column'];
+        $columnName = $_GET['columns'][$columnIndex]['data'];
+        $columnName =  ($columnName=='username') ? 'first_name' : 'created_at';
+        $offset = $_GET['start'] ? $_GET['start'] :"0";
+        $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
+        $draw = $_GET['draw'];
+        $status_id = $_GET['status_id'];
+        $state_id = $_GET['state_id'];
+        $country_id = $_GET['country_id'];
+        $fromdate = $_GET['fromdate'];
+        $todate = $_GET['todate'];        
+        $search_arr = $request->get('search');
+        $search = $search_arr['value'];
+        
+        $data = $this->user->getdata_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
+        $count = $this->user->getdata_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search);
+        $getuser = $this->manage_data($data);
+        $results = ["draw" => intval($draw),
+            "iTotalRecords" => $count,
+            "iTotalDisplayRecords" => $count,
+            "aaData" => $getuser ];
+            echo json_encode($results);
+
+    }
+    public function manage_data($data){
+      $arr = array();
+      $i = 0;
+
+  
+
+      foreach($data as $key=>$data){
+        $view = "<a href='".route('DepartmentDetail',['id' => $data->id])."'> <button type='button' class='btn btn-primary btn-sm'>VIEWDETAIL</button></a>";
+        $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>ACTIVATE</button></a>";
+        $inactive = "<a style='margin-left:5px;' href='javascript:void(0)' onclick = 'status(".$data->id.")'><button type='button' class='btn btn-danger btn-sm's>INACTIVATE</button></a>";
+
+
+        $arr[$key]['name'] = "<td><span class='tbl_row_new'>".$data->department_name."</span></td>";
+        $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>0</span></td>";
+        $arr[$key]['rating'] = "<td><span class='tbl_row_new'>0</span></td>";
+        $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>".date("Y-m-d", strtotime($data->created_at))."</span></td>";
+        if($data->status == 1){
+           $view1= $view.$inactive ;
+        } else {
+           $view1= $view.$active ;
+        }
+        $arr[$key]['view'] = "<td><span class='line_heightt'>".$view1."</span></td>";
+      }
+     return $arr;
+    }
+
+
+    //******add department data
+    public function AddDepartment(Request $req){
+    	$data['department_name'] = $req->department_name;
+    	$data['country_id'] = $req->country;
+    	$data['state_id'] = $req->state;
+    	$data['city_id'] = $req->city;
+        if($req->departmentImage){
+         $departmentImage = Storage::disk('public')->put('departname', $req->departmentImage);          
+          $data['image'] = $departmentImage;
+        }
+        $insertData = Department::create($data);
+     	return redirect('/department_management/department');
+    }
+    // *******view departmentprofilepage data
+    public function DepartmentDetail(Request $req){
+        $getDetail = Department::with('country_data')->with('state_data')->with('city_data')->whereId($req->id)->first();
+        $data['data'] = $getDetail;
+        return view('department_managenment.departmentProfile',$data);
+
+    }
+      // *******view as modalview in departmentprofile page of all badge data 
+    public function viewDepartmentBadgeModel($id){
+        $DepartmentBadgeModelData = DepartmentBadge::where('department_id',$id)->get();
+        return response()->json($DepartmentBadgeModelData, 200);
+    }
+    // ******change department statusa as active/inacttive
+    public function department_status(Request $req){
+         $user_id = $req->user_id;
+        $status_data = Department::where('id',$user_id)->first();
+        $status = $status_data->status;
+         if($status == 1){
+            $user = Department::where('id', $user_id)->update(['status' => 2]);
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
          } else {
             $view1 = $view . $active;
          }
@@ -220,6 +318,7 @@ class DepartmentController extends Controller
          $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>test hjgdfjgsdhh huddhfjuhjdsh usddhsh  </span> <span style='    display: flex;
     justify-content: space-between;'><span>view post</span> <span>     John | 18 sept,20202</span></span></td>";
       }
+<<<<<<< HEAD
       return $arr;
    }
    public function badge_list(Request $request)
@@ -253,6 +352,38 @@ class DepartmentController extends Controller
    }
    public function manage_badge_data($data)
    {
+=======
+     return $arr;
+    }
+    public function badge_list(Request $request){
+        $order_by = $_GET['order'][0]['dir'];
+        $columnIndex = $_GET['order'][0]['column'];
+        $columnName = $_GET['columns'][$columnIndex]['data'];
+        $columnName =  ($columnName=='username') ? 'first_name' : 'created_at';
+        $offset = $_GET['start'] ? $_GET['start'] :"0";
+        $limit_t = ($_GET['length'] !='-1') ? $_GET['length'] :"";
+        $draw = $_GET['draw'];
+        $status_id = $_GET['status_id'];
+        $state_id = $_GET['state_id'];
+        $country_id = $_GET['country_id'];
+        $fromdate = $_GET['fromdate'];
+        $todate = $_GET['todate'];
+        $search_arr = $request->get('search');
+    $search = $search_arr['value'];
+        $city_id = $_GET['city_id'];
+        $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
+
+        $count = $this->badge->getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
+        $getuser = $this->manage_badge_data($data);
+        $results = ["draw" => intval($draw),
+            "iTotalRecords" => $count,
+            "iTotalDisplayRecords" => $count,
+            "aaData" => $getuser ];
+            echo json_encode($results);
+
+    }
+    public function manage_badge_data($data){
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
       $arr = array();
       $i = 0;
       foreach ($data as $key => $data) {

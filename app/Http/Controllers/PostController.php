@@ -78,7 +78,11 @@ class PostController extends Controller
       $i = 0;
       foreach ($data as $key => $data) {
          $view = "<a href='" . route('postViewDetail', ['user_id' => $data->user_id]) . "'><button type='button' class='btn btn-primary btn-sm'>VIEWDETAIL</button></a>";
+<<<<<<< HEAD
          $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm'>DELETE</button></a>";
+=======
+         $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
          // $inactive = "<a href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
 
          $flag = ($data->flag == 1) ? 'department' : 'badges';
@@ -268,7 +272,11 @@ class PostController extends Controller
       $arr = array();
       $i = 0;
       foreach ($postData as $key => $data) {
+<<<<<<< HEAD
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
+=======
+         $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>Delete</span></button>";
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
          $data1 = "Posted On:- $data->created_at </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Cpmments:- 0 </br> Review:- Test";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
          $arr[$key]['image'] = "<td><img class='profile-user-img img-fluid img-circle'

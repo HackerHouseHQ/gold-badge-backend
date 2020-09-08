@@ -24,6 +24,7 @@
     <meta name="author" content="Creative Tim">
     <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
     <!-- Favicon -->
+<<<<<<< HEAD
     <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
     type="text/css">
   
@@ -44,6 +45,17 @@
   <!-- Google Tag Manager -->
      <!-- summernote -->
    <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
+=======
+    <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+    <!-- Icons -->
+    <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
+    <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}"
+        type="text/css">
+    <!-- Argon CSS -->
+    <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
     <style>
       .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
           background: #e2b52dd1 !important;
@@ -199,6 +211,7 @@
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
+<<<<<<< HEAD
                                 </div>
                             </div>
                         </li>
@@ -321,6 +334,130 @@
                                         </div>
                                     </a>
                                 </div>
+=======
+                                </div>
+                            </div>
+                        </li>
+                        <li class="nav-item d-sm-none">
+                            <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
+                                <i class="ni ni-zoom-split-in"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="ni ni-bell-55"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
+                                <!-- Dropdown header -->
+                                <div class="px-3 py-3">
+                                    <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
+                                        notifications.</h6>
+                                </div>
+                                <!-- List group -->
+                                <div class="list-group list-group-flush">
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <img alt="Image placeholder" src="assets/img/theme/team-1.jpg"
+                                                    class="avatar rounded-circle">
+                                            </div>
+                                            <div class="col ml--2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                    </div>
+                                                    <div class="text-right text-muted">
+                                                        <small>2 hrs ago</small>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <img alt="Image placeholder" src="assets/img/theme/team-2.jpg"
+                                                    class="avatar rounded-circle">
+                                            </div>
+                                            <div class="col ml--2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                    </div>
+                                                    <div class="text-right text-muted">
+                                                        <small>3 hrs ago</small>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <img alt="Image placeholder" src="assets/img/theme/team-3.jpg"
+                                                    class="avatar rounded-circle">
+                                            </div>
+                                            <div class="col ml--2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                    </div>
+                                                    <div class="text-right text-muted">
+                                                        <small>5 hrs ago</small>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm mb-0">Your posts have been liked a lot.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <img alt="Image placeholder" src="assets/img/theme/team-4.jpg"
+                                                    class="avatar rounded-circle">
+                                            </div>
+                                            <div class="col ml--2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                    </div>
+                                                    <div class="text-right text-muted">
+                                                        <small>2 hrs ago</small>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <a href="#!" class="list-group-item list-group-item-action">
+                                        <div class="row align-items-center">
+                                            <div class="col-auto">
+                                                <!-- Avatar -->
+                                                <img alt="Image placeholder" src="assets/img/theme/team-5.jpg"
+                                                    class="avatar rounded-circle">
+                                            </div>
+                                            <div class="col ml--2">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <div>
+                                                        <h4 class="mb-0 text-sm">John Snow</h4>
+                                                    </div>
+                                                    <div class="text-right text-muted">
+                                                        <small>3 hrs ago</small>
+                                                    </div>
+                                                </div>
+                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                 <!-- View all -->
                                 <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
                                     all</a>
@@ -425,10 +562,17 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
+<<<<<<< HEAD
                             <!-- <h6 class="h2 text-white d-inline-block mb-0">Default</h6> -->
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <!-- <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li> -->
+=======
+                            <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
+                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                     <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
                                     <!--<li class="breadcrumb-item active" aria-current="page">Default</li>-->
                                 </ol>
@@ -604,11 +748,18 @@
     </div>
     </div> --}}
     <div class="col-xl-12">
+<<<<<<< HEAD
+=======
+
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
         <div class="card">
 

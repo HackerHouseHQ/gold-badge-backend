@@ -132,7 +132,11 @@
                 <th>Name</th>
                 <th>Email</th>
                 <th>Contact No.</th>
+<<<<<<< HEAD
                 <th>Action</th>
+=======
+                <!--<th>Action</th>-->
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
               </tr>
             </thead>
 

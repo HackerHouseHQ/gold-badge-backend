@@ -362,8 +362,13 @@ class UserController extends Controller
       // $active = "<a href='javascript:void(0)' onclick ='status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
       // $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
       if ($type == 0) {
+<<<<<<< HEAD
         $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>ACCEPT</button></a>";
         $reject = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>REJECT</button></a>";
+=======
+        $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>Accept</button></a>";
+        $reject = "<a style='margin-left:5px' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>Reject</button></a>";
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         $arr[$key]['action'] = $accept . $reject;       
       }
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";

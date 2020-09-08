@@ -42,7 +42,11 @@
             aria-expanded="false">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
+<<<<<<< HEAD
                 <img alt="Image placeholder" src="{{asset('admin_new/assets/img/theme/user-default.jpeg')}}">
+=======
+                <img alt="Image placeholder" src="{{asset('admin_new/assets/img/theme/team-4.jpg')}}">
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
               </span>
               <div class="media-body  ml-2  d-none d-lg-block">
                 <span class="mb-0 text-sm  font-weight-bold">Admin</span>
@@ -53,14 +57,23 @@
             <div class="dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
+<<<<<<< HEAD
             <a href="{{route('change-password')}}" class="dropdown-item">
               <i class="ni ni-key-25 text-primary"></i>
+=======
+            <a href="#!" class="dropdown-item">
+              <i class="ni ni-single-02"></i>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
               <span>Change Password</span>
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="{{route('logout')}}" class="dropdown-item">
+<<<<<<< HEAD
               <i class="ni ni-button-power text-primary"></i>
+=======
+              <i class="ni ni-user-run"></i>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
               <span>Logout</span>
             </a>
           </div>

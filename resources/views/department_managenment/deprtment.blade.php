@@ -1,4 +1,5 @@
 @extends('admin_dash.main')
+<<<<<<< HEAD
 
 @section('content')
 <div class="header bg-primary pb-6">
@@ -49,6 +50,58 @@
         </div>
 
 
+=======
+
+@section('content')
+<div class="header bg-primary pb-6">
+  <div class="container-fluid">
+    <div class="header-body">
+      <div class="row align-items-center py-4">
+        <div class="col-lg-6 col-7">
+          <h6 class="h2 text-white d-inline-block mb-0">Department Management</h6>
+          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
+              <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
+              <li class="breadcrumb-item active" aria-current="page">Department</li>
+            </ol>
+          </nav>
+        </div>
+
+
+        <div class="col-lg-6 col-5 text-right">
+          {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
+            Department</a> --}}
+          {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
+          <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
+          <button type="button" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#exampleModal">
+            Add Department
+          </button>
+          {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
+            Department</a> --}}
+        </div>
+
+        <!--<div class="row">-->
+            <!-- <div id="buttons-colors-component" class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="buttons-colors-component-tab"> -->
+
+        <!-- <div class="tab-content">
+          <div id="notify-colors-component" class="tab-pane tab-example-result fade active show" role="tabpanel" 
+            aria-labelledby="notify-colors-component-tab">-->
+            <div class="col-3">
+            </div>
+            <div class="col-3">
+            <a href="{{route('department')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
+              data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
+              </div>
+              <div class="col-3">
+            <a href="{{route('badge')}}" class="btn btn-info" data-toggle="notify" data-placement="top"
+              data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
+          </div>
+          <div class="col-3">
+            </div>
+
+        
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         <!--</div>-->
       </div>
     </div>
@@ -83,6 +136,43 @@
                       @endforeach
                     </select>
                   </div>
+<<<<<<< HEAD
+                </div>
+
+                <div class='col-3'>
+                  <div class="form-group">
+                    <select class="form-control" name="state_id" id="state_id">
+                      <option value="">Select State</option>
+                    </select>
+                  </div>
+                </div>
+                <div class='col-3'>
+                  <div class="form-group">
+                    <select class="form-control" name="city_id" id="city_id">
+                      <option value="">City</option>
+                    </select>
+                  </div>
+                </div>
+                <div class='col-5'>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" placeholder="Select from date" type="text" value=""
+                        name="fromdate" id="fromdate">
+                    </div>
+                  </div>
+                </div>
+                <div class='col-5'>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" placeholder="Select to date" type="text" value=""
+                        name="todate" id="todate">
+=======
                 </div>
 
                 <div class='col-3'>
@@ -196,6 +286,135 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
+            <span style="color:red">*</span>All fields are mandatory
+            <div class="table-responsive">
+              <form id="formId" class="form-horizontal" action="{{route('AddDepartment')}}"
+                enctype="multipart/form-data" method="POST">
+                {{ csrf_field() }}
+                <div class="card-body">
+
+                  <div class="form-group row">
+
+                    <input type="text" id="department_name" required="required"  class="form-control" placeholder="Department Name"
+                      name="department_name">
+
+                  </div>
+                  <div class="form-group row">
+                    <select class="form-control select2" required="required"  style="width: 100%;" id="country1" name="country">
+                      <option value="">Country name</option>
+                      @foreach($countryList as $counntryList)
+                      <option value="{{$counntryList->id}}">{{$counntryList->country_name}} </option>
+                      @endforeach
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <select class="form-control select2" required="required"  style="width: 100%;" id="state" name="state">
+                      <option selected="selected">State Name</option>
+                    </select>
+                  </div>
+                  <div class="form-group row">
+                    <select class="form-control select2" required="required"  style="width: 100%;" id="city1" name="city">
+                      <option selected="selected">City Name</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputFile">Department Icon</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" required="required"  class="custom-file-input" id="exampleInputFile" name="departmentImage">
+                        <label class="custom-file-label" for="exampleInputFile">Pick Icon</label>
+                      </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+                    </div>
+                  </div>
+
+                </div>
+<<<<<<< HEAD
+                <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
+                <div class='col-2'>
+                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+        <div class="table-responsive py-4">
+          <table class="table table-flush" id="datatable-basic">
+            <thead class="thead-light">
+              <tr>
+                <th>Department Name</th>
+                <th>Total Reviews</th>
+                <th>Rating</th>
+                <th>Registered On</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+
+            <tbody>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer -->
+  {{-- <footer class="footer pt-0">
+      <div class="row align-items-center justify-content-lg-between">
+        <div class="col-lg-6">
+          <div class="copyright text-center  text-lg-left  text-muted">
+            &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">Creative
+              Tim</a>
+=======
+ <div class="modal-footer" style="margin-top: -50px;">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="depart" type="submit" class="btn btn-primary ">Add</button>
+        {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+      </div>
+              </form>
+            </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com" class="nav-link" target="_blank">Creative Tim</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/presentation" class="nav-link" target="_blank">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a href="http://blog.creative-tim.com" class="nav-link" target="_blank">Blog</a>
+            </li>
+            <li class="nav-item">
+              <a href="https://www.creative-tim.com/license" class="nav-link" target="_blank">License</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+<<<<<<< HEAD
+    </footer> --}}
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Department</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
             @if ($errors->any())
             <div class="alert alert-danger">
               <ul>
@@ -271,9 +490,65 @@
                 </div>
               </form>
             </div>
+=======
+     
+    </div>
+  </div>
+</div>
+
+{{-- start add department model view --}}
+{{-- <div id="department" class="modal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h4 class="modal-title text-capitalize" id="userName">Add Department1</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                aria-hidden="true">&times;</span>
+            </button>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
           </div>
-        </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <span style="color:red">*</span>All fields are mandatory
+                <div class="table-responsive">
+                  <form id="formId" class="form-horizontal" action="{{route('AddDepartment')}}"
+enctype="multipart/form-data" method="POST">
+{{ csrf_field() }}
+<div class="card-body">
+
+  <div class="form-group row">
+
+    <input type="text" id="department_name" class="form-control" placeholder="Department Name" name="department_name">
+
+  </div>
+  <div class="form-group row">
+    <select class="form-control select2" style="width: 100%;" id="country1" name="country">
+      <option value="">Country name</option>
+      @foreach($countryList as $counntryList)
+      <option value="{{$counntryList->id}}">{{$counntryList->country_name}} </option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group row">
+    <select class="form-control select2" style="width: 100%;" id="state" name="state">
+      <option selected="selected">State Name</option>
+    </select>
+  </div>
+  <div class="form-group row">
+    <select class="form-control select2" style="width: 100%;" id="city1" name="city">
+      <option selected="selected">City Name</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputFile">Department Icon</label>
+    <div class="input-group">
+      <div class="custom-file">
+        <input type="file" class="custom-file-input" id="exampleInputFile" name="departmentImage">
+        <label class="custom-file-label" for="exampleInputFile">Pick Icon</label>
       </div>
+<<<<<<< HEAD
 
     </div>
   </div>
@@ -330,6 +605,8 @@ enctype="multipart/form-data" method="POST">
         <input type="file" class="custom-file-input" id="exampleInputFile" name="departmentImage">
         <label class="custom-file-label" for="exampleInputFile">Pick Icon</label>
       </div>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
     </div>
   </div>
 
@@ -342,6 +619,8 @@ enctype="multipart/form-data" method="POST">
 </form>
 </div>
 </div>
+<<<<<<< HEAD
+=======
 </div>
 </div>
 </div>
@@ -386,10 +665,58 @@ enctype="multipart/form-data" method="POST">
 </div>
 </form>
 </div>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 </div>
 </div>
 </div>
 </div>
+<<<<<<< HEAD
+</div> --}}
+{{-- end add department  --}}
+{{-- start add badge model view --}}
+{{-- <div id="badge" class="modal">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h4 class="modal-title text-capitalize" id="userName">Add Badge</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+                aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="table-responsive">
+                  <form class="form-horizontal" action="{{route('AddBadge')}}" method="GET">
+{{ csrf_field() }}
+<div class="card-body">
+
+  <div class="form-group row">
+    <select class="form-control select2" style="width: 100%;" id="department_id" name="department_id">
+      <option value="">Department Name</option>
+      @foreach($departmentName as $value)
+      <option value="{{$value->id}}">{{$value->department_name}} </option>
+      @endforeach
+    </select>
+  </div>
+  <div class="form-group row">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="Badge Number" name="badge_number">
+    </div>
+  </div>
+</div>
+<div class="card-footer">
+  <button type="submit" class="btn btn-info float-right">Add</button>
+</div>
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 </div>
 </div> --}}
 {{-- end add badge  --}}

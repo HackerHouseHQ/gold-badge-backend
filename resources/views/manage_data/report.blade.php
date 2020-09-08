@@ -24,6 +24,7 @@
             <a href="{{route('countries')}}" class="btn btn-sm btn-neutral">Manage Countries</a>
             <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
+<<<<<<< HEAD
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral"
               style="background-color:#fb6340;color:#fff;">Report Reason Type</a>
 
@@ -77,12 +78,41 @@
                     href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
                     +</a></button>
               </div>
-            </div>
-
-
+=======
+            <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
 
           </div>
+          <br>
+          <div class="row-lg-6  row-5" style="float: right;">
+            <div class="btn-toolbar">
+              <div class="btn-group">
+                <a href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">add new country</a>
+                <a href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">add new state</a>
+                <a href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">add new city</a>
+                <a href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">add new ethnicity</a>
+                <a href="#" data-toggle="modal" data-target="#Privacy" class="btn btn-sm btn-neutral data2">Add Report
+                  Reason Type</a>
+
+              </div>
+            </div>
+          </div>
+          {{-- <a href="#" data-toggle="modal" data-target="#Privacy" class="data2"><img
+            src="{{ asset('admin_css/images/add_people.png') }}" class="add_ppl_imgg"></a> --}}
+
+          {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
+            Department</a> --}}
         </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid mt--6">
+  <!-- Table -->
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <!-- Card header -->
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
@@ -99,8 +129,7 @@
                 <td><span class='tbl_row_new'> <button class="btn btn-info btn-sm" data-toggle="modal"
                       data-target="#exampleModalCenter" onclick="openModal({{$reportData->id}})">
                       Edit</button><span class='tbl_row_new'></td>
-                <td><button class="btn btn-danger btn-sm"><a style="color:#fff;"
-                      href="{{route('DeleteReport',$reportData->id)}}">Delete</a></button></td>
+                <td><button class="btn btn-danger btn-sm"><a style="color:#fff;" href="{{route('DeleteReport',$reportData->id)}}">Delete</a></button></td>
               </tr>
               @endforeach
             </tbody>
@@ -134,6 +163,68 @@
                 <br>
                 <button type="submit" class="btn btn-secondary">Save</button>
               </form>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+            </div>
+
+
+
+          </div>
+        </div>
+<<<<<<< HEAD
+        <div class="table-responsive py-4">
+          <table class="table table-flush" id="datatable-basic">
+            <thead class="thead-light">
+              <tr>
+                <th><span class="tbl_row">Report Reason</span></th>
+                <th><span class="tbl_row">Edit</span></th>
+                <th><span class="tbl_row">Delete</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($data as $reportData)
+              <tr>
+                <td><span class='tbl_row_new'>{{$reportData->name}}</span></td>
+                <td><span class='tbl_row_new'> <button class="btn btn-info btn-sm" data-toggle="modal"
+                      data-target="#exampleModalCenter" onclick="openModal({{$reportData->id}})">
+                      Edit</button><span class='tbl_row_new'></td>
+                <td><button class="btn btn-danger btn-sm"><a style="color:#fff;"
+                      href="{{route('DeleteReport',$reportData->id)}}">Delete</a></button></td>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+      </div>
+    </div>
+  </div>
+</div>
+<<<<<<< HEAD
+
+{{-- start add  model view --}}
+<div id="Privacy" class="modal">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title text-capitalize" id="userName"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
+            aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <form action="{{route('AddReport')}}" method="GET">
+                <div>
+                  <b>Add New Report Reason Name</b>
+                  <input type="text" name="name" placeholder="Enter Name">
+                </div>
+                <br>
+                <button type="submit" class="btn btn-secondary">Save</button>
+              </form>
             </div>
           </div>
         </div>
@@ -141,6 +232,8 @@
     </div>
   </div>
 </div>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 {{-- end add  --}}
 {{-- model edit --}}
 <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
@@ -161,8 +254,13 @@
                 <div id="businessDetails">
 
                 </div>
+<<<<<<< HEAD
                 <div style="text-align: center;margin-top: 23px;">
                   <button type="submit" class="btn btn-info">Save</button>
+=======
+               <div style="text-align: center;margin-top: 23px;">
+                <button type="submit" class="btn btn-info">Save</button>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 </div>
               </form>
             </div>

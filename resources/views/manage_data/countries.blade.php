@@ -44,14 +44,22 @@
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
           <div class="row-lg-6 row-5">
+<<<<<<< HEAD
             <a href="{{route('countries')}}" class="btn btn-sm btn-neutral"
               style="background-color:#fb6340;color:#fff;">Manage Countries</a>
+=======
+            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral">Manage Countries</a>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
 
           </div>
+<<<<<<< HEAD
           <!--          <div class="row-lg-6  row-5" style="float: right;">
+=======
+<!--          <div class="row-lg-6  row-5" style="float: right;">
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             <div class="btn-toolbar">
               <div class="btn-group">
                 <a href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">add new country</a>
@@ -76,6 +84,7 @@
     <div class="col">
       <div class="card">
         <!-- Card header -->
+<<<<<<< HEAD
 
 
 
@@ -116,6 +125,35 @@
         </div>
 
 
+=======
+        
+        
+        
+        <div class="card-body">
+          <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
+              <div class="row">
+                <div class="col-3">
+                    <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">Add Country +</a></button>
+                </div>
+                <div class="col-3">
+                    <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">Add State +</a></button>
+                </div>
+
+                <div class="col-3">
+                 <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">Add City +</a></button>
+                </div>
+                <div class="col-3">
+                  <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
+                </div>
+             
+              </div>
+           
+
+          </div>
+        </div>
+        
+        
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
@@ -204,6 +242,7 @@
                   
                  </table> --}}
                 <div class="row">
+<<<<<<< HEAD
                   <div class="col-2">
                     <span class="tbl_row">SN.</span>
                   </div>
@@ -215,6 +254,19 @@
                   </div>
                 </div>
                 <!--              <form action="http://localhost/gold_badge/public/manage_data/editCityModelView" method="GET">
+=======
+                <div class="col-2">
+                  <span class="tbl_row">SN.</span>
+                </div>
+                <div class="col-7">
+                  <span class="tbl_row">City Name</span>
+                </div>
+                <div class="col-3">
+                  <span class="tbl_row">Action</span>
+                </div>
+                </div>
+<!--              <form action="http://localhost/gold_badge/public/manage_data/editCityModelView" method="GET">
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                    2 
                   <input type="hidden" value="2" name="city_id">
                   <lable>ddsf</lable>

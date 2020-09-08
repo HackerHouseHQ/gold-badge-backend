@@ -1,5 +1,6 @@
 @extends('admin_dash.main')
 @section('content')
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css"
         href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
@@ -35,12 +36,18 @@
         display: inline-block;
     }
 </style>
+=======
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 <div class="header bg-primary pb-6">
   <div class="container-fluid">
     <div class="header-body">
       <div class="row align-items-center py-4">
         <div class="col-lg-6 col-7">
+<<<<<<< HEAD
           <h6 class="h2 text-white d-inline-block mb-0">CMS</h6>
+=======
+          <h6 class="h2 text-white d-inline-block mb-0">Terms & Condition</h6>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
@@ -51,7 +58,11 @@
         <div class="col-lg-6 col-5 text-right">
           <a class="btn btn-sm btn-neutral" href="{{route('about_us')}}">About Us</a>
           <a class="btn btn-sm btn-neutral" href="{{route('privacy')}}">Privacy & Policy</a>
+<<<<<<< HEAD
           <a class="btn btn-sm btn-neutral" href="{{route('terms')}}" style="background-color:#e8c046">Terms & Condition</a>
+=======
+          <a class="btn btn-sm btn-neutral" href="{{route('terms')}}">Terms & Condition</a>
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         </div>
       </div>
     </div>
@@ -64,12 +75,19 @@
       <div class="card">
         <div class="row">
           <div class="col-md-12">
+<<<<<<< HEAD
+=======
+
+
+
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             <!-- <div class="card-header"> <h3 class="card-title"> About Us  </h3>   </div> -->
             <!-- /.card-header -->
             <form action="{{route('edit_terms')}}" method="post">
               @csrf
               <div class="card-body pad">
                 <div class="mb-3">
+<<<<<<< HEAD
                <textarea class="textarea" name="terms" placeholder="Enter text ..."
                 style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;">{{$Terms->terms}}</textarea>
                 </div>                  
@@ -80,6 +98,18 @@
                 </div>
               </div>            
             </form>
+=======
+                  <textarea name="terms" class="textarea" placeholder="Place some text here"
+                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px; border: 1px solid #dddddd; padding: 10px;">{{$Terms->terms}}</textarea>
+                </div>
+              </div>
+              <div class="about_us_savee">
+                <button type="submit" class="btn btn-default save_intro_scrn about_us float-right">SAVE</button>
+              </div>
+            </form>
+
+
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
           </div>
           {{-- close --}}
         </div>
@@ -91,6 +121,7 @@
 
 </div>
 
+<<<<<<< HEAD
 
 @endsection
 @section('script')
@@ -111,4 +142,8 @@
     </script>
 </script>
 
+=======
+@endsection
+@section('script')
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 @endsection

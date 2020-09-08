@@ -52,7 +52,11 @@ class ManageDataController extends Controller
         $offset = $_GET['start'] ? $_GET['start'] : "0";
         $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
         $draw = $_GET['draw'];
+<<<<<<< HEAD
         $search_arr = $request->get('search');
+=======
+       $search_arr = $request->get('search');
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         $search = $search_arr['value'];
         // $search= $request->role;
         $data = $this->state->getdata_table($order_by, $offset, $limit_t, $search);
@@ -72,6 +76,7 @@ class ManageDataController extends Controller
         $i = 0;
         foreach ($data as $key => $data) {
             // $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
+<<<<<<< HEAD
             //  $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
             $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(" . $data->country_id . ")'><button type='button' class='btn btn-info btn-sm'>View Country Department</button></a>";
             //  $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
@@ -86,6 +91,21 @@ class ManageDataController extends Controller
             array_push($array_city, $data->city_name);
             $array_city = implode(",", $array_city);
 
+=======
+          //  $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
+            $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><button type='button' class='btn btn-info btn-sm'>View Country Department</button></a>";
+          //  $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View City List</span></a>";
+            $viewCity = "<a href='javascript:void(0)' onclick ='viewCityModel1(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>View City List</button></a>";
+            //$EditCity = "<a href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>Edit City List</span></a>";
+            $EditCity = "<a  style='margin:5px;' href='javascript:void(0)' onclick ='EditCityModel1(".$data->id.")'><button type='button' class='btn btn-primary btn-sm'>Edit City List</button></a>";
+
+            $arr[$key]['SN'] = "<td><span class='line_heightt'>#".++$i ."</span></td>";
+            $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>".$data->country_name."</span></td>";
+            $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>".($data->state_name)?? ""."</span></td>";
+            $array_city = array();
+               array_push($array_city, $data->city_name);
+            $array_city = implode(",",$array_city);
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
             $arr[$key]['city_name'] = "<td class='tdcalss'><span>" . $viewCity . "</span></td>";
 
@@ -156,6 +176,7 @@ class ManageDataController extends Controller
             'country_id.required' => 'Please select country.'
         ]);
 
+<<<<<<< HEAD
         if (!empty($request->state_file)) {
             $request->validate([
                 'state_file' => 'required|mimes:csv,txt'
@@ -164,6 +185,18 @@ class ManageDataController extends Controller
             ]);
             $path = $request->file('state_file')->getRealPath();
             //  echo "<pre>"; print_r($request->state_file); die;
+=======
+       $path = $request->file('state_file')->getRealPath();
+    //  echo "<pre>"; print_r($request->state_file); die;
+
+       $data1 =  Importer::make('Csv')->load($path)->getCollection();
+       $datacount = count($data1);
+        for ($i=1; $i <$datacount ; $i++) { 
+       // echo"<pre>"; print_r($data[$i][0]); 
+         $data['country_id'] = $request->country_id;
+         $data['state_name'] = $data1[$i][0];
+         $insertCountry = CountryState::create($data);
+>>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
