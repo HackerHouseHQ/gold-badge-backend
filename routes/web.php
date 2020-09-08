@@ -139,7 +139,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/ethnicityExport', 'ManageDataController@ethnicityExport')->name('ethnicityExport');
   });
 
-
   Route::group(['prefix' => 'cms'], function () {
     Route::get('/about_us', 'InformationManagementController@about_us')->name('about_us');
     Route::post('/edit_about_us', 'InformationManagementController@edit_about_us')->name('edit_about_us');
