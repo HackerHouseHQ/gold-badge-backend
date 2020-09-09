@@ -202,4 +202,41 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+
+    public function checkUserNameEmail(Request $request)
+    {
+        try {
+            $email = $request->email;
+            $username =  $request->user_name;
+            if (!empty($email) && !empty($username)) {
+                $checkEmail = User::where('email', $email)->where('user_name', $username)->first();
+
+                if (!empty($checkEmail)) {
+                    throw new Exception('This username and email already exists.', DATA_EXISTS);
+                } else {
+                    throw new Exception('This username and email does not exists.', NOT_EXISTS);
+                }
+            }
+            if ($username) {
+                $checkUsername = User::where('user_name', $username)->first();
+
+                if (!empty($checkUsername)) {
+                    throw new Exception('This username already exists.', DATA_EXISTS);
+                } else {
+                    throw new Exception('This username does not exists.', NOT_EXISTS);
+                }
+            }
+            if ($email) {
+                $checkEmail = User::where('email', $email)->first();
+
+                if (!empty($checkEmail)) {
+                    throw new Exception('This email already exists.', DATA_EXISTS);
+                } else {
+                    throw new Exception('This email does not exists.', NOT_EXISTS);
+                }
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
 }

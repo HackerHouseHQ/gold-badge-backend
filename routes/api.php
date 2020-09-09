@@ -38,4 +38,5 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/checkMobileNo', 'UserController@checkMobileNoExistence');
 	Route::post('/DepartmentList', 'UserController@DepartmentList');
 	Route::post('/signUp', 'UserController@signUp');
+	Route::post('/checkUserNameEmail', 'UserController@checkUserNameEmail');
 });
