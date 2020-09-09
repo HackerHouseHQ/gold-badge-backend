@@ -21,6 +21,14 @@
 
 
   }
+
+  .modal-body.custom_modal_body {
+    padding-bottom: 0px;
+  }
+
+  .modal-header.custom_modal_header {
+    padding-bottom: 0px;
+  }
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -44,22 +52,14 @@
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
           <div class="row-lg-6 row-5">
-<<<<<<< HEAD
             <a href="{{route('countries')}}" class="btn btn-sm btn-neutral"
               style="background-color:#fb6340;color:#fff;">Manage Countries</a>
-=======
-            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral">Manage Countries</a>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
 
           </div>
-<<<<<<< HEAD
           <!--          <div class="row-lg-6  row-5" style="float: right;">
-=======
-<!--          <div class="row-lg-6  row-5" style="float: right;">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             <div class="btn-toolbar">
               <div class="btn-group">
                 <a href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">add new country</a>
@@ -84,7 +84,6 @@
     <div class="col">
       <div class="card">
         <!-- Card header -->
-<<<<<<< HEAD
 
 
 
@@ -125,35 +124,6 @@
         </div>
 
 
-=======
-        
-        
-        
-        <div class="card-body">
-          <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
-              <div class="row">
-                <div class="col-3">
-                    <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">Add Country +</a></button>
-                </div>
-                <div class="col-3">
-                    <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">Add State +</a></button>
-                </div>
-
-                <div class="col-3">
-                 <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">Add City +</a></button>
-                </div>
-                <div class="col-3">
-                  <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
-                </div>
-             
-              </div>
-           
-
-          </div>
-        </div>
-        
-        
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
@@ -179,7 +149,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header custom_modal_header">
         <h4 class="modal-title text-capitalize" id="businessName"> City List</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -187,8 +157,8 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
+          <div class="col-md-12" id="noData">
+            {{-- <div class="table-responsive">
               <div>
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -202,7 +172,7 @@
                   </tbody>
                 </table>
               </div>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -215,7 +185,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:100%">
-      <div class="modal-header">
+      <div class="modal-header custom_modal_header">
         <h4 class="modal-title text-capitalize" id="businessName"> Edit City </h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -224,25 +194,9 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-            <!--<div class="table-responsive">-->
             <div class="">
               <div>
-                {{-- <form action="{{route('editCityModelView')}}" method ="GET"> --}}
-                {{--   <table  class="table table-bordered table-hover">
-                   <thead>
-                     <tr>
-                       <th><span class="tbl_row">SN.</span></th>
-                       <th> <span class="tbl_row">City Name</span> </th>
-                       <th></th>
-                     </tr>
-                   </thead>
-                   <tbody id="EditCity">
-                     
-                   </tbody>
-                  
-                 </table> --}}
                 <div class="row">
-<<<<<<< HEAD
                   <div class="col-2">
                     <span class="tbl_row">SN.</span>
                   </div>
@@ -253,32 +207,8 @@
                     <span class="tbl_row">Action</span>
                   </div>
                 </div>
-                <!--              <form action="http://localhost/gold_badge/public/manage_data/editCityModelView" method="GET">
-=======
-                <div class="col-2">
-                  <span class="tbl_row">SN.</span>
-                </div>
-                <div class="col-7">
-                  <span class="tbl_row">City Name</span>
-                </div>
-                <div class="col-3">
-                  <span class="tbl_row">Action</span>
-                </div>
-                </div>
-<!--              <form action="http://localhost/gold_badge/public/manage_data/editCityModelView" method="GET">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
-                   2 
-                  <input type="hidden" value="2" name="city_id">
-                  <lable>ddsf</lable>
-                  <input type="text" class="input_tag" value="gorakhpur" name="city_name">
-                  <button type="submit" class="btn btn-secondary">Save</button>
-                  </form>-->
                 <br>
                 <div id="EditCity"></div>
-
-                {{-- </form> --}}
-
-
               </div>
             </div>
           </div>
@@ -293,36 +223,56 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:150%">
-      <div class="modal-header">
+      <div class="modal-header custom_modal_header">
         <h4 class="modal-title text-capitalize" id="businessName">Country Department List</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body ">
+        <div class="row">
+          <div class="col-md-12" id="viewDepartment">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end model view department --}}
+{{-- model Edit country --}}
+<div class="modal fade" id="EditCountrymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="width:100%">
+      <div class="modal-header custom_modal_header">
+        <h4 class="modal-title text-capitalize">Edit Country</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom_modal_body">
         <div class="row">
           <div class="col-md-12">
-            <div class="table-responsive">
+            <!--<div class="table-responsive">-->
+            <div class="">
               <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
+                <form action="{{route('editCountry')}}" method="POST">
+                  @csrf
 
-                  </tbody>
-
-                </table>
+                  <div class="row">
 
 
+                    <input type="hidden" value="" name="country_id" id="country_id">
+
+                    <div class="col-9">
+                      <input type="text" class="form-control" value="" name="country_name" id="country_name">
+                    </div>
+                    <div class="col-3">
+                      <button type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                  </div>
+                </form>
 
               </div>
             </div>
@@ -332,14 +282,48 @@
     </div>
   </div>
 </div>
-{{-- end model view department --}}
+
+{{-- end model Edit country --}}
+<div class="modal fade" id="EditStatemodel1" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_modal_header">
+        <h4 class="modal-title text-capitalize">Edit State</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body custom_modal_body">
+        <form action="{{route('editState')}}" method="POST">
+          @csrf
+
+          <div class="row">
+
+
+            <input type="hidden" value="" name="state_id" id="state_id">
+
+            <div class="col-9">
+              <input type="text" class="form-control" value="" name="state_name" id="state_name">
+            </div>
+            <div class="col-2">
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 @endsection
+
 @section('script')
 <script type="text/javascript">
   $(document).ready(function(){
   var dataTable = $('#datatable-basic').DataTable({
     language: {
       searchPlaceholder: "Country , State Name",
+      "emptyTable":     "No data found.",
       paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
           next:     '<i class="fas fa-angle-right"></i>'
@@ -386,26 +370,45 @@
           url: "{{ route('viewCityModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-            console.log(response);
-          if(response) {
-              $('#businessDetails').html('');
+            
+          if(response.length) {
+            console.log('aaa--',response);
+            $('#noData').html('');
+            // $('#noData').css("display","block"); 
               var i = 0;
+              let row = `<div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">City Name</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="businessDetails">`;
               $.each(response, function(key, value){
-                let row = `
+                row += `
                 <tr>
                   <td> ${++i} </td>
                   <td class="text-capitalize">${value.city_name}</td>
                  </tr>
                 `;
-                $('#businessDetails').append(row)
+               
               })
+               row +=`    </tbody>
+                </table>
+              </div>
+            </div>`;
+              $('#noData').append(row)
             } else {
-              let row = `
-                <tr>
-                  <td colspan="7"> Record not found! </td>
-                </tr>
-                `;
-                $('#businessDetails').html(row);
+              console.log('else');
+              // let row = `
+              //   <tr>
+              //     <td colspan="7"> Record not found! </td>
+              //   </tr>
+              //   `;
+              $('#noData').html("No city found.");
+                // $('#noData').css("display","none");
             }
              $('#exampleModalCenter').modal('show');
         },
@@ -436,10 +439,10 @@
                   <input type="hidden" value="${value.id}" name="city_id">
                           </div>
                       <div class="col-7">
-                  <input type="text" class="input_tag" value="${value.city_name}" name="city_name">
+                  <input type="text" class="form-control" value="${value.city_name}" name="city_name">
                       </div>
                       <div class="col-3">
-                  <button type="submit" class="btn btn-secondary">Save</button>
+                  <button type="submit" class="btn btn-primary">Save</button>
                       </div>
                   </form>
                 
@@ -462,68 +465,133 @@
       });
   }
    function viewDepartmentModel1(id){
-    // alert(id);
-      $('#viewDepartment').html('');
-        var i = 0;
-        let row = `
-          <tr>
-             <td> 1 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-          <tr>
-             <td> 2 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-          <tr>
-             <td> 3 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-          <tr>
-             <td> 4 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-          <tr>
-             <td> 5 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-          <tr>
-             <td> 6 </td>
-             <td class="text-capitalize"> India</td>
-             <td class="text-capitalize">UP</td>
-             <td class="text-capitalize">Varanasi</td>
-             <td class="text-capitalize">Rating 4</td>
-             <td class="text-capitalize">120 reviews</td>
-             <td class="text-capitalize">10 badges</td>
-          </tr>
-
-        `;
-        $('#viewDepartment').append(row)
+    $.ajax({
+          url: "{{ route('viewDeparmentModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            if(response.length >0)
+            {
+            $('#viewDepartment').html('');
+            var i = 1;
+            let row=` <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody>`;
+            $.each(response, function(key, value){
+               row += `
+               <tr>
+              <td>${i++}</td>
+              <td class="text-capitalize">${value.country_data.country_name}</td>
+              <td class="text-capitalize">${value.state_data.state_name}</td>
+              <td class="text-capitalize">${value.city_data.city_name}</td>
+              <td class="text-capitalize">${(value.post_data != null) ? value.post_data.rating : 0 }</td>
+              <td class="text-capitalize">120 reviews</td>
+              <td class="text-capitalize">10 badges</td>
+           </tr>`;
+           
+            });
+            row +=`  </tbody>
+</table>
+</div>
+</div>`;
+            $('#viewDepartment').append(row);
+            }
+            else{
+              $('#viewDepartment').html('<div>No record found.</div>');
+            }
+             
         $('#viewDepartmentModel').modal('show');
+          },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+    }
+   
+      // $('#viewDepartment').html('');
+      //   var i = 0;
+      //   let row = `
+      //     <tr>
+      //        <td> 1 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+      //     <tr>
+      //        <td> 2 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+      //     <tr>
+      //        <td> 3 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+      //     <tr>
+      //        <td> 4 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+      //     <tr>
+      //        <td> 5 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+      //     <tr>
+      //        <td> 6 </td>
+      //        <td class="text-capitalize"> India</td>
+      //        <td class="text-capitalize">UP</td>
+      //        <td class="text-capitalize">Varanasi</td>
+      //        <td class="text-capitalize">Rating 4</td>
+      //        <td class="text-capitalize">120 reviews</td>
+      //        <td class="text-capitalize">10 badges</td>
+      //     </tr>
+
+      //   `;
+      //   $('#viewDepartment').append(row)
+      //   $('#viewDepartmentModel').modal('show');
+      // }
+      function EditCountryModel1(id , country_name) {
+        $('#country_id').val(id);
+        $('#country_name').val(country_name);
+        $('#EditCountrymodel1').modal('show');
+      }
+      function EditStateModel1(id , state_name) {
+     
+        $('#state_id').val(id);
+        $('#state_name').val(state_name);
+        
+        $('#EditStatemodel1').modal('show');
       }
 </script>
 @endsection

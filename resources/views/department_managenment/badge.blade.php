@@ -39,9 +39,9 @@
           <h6 class="h2 text-white d-inline-block mb-0">Datatables</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-              <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Datatables</li>
+              <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+
+              <li class="breadcrumb-item active" aria-current="page">Badge</li>
             </ol>
           </nav>
         </div>
@@ -58,7 +58,6 @@
           {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
             Department</a> --}}
         </div>
-<<<<<<< HEAD
         <div class="col-3">
         </div>
         <div class="col-3">
@@ -71,20 +70,6 @@
         </div>
         <div class="col-3">
         </div>
-=======
-         <div class="col-3">
-            </div>
-            <div class="col-3">
-            <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top"
-              data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
-              </div>
-              <div class="col-3">
-            <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
-              data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
-          </div>
-          <div class="col-3">
-            </div>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
       </div>
     </div>
   </div>
@@ -158,7 +143,11 @@
                 </div>
                 <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                 <div class='col-2'>
-                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                  <div class="row">
+                    <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
+                  </div>
 
                 </div>
               </div>
@@ -166,7 +155,6 @@
 
           </div>
         </div>
-<<<<<<< HEAD
 
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
@@ -184,25 +172,6 @@
 
             <tbody>
 
-=======
-
-        <div class="table-responsive py-4">
-          <table class="table table-flush" id="datatable-basic">
-            <thead class="thead-light">
-              <tr>
-                <th>Badge Number</th>
-                <th>Department Name</th>
-                <th>Badge Rating</th>
-                <th>Department Rating</th>
-                <th>Registered On</th>
-                <th>Action</th>
-
-              </tr>
-            </thead>
-
-            <tbody>
-
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
             </tbody>
           </table>
         </div>
@@ -249,7 +218,6 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-md-12">
-<<<<<<< HEAD
             @if ($errors->any())
             <div class="alert alert-danger">
               <ul>
@@ -261,19 +229,11 @@
             @endif
             <div class="table-responsive">
               <form class="form-horizontal" action="{{route('AddBadge')}}" method="POST" enctype="multipart/form-data">
-=======
-            <div class="table-responsive">
-              <form class="form-horizontal" action="{{route('AddBadge')}}" method="GET">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 {{ csrf_field() }}
                 <div class="card-body">
                   <?php $departmentName = App\Department::where('status',1)->get(); ?>
                   <div class="form-group row">
-<<<<<<< HEAD
                     <select class="form-control select2" style="width: 100%;" id="department_id" name="department_id">
-=======
-                      <select class="form-control select2" required="required" style="width: 100%;" id="department_id" name="department_id">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                       <option value="">Department Name</option>
                       @foreach($departmentName as $value)
                       <option value="{{$value->id}}">{{$value->department_name}} </option>
@@ -282,18 +242,13 @@
                   </div>
                   <div class="form-group row">
 
-<<<<<<< HEAD
                     <input type="text" class="form-control" placeholder="Badge Number" name="badge_number">
-=======
-                    <input type="text" required="required" class="form-control" placeholder="Badge Number" name="badge_number">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
                   </div>
                 </div>
                 {{-- <div class="card-footer btn-add">
                   <button type="submit" class="btn btn-info float-right ">Add</button>
                 </div> --}}
-<<<<<<< HEAD
                 <div class="form-group">
                   OR
                 </div>
@@ -311,18 +266,12 @@
                     </div>
                   </div>
                 </div>
-=======
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
             </div>
           </div>
         </div>
       </div>
-<<<<<<< HEAD
       <div class="modal-footer" style="margin-top: -50px;">
-=======
-      <div class="modal-footer"  style="margin-top: -50px;">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary ">Add</button>
         {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
@@ -460,6 +409,11 @@
   @if (count($errors) > 0)
       $('#badge').modal('show');
   @endif
+</script>
+<script>
+  function myFunction() {
+document.getElementById("search_data").reset();
+}
 </script>
 
 @endsection

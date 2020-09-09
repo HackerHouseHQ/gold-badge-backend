@@ -141,7 +141,12 @@
                 </div>
                 <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                 <div class='col-2'>
-                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                  <div class="row">
+                    <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
+                  </div>
+
 
                 </div>
               </div>
@@ -451,5 +456,10 @@
         });
     });
   });
+</script>
+<script>
+  function myFunction() {
+document.getElementById("search_data").reset();
+}
 </script>
 @endsection

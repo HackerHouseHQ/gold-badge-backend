@@ -44,7 +44,7 @@
             <form class="form-horizontal" method="POST" action="{{route('AddReport')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
               <div class="form-group">
-                <label class="form-control-label" for="exampleFormControlInput1">Report Reason Name </label>
+                <label class="form-control-label" for="exampleFormControlInput1">Rating Question Name </label>
                 <input type="text" class="form-control" name="name" id="exampleFormControlInput1"
                   value="{{ old('name') }}" placeholder="Enter rating question">
               </div>
@@ -68,8 +68,9 @@
 
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <button type="button" class="btn btn btn-info"><a style="color : white;"
-                    href="{{route('countries')}}">Back</a></button>
+
+                <a style="color : white;" href="{{route('report')}}"><button type="button"
+                    class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>

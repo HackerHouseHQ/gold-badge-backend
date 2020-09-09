@@ -14,7 +14,7 @@
             </ol>
           </nav>
         </div>
-       
+
       </div>
     </div>
   </div>
@@ -33,66 +33,74 @@
            
           </form>
  -->
- <!-- Card body -->
- <div class="card-body">
-     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
-   <form>
-   <div class='row'>
-      <div class='col-4'>
-      <div class="form-group">
+        <!-- Card body -->
+        <div class="card-body">
+          <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
+            <form id="myForm">
+              <div class='row'>
+                <div class='col-4'>
+                  <div class="form-group">
                     <select class="form-control" name="status_id" id="status_id">
-                    <option value="">status</option>
-                        <option value="1">Active</option>
-                        <option value="2">Inactive</option>
+                      <option value="">status</option>
+                      <option value="1">Active</option>
+                      <option value="2">Inactive</option>
                     </select>
                   </div>
-      </div>
-      <div class='col-4'>
-      <?php $countryList =  App\Country::get();?>
-      <div class="form-group">
+                </div>
+                <div class='col-4'>
+                  <?php $countryList =  App\Country::get();?>
+                  <div class="form-group">
                     <select class="form-control" name="country_id" id="country_id">
-                    <option value="">Select Country</option>
-                        @foreach($countryList as $counntryList)
-                        <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
-                        @endforeach
+                      <option value="">Select Country</option>
+                      @foreach($countryList as $counntryList)
+                      <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                      @endforeach
                     </select>
                   </div>
-      </div>
-      <div class='col-4'>
-      <div class="form-group">
+                </div>
+                <div class='col-4'>
+                  <div class="form-group">
                     <select class="form-control" name="state_id" id="state_id">
-                    <option value="">Select State</option>
+                      <option value="">Select State</option>
                     </select>
                   </div>
-      </div>
-      <div class='col-5'>
-      <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                </div>
+                <div class='col-5'>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" placeholder="Select date form date" type="text" value=""
+                        name="fromdate" id="fromdate">
+                    </div>
                   </div>
-                  <input class="form-control datepicker" placeholder="Select date form date" type="text" value="" name="fromdate" id ="fromdate">
+                </div>
+                <div class='col-5'>
+                  <div class="form-group">
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                      </div>
+                      <input class="form-control datepicker" placeholder="Select date to date" type="text" value=""
+                        name="todate" id="todate">
+                    </div>
+                  </div>
+                </div>
+                <div class='col-2'>
+                  <div class="row">
+                    <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
+                  </div>
+
+
+
                 </div>
               </div>
-      </div>
-      <div class='col-5'>
-      <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                  </div>
-                  <input class="form-control datepicker" placeholder="Select date to date" type="text" value="" name="todate" id ="todate">
-                </div>
-              </div>      
-      </div>
-      <div class='col-2'>
-      <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-  
-      </div>
-    </div>
-   </form>
-    
-  </div>
+            </form>
+
+          </div>
         </div>
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
@@ -114,12 +122,12 @@
             </tbody>
           </table>
         </div>
-        </div>
       </div>
     </div>
   </div>
-  <!-- Footer -->
-  {{-- <footer class="footer pt-0">
+</div>
+<!-- Footer -->
+{{-- <footer class="footer pt-0">
     <div class="row align-items-center justify-content-lg-between">
       <div class="col-lg-6">
         <div class="copyright text-center  text-lg-left  text-muted">
@@ -153,8 +161,8 @@
     src="https://www.facebook.com/tr?id=111649226022273&ev=PageView&noscript=1" />
 </noscript>
 <script>
-  
-  </script>
+
+</script>
 <script type="text/javascript">
   $(document).ready(function(){
     $("#country_id").change(function(){
@@ -166,7 +174,9 @@
             dataType: 'json',
             success:function(response){
             var len = response.length;
+            
             $("#state_id").empty();
+            $("#state_id").append("<option value=''>Select State</option>");
               for( var i = 0; i<len; i++){
                 var id = response[i]['id'];
                 var name = response[i]['name'];
@@ -224,9 +234,13 @@
         { data: 'view' },
     ]
   });
-   $('#search_data1').click(function(){
-     dataTable.draw();
-  });
+
+//   $("#status_id").keyup(function(){
+    
+// });
+    $('#search_data1').click(function(){
+      dataTable.draw();
+    });
 });
 </script>
 <script type="text/javascript">
@@ -240,6 +254,11 @@
         }
     });
   }
+</script>
+<script>
+  function myFunction() {
+document.getElementById("myForm").reset();
+}
 </script>
 {{-- <script>
   $(document).ready(function () {

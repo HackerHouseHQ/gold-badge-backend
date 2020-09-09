@@ -14,20 +14,11 @@
         <div class="header-body">
             <div class="row align-items-center py-4">
                 <div class="col-lg-6 col-7">
-<<<<<<< HEAD
                     <h6 class="h2 text-white d-inline-block mb-0">Post</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
                             <li class="breadcrumb-item active" aria-current="page">PostDetails</li>
-=======
-                    <h6 class="h2 text-white d-inline-block mb-0">Datatables</h6>
-                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                            <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Datatables</li>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                         </ol>
                     </nav>
                 </div>
@@ -100,62 +91,73 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <form action="" id="search_data" class="search_data_row_class">
-                                              <div class='row'>
-                <div class='col-12'>
-                  <div class="form-group">
-                       <input class="form-control form-control-sm" type="text" placeholder="Search By Name.Badge,Department,Country,State,City....">
-               
-                  </div>
-                </div>
-                <div class='col-5'>
-                  <div class="form-group">
-                   
-                       <select class="form-control" name="department_id" id="department_id">
-                    <option value="">Select Department</option>
-                    <option value="1">Department1</option>
-                    <option value="2">Department2</option>
-                </select>
-                  </div>
-                </div>
-                <div class='col-5'>
-                  <div class="form-group">
-                       
-                        <select class="form-control" name="badge_id" id="badge_id">
-                            <option value="">Select Badge</option>
-                            <option value="1">Badge1</option>
-                            <option value="2">Badge2</option>
-                        </select>
-                  </div>
-                </div>
-                <div class='col-6'>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select from date" type="text" value=""
-                        name="fromdate" id="fromdate">
-                    </div>
-                  </div>
-                </div>
-                <div class='col-6'>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select to date" type="text" value=""
-                        name="todate" id="todate">
-                    </div>
-                  </div>
-                </div>
-                <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
-                <div class='col-2'>
-                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                  
-                </div>
-              </div>
-<!--                                            <table class="table table-striped">
+                                            <div class='row'>
+                                                <div class='col-12'>
+                                                    <div class="form-group">
+                                                        <input class="form-control form-control-sm" type="text"
+                                                            placeholder="Search By Name.Badge,Department,Country,State,City....">
+
+                                                    </div>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" name="department_id"
+                                                            id="department_id">
+                                                            <option value="">Select Department</option>
+                                                            <option value="1">Department1</option>
+                                                            <option value="2">Department2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class='col-5'>
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" name="badge_id" id="badge_id">
+                                                            <option value="">Select Badge</option>
+                                                            <option value="1">Badge1</option>
+                                                            <option value="2">Badge2</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class='col-6'>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i
+                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                            </div>
+                                                            <input class="form-control datepicker"
+                                                                placeholder="Select from date" type="text" value=""
+                                                                name="fromdate" id="fromdate">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='col-6'>
+                                                    <div class="form-group">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text"><i
+                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                            </div>
+                                                            <input class="form-control datepicker"
+                                                                placeholder="Select to date" type="text" value=""
+                                                                name="todate" id="todate">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" placeholder="Look for user" name="search2"
+                                                    id="search2" class="search_input">
+                                                <div class='col-2 d-flex'>
+
+                                                    <button type="button" id="search_data1"
+                                                        class="btn btn-primary apply_btnn">Apply</button>
+                                                    <button type="button" value="Reset form" onclick="myFunction()"
+                                                        class="btn btn-info apply_btnn">Reset</button>
+
+                                                </div>
+                                            </div>
+                                            <!--                                            <table class="table table-striped">
                                                 <thead>
                                                     <tr>
 
@@ -201,7 +203,7 @@
                                         <div class="card class_scroll ">
                                             <div class="card-body p-0">
                                                 <table id="data1" class="table ">
-<!--                                                    <thead>
+                                                    <!--                                                    <thead>
                                                         <tr>
                                                             {{-- <th><span class="tbl_row">Username</span></th>
                                                         <th><span class="tbl_row">Full Name</span></th>
@@ -355,8 +357,7 @@
             data.fromdate = fromdate;
             var todate = $('#todate').val();
             data.todate = todate;
-            var search = $('#search').val();
-            data.search = search;
+           
             
          }
          },
@@ -395,6 +396,11 @@
           }
       });
     }
+    </script>
+    <script>
+        function myFunction() {
+      document.getElementById("search_data").reset();
+      }
     </script>
 
     @endsection

@@ -33,26 +33,27 @@
         </div>
 
         <!--<div class="row">-->
-                
-        
-        
-          <div class="col-lg-6 col-6 d-flex justify-content-end">
-            <ul class="nav nav-tabs abc" style="border-bottom: 1px solid #5e72e3;">
-                <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #f7fafc;" href="{{route('departmentRequest')}}" class="btn btn-secondary" data-toggle="notify"
-                  data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
-                  id="approve">Approved</a></li>
-              <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-success"
-                  data-toggle="notify" data-placement="top" data-align="center" data-type="success"
-                  data-icon="ni ni-bell-55">Pending</a></li>
-              <li class="show"  style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}" id="reject" class="btn btn-secondary"
-                  data-toggle="notify" data-placement="top" data-align="center" data-type="success"
-                  data-icon="ni ni-bell-55">Rejected</a>
-              </li>
-            </ul>
-          </div>
-        
-        
-        
+
+
+
+        <div class="col-lg-6 col-6 d-flex justify-content-end">
+          <ul class="nav nav-tabs abc" style="border-bottom: 1px solid #5e72e3;">
+            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #f7fafc;"
+                href="{{route('departmentRequest')}}" class="btn btn-secondary" data-toggle="notify"
+                data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
+                id="approve">Approved</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
+                id="pending" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center"
+                data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}"
+                id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
+                data-type="success" data-icon="ni ni-bell-55">Rejected</a>
+            </li>
+          </ul>
+        </div>
+
+
+
         <!--</div>-->
         {{-- <div class="tab-content">
           <div id="notify-colors-component" class="tab-pane tab-example-result fade active show" role="tabpanel"
@@ -116,7 +117,12 @@
                 </div>
                 <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                 <div class='col-2'>
-                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                  <div class="row">
+                    <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
+
+                  </div>
 
                 </div>
               </div>
@@ -469,5 +475,11 @@ var dataTable = $('#data1').DataTable({
 
 });
 </script> --}}
+<script>
+  function myFunction() {
+document.getElementById("search_data").reset();
+}
+</script>
+
 
 @endsection

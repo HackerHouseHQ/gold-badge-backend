@@ -24,43 +24,32 @@
     <meta name="author" content="Creative Tim">
     <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
     <!-- Favicon -->
-<<<<<<< HEAD
     <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
-    type="text/css">
-  
-
-   
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
-  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
- 
-  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}"></script>
-  <!-- Page plugins -->
-  <link rel="stylesheet"
-    href="{{asset('admin_new/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
-  <link rel="stylesheet"
-    href="{{asset('admin_new/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
-  <link rel="stylesheet"
-    href="{{asset('admin_new/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
-  <!-- Google Tag Manager -->
-     <!-- summernote -->
-   <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
-=======
-    <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">
-    <!-- Fonts -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
-    <!-- Icons -->
-    <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
-    <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}"
         type="text/css">
+
+
+
     <!-- Argon CSS -->
     <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+    <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
+
+    <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+    </script>
+    <!-- Page plugins -->
+    <link rel="stylesheet"
+        href="{{asset('admin_new/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('admin_new/assets/vendor/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css')}}">
+    <link rel="stylesheet"
+        href="{{asset('admin_new/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
+    <!-- Google Tag Manager -->
+    <!-- summernote -->
+    <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
     <style>
-      .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
-          background: #e2b52dd1 !important;
-      }
-      </style>
+        .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
+            background: #e2b52dd1 !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -211,7 +200,6 @@
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
                                     <i class="sidenav-toggler-line"></i>
-<<<<<<< HEAD
                                 </div>
                             </div>
                         </li>
@@ -334,130 +322,6 @@
                                         </div>
                                     </a>
                                 </div>
-=======
-                                </div>
-                            </div>
-                        </li>
-                        <li class="nav-item d-sm-none">
-                            <a class="nav-link" href="#" data-action="search-show" data-target="#navbar-search-main">
-                                <i class="ni ni-zoom-split-in"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="ni ni-bell-55"></i>
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-xl  dropdown-menu-right  py-0 overflow-hidden">
-                                <!-- Dropdown header -->
-                                <div class="px-3 py-3">
-                                    <h6 class="text-sm text-muted m-0">You have <strong class="text-primary">13</strong>
-                                        notifications.</h6>
-                                </div>
-                                <!-- List group -->
-                                <div class="list-group list-group-flush">
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="assets/img/theme/team-1.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="assets/img/theme/team-2.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="assets/img/theme/team-3.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>5 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Your posts have been liked a lot.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="assets/img/theme/team-4.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>2 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">Let's meet at Starbucks at 11:30. Wdyt?</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <a href="#!" class="list-group-item list-group-item-action">
-                                        <div class="row align-items-center">
-                                            <div class="col-auto">
-                                                <!-- Avatar -->
-                                                <img alt="Image placeholder" src="assets/img/theme/team-5.jpg"
-                                                    class="avatar rounded-circle">
-                                            </div>
-                                            <div class="col ml--2">
-                                                <div class="d-flex justify-content-between align-items-center">
-                                                    <div>
-                                                        <h4 class="mb-0 text-sm">John Snow</h4>
-                                                    </div>
-                                                    <div class="text-right text-muted">
-                                                        <small>3 hrs ago</small>
-                                                    </div>
-                                                </div>
-                                                <p class="text-sm mb-0">A new issue has been reported for Argon.</p>
-                                            </div>
-                                        </div>
-                                    </a>
-                                </div>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                 <!-- View all -->
                                 <a href="#!" class="dropdown-item text-center text-primary font-weight-bold py-3">View
                                     all</a>
@@ -562,17 +426,10 @@
                 <div class="header-body">
                     <div class="row align-items-center py-4">
                         <div class="col-lg-6 col-7">
-<<<<<<< HEAD
                             <!-- <h6 class="h2 text-white d-inline-block mb-0">Default</h6> -->
                             <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                                 <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                                     <!-- <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li> -->
-=======
-                            <h6 class="h2 text-white d-inline-block mb-0">Default</h6>
-                            <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-                                <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                                    <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                     <li class="breadcrumb-item"><a href="#">Dashboards</a></li>
                                     <!--<li class="breadcrumb-item active" aria-current="page">Default</li>-->
                                 </ol>
@@ -594,14 +451,14 @@
                                             <h5 class="card-title text-uppercase text-muted mb-0">Registered Users</h5>
                                             <span class="h2 font-weight-bold mb-0">{{$UserCount}}</span>
                                         </div>
-<!--                                        <div class="col-auto">
+                                        <!--                                        <div class="col-auto">
                                             <div
                                                 class="icon icon-shape bg-gradient-red text-white rounded-circle shadow">
                                                 <i class="ni ni-active-40"></i>
                                             </div>
                                         </div>-->
                                     </div>
-<!--                                    <p class="mt-3 mb-0 text-sm">
+                                    <!--                                    <p class="mt-3 mb-0 text-sm">
                                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>-->
@@ -617,14 +474,14 @@
                                             <h5 class="card-title text-uppercase text-muted mb-0">Guest Login</h5>
                                             <span class="h2 font-weight-bold mb-0">1</span>
                                         </div>
-<!--                                        <div class="col-auto">
+                                        <!--                                        <div class="col-auto">
                                             <div
                                                 class="icon icon-shape bg-gradient-orange text-white rounded-circle shadow">
                                                 <i class="ni ni-chart-pie-35"></i>
                                             </div>
                                         </div>-->
                                     </div>
-<!--                                    <p class="mt-3 mb-0 text-sm">
+                                    <!--                                    <p class="mt-3 mb-0 text-sm">
                                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>-->
@@ -640,14 +497,14 @@
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total Departments</h5>
                                             <span class="h2 font-weight-bold mb-0">{{$DepartmentCount}}</span>
                                         </div>
-<!--                                        <div class="col-auto">
+                                        <!--                                        <div class="col-auto">
                                             <div
                                                 class="icon icon-shape bg-gradient-green text-white rounded-circle shadow">
                                                 <i class="ni ni-money-coins"></i>
                                             </div>
                                         </div>-->
                                     </div>
-<!--                                    <p class="mt-3 mb-0 text-sm">
+                                    <!--                                    <p class="mt-3 mb-0 text-sm">
                                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>-->
@@ -663,14 +520,14 @@
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total badge</h5>
                                             <span class="h2 font-weight-bold mb-0">{{$BadgeCount}}</span>
                                         </div>
-<!--                                        <div class="col-auto">
+                                        <!--                                        <div class="col-auto">
                                             <div
                                                 class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                                 <i class="ni ni-chart-bar-32"></i>
                                             </div>
                                         </div>-->
                                     </div>
-<!--                                    <p class="mt-3 mb-0 text-sm">
+                                    <!--                                    <p class="mt-3 mb-0 text-sm">
                                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>-->
@@ -686,14 +543,14 @@
                                             <h5 class="card-title text-uppercase text-muted mb-0">Total Reviews</h5>
                                             <span class="h2 font-weight-bold mb-0">10</span>
                                         </div>
-<!--                                        <div class="col-auto">
+                                        <!--                                        <div class="col-auto">
                                             <div
                                                 class="icon icon-shape bg-gradient-info text-white rounded-circle shadow">
                                                 <i class="ni ni-chart-bar-32"></i>
                                             </div>
                                         </div>-->
                                     </div>
-<!--                                    <p class="mt-3 mb-0 text-sm">
+                                    <!--                                    <p class="mt-3 mb-0 text-sm">
                                         <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
                                         <span class="text-nowrap">Since last month</span>
                                     </p>-->
@@ -748,102 +605,104 @@
     </div>
     </div> --}}
     <div class="col-xl-12">
-<<<<<<< HEAD
-=======
-
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
 
 
 
-<<<<<<< HEAD
 
-=======
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
         <div class="card">
 
-        <div class="card-body">
-     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
-   <form>
-   <div class="row">      
-      <div class="col-3">
-            <div class="form-group">
-            <?php $countryList = App\Country::get(); ?>
-                    <select class="form-control" name="country_id" id="country_id">
-                    <option value="">Country</option>
-                    @foreach($countryList as $counntryList)
-                    <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
-                    @endforeach
-                    </select>
-                  </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-                    <select class="form-control" name="state_id" id="state_id">
-                    <option value="">Select State</option>
-                    </select>
-                  </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-                    <select class="form-control" name="city_id" id="city_id">
-                    <option value="">Select  City</option>
-                    </select>
-                  </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-                    <select class="form-control" name="gender" id="gender">
-                    <option value="">Select Gender</option>
-                        <option value="1">Male</option>
-                        <option value="2">Female</option>
-                    </select>
-                  </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-      <?php $ethnicytyList = App\Ethnicity::get(); ?>
-                    <select class="form-control" name="Ethnicity" id="Ethnicity">
-                    <option value="">Select Ethnicity</option>
-                    @foreach($ethnicytyList as $list)
-                    <option value="{{$list->id}}">{{$list->ethnicity_name}}
-                    </option>
-                    @endforeach
-                    </select>
-                  </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                  </div>
-                  <input class="form-control datepicker" placeholder="Select date form date" type="text" value="" name="fromdate" id="fromdate">
-                </div>
-              </div>
-      </div>
-      <div class="col-3">
-      <div class="form-group">
-                <div class="input-group">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                  </div>
-                  <input class="form-control datepicker" placeholder="Select date to date" type="text" value="" name="todate" id="todate">
-                </div>
-              </div>      
-      </div>
-      <div class="col-2">
-      <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-  
-      </div>
-    </div>
-   </form>
-    
-  </div>
-        </div>
+            <div class="card-body">
+                <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
+                    <form id="search_data">
+                        <div class="row">
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <?php $countryList = App\Country::get(); ?>
+                                    <select class="form-control" name="country_id" id="country_id">
+                                        <option value="">Country</option>
+                                        @foreach($countryList as $counntryList)
+                                        <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <select class="form-control" name="state_id" id="state_id">
+                                        <option value="">Select State</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <select class="form-control" name="city_id" id="city_id">
+                                        <option value="">Select City</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <select class="form-control" name="gender" id="gender">
+                                        <option value="">Select Gender</option>
+                                        <option value="1">Male</option>
+                                        <option value="2">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <?php $ethnicytyList = App\Ethnicity::get(); ?>
+                                    <select class="form-control" name="Ethnicity" id="Ethnicity">
+                                        <option value="">Select Ethnicity</option>
+                                        @foreach($ethnicytyList as $list)
+                                        <option value="{{$list->id}}">{{$list->ethnicity_name}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        </div>
+                                        <input class="form-control datepicker" placeholder="Select date form date"
+                                            type="text" value="" name="fromdate" id="fromdate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-3">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        </div>
+                                        <input class="form-control datepicker" placeholder="Select date to date"
+                                            type="text" value="" name="todate" id="todate">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="row">
+                                    <button type="button" id="search_data1"
+                                        class="btn btn-primary apply_btnn">Apply</button>
+                                    <button type="button" value="Reset form" onclick="myFunction()"
+                                        class="btn btn-info apply_btnn">Reset</button>
+                                </div>
 
-   <div class="card-header bg-transparent">
+
+
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+            <div class="card-header bg-transparent">
                 <div class="row align-items-center">
                     <div class="col">
                         <!-- <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6> -->
@@ -1130,8 +989,10 @@
     <script src="{{asset('admin_new/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
     <script src="{{asset('admin_new/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
 
-     <!-- Datepicker -->
-   <script src="http://localhost/gold_badge/public/admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <!-- Datepicker -->
+    <script
+        src="http://localhost/gold_badge/public/admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js">
+    </script>
     <!-- Optional JS -->
     <script src="{{asset('admin_new/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
     <script src="{{asset('admin_new/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
@@ -1140,7 +1001,7 @@
 
 
     <script type="text/javascript">
-    $(document).ready(function () {
+        $(document).ready(function () {
         $("#country_id").change(function(){
         var country_id = $(this).val();
                 $.ajax({
@@ -1162,8 +1023,8 @@
         });
         }
         );
-</script>
-<script type="text/javascript">
+    </script>
+    <script type="text/javascript">
         $(document).ready(function () {
             $("#state_id").change(function(){
             // alert('dfshj');
@@ -1188,7 +1049,12 @@
                     );
         });
     });
-</script>
+    </script>
+    <script>
+        function myFunction() {
+  document.getElementById("search_data").reset();
+  }
+    </script>
 </body>
 
 </html>

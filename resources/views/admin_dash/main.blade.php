@@ -14,17 +14,6 @@
   <!--<link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">-->
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
     type="text/css">
-<<<<<<< HEAD
-
-
-
-  <!-- Argon CSS -->
-  <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
-  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
-
-  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
-  </script>
-=======
   
 
    
@@ -33,7 +22,6 @@
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
  
   <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}"></script>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
   <!-- Page plugins -->
   <link rel="stylesheet"
     href="{{asset('admin_new/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -42,15 +30,9 @@
   <link rel="stylesheet"
     href="{{asset('admin_new/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <!-- Google Tag Manager -->
-<<<<<<< HEAD
-  <!-- summernote -->
-  <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
-  <!-- <script>
-=======
      <!-- summernote -->
    <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
-  <script>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
+  <!-- <script>
     (function (w, d, s, l, i) {
               w[l] = w[l] || [];
               w[l].push({
@@ -65,17 +47,7 @@
                   'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
               f.parentNode.insertBefore(j, f);
           })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-<<<<<<< HEAD
   </script> -->
-  <!-- End Google Tag Manager -->
-  <style>
-    .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
-      background: #e2b52dd1 !important;
-    }
-  </style>
-
-=======
-  </script>
   <!-- End Google Tag Manager -->
   <style>
       .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
@@ -85,18 +57,12 @@
           color: #8898aa;
       }
       </style>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 </head>
 
 <body>
   <!-- Google Tag Manager (noscript) -->
-<<<<<<< HEAD
   <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
       style="display:none;visibility:hidden"></iframe></noscript> -->
-=======
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NKDMSK6" height="0" width="0"
-      style="display:none;visibility:hidden"></iframe></noscript>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
   <!-- End Google Tag Manager (noscript) -->
   @include('admin_dash.sidebar')
   <div class="main-content" id="panel">
@@ -120,19 +86,11 @@
   <script src="{{asset('admin_new/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-<<<<<<< HEAD
-  <!-- Datepicker -->
-  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
-
-  <script src="{{ asset('admin_new/assets/js/summernote-bs4.min.js') }}"></script>
-
-=======
    <!-- Datepicker -->
    <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
    <script src="{{ asset('admin_new/assets/js/summernote-bs4.min.js') }}"></script>
    
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
@@ -145,21 +103,12 @@
 
   <!-- Argon JS -->
   <script src="{{asset('admin_new/assets/js/argon.js?v=1.2.0')}}"></script>
-<<<<<<< HEAD
-  <script>
-    $(function () {
-    // Summernote
-    $('.textarea').summernote()
-  })
-  </script>
-=======
  <script>
   $(function () {
     // Summernote
     $('.textarea').summernote()
   })
 </script>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
   @yield('script')
 </body>
 

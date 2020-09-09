@@ -24,26 +24,16 @@
         <ul class="navbar-nav">
           <li class="nav-item">
               <a href="{{ route('home') }}" class="nav-link  @if(request()->route()->getName()=='home') active
-<<<<<<< HEAD
           @endif">
                 <i class="ni ni-tv-2 text-primary"></i>
-=======
-          @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Dashboard</span>
               </a>
           </li>         
           <li class="nav-item">
               <a href="{{ route('user') }}" class="nav-link  @if(request()->route()->getName()=='user') active
             @elseif(request()->route()->getName()=='UserDetail') active
-<<<<<<< HEAD
             @endif">
                 <i class="fas fa-user-cog text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">User Management</span>
               </a>
           </li>
@@ -53,61 +43,36 @@
               @elseif(request()->route()->getName()=='badge') active
               @elseif(request()->route()->getName()=='DepartmentDetail') active
               @elseif(request()->route()->getName()=='BadgeDetail') active
-<<<<<<< HEAD
               @endif">
                 <i class="fab fa-delicious text-primary"></i>
-=======
-              @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Department/Badge Management  </span>
               </a>
           </li>
           <li class="nav-item">
               <a href="{{ route('departmentRequest') }}" class="nav-link  @if(request()->route()->getName()=='departmentRequest' || request()->route()->getName()=='deprtmentPendingRequest' || request()->route()->getName()=='deprtmentRejectRequest') active
-<<<<<<< HEAD
             @endif">
                 <i class="fas fa-tasks text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Department Request </span>
               </a>
           </li>
           <li class="nav-item">
               <a href="{{ route('post-list') }}" class="nav-link  @if(request()->route()->getName()=='post-list') active
-<<<<<<< HEAD
             @endif">
                 <i class="far fa-envelope text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Post Management </span>
               </a>
           </li> 
            <li class="nav-item">
               <a href="{{ route('notification') }}" class="nav-link  @if(request()->route()->getName()=='notification') active
-<<<<<<< HEAD
             @endif">
                 <i class="fas fa-bell text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Notification </span>
               </a>
           </li> 
           <li class="nav-item">
               <a href="{{ route('about_us') }}" class="nav-link  @if(request()->route()->getName()=='about_us' || request()->route()->getName()=='privacy' || request()->route()->getName()=='terms') active
-<<<<<<< HEAD
             @endif">
                 <i class="ni ni-collection text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">CMS </span>
               </a>
           </li> 
@@ -115,13 +80,8 @@
               <a href="{{ route('countries') }}" class="nav-link  @if(request()->route()->getName()=='countries' 
                  || request()->route()->getName()=='ethnicity' || request()->route()->getName()=='gender' 
                  || request()->route()->getName()=='report' || request()->route()->getName()=='add_country') active
-<<<<<<< HEAD
             @endif">
                 <i class="far fa-chart-bar text-primary"></i>
-=======
-            @endif" style="padding-bottom: 1px;">
-                <i class="ni ni-archive-2 text-green"></i>
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                 <span class="nav-link-text">Manage Report </span>
               </a>
           </li> 

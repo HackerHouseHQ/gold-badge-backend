@@ -61,8 +61,8 @@
 
     .avatar1 {
         vertical-align: middle;
-        width: 100px;
-        height: 100px;
+        width: 75px;
+        height: 75px;
         border-radius: 50%;
         margin-bottom: 10px;
     }
@@ -76,15 +76,13 @@
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
                             <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{route('department')}}">Department</a></li>
+
                             <li class="breadcrumb-item active" aria-current="page">Department Detail</li>
                         </ol>
                     </nav>
                 </div>
-<<<<<<< HEAD
                 <!--                <div class="col-lg-6 col-5 text-right">
-=======
-<!--                <div class="col-lg-6 col-5 text-right">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                     <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
                     <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}">
                         Followings</a>
@@ -111,9 +109,8 @@
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
                                         <div class="text-center">
-<<<<<<< HEAD
                                             @if(!empty($data->image))
-                                            <img src="{{env('APP_URL').'/storage/app/public/departname/' .$data->image}}"
+                                            <img src="{{env('APP_URL').'/storage/app/public/' .$data->image}}"
                                                 alt="Avatar" class="avatar1">
                                             @else
                                             <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar"
@@ -166,63 +163,12 @@
                                             </a>
                                         </div>
 
-=======
-                                            <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-                                                alt="Avatar" class="avatar1">
-
-                                        </div>
-
-
-                                        <ul class="list-group list-group-unbordered mb-3">
-                                            <li class="list-group-item">
-                                                Department <a class="float-right">{{$data->department_name}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Country <a class="float-right">{{$data->country_data->country_name}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                State <a class="float-right">{{$data->state_data->state_name}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                City <a class="float-right">{{$data->city_data->city_name}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Avg. Rating <a class="float-right">0</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                No. of badge <a class="float-right">0</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Badge Rating <a class="float-right">0</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                No. of followers <a class="float-right">0</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Registered On <a
-                                                    class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
-                                            </li>
-                                            <li class="list-group-item">
-                                                Total Reviews <a class="float-right">0</a>
-                                            </li>
-                                        </ul>
-
-                                        {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
-                                         <div class="text-center">
-                                             <a href='javascript:void(0)'
-                                            onclick='viewDepartmentBadgeModel1({{$data->id}})'><span
-                                                class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
-                                        </a>
-                                        </div>
-                                      
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-8">
                                 <div class="card">
                                     <div class="card-body">
-<<<<<<< HEAD
 
                                         <form action="" id="search_data" class="search_data_row_class">
                                             <div class='row'>
@@ -271,166 +217,16 @@
                                                 <input type="hidden" placeholder="Look for user" name="search2"
                                                     id="search2" class="search_input">
                                                 <div class='col-2'>
-                                                    <button type="button" id="search_data1"
-                                                        class="btn btn-primary apply_btnn">Apply</button>
+                                                    <div class="d-flex">
+                                                        <button type="button" id="search_data1"
+                                                            class="btn btn-primary apply_btnn">Apply</button>
+                                                        <button type="button" value="Reset form" onclick="myFunction()"
+                                                            class="btn btn-info apply_btnn">Reset</button>
+                                                    </div>
+
 
                                                 </div>
                                             </div>
-=======
-                                       
-                                        <form action="" id="search_data" class="search_data_row_class">
-                                             <div class='row'>
-                <div class='col-12'>
-                  <div class="form-group">
-                       <input class="form-control form-control-sm" type="text" placeholder="Search By User Name">
-               
-                  </div>
-                </div>
-                <div class='col-5'>
-                  <div class="form-group">
-                    <select class="form-control" name="status_id" id="status_id">
-                      <option value="">status</option>
-                      <option value="1">Active</option>
-                      <option value="2">Inactive</option>
-                    </select>
-                  </div>
-                </div>
-                <div class='col-6'>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select from date" type="text" value=""
-                        name="fromdate" id="fromdate">
-                    </div>
-                  </div>
-                </div>
-                <div class='col-6'>
-                  <div class="form-group">
-                    <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                      </div>
-                      <input class="form-control datepicker" placeholder="Select to date" type="text" value=""
-                        name="todate" id="todate">
-                    </div>
-                  </div>
-                </div>
-                <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
-                <div class='col-2'>
-                  <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-
-                </div>
-              </div>
-
-<!--                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <span class="div_cover_sell">
-                                                            <span>
-                                                                <select class="" name="status_id" id="status_id">
-                                                                    <option value="">Status</option>
-                                                                    <option value="1">Active</option>
-                                                                    <option value="2">Inactive</option>
-                                                                </select>
-                                                            </span>
-                                                        </span>
-
-                                                        <span class="from_to_select">
-                                                            <label for="from_text" class="serach_by_text">From</label>
-
-                                                            <input type="date" class="from_control" name="fromdate"
-                                                                id="fromdate" style="-webkit-appearance: media-slider;">
-                                                            <label for="to_text" class="serach_by_text">To</label>
-                                                            <input type="date" class="from_control" name="todate"
-                                                                id="todate" style="-webkit-appearance: media-slider;">
-                                                        </span>
-                                                        <input type="hidden" placeholder="Look for user" name="search2"
-                                                            id="search2" class="search_input">
-                                                        <button type="button" id="search_data1"
-                                                            class="apply_btnn">Apply</button>
-
-
-                                                    </tr>
-                                                </thead>
-                                            </table>-->
-                                        </form>
-                                        <div class="wrapper_ratings_review">
-                                            <div class="row">
-                                                <div class="col-md-2">
-                                                    <div class="number_star" style="margin-top:17px;">
-                                                        <p class="number_ratings_black">4.1</p>
-
-                                                        <span class="star_icon">
-                                                            <i class="fas fa-star custom_star_iconn"
-                                                                style="margin:3px;"></i>
-                                                            <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
-                                                        </span>
-                                                    </div>
-                                                    <p class="number_ratings_grey" style="margin-top:-20px;">672</p>
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <div class="main_div_five_rows">
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
 
                                             <!--                                            <table class="table table-striped">
                                                 <thead>
@@ -445,7 +241,6 @@
                                                             </span>
                                                         </span>
 
-<<<<<<< HEAD
                                                         <span class="from_to_select">
                                                             <label for="from_text" class="serach_by_text">From</label>
 
@@ -564,31 +359,6 @@
                                                         </div>
                                                     </div>
 
-=======
-                                                    <div class="progress-group">
-                                                        <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-primary" style="width: 80%">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- /.progress-group -->
-
-                                                    <div class="progress-group">
-                                                        <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-danger" style="width: 75%">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
-                                                    <!-- /.progress-group -->
-                                                    <div class="progress-group">
-                                                        <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-success" style="width: 60%">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-
->>>>>>> f0827c1f3c3f0ba7c8f02d217a2c0a7fa6e27e33
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
@@ -726,5 +496,9 @@
     });
     }
 </script>
-
+<script>
+    function myFunction() {
+  document.getElementById("search_data").reset();
+  }
+</script>
 @endsection

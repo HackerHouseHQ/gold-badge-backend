@@ -61,10 +61,20 @@
 
   .avatar1 {
     vertical-align: middle;
-    width: 100px;
-    height: 100px;
+    width: 75px;
+    height: 75px;
     border-radius: 50%;
     margin-bottom: 10px;
+  }
+
+  .sorting_asc:before {
+    content: '';
+    display: none;
+  }
+
+  .sorting_asc:after {
+    content: '';
+    display: none;
   }
 </style>
 <div class="header bg-primary pb-6">
@@ -76,7 +86,8 @@
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-              <li class="breadcrumb-item active" aria-current="page">Department Detail</li>
+              <li class="breadcrumb-item"><a href="{{route('badge')}}">Badge</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Badge Detail</li>
             </ol>
           </nav>
         </div>
@@ -108,8 +119,8 @@
                   <div class="card-body box-profile">
                     <div class="text-center">
 
-                      @if(!empty($data->image))
-                      <img src="{{env('APP_URL').'/storage/app/public/departname/' .$data->image}}" alt="Avatar"
+                      @if(!empty($data->department_data->image))
+                      <img src="{{env('APP_URL').'/storage/app/public/' .$data->department_data->image}}" alt="Avatar"
                         class="avatar1">
                       @else
                       <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar" class="avatar1">
@@ -123,7 +134,7 @@
                         Badge Number <a class="float-right">{{$data->badge_number}}</a>
                       </li>
                       <li class="list-group-item">
-                        Department <a class="float-right">{{$data->department_name}}</a>
+                        Department <a class="float-right">{{$data->department_data->department_name}}</a>
                       </li>
                       <li class="list-group-item">
                         Country <a class="float-right">{{$data->department_data->country_data->country_name}}</a>
@@ -135,10 +146,7 @@
                         City <a class="float-right">{{$data->department_data->city_data->city_name}}</a>
                       </li>
                       <li class="list-group-item">
-                        Avg. Rating <a class="float-right">0</a>
-                      </li>
-                      <li class="list-group-item">
-                        No. of badge <a class="float-right">0</a>
+                        Department Rating <a class="float-right">0</a>
                       </li>
                       <li class="list-group-item">
                         Badge Rating <a class="float-right">0</a>
@@ -210,7 +218,11 @@
                         <input type="hidden" placeholder="Look for user" name="search2" id="search2"
                           class="search_input">
                         <div class='col-2'>
-                          <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                          <div class="d-flex">
+                            <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                            <button type="button" value="Reset form" onclick="myFunction()"
+                              class="btn btn-info apply_btnn">Reset</button>
+                          </div>
 
                         </div>
                       </div>
@@ -398,5 +410,10 @@
 //     dataTable.draw();
 //  });
 });
+</script>
+<script>
+  function myFunction() {
+document.getElementById("search_data").reset();
+}
 </script>
 @endsection

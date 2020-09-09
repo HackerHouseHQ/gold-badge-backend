@@ -103,6 +103,9 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/insert_country', 'ManageDataController@add_country')->name('add_country');
     Route::get('/viewCityModel/{id?}', 'ManageDataController@viewCityModel')->name('viewCityModel');
     Route::get('/editCityModelView', 'ManageDataController@editCityModelView')->name('editCityModelView');
+    Route::post('/editCounty', 'ManageDataController@editCountry')->name('editCountry');
+    Route::get('/viewDeparmentModel/{id?}', 'ManageDataController@viewDeparmentModel')->name('viewDeparmentModel');
+
 
 
     Route::get('/add_state', 'ManageDataController@add_state_page')->name('add_state_page');
@@ -111,6 +114,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/get_city', 'ManageDataController@get_city')->name('get_city');
     Route::get('/add_city', 'ManageDataController@add_city_page')->name('add_city_page');
     Route::post('/insert_city', 'ManageDataController@add_city')->name('add_city');
+    Route::post('/editState', 'ManageDataController@editState')->name('editState');
+
 
 
     Route::get('/add_ethnicity', 'ManageDataController@add_ethnicity_page')->name('add_ethnicity_page');
