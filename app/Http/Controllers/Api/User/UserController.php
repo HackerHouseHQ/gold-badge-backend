@@ -130,7 +130,7 @@ class UserController extends Controller
                 $request->all(),
                 [
                     'name' => 'required|string',
-                    'username' => 'required|string',
+                    'user_name' => 'required|string|unique:users',
                     'email' => 'required|email',
                     'mobile_no' => 'required|numeric',
                     'country_id' => 'required|numeric',
@@ -141,6 +141,10 @@ class UserController extends Controller
             /**
              * Check input parameter validation
              */
+            $checkemail = User::where('email', $request->email)->first();
+            if ($checkemail) {
+                throw new Exception('Email already exists.', DATA_EXISTS);
+            }
 
             if ($validator->fails()) {
                 return res_validation_error($validator); //Sending Validation Error Message
@@ -165,7 +169,7 @@ class UserController extends Controller
             $user->access_token = $resulToken->accessToken;
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
-            return res_success('User  Social Signup Successfully', $user);
+            return res_success('User  Signup Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
