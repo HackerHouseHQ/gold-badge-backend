@@ -2,9 +2,9 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
-use DB;
+use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
@@ -117,7 +117,7 @@ class Department extends Model
       $data = $query->get();
       return $data;
    }
-   public static function  getDepartmentList($country_id, $state_id)
+   public static function  getDepartmentList($country_id, $state_id, $city_id)
    {
       $query = Post::query()->select(
          'departments.id as department_id',
@@ -134,6 +134,9 @@ class Department extends Model
       }
       if ($state_id) {
          $query->Where('departments.state_id', $state_id);
+      }
+      if ($city_id) {
+         $query->Where('departments.city_id', $city_id);
       }
 
 

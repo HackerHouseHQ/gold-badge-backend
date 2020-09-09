@@ -12,6 +12,7 @@ use App\CountryState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -108,12 +109,13 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function followDepartmentList(Request $request)
+    public function DepartmentList(Request $request)
     {
         try {
             $countryId = $request->country_id;
             $stateId = $request->state_id;
-            $department = Department::getDepartmentList($countryId, $stateId);
+            $cityId = $request->city_id;
+            $department = Department::getDepartmentList($countryId, $stateId, $cityId);
             if (count($department) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $department));
             } else {
@@ -125,6 +127,7 @@ class UserController extends Controller
     }
     public function signUp(Request $request)
     {
+
         try {
             $validator = Validator::make(
                 $request->all(),
@@ -136,20 +139,26 @@ class UserController extends Controller
                     'country_id' => 'required|numeric',
                     'state_id' => 'required|numeric',
                     'city_id' => 'required|numeric',
+                    'image'   => 'required|image|mimes:jpeg,png,jpg|max:2048'
                 ]
             );
             /**
              * Check input parameter validation
              */
-            $checkemail = User::where('email', $request->email)->first();
-            if ($checkemail) {
-                throw new Exception('Email already exists.', DATA_EXISTS);
-            }
+
 
             if ($validator->fails()) {
                 return res_validation_error($validator); //Sending Validation Error Message
             }
-
+            $checkemail = User::where('email', $request->email)->first();
+            if ($checkemail) {
+                throw new Exception('Email already exists.', DATA_EXISTS);
+            }
+            $file = $request->image;
+            $extension = $file->getClientOriginalExtension();
+            $filename = time()  . "." . $extension;
+            $path = storage_path() . '/app/public/uploads/user_image';
+            $file->move($path, $filename);
             $insertData = [
                 'first_name' => $request->name,
                 'user_name' => $request->user_name,
@@ -158,10 +167,25 @@ class UserController extends Controller
                 'country_id' => $request->country_id,
                 'state_id' => $request->state_id,
                 'city_id' => $request->city_id,
+                'image'  => $filename,
                 'created_at' => CURRENT_DATE,
                 'updated_at' => CURRENT_DATE
             ];
+
             $userInsetId = User::insertGetId($insertData);
+            if (isset($request->department_followed) && !empty($request->department_followed)) {
+                $follow = json_decode($request->department_followed);
+                foreach ($follow as  $followed) {
+                    $insertFollowed = [
+                        'user_id' => $userInsetId,
+                        'department_id' => $followed,
+                        'created_at' => CURRENT_DATE,
+                        'updated_at' => CURRENT_DATE,
+                    ];
+                    UserDepartmentFollow::insert($insertFollowed);
+                }
+            }
+
             $user = User::where('id', $userInsetId)->first();
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
