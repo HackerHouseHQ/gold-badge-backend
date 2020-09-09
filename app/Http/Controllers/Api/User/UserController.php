@@ -135,11 +135,13 @@ class UserController extends Controller
                     'name' => 'required|string',
                     'user_name' => 'required|string|unique:users',
                     'email' => 'required|email',
-                    'mobile_no' => 'required|numeric',
+                    'mobile_no' => 'required|numeric|min:10',
+                    'mobile_country_code' => 'required|max:4',
                     'country_id' => 'required|numeric',
                     'state_id' => 'required|numeric',
                     'city_id' => 'required|numeric',
-                    'image'   => 'required|image|mimes:jpeg,png,jpg|max:2048'
+                    'image'   => 'required|image|mimes:jpeg,png,jpg|max:10240',
+
                 ]
             );
             /**
@@ -164,6 +166,7 @@ class UserController extends Controller
                 'user_name' => $request->user_name,
                 'email' => $request->email,
                 'mobil_no' => $request->mobile_no,
+                'mobile_country_code' => $request->mobile_country_code,
                 'country_id' => $request->country_id,
                 'state_id' => $request->state_id,
                 'city_id' => $request->city_id,
@@ -193,6 +196,7 @@ class UserController extends Controller
             $user->access_token = $resulToken->accessToken;
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
+            $user->image =  env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image;
             return res_success('User  Signup Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
