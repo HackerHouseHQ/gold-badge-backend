@@ -117,4 +117,27 @@ class Department extends Model
       $data = $query->get();
       return $data;
    }
+   public static function  getDepartmentList($country_id, $state_id)
+   {
+      $query = Post::query()->select(
+         'departments.id as department_id',
+         'departments.department_name',
+         DB::raw('COUNT(departments.id) as total_reviews'),
+         DB::raw('AVG(posts.rating) as rating')
+      )->where('flag', 1)
+         ->groupBy('posts.department_id')
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         });
+      if ($country_id) {
+         $query->Where('departments.country_id', $country_id);
+      }
+      if ($state_id) {
+         $query->Where('departments.state_id', $state_id);
+      }
+
+
+      $data = $query->get();
+      return $data;
+   }
 }

@@ -141,7 +141,7 @@ class ManageDataController extends Controller
     }
     public function viewCityModel($id)
     {
-        $genderData = City::where('country_id', $id)->get();
+        $genderData = City::where('state_id', $id)->get();
         return response()->json($genderData, 200);
     }
     public function editCityModelView(Request $request)

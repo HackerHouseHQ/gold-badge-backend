@@ -6,6 +6,7 @@ use App\City;
 use App\User;
 use Exception;
 use App\Country;
+use App\Department;
 use App\CountryState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +24,7 @@ class UserController extends Controller
          * 
          */
         try {
-            $country = Country::select('id as country_id', 'country_name')->get();
+            $country = Country::select('id as country_id', 'country_nam')->get();
             if (count($country) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('countryList' => $country));
             } else {
@@ -84,7 +85,7 @@ class UserController extends Controller
     public function checkMobileNoExistence(Request $request)
     {
         /**
-         * Show city List.
+         * Check mobile number existence.
          *
          * @param int $mobileNumber
          * @return Json
@@ -99,6 +100,21 @@ class UserController extends Controller
                 throw new Exception(trans('messages.recordExists'), DATA_EXISTS);
             } else {
                 throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function followDepartmentList(Request $request)
+    {
+        try {
+            $countryId = $request->country_id;
+            $stateId = $request->state_id;
+            $department = Department::getDepartmentList($countryId, $stateId);
+            if (count($department) > 0) {
+                return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $department));
+            } else {
+                return res_success('No record found', (object) array('departmentFollowList' => $department));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
