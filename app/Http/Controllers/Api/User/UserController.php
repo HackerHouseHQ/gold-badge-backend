@@ -11,6 +11,8 @@ use App\CountryState;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
+
 
 class UserController extends Controller
 {
@@ -24,7 +26,7 @@ class UserController extends Controller
          * 
          */
         try {
-            $country = Country::select('id as country_id', 'country_nam')->get();
+            $country = Country::select('id as country_id', 'country_name')->get();
             if (count($country) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('countryList' => $country));
             } else {
@@ -116,6 +118,53 @@ class UserController extends Controller
             } else {
                 return res_success('No record found', (object) array('departmentFollowList' => $department));
             }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function signUp(Request $request)
+    {
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required|string',
+                    'username' => 'required|string',
+                    'email' => 'required|email',
+                    'mobile_no' => 'required|numeric',
+                    'country_id' => 'required|numeric',
+                    'state_id' => 'required|numeric',
+                    'city_id' => 'required|numeric',
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
+
+            $insertData = [
+                'first_name' => $request->name,
+                'user_name' => $request->user_name,
+                'email' => $request->email,
+                'mobil_no' => $request->mobile_no,
+                'country_id' => $request->country_id,
+                'state_id' => $request->state_id,
+                'city_id' => $request->city_id,
+                'created_at' => CURRENT_DATE,
+                'updated_at' => CURRENT_DATE
+            ];
+            $userInsetId = User::insertGetId($insertData);
+            $user = User::where('id', $userInsetId)->first();
+            $resulToken = $user->createToken('');
+            $token = $resulToken->token;
+            $token->save();
+            $user->access_token = $resulToken->accessToken;
+            $user->token_type = 'Bearer';
+            $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
+            return res_success('User  Social Signup Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
