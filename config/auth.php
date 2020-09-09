@@ -40,17 +40,17 @@ return [
     */
 
     'guards' => [
-         'admin' => [
+        'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
-        ],   
+        ],
         'web' => [
             'driver' => 'session',
             'provider' => 'users',
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
             'hash' => false,
         ],
@@ -78,7 +78,7 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
-         'admins' => [
+        'admins' => [
             'driver' => 'eloquent',
             'model' => App\Admin::class,
         ],

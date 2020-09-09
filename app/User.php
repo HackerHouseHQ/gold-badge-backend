@@ -5,10 +5,12 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
+
 
 class User extends Authenticatable
 {
-   use Notifiable;
+   use HasApiTokens, Notifiable;
 
 
    protected $fillable = [
@@ -23,8 +25,8 @@ class User extends Authenticatable
    {
       $query = self::query()->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
-          $fromdate =  date('Y-m-d',strtotime($fromdate));
-          $todate =  date('Y-m-d',strtotime($todate));
+         $fromdate =  date('Y-m-d', strtotime($fromdate));
+         $todate =  date('Y-m-d', strtotime($todate));
          $query->Where(function ($q) use ($fromdate, $todate) {
             $q->wheredate('created_at', '>=', $fromdate);
             $q->wheredate('created_at', '<=', $todate);
