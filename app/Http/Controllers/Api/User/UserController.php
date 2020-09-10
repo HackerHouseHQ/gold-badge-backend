@@ -299,8 +299,8 @@ class UserController extends Controller
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
-                        'uploadFile' => 'array',
-                        'uploadFile.*.' => 'required|image|mimes:jpeg,png,jpg|max:10240',
+                        'upLoadFile' => 'nullable|array',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240',
 
                     ]
                 );
@@ -361,11 +361,13 @@ class UserController extends Controller
                         'department_id' => 'required|numeric',
                         'badge_id' => 'required|numeric',
                         'ratingArr' => 'required|array',
+                        'ratingArr.*.reason_id' => 'required|numeric',
+                        'ratingArr.*.rating' => 'required|numeric',
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
-                        'uploadFile' => 'array',
-
+                        'upLoadFile' => 'nullable|array',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240',
                     ]
                 );
                 /**
@@ -382,7 +384,6 @@ class UserController extends Controller
                 $stayAnonymous = $request->stay_anonymous;
                 $uploadFile  = $request->upLoadFile;
                 if (isset($ratingArr) && !empty($ratingArr)) {
-
                     $arr = $ratingArr;
                     if (!is_array($arr)) {
                         $arr = json_decode($arr, true);
