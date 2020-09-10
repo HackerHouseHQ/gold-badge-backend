@@ -119,16 +119,16 @@ class Department extends Model
    }
    public static function  getDepartmentList($country_id, $state_id, $city_id)
    {
-      $query = Post::query()->select(
+      $query = self::query()->select(
          'departments.id as department_id',
          'departments.department_name',
-         DB::raw('COUNT(departments.id) as total_reviews'),
+         'posts.flag',
+         DB::raw('COUNT(posts.department_id) as total_reviews'),
          DB::raw('AVG(posts.rating) as rating')
-      )->where('flag', 1)
-         ->groupBy('posts.department_id')
-         ->leftjoin("departments", function ($join) {
-            $join->on('posts.department_id', '=', 'departments.id');
-         });
+      )->leftjoin("posts", function ($join) {
+         $join->on('departments.id', '=', 'posts.department_id');
+      })->groupBy('departments.id')
+         ->where('flag', 1);
       if ($country_id) {
          $query->Where('departments.country_id', $country_id);
       }
@@ -138,8 +138,24 @@ class Department extends Model
       if ($city_id) {
          $query->Where('departments.city_id', $city_id);
       }
-
-
+      $data = $query->get();
+      return $data;
+   }
+   public static function getDepartmentListAll($country_id, $state_id, $city_id)
+   {
+      $query = self::query()->select(
+         'departments.id as department_id',
+         'departments.department_name',
+      )->where('status', ACTIVE);
+      if ($country_id) {
+         $query->Where('departments.country_id', $country_id);
+      }
+      if ($state_id) {
+         $query->Where('departments.state_id', $state_id);
+      }
+      if ($city_id) {
+         $query->Where('departments.city_id', $city_id);
+      }
       $data = $query->get();
       return $data;
    }

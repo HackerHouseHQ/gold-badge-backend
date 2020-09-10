@@ -39,4 +39,5 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/DepartmentList', 'UserController@DepartmentList');
 	Route::post('/signUp', 'UserController@signUp');
 	Route::post('/checkUserNameEmail', 'UserController@checkUserNameEmail');
+	Route::post('/savePostReview', 'UserController@savePostReview');
 });

@@ -6,6 +6,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use GuzzleHttp\Psr7\Request;
 
 class DepartmentBadge extends Model
 {
@@ -117,5 +118,27 @@ class DepartmentBadge extends Model
    public function department_data()
    {
       return $this->belongsTo('App\Department', 'department_id');
+   }
+   public static function getDepartmentBadge($country_id, $state_id, $city_id)
+   {
+      $query = self::query()->select(
+         'department_badges.department_id',
+         'department_badges.badge_number',
+         'department_badges.id as badge_id'
+      )->leftjoin("departments", function ($join) {
+         $join->on('departments.id', '=', 'department_badges.department_id');
+      })
+         ->where('department_badges.status', ACTIVE);
+      if ($country_id) {
+         $query->Where('departments.country_id', $country_id);
+      }
+      if ($state_id) {
+         $query->Where('departments.state_id', $state_id);
+      }
+      if ($city_id) {
+         $query->Where('departments.city_id', $city_id);
+      }
+      $data = $query->get();
+      return $data;
    }
 }
