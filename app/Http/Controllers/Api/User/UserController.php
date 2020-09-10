@@ -283,7 +283,7 @@ class UserController extends Controller
     {
 
         /**
-         * Check username  and email existence.
+         * save post review .
          *
          * @return Json
          * @author Ratnesh Kumar 
@@ -300,7 +300,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'nullable|array',
-                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
 
                     ]
                 );
@@ -324,7 +324,7 @@ class UserController extends Controller
                     'stay_anonymous' => $stayAnonymous,
                     'flag' => 1,
                     'created_at' => CURRENT_DATE,
-                    'updated_at' => CURRENT_DATE,
+                    'updated_at' => CURRENT_DATE
                 ];
 
                 $insertPostId = Post::insertGetId($insertPostDepartment);
@@ -367,7 +367,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'nullable|array',
-                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
                     ]
                 );
                 /**
@@ -400,7 +400,7 @@ class UserController extends Controller
                             'rating' => $rating['rating'],
                             'flag' => 2,
                             'created_at' => CURRENT_DATE,
-                            'updated_at' => CURRENT_DATE,
+                            'updated_at' => CURRENT_DATE
                         ];
                         $insertData = Post::insert($insertPostBadge);
                     }
