@@ -300,6 +300,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'uploadFile' => 'array',
+                        'uploadFile.*.' => 'required|image|mimes:jpeg,png,jpg|max:10240',
 
                     ]
                 );

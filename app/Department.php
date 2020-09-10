@@ -145,7 +145,7 @@ class Department extends Model
    {
       $query = self::query()->select(
          'departments.id as department_id',
-         'departments.department_name',
+         'departments.department_name'
       )->where('status', ACTIVE);
       if ($country_id) {
          $query->Where('departments.country_id', $country_id);
