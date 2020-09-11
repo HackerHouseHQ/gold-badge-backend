@@ -110,8 +110,8 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
                                             @if(!empty($data->image))
-                                            <img src="{{env('APP_URL').'storage/app/public/' .$data->image}}"
-                                                alt="Avatar" class="avatar1">
+                                            <img src="{{'../storage/departname/' .$data->image}}" alt="Avatar"
+                                                class="avatar1">
                                             @else
                                             <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar"
                                                 class="avatar1">
