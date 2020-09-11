@@ -123,16 +123,17 @@
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
-                                                Department <a class="float-right">{{$data->department_name}}</a>
+                                                Department <a class="float-right">{{@$data->department_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Country <a class="float-right">{{$data->country_data->country_name}}</a>
+                                                Country <a
+                                                    class="float-right">{{@$data->country_data->country_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                State <a class="float-right">{{$data->state_data->state_name}}</a>
+                                                State <a class="float-right">{{@$data->state_data->state_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                City <a class="float-right">{{$data->city_data->city_name}}</a>
+                                                City <a class="float-right">{{@$data->city_data->city_name}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Avg. Rating <a class="float-right">0</a>
