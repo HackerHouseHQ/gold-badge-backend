@@ -71,7 +71,7 @@
 
           <div class="leftpane">
             <div class="img-r">
-              <img src="{{$data->image}}" alt="" style="width: 100px;">
+              <img src="../storage/public/uploads/user_image/{{$data->image}}" alt="" style="width: 100px;">
             </div>
           </div>
           <div class="middlepane">
