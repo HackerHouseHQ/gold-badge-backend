@@ -1,5 +1,12 @@
 @extends('admin_dash.main')
+
 @section('content')
+<style>
+  .form-control[readonly] {
+    opacity: 1;
+    background-color: #ffffff;
+  }
+</style>
 <div class="header bg-primary pb-6">
   <div class="container-fluid">
     <div class="header-body">

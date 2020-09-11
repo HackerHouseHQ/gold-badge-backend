@@ -210,16 +210,22 @@ class UserController extends Controller
 
             $userInsetId = User::insertGetId($insertData);
             if (isset($request->department_followed) && !empty($request->department_followed)) {
-                $follow = json_decode($request->department_followed);
-                foreach ($follow as  $followed) {
+                $arr = $request->department_followed;
+                if (!is_array($arr)) {
+                    $arr = json_decode($arr, true);
+                }
+                foreach ($arr as  $followed) {
                     $insertFollowed = [
                         'user_id' => $userInsetId,
                         'department_id' => $followed,
                         'created_at' => CURRENT_DATE,
                         'updated_at' => CURRENT_DATE,
                     ];
-                    UserDepartmentFollow::insert($insertFollowed);
+                    $followdata =  UserDepartmentFollow::insert($insertFollowed);
                 }
+            }
+            if (!$followdata) {
+                User::where('id', $userInsetId)->delete();
             }
 
             $user = User::where('id', $userInsetId)->first();

@@ -2,8 +2,8 @@
 <style>
     .avatar1 {
         vertical-align: middle;
-        width: 100px;
-        height: 100px;
+        width: 75px;
+        height: 75px;
         border-radius: 50%;
         margin-bottom: 10px;
     }
@@ -55,7 +55,7 @@
                                                     class="float-right">{{$data->first_name ." ". $data->last_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                UserName <a class="float-right">{{@$data->user_name}}</a>
+                                                Username <a class="float-right">{{@$data->user_name}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Mobile No. <a class="float-right">{{@$data->mobil_no}}</a>
@@ -67,10 +67,12 @@
                                                 Ethnicity <a class="float-right">{{@$data->ethnicity}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                D.O.B.<a class="float-right">{{@$data->dob}}</a>
+                                                D.O.B.<a
+                                                    class="float-right">{{date("d-m-y", strtotime(@$data->dob))}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Following Departments <a class="float-right">0</a>
+                                                Following Departments <a
+                                                    class="float-right">{{@$data->tota_department_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Following Badges <a class="float-right">0</a>

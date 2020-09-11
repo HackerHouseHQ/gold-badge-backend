@@ -186,7 +186,7 @@ class ManageDataController extends Controller
             // die;
         } else {
             $request->validate([
-                'state_name'  => 'required'
+                'state_name'  => 'required|unique:country_states'
             ]);
             $data['country_id'] = $request->country_id;
             $data['state_name'] = $request->state_name;
@@ -252,7 +252,7 @@ class ManageDataController extends Controller
             return redirect('/manage_data/countries');
         } else {
             $request->validate([
-                'city_name' => 'required'
+                'city_name' => 'required|uniq'
             ]);
             $data['country_id'] = $request->country_id;
             $data['state_id'] = $request->state_id;

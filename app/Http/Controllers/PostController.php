@@ -13,6 +13,7 @@ use Validator;
 
 use App\Department;
 use App\DepartmentBadge;
+use App\UserDepartmentFollow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -20,12 +21,11 @@ class PostController extends Controller
 {
 
    function __construct()
-   {    
+   {
       $this->user = new Department;
       $this->badge = new DepartmentBadge;
-      
+
       $this->postTable = new Post;
-      
    }
 
    public function department()
@@ -37,7 +37,7 @@ class PostController extends Controller
    }
    public function posts(Request $request)
    {
-   //  echo "aWSA"; die;
+      //  echo "aWSA"; die;
       return view('post.post');
    }
    public function post_list(Request $request)
@@ -60,7 +60,7 @@ class PostController extends Controller
       $fromdate = $_GET['fromdate'];
       $todate = $_GET['todate'];
       $search_arr = $request->get('search');
-        $search = $search_arr['value'];
+      $search = $search_arr['value'];
       $data = $this->postTable->getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id, $city_id);
       $count = $this->postTable->getdata_count($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id);
       $getuser = $this->manage_data($data);
@@ -85,8 +85,8 @@ class PostController extends Controller
          $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data->users->user_name . "</span></td>";
          $arr[$key]['fullName'] = "<td><span class='tbl_row_new'>" . $data->users->first_name . " " . $data->users->last_name . "</span></td>";
          $arr[$key]['postedAbout'] = "<td><span class='tbl_row_new'>" . $flag . "</span></td>";
-         $arr[$key]['postedOn'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->created_at)) . "</span></td>";
-         $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
+         $arr[$key]['postedOn'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
+         $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" .  number_format((float)$data->rating, 1, '.', '') . "</span></td>";
 
          $view1 = $view . $active;
 
@@ -227,7 +227,8 @@ class PostController extends Controller
    public function postViewDetail(Request $request)
    {
       $user = User::select('id', 'first_name', 'last_name', 'user_name', 'email', 'mobil_no', 'dob', 'gender', 'ethnicity', 'image')->where('id', $request->user_id)->first();
-
+      $count = UserDepartmentFollow::where('user_id', $request->user_id)->count();
+      $user['tota_department_follows'] = $count;
       return view('post.post-detail', ['data' => $user]);
    }
    public function PostDepartmentDetail(Request $request)
@@ -250,10 +251,10 @@ class PostController extends Controller
       // $country_id = $_GET['country_id'];
       $fromdate = $_GET['fromdate'];
       $todate = $_GET['todate'];
-        $search_arr = $request->get('search');
-        $search = $search_arr['value'];
+      $search_arr = $request->get('search');
+      $search = $search_arr['value'];
       $data = Post::getPost($search, $department_id,  $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id);
-      $count  = 3;
+      $count  = count($data);
       $getuser = $this->manage_post_view($data);
       $results = [
          "draw" => intval($draw),
@@ -267,12 +268,14 @@ class PostController extends Controller
    {
       $arr = array();
       $i = 0;
+
       foreach ($postData as $key => $data) {
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Posted On:- $data->created_at </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Cpmments:- 0 </br> Review:- Test";
+         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- $data->comment </br> Review:- Test";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
          $arr[$key]['image'] = "<td><img class='profile-user-img img-fluid img-circle'
-         src='$data->image' alt='User profile picture'></td>";
+         src='$data->image' alt='User profile picture' style='max-width: 50%;
+         height: auto;'></td>";
          $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data1 . "</span></br></td>";
          $view1 =  $active;
          $arr[$key]['action'] = "<td><span class='tbl_row_new'>" . $view1 . "</span></td>";

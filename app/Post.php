@@ -173,6 +173,7 @@ class Post extends Model
          'posts.user_id',
          'posts.department_id',
          'posts.rating',
+         'posts.comment',
          'posts.flag',
          'departments.department_name',
          'departments.image',
@@ -180,7 +181,7 @@ class Post extends Model
          'reason_id',
          'posts.created_at'
       )
-      ->leftjoin("departments", function ($join) {
+         ->leftjoin("departments", function ($join) {
             $join->on('posts.department_id', '=', 'departments.id');
          })->where('user_id', $user_id);
       if ($search) {
