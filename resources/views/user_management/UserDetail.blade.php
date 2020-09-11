@@ -51,7 +51,7 @@
             </ol>
           </nav>
         </div>
-<!--
+        <!--
         <div class="col-lg-6 col-5 text-right">
           <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
           <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Followings</a>
@@ -78,19 +78,19 @@
             <div class="key_value_box">
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Full Name:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">MOB. NO.:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Email:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Gender:</label>
@@ -106,49 +106,51 @@
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">DOB:</label>
-                 <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
+                <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
                 <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Following Department:</label>
-                <span class="tbl_row value userDetailsColor">0</span>                
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
-              
+
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Following Badge:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
               <div class="key_value_box_div">
-               
+
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Total Reviews:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Reported Reviews:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
             </div>
-          </div>           
+          </div>
           <div>
-             </div>   
-            
+          </div>
+
         </div>
-            <!-- tab-->
-            <div class="row">
-                 <div class="col-3">
+        <!-- tab-->
+        <div class="row">
+          <div class="col-3">
           </div>
-              <div class="col-3">
-              <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Reviews</a>
+          <div class="col-3">
+            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Reviews</a>
           </div>
-                 <div class="col-3">
-              <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
+          <div class="col-3">
+            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
           </div>
           <div class="col-3">
           </div>
-          </div>
-<!--            <div class="tab-content">
+        </div>
+        <!--            <div class="tab-content">
             <div id="nav-pills-component" class="tab-pane tab-example-result fade show active" role="tabpanel" aria-labelledby="nav-pills-component-tab">
               <ul class="nav nav-pills nav-fill flex-column flex-sm-row" id="tabs-text" role="tablist">
                   <li class="nav-item">
@@ -160,9 +162,9 @@
               </ul>
             </div>
           </div>-->
-            
-            
-            
+
+
+
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">

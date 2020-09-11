@@ -55,12 +55,12 @@ class UserController extends Controller
     $i = 0;
     foreach ($data as $key => $data) {
 
-       $view = "<a href='".route('UserDetail',['id' => $data->id])."'> <button type='button' class='btn btn-primary btn-sm'>VIEW</button></a>";
-       $active = "<a style='margin-left:5px' href='javascript:void(0)' onclick ='status(".$data->id.")'><button type='button' class='btn btn-success btn-sm'>ACTIVATE</button></a>";
-       $inactive = "<a style='margin-left:5px' href='javascript:void(0)' onclick = 'status(".$data->id.")'><button type='button' class='btn btn-danger btn-sm's>INACTIVATE</button></a>";
+      $view = "<a href='" . route('UserDetail', ['id' => $data->id]) . "'> <button type='button' class='btn btn-primary btn-sm'>VIEW</button></a>";
+      $active = "<a style='margin-left:5px' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-success btn-sm'>ACTIVATE</button></a>";
+      $inactive = "<a style='margin-left:5px' href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm's>INACTIVATE</button></a>";
 
-      
-      
+
+
 
       $arr[$key]['name'] = "<td><span class='tbl_row_new'>" . $data->first_name . " " . $data->last_name . "</span></td>";
       $arr[$key]['contact'] = "<td><span class='tbl_row_new'>" . $data->mobile_country_code . "-" . $data->mobil_no . "</span></td>";
@@ -207,7 +207,7 @@ class UserController extends Controller
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
     $user_id = $_GET['user_id'];
-     $search_arr = $req->get('search');
+    $search_arr = $req->get('search');
     $search = $search_arr['value'];
     // $type = $_GET['type'];
     $data = User::getPostDepartment($user_id, $search, $offset, $limit_t);
@@ -252,7 +252,7 @@ class UserController extends Controller
     $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
     $draw = $_GET['draw'];
     $user_id = $_GET['user_id'];
-     $search_arr = $req->get('search');
+    $search_arr = $req->get('search');
     $search = $search_arr['value'];
 
     // $type = $_GET['type'];
@@ -290,38 +290,39 @@ class UserController extends Controller
   {
     return view('user_management.deprtmentRejectRequest');
   }
-  public function acceptDepartmentRequest(Request $request) {
-        $deprtmentRequestId = $request->departId;
-//print_r($deprtmentRequestId);die;
-// $status_data = UserDepartmentRequest::where('id',$deprtmentRequestId)->first();
-// $status = $status_data->status;
-        $user = UserDepartmentRequest::where('id', $deprtmentRequestId)->update(['status' => $request->status]);
-        $requestData = UserDepartmentRequest::where('id', $deprtmentRequestId)->first();
-//print_r($requestData);die;
-        if ($request->status == 1) {
-            if ($user) {
-                $data['department_name'] = $requestData->department_name;
-                $data['country_id'] = $requestData->country_id;
-                $data['state_id'] = $requestData->state_id;
-                $data['city_id'] = $requestData->city_id;
-                if ($request->departmentImage) {
-                    $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
-                    $data['image'] = $departmentImage;
-                }
-                $insertData = Department::create($data);
-                return redirect('/user_management/departmentRequest');
-            }
-        } else {
-            return redirect('/user_management/deprtmentRejectRequest');
+  public function acceptDepartmentRequest(Request $request)
+  {
+    $deprtmentRequestId = $request->departId;
+    //print_r($deprtmentRequestId);die;
+    // $status_data = UserDepartmentRequest::where('id',$deprtmentRequestId)->first();
+    // $status = $status_data->status;
+    $user = UserDepartmentRequest::where('id', $deprtmentRequestId)->update(['status' => $request->status]);
+    $requestData = UserDepartmentRequest::where('id', $deprtmentRequestId)->first();
+    //print_r($requestData);die;
+    if ($request->status == 1) {
+      if ($user) {
+        $data['department_name'] = $requestData->department_name;
+        $data['country_id'] = $requestData->country_id;
+        $data['state_id'] = $requestData->state_id;
+        $data['city_id'] = $requestData->city_id;
+        if ($request->departmentImage) {
+          $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+          $data['image'] = $departmentImage;
         }
-// if($status == 1){
-// $user = Department::where('id', $user_id)->update(['status' => 2]);
-// } else {
-// $user = Department::where('id', $user_id)->update(['status' => 1]);
-// }
+        $insertData = Department::create($data);
+        return redirect('/user_management/departmentRequest');
+      }
+    } else {
+      return redirect('/user_management/deprtmentRejectRequest');
     }
+    // if($status == 1){
+    // $user = Department::where('id', $user_id)->update(['status' => 2]);
+    // } else {
+    // $user = Department::where('id', $user_id)->update(['status' => 1]);
+    // }
+  }
 
-    public function UserRequestData(Request $request)
+  public function UserRequestData(Request $request)
   {
     // echo"<pre>"; print_r($request->all()); die;
     $order_by = $_GET['order'][0]['dir'];
@@ -364,7 +365,7 @@ class UserController extends Controller
       if ($type == 0) {
         $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>ACCEPT</button></a>";
         $reject = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>REJECT</button></a>";
-        $arr[$key]['action'] = $accept . $reject;       
+        $arr[$key]['action'] = $accept . $reject;
       }
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['country'] = "<td><span class='tbl_row_new'>" . $data->country->country_name . "</span></td>";

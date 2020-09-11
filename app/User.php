@@ -20,7 +20,6 @@ class User extends Authenticatable
    protected $casts = [
       'email_verified_at' => 'datetime',
    ];
-
    public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id)
    {
       $query = self::query()->orderBy('created_at', 'asc');
@@ -78,8 +77,7 @@ class User extends Authenticatable
             $q->where('state_id', $state_id);
          });
       }
-      $query->skip($offset);
-      $query->take($limit_t);
+
       $data = $query->get();
       $total = $data->count();
       return $total;

@@ -78,7 +78,7 @@
       <div class="card">
         <div class="card-body ">
 
-         <div class="leftpane">
+          <div class="leftpane">
             <div class="img-r">
               <img src="{{$data->image}}" alt="" style="width: 100px;">
             </div>
@@ -87,19 +87,19 @@
             <div class="key_value_box">
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Full Name:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">MOB. NO.:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
-              </div>             
+                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
+              </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Email:</label>
-                 <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Gender:</label>
@@ -115,55 +115,60 @@
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">DOB:</label>
-                 <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
+                <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
                 <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Following Department:</label>
-                <span class="tbl_row value userDetailsColor">0</span>                
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
-              
+
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Following Badge:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
               <div class="key_value_box_div">
-               
+
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Total Reviews:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Reported Reviews:</label>
-                 <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">0</span>
               </div>
             </div>
-          </div>  
+          </div>
 
         </div>
-             <!-- tab-->
-          <!-- tab-->
-          <div class="card-body" style="background-color: #edce46;border-radius: 5px; border: 3px solid #6b6c7d;">
-             
-              <div class="middlepane" style="float:right">     
-                 <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
-              </div>
-              <div class="rightpane">
-                  <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Reviews</a>
-              </div>
-          </div>
-           <div class="card-body" >
-             
-              <div class="middlepane" style="float:right">     
-                 <a  href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Badge</a>
-              </div>
-              <div class="rightpane">
-                  <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Department</a>
-              </div>
-          </div>
+        <!-- tab-->
+        <!-- tab-->
+        <div class="card-body" style="background-color: #edce46;border-radius: 5px; border: 3px solid #6b6c7d;">
 
-       
+          <div class="middlepane" style="float:right">
+            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
+          </div>
+          <div class="rightpane">
+            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Reviews</a>
+          </div>
+        </div>
+        <div class="card-body">
+
+          <div class="middlepane" style="float:right">
+            <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info"
+              data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+              data-icon="ni ni-bell-55">Badge</a>
+          </div>
+          <div class="rightpane">
+            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Department</a>
+          </div>
+        </div>
+
+
         <div class="table-responsive py-4">
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
@@ -315,7 +320,7 @@
               <span>${response.created_at.substr(0,10).split('-').reverse().join('/')}</span>
               <br>
               <span>Likes:</span>
-              <span>0</span>
+              <span></span>
               <br>
               <span>Share:</span>
               <span>0</span>
