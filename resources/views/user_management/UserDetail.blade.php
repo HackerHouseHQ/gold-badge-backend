@@ -82,11 +82,11 @@
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->user_name}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">MOB. NO.:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobil_no}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Email:</label>
@@ -110,8 +110,9 @@
                 <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
               </div>
               <div class="key_value_box_div">
+                <?php $followcount =  App\UserDepartmentFollow::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Following Department:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{ ($followcount) >0 ? $followcount : 0}}</span>
               </div>
 
               <div class="key_value_box_div">
@@ -122,8 +123,10 @@
 
               </div>
               <div class="key_value_box_div">
+                <?php $Reviewcount =  App\Post::where('user_id' , $data->id)->count(); ?>
+
                 <label class="tbl_row labell">Total Reviews:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{ ($Reviewcount) >0 ? $Reviewcount : 0}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Reported Reviews:</label>
@@ -320,8 +323,9 @@
           success: function (response) {
             console.log(response.departments.image);
             if(typeof response.departments.image != "undefined"){ 
+              
             $('#userImage').html(`<img
-              src="${response.departments.image}"
+              src="../storage/departname/${response.departments.image}"
               alt="" style="width: 300px; height:300px;">`);
           }else{
             $('#userImage').html(` <img
@@ -359,7 +363,7 @@
               <span>${response.rating}</span>
               <br>
               <span>Review:</span>
-              <span></span>
+              <span>${(response.comment) ? response.comment : " " }</span>
               <br>
             </div>`;
             $('#viewDepartment').append(row)

@@ -39,7 +39,7 @@ class UserController extends Controller
     $fromdate = $_GET['fromdate'];
     $todate = $_GET['todate'];
     $data = $this->user->getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id);
-    $count = $this->user->getdata_count($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id);
+    $count = $this->user->getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id);
     $getuser = $this->manage_data($data);
     $results = [
       "draw" => intval($draw),
@@ -166,7 +166,8 @@ class UserController extends Controller
     // $search = $_GET['search'];
     // $type = $_GET['type'];
     $data = User::getPost($user_id, $offset, $limit_t);
-    $count = 1;
+
+    $count = User::getPostCount($user_id);
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
@@ -211,7 +212,7 @@ class UserController extends Controller
     $search = $search_arr['value'];
     // $type = $_GET['type'];
     $data = User::getPostDepartment($user_id, $search, $offset, $limit_t);
-    $count = $data->count();
+    $count = User::getPostDepartmentCount($user_id, $search);
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
@@ -257,7 +258,7 @@ class UserController extends Controller
 
     // $type = $_GET['type'];
     $data = User::getPostBadge($user_id, $search, $offset, $limit_t);
-    $count = $data->count();
+    $count = User::getPostBadgeCount($user_id, $search);
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";

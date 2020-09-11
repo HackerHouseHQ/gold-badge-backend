@@ -197,7 +197,8 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title text-capitalize" id="businessName"></h4>
+
+        <h4 class="modal-title text-capitalize"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -310,9 +311,25 @@
           url: "{{ route('viewUserDetailModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-            $('#viewDepartment').html('');
-            
-         let row=` <div class="col">
+            if(typeof response.departments.image != "undefined"){ 
+              
+              $('#userImage').html(`<img
+                src="../storage/departname/${response.departments.image}"
+                alt="" style="width: 300px; height:300px;">`);
+            }else{
+              $('#userImage').html(` <img
+                src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                alt="" style="width: 300px; height:300px;">`);
+            }
+              $('#viewDepartment').html('');
+              
+           let row=` <div class="col">
+  
+          <span><img src="${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;"></span>
+          <br>
               <span>Full Name:</span>
               <span>${response.users.first_name+' '+ response.users.last_name}</span>
               <br>
@@ -335,7 +352,7 @@
               <span>${response.rating}</span>
               <br>
               <span>Review:</span>
-              <span></span>
+              <span>${(response.comment) ? response.comment : " " }</span>
               <br>
             </div>`;
             $('#viewDepartment').append(row)

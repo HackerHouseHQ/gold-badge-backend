@@ -62,7 +62,7 @@ class PostController extends Controller
       $search_arr = $request->get('search');
       $search = $search_arr['value'];
       $data = $this->postTable->getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id, $city_id);
-      $count = $this->postTable->getdata_count($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id);
+      $count = $this->postTable->getdata_count($status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id);
       $getuser = $this->manage_data($data);
       $results = [
          "draw" => intval($draw),
@@ -254,7 +254,7 @@ class PostController extends Controller
       $search_arr = $request->get('search');
       $search = $search_arr['value'];
       $data = Post::getPost($search, $department_id,  $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id);
-      $count  = count($data);
+      $count  = Post::getPostCount($search,  $department_id, $badge_id, $fromdate, $todate, $user_id);
       $getuser = $this->manage_post_view($data);
       $results = [
          "draw" => intval($draw),
@@ -271,10 +271,11 @@ class PostController extends Controller
 
       foreach ($postData as $key => $data) {
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- $data->comment </br> Review:- Test";
+         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- </br> Review:- $data->comment";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
+         $image = ($data->image) ? '../storage/departname/' . $data->image : '';
          $arr[$key]['image'] = "<td><img class='profile-user-img img-fluid img-circle'
-         src='$data->image' alt='User profile picture' style='max-width: 50%;
+         src='$image' alt='User profile picture' style='max-width: 50%;
          height: auto;'></td>";
          $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data1 . "</span></br></td>";
          $view1 =  $active;

@@ -91,7 +91,7 @@ class Post extends Model
       // echo"<pre>";print_r($data);  die;
       return $data;
    }
-   public function getdata_count($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id)
+   public function getdata_count($status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id)
    {
       if ($badge_id) {
          $query = self::query()->select('id', 'user_id', 'department_id', DB::raw('avg(rating) as rating'), 'flag', 'created_at')
@@ -189,10 +189,10 @@ class Post extends Model
       }
       if ($department_id) {
          $query
-            ->orwhere('posts.department_id',  $department_id);
+            ->where('posts.department_id',  $department_id);
       }
       if ($badge_id) {
-         $query->orwhere('badge_id', 'like', $badge_id);
+         $query->where('badge_id', 'like', $badge_id);
       }
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
@@ -220,5 +220,59 @@ class Post extends Model
          }
       }
       return $post_data;
+   }
+   public static function getPostCount($search,  $department_id, $badge_id, $fromdate, $todate, $user_id)
+   {
+      $query = self::query()->select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.comment',
+         'posts.flag',
+         'departments.department_name',
+         'departments.image',
+         'departments.created_at',
+         'reason_id',
+         'posts.created_at'
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })->where('user_id', $user_id);
+      if ($search) {
+         $query->orwhere('department_name', 'like', '%' . $search . '%');
+      }
+      if ($department_id) {
+         $query
+            ->where('posts.department_id',  $department_id);
+      }
+      if ($badge_id) {
+         $query->where('badge_id', 'like', $badge_id);
+      }
+      if (!empty($fromdate) &&  !empty($todate)) {
+         $query->Where(function ($q) use ($fromdate, $todate) {
+            $q->wheredate('posts.created_at', '>=', $fromdate);
+            $q->wheredate('posts.created_at', '<=', $todate);
+         });
+      }
+
+      $query = $query->latest('posts.created_at')->get();
+      $arr = [];
+      $post_data = [];
+      foreach ($query as $key => $value) {
+         if ($value->badge_id == null) {
+            array_push($arr, $value->badge_id);
+            array_push($post_data, $value);
+         } else {
+            if (!in_array($value->badge_id, $arr)) {
+               array_push($arr, $value->badge_id);
+               array_push($post_data, $value);
+
+               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+                  ->avg('rating');
+            }
+         }
+      }
+      return count($post_data);
    }
 }
