@@ -38,6 +38,17 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/checkMobileNo', 'UserController@checkMobileNoExistence');
 	Route::post('/DepartmentList', 'UserController@DepartmentList');
 	Route::post('/signUp', 'UserController@signUp');
+	Route::post('/login', 'UserController@login');
 	Route::post('/checkUserNameEmail', 'UserController@checkUserNameEmail');
-	Route::post('/savePostReview', 'UserController@savePostReview');
+	Route::group(['middleware' => ['auth:api']], function () {
+		Route::post('/savePostReview', 'UserController@savePostReview');
+		Route::post('/getPostDepartment', 'UserController@getPostDepartment');
+		Route::post('/savePostDepartmentLike', 'UserController@savePostDepartmentLike');
+		Route::post('/savePostDepartmentShare', 'UserController@savePostDepartmentShare');
+		Route::post('/savePostDepartmentComment', 'UserController@savePostDepartmentComment');
+		Route::post('/savePostDepartmentSubComment', 'UserController@savePostDepartmentSubComment');
+		Route::post('/getPostDepartmentCommentList', 'UserController@getPostDepartmentCommentList');
+		Route::post('/savePostReport', 'UserController@savePostReport');
+		Route::post('/savePostVote', 'UserController@savePostVote');
+	});
 });

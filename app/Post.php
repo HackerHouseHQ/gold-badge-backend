@@ -2,6 +2,7 @@
 
 namespace App;
 
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\DB;
 
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,22 @@ class Post extends Model
 
    protected $fillable = ['country_id', 'state_id', 'city_id', 'department_name', 'image', 'status', 'id', 'user_id'];
 
+   public function post_vote()
+   {
+      $siteUrl = env('APP_URL');
 
+      return $this->hasMany('App\DepartmentVote', 'post_id', 'post_id')->select(
+         'department_votes.id as vote_id',
+         'department_votes.rating',
+         'user_id',
+         'post_id',
+         'users.user_name',
+         DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"),
+      )
+         ->leftjoin("users", function ($join) {
+            $join->on('department_votes.user_id', '=', 'users.id');
+         });
+   }
    public function users()
    {
       return $this->belongsTo('App\User', 'user_id');
@@ -165,6 +181,10 @@ class Post extends Model
    public function city_data()
    {
       return $this->belongsTo('App\City', 'city_id');
+   }
+   public function post_image()
+   {
+      return $this->hasMany('App\PostImage', 'post_id');
    }
    public static function getPost($search,  $department_id, $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id)
    {
