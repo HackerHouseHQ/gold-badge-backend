@@ -53,7 +53,7 @@ class UserDepartmentFollow extends Model
             DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image) as department_image"),
             DB::raw('COUNT(department_likes.post_id) as like_count'),
             DB::raw('COUNT(department_shares.post_id) as share_count'),
-            DB::raw('COUNT(department_comments.post_id) as comment_count'),
+            DB::raw('COUNT(department_comments.post_id) as comment_count')
 
         )
             ->leftjoin("departments", function ($join) {
@@ -94,7 +94,7 @@ class UserDepartmentFollow extends Model
             DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image) as department_image"),
             DB::raw('COUNT(department_likes.post_id) as like_count'),
             DB::raw('COUNT(department_shares.post_id) as share_count'),
-            DB::raw('COUNT(department_comments.post_id) as comment_count'),
+            DB::raw('COUNT(department_comments.post_id) as comment_count')
 
 
 
@@ -133,7 +133,7 @@ class UserDepartmentFollow extends Model
             DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image) as department_image"),
             DB::raw('COUNT(department_likes.post_id) as like_count'),
             DB::raw('COUNT(department_shares.post_id) as share_count'),
-            DB::raw('COUNT(department_comments.post_id) as comment_count'),
+            DB::raw('COUNT(department_comments.post_id) as comment_count')
         )
             ->leftjoin("departments", function ($join) {
                 $join->on('posts.department_id', '=', 'departments.id');
