@@ -22,7 +22,7 @@ class Post extends Model
          'user_id',
          'post_id',
          'users.user_name',
-         DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"),
+         DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image")
       )
          ->leftjoin("users", function ($join) {
             $join->on('department_votes.user_id', '=', 'users.id');
