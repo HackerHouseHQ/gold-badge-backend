@@ -362,7 +362,7 @@ class UserController extends Controller
                         $i++;
                     }
                 }
-                if ($insertData || $insertPostId) {
+                if ($insertPostId || $insertData) {
                     return res_success('Post Saved Successfully');
                 }
             }
