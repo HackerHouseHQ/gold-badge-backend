@@ -23,6 +23,7 @@ use App\DepartmentVote;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -453,6 +454,7 @@ class UserController extends Controller
 
     public function getPostDepartment(Request $request)
     {
+        // echo "fvf"; die;
         /**
          * save post review .
          *
@@ -462,6 +464,7 @@ class UserController extends Controller
          */
         try {
             if ($request->type == 1) {
+                //  echo "da"; die;
                 $user_id = $request->user_id;
                 $myPost = UserDepartmentFollow::getPostDepartmentData($user_id);
                 $query = UserDepartmentFollow::query()->select(
@@ -767,8 +770,7 @@ class UserController extends Controller
                 'post_id',
                 'comment',
                 'users.user_name',
-                DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"),
-
+                DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image")
             )->where('post_id', $post_id)
                 ->leftjoin("users", function ($join) {
                     $join->on('department_comments.user_id', '=', 'users.id');
@@ -873,6 +875,42 @@ class UserController extends Controller
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
             return res_success('User  login  Successfully', $user);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function deparmentBadgeList(Request $request)
+    {
+        try {
+            $callback = function ($query) {
+                $query->where('status', ACTIVE);
+            };
+            $departmentBadge = UserDepartmentBadgeFollow::whereHas('badge.department_data', $callback)->whereHas('badge', $callback)->with(['badge.department_data' => $callback, 'badge' => $callback])
+                ->where('user_id', $request->user_id)->get();
+
+            $department = UserDepartmentFollow::whereHas('departments', $callback)->with(['departments' => $callback])->where('user_id', $request->user_id)->get();
+            $arrDepartment = [];
+            foreach ($department as $key => $value) {
+                $arrDepartment[] = [
+                    'user_id' => $value->user_id,
+                    'department_id' => $value->department_id ?? "",
+                    'department_name' => $value->departments->department_name ?? ""
+
+                ];
+            }
+            $arrDepartmentBadge = [];
+            foreach ($departmentBadge as $key => $value) {
+                $arrDepartmentBadge[] = [
+                    'user_id' => $value->user_id,
+                    'badge_id' => $value->badge_id,
+                    'department_id' => $value->badge->department_id ?? "",
+                    'department_name' => $value->badge->department_data->department_name ?? "",
+                    'badge_number' => $value->badge->badge_number
+
+                ];
+            }
+            // return $departmentBadge;
+            return res_success(trans('messages.successFetchList'), array('departmentList' => $arrDepartment, 'departmentBadgeList' => $arrDepartmentBadge));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }

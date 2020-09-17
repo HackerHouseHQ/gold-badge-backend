@@ -18,7 +18,7 @@ class DepartmentComment extends Model
             'post_id',
             'sub_comment',
             'users.user_name',
-            DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"),
+            DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image")
         )
             ->leftjoin("users", function ($join) {
                 $join->on('department_sub_comments.user_id', '=', 'users.id');

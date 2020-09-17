@@ -252,7 +252,7 @@ class ManageDataController extends Controller
             return redirect('/manage_data/countries');
         } else {
             $request->validate([
-                'city_name' => 'required|uniq'
+                'city_name' => 'required|unique:cities'
             ]);
             $data['country_id'] = $request->country_id;
             $data['state_id'] = $request->state_id;
@@ -473,11 +473,17 @@ class ManageDataController extends Controller
     }
     public function editCountry(Request $request)
     {
+        $request->validate([
+            'country_name'  => 'required|unique:countries',
+        ]);
         $editCountry = Country::where('id', $request->country_id)->update(['country_name' => $request->country_name]);
         return redirect('/manage_data/countries');
     }
     public function editState(Request $request)
     {
+        $request->validate([
+            'state_name'  => 'required|unique:country_states',
+        ]);
         $editCountry = CountryState::where('id', $request->state_id)->update(['state_name' => $request->state_name]);
         return redirect('/manage_data/countries');
     }

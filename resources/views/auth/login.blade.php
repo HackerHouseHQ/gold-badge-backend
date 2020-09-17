@@ -17,7 +17,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+  <title>Gold Badge</title>
   <!-- Favicon -->
   <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">
   <!-- Fonts -->
@@ -122,7 +122,7 @@
   <div class="main-content">
     <!-- Header -->
     <!-- <div class="header bg-gradient-primary py-7 py-lg-8 pt-lg-9"> -->
-      <div class="header">
+    <div class="header">
       <!-- <div class="container">
         <div class="header-body text-center mb-7" style="margin-top:50px;">
           <div class="row justify-content-center">
@@ -141,120 +141,121 @@
         </svg>
       </div>
     </div> -->
-    <!-- Page content -->
-    <div class="container">
-      <div class='row'>
-        <div class='col-12 d-flex justify-content-center'><img class='my-3' width="200" height="200"   src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt=""></div>
-      </div>
-    
-      <div class="row justify-content-center">
-        <div class="col-lg-5 col-md-7">
-          <div class="card bg-secondary border-0 mb-0">
+      <!-- Page content -->
+      <div class="container">
+        <div class='row'>
+          <div class='col-12 d-flex justify-content-center'><img class='my-3' width="200" height="200"
+              src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt=""></div>
+        </div>
 
-            <div class="card-body ">
-              <div class="text-center text-muted mb-4">
-                <small>Welcome To Gold Badge Login</small>
-              </div>
-              {{-- <p class="text-lead text-white"></p> --}}
+        <div class="row justify-content-center">
+          <div class="col-lg-5 col-md-7">
+            <div class="card bg-secondary border-0 mb-0">
 
-              {{-- <form role="form" method="POST" action="{{ route('login') }}">
-              {{ csrf_field() }}
-              <div class="class_centerr">
-                <div class="form-group{{ $errors->has('email') ? ' has-error':''}}">
-                  <label for="email" class="col-md-3 control-label"></label>
-                  <div class="col-md-6">
-                    <input id="email" type="email" class="form-control cstm_form_cls_login"
-                      placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
-                  </div>
+              <div class="card-body ">
+                <div class="text-center text-muted mb-4">
+                  <small>Welcome To Gold Badge Login</small>
                 </div>
-                @if ($errors->has('email'))
-                    <span class="help-block">
-                      <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                    @endif
-                <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                  <label for="password" class="col-md-3 control-label"></label>
-                  <div class="col-md-6">
-                    <input id="password" type="text" placeholder="Enter your password"
-                      class="form-control cstm_form_cls_login" name="password" required>
+                {{-- <p class="text-lead text-white"></p> --}}
 
-                  </div>
-
-                </div>
-                <a class="btn btn-link forgot_link" href="#">Forgot Password ?
-                </a>
-              </div>
-              <div class="form-group">
-                <div class="col-md-12">
-                  <button type="submit" class="btn btn-primary login_under">
-                    Login
-                  </button>
-                </div>
-              </div>
-              </form> --}}
-               @if ($errors->has('email'))
-               <span class="help-block" style="color:red">
-                      <strong>{{ $errors->first('email') }}</strong>
-                    </span>
-                    @endif
-
-              <form role="form" method="POST" action="{{route('login')}}">
+                {{-- <form role="form" method="POST" action="{{ route('login') }}">
                 {{ csrf_field() }}
-                
-                <div class="form-group mb-3">
-                  <div class="input-group input-group-merge input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                <div class="class_centerr">
+                  <div class="form-group{{ $errors->has('email') ? ' has-error':''}}">
+                    <label for="email" class="col-md-3 control-label"></label>
+                    <div class="col-md-6">
+                      <input id="email" type="email" class="form-control cstm_form_cls_login"
+                        placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
-                    <input id="email" type="email" class="form-control " placeholder="Enter your email" name="email"
-                      value="{{ old('email') }}" required autofocus>
-                   
                   </div>
+                  @if ($errors->has('email'))
+                  <span class="help-block">
+                    <strong>{{ $errors->first('email') }}</strong>
+                  </span>
+                  @endif
+                  <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+                    <label for="password" class="col-md-3 control-label"></label>
+                    <div class="col-md-6">
+                      <input id="password" type="text" placeholder="Enter your password"
+                        class="form-control cstm_form_cls_login" name="password" required>
+
+                    </div>
+
+                  </div>
+                  <a class="btn btn-link forgot_link" href="#">Forgot Password ?
+                  </a>
                 </div>
                 <div class="form-group">
-                  <div class="input-group input-group-merge input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input id="password" type="password" placeholder="Enter your password" class="form-control "
-                      name="password" required>
-                    {{-- <input class="form-control" placeholder="Password" type="password"> --}}
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-primary login_under">
+                      Login
+                    </button>
                   </div>
                 </div>
-                {{-- <div class="custom-control custom-control-alternative custom-checkbox">
+                </form> --}}
+                @if ($errors->has('email'))
+                <span class="help-block" style="color:red">
+                  <strong>{{ $errors->first('email') }}</strong>
+                </span>
+                @endif
+
+                <form role="form" method="POST" action="{{route('login')}}">
+                  {{ csrf_field() }}
+
+                  <div class="form-group mb-3">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                      </div>
+                      <input id="email" type="email" class="form-control " placeholder="Enter your email" name="email"
+                        value="{{ old('email') }}" required autofocus>
+
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="input-group input-group-merge input-group-alternative">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
+                      </div>
+                      <input id="password" type="password" placeholder="Enter your password" class="form-control "
+                        name="password" required>
+                      {{-- <input class="form-control" placeholder="Password" type="password"> --}}
+                    </div>
+                  </div>
+                  {{-- <div class="custom-control custom-control-alternative custom-checkbox">
                   <input class="custom-control-input" id=" customCheckLogin" type="checkbox">
                   <label class="custom-control-label" for=" customCheckLogin">
                     <span class="text-muted">Remember me</span>
                   </label>
                 </div> --}}
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Sign in</button>
-                </div>
-              </form>
+                  <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Sign in</button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
-          <div class="row text-center">
-            <div class="col-12">
-              <a href="{{route('forgot-password')}}" class="text-light"><small>Forgot password?</small></a>
-            </div>
+            <div class="row text-center">
+              <div class="col-12">
+                <a href="{{route('forgot-password')}}" class="text-light"><small>Forgot password?</small></a>
+              </div>
 
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <!-- Footer -->
+    <!-- Footer -->
 
 
-  <!-- Argon Scripts -->
-  <!-- Core -->
-  <script src="{{asset('admin_new/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
-  <script src="{{asset('admin_new/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{asset('admin_new/assets/vendor/js-cookie/js.cookie.js')}}"></script>
-  <script src="{{asset('admin_new/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
-  <script src="{{asset('admin_new/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
-  <!-- Argon JS -->
-  <script src="{{asset('admin_new/assets/js/argon.js?v=1.2.0')}}"></script>
+    <!-- Argon Scripts -->
+    <!-- Core -->
+    <script src="{{asset('admin_new/assets/vendor/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{asset('admin_new/assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{asset('admin_new/assets/vendor/js-cookie/js.cookie.js')}}"></script>
+    <script src="{{asset('admin_new/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
+    <script src="{{asset('admin_new/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
+    <!-- Argon JS -->
+    <script src="{{asset('admin_new/assets/js/argon.js?v=1.2.0')}}"></script>
 </body>
 
 </html>

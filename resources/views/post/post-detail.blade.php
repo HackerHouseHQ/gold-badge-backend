@@ -72,20 +72,19 @@
                                             </li>
                                             <li class="list-group-item">
                                                 Following Departments <a
-                                                    class="float-right">{{@$data->tota_department_follows}}</a>
+                                                    class="float-right">{{@$data->total_department_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Following Badges <a class="float-right">0</a>
+                                                Following Badges <a
+                                                    class="float-right">{{@$data->total_department_badge_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Reported Reviews <a class="float-right">0</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Total Reviews <a class="float-right">0</a>
+                                                Total Reviews <a class="float-right">{{@$data->total_reviews}}</a>
                                             </li>
                                         </ul>
-
-
                                     </div>
                                 </div>
                             </div>
