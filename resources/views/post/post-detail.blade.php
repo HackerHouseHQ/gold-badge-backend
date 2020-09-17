@@ -45,7 +45,8 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
 
-                                            <img class="avatar1" src="{{$data->image}}" alt="User profile picture">
+                                            <img class="avatar1" src="../storage/uploads/user_image/{{$data->image}}"
+                                                alt="User profile picture">
                                         </div>
                                         <input type="hidden" id="user_id" value="{{$data->id}}">
 
