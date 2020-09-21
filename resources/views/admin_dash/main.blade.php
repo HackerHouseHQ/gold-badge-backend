@@ -14,14 +14,17 @@
   <!--<link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">-->
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
     type="text/css">
-  
 
-   
+  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/sweetalert2/dist/sweetalert2.min.css')}}">
+
+
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
- 
-  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}"></script>
+
+
+  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css')}}">
+  </script>
   <!-- Page plugins -->
   <link rel="stylesheet"
     href="{{asset('admin_new/assets/vendor/datatables.net-bs4/css/dataTables.bootstrap4.min.css')}}">
@@ -30,8 +33,9 @@
   <link rel="stylesheet"
     href="{{asset('admin_new/assets/vendor/datatables.net-select-bs4/css/select.bootstrap4.min.css')}}">
   <!-- Google Tag Manager -->
-     <!-- summernote -->
-   <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
+
   <!-- <script>
     (function (w, d, s, l, i) {
               w[l] = w[l] || [];
@@ -50,13 +54,14 @@
   </script> -->
   <!-- End Google Tag Manager -->
   <style>
-      .navbar-vertical.navbar-expand-xs .navbar-nav > .nav-item > .nav-link.active {
-          background: #e2b52dd1 !important;
-      }
-      .userDetailsColor{
-          color: #8898aa;
-      }
-      </style>
+    .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
+      background: #e2b52dd1 !important;
+    }
+
+    .userDetailsColor {
+      color: #8898aa;
+    }
+  </style>
 </head>
 
 <body>
@@ -80,35 +85,39 @@
   <script src="{{asset('admin_new/assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js')}}"></script>
   <!-- Optional JS -->
+
+
   <script src="{{asset('admin_new/assets/vendor/chart.js/dist/Chart.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/chart.js/dist/Chart.extension.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net/js/jquery.dataTables.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
-   <!-- Datepicker -->
-   <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
+  <!-- Datepicker -->
+  <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}"></script>
 
-   <script src="{{ asset('admin_new/assets/js/summernote-bs4.min.js') }}"></script>
-   
+  <script src="{{ asset('admin_new/assets/js/summernote-bs4.min.js') }}"></script>
+
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.html5.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.flash.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/buttons.print.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
   <!-- Argon JS -->
+  <script src="{{asset('admin_new/assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
   <script src="{{asset('admin_new/assets/js/argon.min.js?v=1.2.0')}}"></script>
+
   {{--  --}}
 
   <!-- Optional JS -->
 
   <!-- Argon JS -->
   <script src="{{asset('admin_new/assets/js/argon.js?v=1.2.0')}}"></script>
- <script>
-  $(function () {
+  <script>
+    $(function () {
     // Summernote
     $('.textarea').summernote()
   })
-</script>
+  </script>
   @yield('script')
 </body>
 

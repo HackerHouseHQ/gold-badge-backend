@@ -1,4 +1,6 @@
 @extends('admin_dash.main')
+
+
 <style type="text/css">
   .leftpane {
     width: 20%;
@@ -46,17 +48,20 @@
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="#"><i class="fas fa-home"></i></a></li>
-              <li class="breadcrumb-item"><a href="#">Tables</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Datatables</li>
+              <li class="breadcrumb-item"><a href={{route('user')}}>User</a></li>
+              <li class="breadcrumb-item active" aria-current="page">User Detail</li>
+              {{-- <li> <button class="btn btn-primary" data-toggle="sweet-alert" data-sweet-alert="confirm">Confim
+                  alert</button></li> --}}
+
             </ol>
           </nav>
         </div>
         <!--
         <div class="col-lg-6 col-5 text-right">
           <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
-          <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Followings</a>
+<a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}"> Followings</a>
 
-        </div>-->
+</div>-->
       </div>
     </div>
   </div>

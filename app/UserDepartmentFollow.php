@@ -38,7 +38,7 @@ class UserDepartmentFollow extends Model
         $siteUrl = env('APP_URL');
         return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"));
     }
-    public  static function getPostDepartmentData($user_id = null)
+    public  static function getPostDepartmentData($user_id)
     {
         $siteUrl = env('APP_URL');
         $query = self::query()->select(
@@ -75,9 +75,9 @@ class UserDepartmentFollow extends Model
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
             });
-        if ($user_id) {
-            $query->where('user_department_follows.user_id', $user_id);
-        }
+
+        $query->where('user_department_follows.user_id', $user_id);
+
         $query->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
         return $query;
     }
