@@ -313,7 +313,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'nullable|array',
-                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
+                        'upLoadFile.*' => 'required'
 
                     ]
                 );
@@ -380,7 +380,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'required',
-                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
+                        'upLoadFile.*' => 'required'
                     ]
                 );
                 /**
