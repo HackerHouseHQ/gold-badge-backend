@@ -378,9 +378,9 @@ class UserController extends Controller
                         'ratingArr.*.rating' => 'required|numeric',
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
-                        'stay_anonymous' => 'required|boolean'
-                        // 'upLoadFile' => 'nullable|array',
-                        // 'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
+                        'stay_anonymous' => 'required|boolean',
+                        'upLoadFile' => 'required',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
                     ]
                 );
                 /**
