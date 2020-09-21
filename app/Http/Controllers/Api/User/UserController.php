@@ -311,9 +311,9 @@ class UserController extends Controller
                         'rating' => 'required|numeric',
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
-                        'stay_anonymous' => 'required|boolean'
-                        // 'upLoadFile' => 'nullable|array',
-                        // 'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
+                        'stay_anonymous' => 'required|boolean',
+                        'upLoadFile' => 'nullable|array',
+                        'upLoadFile.*' => 'required|image|mimes:jpeg,png,jpg|max:10240'
 
                     ]
                 );
@@ -456,7 +456,7 @@ class UserController extends Controller
     {
         // echo "fvf"; die;
         /**
-         * save post review .
+         * get post department .
          *
          * @return Json
          * @author Ratnesh Kumar 
@@ -839,7 +839,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         /**
-         * sign up user.
+         * login.
          *
          * @return Json
          * @author Ratnesh Kumar 
@@ -909,7 +909,6 @@ class UserController extends Controller
 
                 ];
             }
-            // return $departmentBadge;
             return res_success(trans('messages.successFetchList'), array('departmentList' => $arrDepartment, 'departmentBadgeList' => $arrDepartmentBadge));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());

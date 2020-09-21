@@ -5,6 +5,7 @@ namespace App;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
+use phpDocumentor\Reflection\Types\Null_;
 
 class UserDepartmentFollow extends Model
 {
@@ -37,7 +38,7 @@ class UserDepartmentFollow extends Model
         $siteUrl = env('APP_URL');
         return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"));
     }
-    public  static function getPostDepartmentData($user_id)
+    public  static function getPostDepartmentData($user_id = null)
     {
         $siteUrl = env('APP_URL');
         $query = self::query()->select(
@@ -73,9 +74,11 @@ class UserDepartmentFollow extends Model
             })
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
-            })
-            ->where('user_department_follows.user_id', $user_id)
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
+            });
+        if ($user_id) {
+            $query->where('user_department_follows.user_id', $user_id);
+        }
+        $query->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
         return $query;
     }
     public  static function getPostDepartmentDataLike($user_id)
@@ -153,6 +156,44 @@ class UserDepartmentFollow extends Model
             })
 
             ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('share_count', 'DESC')->paginate(5);
+        return $query;
+    }
+    public  static function getPostDepartmentDataGuest($user_id)
+    {
+        $siteUrl = env('APP_URL');
+        $query = Post::query()->select(
+            'posts.user_id',
+            'posts.id as post_id',
+            'users.user_name',
+            'departments.department_name',
+            'posts.created_at',
+            'posts.comment as post_content',
+            'posts.flag',
+            'posts.department_id',
+            DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"),
+            DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image) as department_image"),
+            DB::raw('COUNT(department_likes.post_id) as like_count'),
+            DB::raw('COUNT(department_shares.post_id) as share_count'),
+            DB::raw('COUNT(department_comments.post_id) as comment_count')
+        )
+            ->leftjoin("departments", function ($join) {
+                $join->on('posts.department_id', '=', 'departments.id');
+            })
+
+            ->leftjoin("users", function ($join) {
+                $join->on('posts.user_id', '=', 'users.id');
+            })
+            ->leftjoin("department_likes", function ($join) {
+                $join->on('department_likes.post_id', '=', 'posts.id');
+            })
+            ->leftjoin("department_shares", function ($join) {
+                $join->on('department_shares.post_id', '=', 'posts.id');
+            })
+            ->leftjoin("department_comments", function ($join) {
+                $join->on('department_comments.post_id', '=', 'posts.id');
+            })
+
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
         return $query;
     }
 }

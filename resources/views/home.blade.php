@@ -22,7 +22,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
     <meta name="author" content="Creative Tim">
-    <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
+    <title>Gold Badge</title>
     <!-- Favicon -->
     <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
         type="text/css">
@@ -472,7 +472,7 @@
                                     <div class="row">
                                         <div class="col">
                                             <h5 class="card-title text-uppercase text-muted mb-0">Guest Login</h5>
-                                            <span class="h2 font-weight-bold mb-0">1</span>
+                                            <span class="h2 font-weight-bold mb-0">{{$GuestCount}}</span>
                                         </div>
                                         <!--                                        <div class="col-auto">
                                             <div

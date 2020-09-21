@@ -31,6 +31,11 @@ Route::post('register', 'UserController@register');
 // Route::post('verify-otp', 'API\UserController@verify_otp');
 // Route::post('reset-password', 'API\UserController@reset_password');
 // }); 
+Route::group(['prefix' => 'guest', 'namespace' => 'Api\User'], function () {
+	Route::post('/login', 'GuestController@guestLogin');
+	Route::post('/logout', 'GuestController@guestLogout');
+	Route::get('/homepage', 'GuestController@homePage');
+});
 Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::get('/countryList', 'UserController@getCountryList');
 	Route::post('/stateList', 'UserController@getStateList');
