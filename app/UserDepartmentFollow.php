@@ -74,11 +74,8 @@ class UserDepartmentFollow extends Model
             })
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
-            });
-
-        $query->where('user_department_follows.user_id', $user_id);
-
-        $query->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
+            })->where('user_department_follows.user_id', $user_id)
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(5);
         return $query;
     }
     public  static function getPostDepartmentDataLike($user_id)
