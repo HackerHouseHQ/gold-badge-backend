@@ -121,8 +121,9 @@
               </div>
 
               <div class="key_value_box_div">
+                <?php $followBadgecount =  App\UserDepartmentBadgeFollow::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Following Badge:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{$followBadgecount}}</span>
               </div>
               <div class="key_value_box_div">
 
@@ -134,8 +135,9 @@
                 <span class="tbl_row value userDetailsColor">{{ ($Reviewcount) >0 ? $Reviewcount : 0}}</span>
               </div>
               <div class="key_value_box_div">
+                <?php $reportedCount =  App\DepartmentReport::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Reported Reviews:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{$reportedCount}}</span>
               </div>
             </div>
           </div>
@@ -340,8 +342,8 @@
             $('#viewDepartment').html('');
             
          let row=` <div class="col">
-
-        <span><img src="${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
+         
+        <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
   width: 50px;
   height: 50px;
   border-radius: 50%;"></span>

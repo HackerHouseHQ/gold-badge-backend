@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Department;
+use App\DepartmentComment;
+use App\DepartmentLike;
+use App\DepartmentShare;
 use App\Post;
 use Illuminate\Http\Request;
 use App\UserDepartmentRequest;
@@ -67,7 +70,7 @@ class UserController extends Controller
       $arr[$key]['email'] = "<td><span class='tbl_row_new'>" . $data->email . "</span></td>";
       $arr[$key]['username'] = "<td><span class='tbl_row_new'>" . $data->user_name . "</span></td>";
       $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->created_at)) . "</span></td>";
-      $arr[$key]['review'] = "<td><span class='tbl_row_new'>0</span></td>";
+      $arr[$key]['review'] = "<td><span class='tbl_row_new'>" . $data->total_reviews . "</span></td>";
       // $arr[$key]['view'] = '<a href="#"><span class="line_heightt">view Detailes/<br>Inactive</a>';
       // $arr[$key]['view'] = $view;
       if ($data->status == 1) {
@@ -82,8 +85,12 @@ class UserController extends Controller
   public function viewUserDetailModel(Request $req)
   {
     $data = Post::with('users')->with('departments')->where('id', $req->id)->first();
-    // return response()->json($data, 200);
-    // return htmlspecialchars($data);
+    $likeCount =  DepartmentLike::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
+    $shareCount = DepartmentShare::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
+    $commentCount  = DepartmentComment::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
+    $data['department_like'] = $likeCount;
+    $data['department_share'] = $shareCount;
+    $data['department_comment'] = $commentCount;
     return $data;
   }
   public function delete_post(Request $request)
@@ -176,11 +183,10 @@ class UserController extends Controller
       $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
       $arr[$key]['date'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
-
-      $arr[$key]['likes'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
-      $arr[$key]['share'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
-      $arr[$key]['comment'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
-      $arr[$key]['report'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['likes'] = "<td><span class='tbl_row_new'>" . $data->department_like . "</span></td>";
+      $arr[$key]['share'] = "<td><span class='tbl_row_new'>" . $data->department_share . "</span></td>";
+      $arr[$key]['comment'] = "<td><span class='tbl_row_new'>" . $data->department_comment  . "</span></td>";
+      $arr[$key]['report'] = "<td><span class='tbl_row_new'>" . $data->department_report  . "</span></td>";
       $view1 = $view . $active;
       $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
     }
@@ -211,8 +217,8 @@ class UserController extends Controller
     $search_arr = $req->get('search');
     $search = $search_arr['value'];
     // $type = $_GET['type'];
-    $data = User::getPostDepartment($user_id, $search, $offset, $limit_t);
-    $count = User::getPostDepartmentCount($user_id, $search);
+    $data = User::getPostDepartmentFollowing($user_id, $search, $offset, $limit_t);
+    $count = User::getPostDepartmentFollowingCount($user_id, $search);
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
@@ -360,6 +366,7 @@ class UserController extends Controller
     $i = 0;
     // if(!empty($data)){
     foreach ($data as $key => $data) {
+
       // $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>VIEWDETAIL</span></a><br>";
       // $active = "<a href='javascript:void(0)' onclick ='status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>ACTIVATE</span></a>";
       // $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
@@ -371,7 +378,7 @@ class UserController extends Controller
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['country'] = "<td><span class='tbl_row_new'>" . $data->country->country_name . "</span></td>";
       $arr[$key]['state'] = "<td><span class='tbl_row_new'>" . $data->state->state_name . "</span></td>";
-      $arr[$key]['city'] = "<td><span class='tbl_row_new'>" . $data->city->city_name . "</span></td>";
+      $arr[$key]['city'] = "<td><span class='tbl_row_new'>" . @$data->city->city_name . "</span></td>";
       $arr[$key]['username'] = "<td><span class='tbl_row_new'>" . $data->userInfo->user_name . "</span></td>";
       $arr[$key]['reg_date'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->userInfo->created_at)) . "</span></td>";
       $arr[$key]['u_name'] = "<td><span class='tbl_row_new'>" . $data->userInfo->first_name . ' ' . $data->userInfo->last_name . "</span></td>";

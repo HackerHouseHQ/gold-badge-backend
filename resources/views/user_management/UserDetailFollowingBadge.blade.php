@@ -79,7 +79,7 @@
 
           <div class="leftpane">
             <div class="img-r">
-              <img src="{{$data->image}}" alt="" style="width: 100px;">
+              <img src="../storage/uploads/user_image/{{$data->image}}" alt="user-image">
             </div>
           </div>
           <div class="middlepane">
@@ -90,11 +90,11 @@
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->username}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->user_name}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">MOB. NO.:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobile_no}}</span>
+                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobil_no}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Email:</label>
@@ -118,24 +118,29 @@
                 <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
               </div>
               <div class="key_value_box_div">
+                <?php $followcount =  App\UserDepartmentFollow::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Following Department:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{ ($followcount) >0 ? $followcount : 0}}</span>
               </div>
 
               <div class="key_value_box_div">
+                <?php $followBadgecount =  App\UserDepartmentBadgeFollow::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Following Badge:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{$followBadgecount}}</span>
               </div>
               <div class="key_value_box_div">
 
               </div>
               <div class="key_value_box_div">
+                <?php $Reviewcount =  App\Post::where('user_id' , $data->id)->count(); ?>
+
                 <label class="tbl_row labell">Total Reviews:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{ ($Reviewcount) >0 ? $Reviewcount : 0}}</span>
               </div>
               <div class="key_value_box_div">
+                <?php $reportedCount =  App\DepartmentReport::where('user_id' , $data->id)->count(); ?>
                 <label class="tbl_row labell">Reported Reviews:</label>
-                <span class="tbl_row value userDetailsColor">0</span>
+                <span class="tbl_row value userDetailsColor">{{$reportedCount}}</span>
               </div>
             </div>
           </div>

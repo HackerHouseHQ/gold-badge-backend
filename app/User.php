@@ -2,10 +2,11 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\DB;
+use Laravel\Passport\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Passport\HasApiTokens;
 
 
 class User extends Authenticatable
@@ -51,6 +52,10 @@ class User extends Authenticatable
       $data = $query->get(); //->toArray();
       // $data = $query->get()->toArray();
       // echo"<pre>";print_r($data);  die;
+      foreach ($data as $key => $value) {
+         $count  = Post::where('user_id', $value->id)->count();
+         $value['total_reviews'] = $count;
+      }
       return $data;
    }
    public function getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id)
@@ -110,6 +115,7 @@ class User extends Authenticatable
 
       return $query;
    }
+
    public static function getPostDepartmentCount($user_id, $search)
    {
       $query = Post::select(
@@ -236,18 +242,26 @@ class User extends Authenticatable
       $arr = [];
       $post_data = [];
       foreach ($query as $key => $value) {
-         if ($value->badge_id == null) {
-            array_push($arr, $value->badge_id);
-            array_push($post_data, $value);
-         } else {
-            if (!in_array($value->badge_id, $arr)) {
-               array_push($arr, $value->badge_id);
-               array_push($post_data, $value);
-
-               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-                  ->avg('rating');
-            }
-         }
+         $likeCount =  DepartmentLike::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
+         $shareCount = DepartmentShare::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
+         $commentCount  = DepartmentComment::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
+         $reportCount = DepartmentReport::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
+         $value['department_like'] = $likeCount;
+         $value['department_share'] = $shareCount;
+         $value['department_comment'] = $commentCount;
+         $value['department_report'] = $reportCount;
+         array_push($post_data, $value);
+         // if ($value->badge_id == null) {
+         //    array_push($arr, $value->badge_id);
+         //    array_push($post_data, $value);
+         // } else {
+         //    if (!in_array($value->badge_id, $arr)) {
+         //       array_push($arr, $value->badge_id);
+         //       array_push($post_data, $value);
+         //       $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+         //          ->avg('rating');
+         //    }
+         // }
       }
       return $post_data;
    }
@@ -278,19 +292,91 @@ class User extends Authenticatable
       $arr = [];
       $post_data = [];
       foreach ($query as $key => $value) {
-         if ($value->badge_id == null) {
-            array_push($arr, $value->badge_id);
-            array_push($post_data, $value);
-         } else {
-            if (!in_array($value->badge_id, $arr)) {
-               array_push($arr, $value->badge_id);
-               array_push($post_data, $value);
+         array_push($post_data, $value);
 
-               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-                  ->avg('rating');
-            }
-         }
+         // if ($value->badge_id == null) {
+
+         //    array_push($arr, $value->badge_id);
+         //    array_push($post_data, $value);
+         // } else {
+         //    if (!in_array($value->badge_id, $arr)) {
+         //       array_push($arr, $value->badge_id);
+         //       array_push($post_data, $value);
+
+         //       $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+         //          ->avg('rating');
+         //    }
+         // }
       }
       return count($post_data);
+   }
+   public static function getPostDepartmentFollowing($user_id, $search, $offset, $limit_t)
+   {
+      $query = UserDepartmentFollow::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+         DB::raw('COUNT(posts.department_id) as total_reviews'),
+         DB::raw('AVG(posts.rating) as rating')
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('user_department_follows.department_id', '=', 'departments.id');
+         })
+         ->leftjoin("posts", function ($join) {
+            $join->on('user_department_follows.department_id', '=', 'posts.department_id');
+         })
+         ->groupBy('departments.id')
+         ->where('user_department_follows.user_id', $user_id)->where('posts.flag', 1);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+         });
+      }
+      $query->skip($offset);
+      $query->take($limit_t);
+      $query = $query->latest('posts.created_at')->get();
+
+      return $query;
+   }
+   public static function getPostDepartmentFollowingCount($user_id, $search)
+   {
+      $query = UserDepartmentFollow::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+         DB::raw('COUNT(posts.department_id) as total_reviews'),
+         DB::raw('AVG(posts.rating) as rating')
+      )
+         ->leftjoin("departments", function ($join) {
+            $join->on('user_department_follows.department_id', '=', 'departments.id');
+         })
+         ->leftjoin("posts", function ($join) {
+            $join->on('user_department_follows.department_id', '=', 'posts.department_id');
+         })
+         ->groupBy('departments.id')
+         ->where('user_department_follows.user_id', $user_id)->where('posts.flag', 1);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+         });
+      }
+
+      $query = $query->latest('posts.created_at')->get();
+
+      return count($query);
    }
 }
