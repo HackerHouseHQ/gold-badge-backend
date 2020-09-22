@@ -244,7 +244,7 @@ class UserController extends Controller
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
       $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
-      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . $data->total_reviews . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
       $view1 = $view . $active;
       $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
@@ -291,7 +291,7 @@ class UserController extends Controller
       $active = "<a style='margin-left:5px' href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
-      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";
+      $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . $data->total_reviews . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
       $view1 = $view . $active;
 

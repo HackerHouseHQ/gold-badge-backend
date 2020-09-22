@@ -324,8 +324,8 @@ class User extends Authenticatable
          // 'departments.created_at',
          // 'reason_id',
          // 'posts.created_at',
-         DB::raw('COUNT(posts.department_id) as total_reviews'),
-         DB::raw('AVG(posts.rating) as rating')
+         DB::raw('COUNT(posts.department_id) as total_reviews')
+         // DB::raw('AVG(posts.rating) as rating')
       )
          ->leftjoin("departments", function ($join) {
             $join->on('user_department_follows.department_id', '=', 'departments.id');
@@ -359,8 +359,8 @@ class User extends Authenticatable
          // 'departments.created_at',
          // 'reason_id',
          // 'posts.created_at',
-         DB::raw('COUNT(posts.department_id) as total_reviews'),
-         DB::raw('AVG(posts.rating) as rating')
+         DB::raw('COUNT(posts.department_id) as total_reviews')
+         // DB::raw('AVG(posts.rating) as rating')
       )
          ->leftjoin("departments", function ($join) {
             $join->on('user_department_follows.department_id', '=', 'departments.id');
@@ -394,7 +394,9 @@ class User extends Authenticatable
          // 'reason_id',
          // 'posts.created_at',
          'posts.badge_id',
-         'department_badges.badge_number'
+         'department_badges.badge_number',
+         DB::raw('COUNT(posts.department_id) as total_reviews')
+
       )
          ->leftjoin("posts", function ($join) {
             $join->on('user_department_badge_follows.badge_id', '=', 'posts.badge_id');
@@ -432,6 +434,7 @@ class User extends Authenticatable
          // 'departments.created_at',
          // 'reason_id',
          // 'posts.created_at',
+         DB::raw('COUNT(posts.department_id) as total_reviews'),
          'posts.badge_id',
          'department_badges.badge_number'
       )
