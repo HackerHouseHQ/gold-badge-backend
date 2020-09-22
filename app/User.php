@@ -380,4 +380,79 @@ class User extends Authenticatable
 
       return count($query);
    }
+   public static function getPostBadgeFollowing($user_id, $search, $offset, $limit_t)
+   {
+      $query = UserDepartmentBadgeFollow::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+         'posts.badge_id',
+         'department_badges.badge_number'
+      )
+         ->leftjoin("posts", function ($join) {
+            $join->on('user_department_badge_follows.badge_id', '=', 'posts.badge_id');
+         })
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })
+         ->leftjoin("department_badges", function ($join) {
+            $join->on('posts.badge_id', '=', 'department_badges.id');
+         })
+         ->where('posts.user_id', $user_id)->where('posts.flag', 2);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+            $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+         });
+      }
+
+      $query->skip($offset);
+      $query->take($limit_t);
+      $query = $query->latest('posts.created_at')->get();
+
+      return $query;
+   }
+   public static function getPostBadgeFollowingCount($user_id, $search)
+   {
+      $query = UserDepartmentBadgeFollow::select(
+         'posts.id as post_id',
+         'posts.user_id',
+         'posts.department_id',
+         'posts.rating',
+         'posts.flag',
+         'departments.department_name',
+         // 'departments.image',
+         // 'departments.created_at',
+         // 'reason_id',
+         // 'posts.created_at',
+         'posts.badge_id',
+         'department_badges.badge_number'
+      )
+         ->leftjoin("posts", function ($join) {
+            $join->on('user_department_badge_follows.badge_id', '=', 'posts.badge_id');
+         })
+         ->leftjoin("departments", function ($join) {
+            $join->on('posts.department_id', '=', 'departments.id');
+         })
+         ->leftjoin("department_badges", function ($join) {
+            $join->on('posts.badge_id', '=', 'department_badges.id');
+         })
+         ->where('posts.user_id', $user_id)->where('posts.flag', 2);
+      if ($search) {
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
+            $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+         });
+      }
+      $query = $query->latest('posts.created_at')->get();
+
+      return count($query);
+   }
 }

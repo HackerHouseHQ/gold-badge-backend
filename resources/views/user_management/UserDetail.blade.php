@@ -264,12 +264,12 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h4 class="modal-title text-capitalize" id="businessName"></h4>
+        <h4 class="modal-title text-capitalize" id="businessName1"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="businessName1">
+      <div class="modal-body">
         <div class="row">
           <div class="col-6" id="userImage1">
 
@@ -327,7 +327,7 @@
           <div class="col-6" id="userImage2">
 
           </div>
-          <div class="col-6" id="viewDepartmentshare">
+          <div class="col-6" id="viewDepartmentShare">
 
 
           </div>
@@ -417,12 +417,14 @@
 </script>
 <script>
   function viewUserDetailShareModel(id){
-    $('#viewUserDetailLikeModel').modal('show');
+    // $('#viewUserDetailLikeModel').modal('show');
     $.ajax({
-          url: "{{ route('viewUserDetailLikeModel') }}/" + id, 
+          url: "{{ route('viewUserDetailShareModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-            $('#userImage1').html(``);
+            $('#share').html(``);
+            $('#userImage2').html(``);
+            
            let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">`;
   let i = 1;
@@ -453,8 +455,8 @@
     <span class="sr-only">Next</span>
   </a>
 </div>`;
-$('#userImage1').append(rowImage);
-        $('#viewDepartmentLike').html('');
+$('#userImage2').append(rowImage);
+        $('#viewDepartmentShare').html('');
             
             response.forEach(value => {
               let row=` <div class="col">
@@ -462,15 +464,18 @@ $('#userImage1').append(rowImage);
         <span>${value.user_name}</span>
         <br>
             </div>`;
-            $('#viewDepartmentLike').append(row)
+            $('#viewDepartmentShare').append(row)
             }); 
             if(response.length == 0)
             {
-              $('#businessName1').html('<h4>no record found</h4>');
+              $('#userImage2').html(``);
+            $('#share').html(``);
+
+              $('#share').html('<h4>no record found</h4>');
             }
             console.log(response);
          
-        $('#viewUserDetailLikeModel').modal('show');
+        $('#viewUserDetailShareModel').modal('show');
         },
         error: function(err) {
           console.log(err);
@@ -484,6 +489,7 @@ $('#userImage1').append(rowImage);
           type: 'get',
           success: function (response) {
             $('#userImage1').html(``);
+            $('#businessName1').html('');
            let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">`;
   let i = 1;
@@ -527,7 +533,9 @@ $('#userImage1').append(rowImage);
             }); 
             if(response.length == 0)
             {
-              $('#businessName1').html('<h4>no record found</h4>');
+            $('#userImage1').html(``);
+            $('#viewDepartmentLike').html('');
+              $('#businessName1').html('no record found</>');
             }
             console.log(response);
          
@@ -544,16 +552,55 @@ $('#userImage1').append(rowImage);
           url: "{{ route('viewUserDetailModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-            if(typeof response.departments.image != "undefined"){ 
-              
-            $('#userImage').html(`<img
-              src="../storage/departname/${response.departments.image}"
-              alt="" style="width: 300px; height:300px;">`);
-          }else{
-            $('#userImage').html(` <img
+            $('#userImage').html(``);
+           let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">`;
+  let i = 1;
+   
+        response.post_image.forEach(image => {
+          if(i==1)
+          {
+            rowImage +=` <div class="carousel-item active">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
+    </div>`;
+          }
+          else{
+            rowImage +=` <div class="carousel-item">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
+    </div>`;
+          }
+           
+           i++;
+         });
+      
+       rowImage +=`</div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`;
+$('#userImage').append(rowImage);
+if(response.post_image.length == 0)
+{
+    $('#userImage').html(` <img
               src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
               alt="" style="width: 300px; height:300px;">`);
-          }
+
+}
+          //   if(typeof response.departments.image != "undefined"){ 
+              
+          //   $('#userImage').html(`<img
+          //     src="../storage/departname/${response.departments.image}"
+          //     alt="" style="width: 300px; height:300px;">`);
+          // }else{
+          //   $('#userImage').html(` <img
+          //     src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+          //     alt="" style="width: 300px; height:300px;">`);
+          // }
             $('#viewDepartment').html('');
             
          let row=` <div class="col">
@@ -571,7 +618,7 @@ $('#userImage1').append(rowImage);
               <br>
               <span>Share:</span>
               <span>${response.department_share}</span>
-              <a href='javascript:void(0)' onclick ='viewUserDetailLikeModel(${response.id})'>view list</a>
+              <a href='javascript:void(0)' onclick ='viewUserDetailShareModel(${response.id})'>view list</a>
               <br>
               <span>Comments:</span>
               <span>${response.department_comment}</span>

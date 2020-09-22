@@ -85,7 +85,7 @@ class UserController extends Controller
   }
   public function viewUserDetailModel(Request $req)
   {
-    $data = Post::with('users')->with('departments')->where('id', $req->id)->first();
+    $data = Post::with('users')->with('departments')->with('post_image')->where('id', $req->id)->first();
     $likeCount =  DepartmentLike::where('post_id', $data->id)->count();
     $shareCount = DepartmentShare::where('post_id', $data->id)->count();
     $commentCount  = DepartmentComment::where('post_id', $data->id)->count();
@@ -102,6 +102,14 @@ class UserController extends Controller
     $data = DepartmentLike::with('post_images')->where('post_id', $request->id)
       ->leftjoin("users", function ($join) {
         $join->on('department_likes.user_id', '=', 'users.id');
+      })->get();
+    return $data;
+  }
+  public function viewUserDetailShareModel(Request  $request)
+  {
+    $data = DepartmentShare::with('post_images')->where('post_id', $request->id)
+      ->leftjoin("users", function ($join) {
+        $join->on('department_shares.user_id', '=', 'users.id');
       })->get();
     return $data;
   }
@@ -275,8 +283,8 @@ class UserController extends Controller
     $search = $search_arr['value'];
 
     // $type = $_GET['type'];
-    $data = User::getPostBadge($user_id, $search, $offset, $limit_t);
-    $count = User::getPostBadgeCount($user_id, $search);
+    $data = User::getPostBadgeFollowing($user_id, $search, $offset, $limit_t);
+    $count = User::getPostBadgeFollowingCount($user_id, $search);
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
