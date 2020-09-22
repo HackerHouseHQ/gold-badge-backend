@@ -116,8 +116,13 @@ class DepartmentController extends Controller
             $data['state_id'] = $request->state;
             $data['city_id'] = $request->city;
             if ($request->departmentImage) {
-               $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
-               $data['image'] = $departmentImage;
+               $file = $request->departmentImage;
+               $extension = $file->getClientOriginalExtension();
+               $filename = time()  . "." . $extension;
+               $path = storage_path() . '/app/public/departname';
+               $file->move($path, $filename);
+               // $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+               $data['image'] = $filename;
             }
             $insertReason = Department::create($data);
          }
@@ -140,8 +145,13 @@ class DepartmentController extends Controller
          $data['state_id'] = $request->state;
          $data['city_id'] = $request->city;
          if ($request->departmentImage) {
-            $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
-            $data['image'] = $departmentImage;
+            $file = $request->departmentImage;
+            $extension = $file->getClientOriginalExtension();
+            $filename = time()  . "." . $extension;
+            $path = storage_path() . '/app/public/departname';
+            $file->move($path, $filename);
+            // $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+            $data['image'] = $filename;
          }
          $insertData = Department::create($data);
          return redirect('/department_management/department');

@@ -258,6 +258,60 @@
   </div>
 </div>
 {{-- end model view department --}}
+{{-- model view department --}}
+<div class="modal fade" id="viewUserDetailLikeModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-capitalize" id="businessName"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="businessName1">
+        <div class="row">
+          <div class="col-6" id="userImage1">
+
+          </div>
+          <div class="col-6" id="viewDepartmentLike">
+
+
+          </div>
+        </div>
+        {{-- <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="viewDepartment">
+
+                  </tbody>
+
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
+{{-- end model view department --}}
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -322,13 +376,99 @@
   });
 </script>
 <script>
+  function viewUserDetailLikeModel(id){
+    $('#viewUserDetailLikeModel').modal('show');
+    $.ajax({
+          url: "{{ route('viewUserDetailLikeModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            $('#userImage1').html(``);
+           let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">`;
+  let i = 1;
+    response.forEach(value => {
+        value.post_images.forEach(image => {
+          if(i==1)
+          {
+            rowImage +=` <div class="carousel-item active">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
+    </div>`;
+          }
+          else{
+            rowImage +=` <div class="carousel-item">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
+    </div>`;
+          }
+           
+           i++;
+         });
+       }); 
+       rowImage +=`</div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`;
+$('#userImage1').append(rowImage);
+//             $('#userImage1').html(`<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+//   <div class="carousel-inner">
+//     <div class="carousel-item active">
+//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="First slide">
+//     </div>
+//     <div class="carousel-item">
+//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="Second slide">
+//     </div>
+//     <div class="carousel-item">
+//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="Third slide">
+//     </div>
+//   </div>
+//   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+//     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+//     <span class="sr-only">Previous</span>
+//   </a>
+//   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+//     <span class="carousel-control-next-icon" aria-hidden="true"></span>
+//     <span class="sr-only">Next</span>
+//   </a>
+// </div>`);
+            
+            // $('#userImage1').html(` <img
+            //   src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+            //   alt="" style="width: 300px; height:300px;">`);
+          // }
+            $('#viewDepartmentLike').html('');
+            
+            response.forEach(value => {
+              let row=` <div class="col">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+        <span>${value.user_name}</span>
+        <br>
+            </div>`;
+            $('#viewDepartmentLike').append(row)
+            }); 
+            if(response.length == 0)
+            {
+              $('#businessName1').html('<h4>no record found</h4>');
+            }
+            console.log(response);
+         
+        $('#viewUserDetailLikeModel').modal('show');
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
   function viewUserDetailModel(id){
     // alert(id);
     $.ajax({
           url: "{{ route('viewUserDetailModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-            console.log(response.departments.image);
             if(typeof response.departments.image != "undefined"){ 
               
             $('#userImage').html(`<img
@@ -342,11 +482,7 @@
             $('#viewDepartment').html('');
             
          let row=` <div class="col">
-         
-        <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;"></span>
+        <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
         <br>
               <span>Full Name:</span>
               <span>${response.users.first_name+' '+ response.users.last_name}</span>
@@ -355,16 +491,17 @@
               <span>${response.created_at.substr(0,10).split('-').reverse().join('/')}</span>
               <br>
               <span>Likes:</span>
-              <span>0</span>
+              <span>${response.department_like}</span>
+              <a href='javascript:void(0)' onclick ='viewUserDetailLikeModel(${response.id})'>view list</a>
               <br>
               <span>Share:</span>
-              <span>0</span>
+              <span>${response.department_share}</span>
               <br>
               <span>Comments:</span>
-              <span>0</span>
+              <span>${response.department_comment}</span>
               <br>
               <span>Report:</span>
-              <span>0</span>
+              <span>${response.department_report} </span>
               <br>
               <span>Rating:</span>
               <span>${response.rating}</span>
@@ -396,6 +533,9 @@
 //   $(this).parent("tr:first").remove()
 // })
            location.reload();// refresh same page
+        },
+        error: function(err) {
+          console.log(err);
         }
     });
   }

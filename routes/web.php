@@ -60,6 +60,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/departmentRequest', 'UserController@departmentRequest')->name('departmentRequest');
     Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
     Route::get('/viewUserDetailModel/{id?}', 'UserController@viewUserDetailModel')->name('viewUserDetailModel');
+    Route::get('/viewUserDetailLikeModel/{id?}', 'UserController@viewUserDetailLikeModel')->name('viewUserDetailLikeModel');
+
     Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
   });
 

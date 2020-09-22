@@ -242,10 +242,10 @@ class User extends Authenticatable
       $arr = [];
       $post_data = [];
       foreach ($query as $key => $value) {
-         $likeCount =  DepartmentLike::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
-         $shareCount = DepartmentShare::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
-         $commentCount  = DepartmentComment::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
-         $reportCount = DepartmentReport::where('post_id', $value->post_id)->where('user_id', $value->user_id)->count();
+         $likeCount =  DepartmentLike::where('post_id', $value->post_id)->count();
+         $shareCount = DepartmentShare::where('post_id', $value->post_id)->count();
+         $commentCount  = DepartmentComment::where('post_id', $value->post_id)->count();
+         $reportCount = DepartmentReport::where('post_id', $value->post_id)->count();
          $value['department_like'] = $likeCount;
          $value['department_share'] = $shareCount;
          $value['department_comment'] = $commentCount;
@@ -260,6 +260,7 @@ class User extends Authenticatable
          //       array_push($post_data, $value);
          //       $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
          //          ->avg('rating');
+         //       $value['rating'] = $rating;
          //    }
          // }
       }

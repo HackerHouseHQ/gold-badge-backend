@@ -6,6 +6,7 @@ use App\User;
 use App\Department;
 use App\DepartmentComment;
 use App\DepartmentLike;
+use App\DepartmentReport;
 use App\DepartmentShare;
 use App\Post;
 use Illuminate\Http\Request;
@@ -85,12 +86,23 @@ class UserController extends Controller
   public function viewUserDetailModel(Request $req)
   {
     $data = Post::with('users')->with('departments')->where('id', $req->id)->first();
-    $likeCount =  DepartmentLike::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
-    $shareCount = DepartmentShare::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
-    $commentCount  = DepartmentComment::where('post_id', $data->id)->where('user_id', $data->user_id)->count();
+    $likeCount =  DepartmentLike::where('post_id', $data->id)->count();
+    $shareCount = DepartmentShare::where('post_id', $data->id)->count();
+    $commentCount  = DepartmentComment::where('post_id', $data->id)->count();
+    $reportCount = DepartmentReport::where('post_id', $data->id)->count();
     $data['department_like'] = $likeCount;
     $data['department_share'] = $shareCount;
     $data['department_comment'] = $commentCount;
+    $data['department_report'] = $reportCount;
+
+    return $data;
+  }
+  public function viewUserDetailLikeModel(Request  $request)
+  {
+    $data = DepartmentLike::with('post_images')->where('post_id', $request->id)
+      ->leftjoin("users", function ($join) {
+        $join->on('department_likes.user_id', '=', 'users.id');
+      })->get();
     return $data;
   }
   public function delete_post(Request $request)
@@ -268,7 +280,7 @@ class UserController extends Controller
     $arr = array();
     foreach ($data as $key => $data) {
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
-      $active = "<a style='margin-left:5px' href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>Delete</button></a>";
+      $active = "<a style='margin-left:5px' href='javascript:void(0)'  onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
       $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . "0" . "</span></td>";

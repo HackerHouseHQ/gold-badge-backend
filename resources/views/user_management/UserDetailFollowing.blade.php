@@ -330,7 +330,7 @@
               
            let row=` <div class="col">
   
-          <span><img src="${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
+          <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
     width: 50px;
     height: 50px;
     border-radius: 50%;"></span>
