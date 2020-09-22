@@ -313,7 +313,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'nullable|array',
-                        'upLoadFile.*' => 'required'
+                        // 'upLoadFile.*' => 'required'
 
                     ]
                 );
@@ -379,8 +379,8 @@ class UserController extends Controller
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
-                        'upLoadFile' => 'required',
-                        'upLoadFile.*' => 'required'
+                        'upLoadFile' => 'required|array',
+                        // 'upLoadFile.*' => 'required'
                     ]
                 );
                 /**

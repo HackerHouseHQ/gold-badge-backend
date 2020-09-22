@@ -312,6 +312,58 @@
   </div>
 </div>
 {{-- end model view department --}}
+<div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-capitalize" id="share"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="share">
+        <div class="row">
+          <div class="col-6" id="userImage2">
+
+          </div>
+          <div class="col-6" id="viewDepartmentshare">
+
+
+          </div>
+        </div>
+        {{-- <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="viewDepartment">
+
+                  </tbody>
+
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -341,18 +393,6 @@
           'data': function(data){
               var user_id = $('#user_id').val();
             data.user_id = user_id;
-            //    var search = $('#search').val();
-            // data.search = search;
-            //   var status_id = $('#status_id').val();
-            // data.status_id = status_id;
-            // var state_id = $('#state_id').val();
-            // data.state_id = state_id;
-            // var country_id = $('#country_id').val();
-            // data.country_id = country_id;
-            //  var fromdate = $('#fromdate').val();
-            // data.fromdate = fromdate;
-            // var todate = $('#todate').val();
-            // data.todate = todate;
           }
          },
       'columns': [
@@ -376,6 +416,67 @@
   });
 </script>
 <script>
+  function viewUserDetailShareModel(id){
+    $('#viewUserDetailLikeModel').modal('show');
+    $.ajax({
+          url: "{{ route('viewUserDetailLikeModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            $('#userImage1').html(``);
+           let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+  <div class="carousel-inner">`;
+  let i = 1;
+    response.forEach(value => {
+        value.post_images.forEach(image => {
+          if(i==1)
+          {
+            rowImage +=` <div class="carousel-item active">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
+    </div>`;
+          }
+          else{
+            rowImage +=` <div class="carousel-item">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
+    </div>`;
+          }
+           
+           i++;
+         });
+       }); 
+       rowImage +=`</div>
+  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="sr-only">Previous</span>
+  </a>
+  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="sr-only">Next</span>
+  </a>
+</div>`;
+$('#userImage1').append(rowImage);
+        $('#viewDepartmentLike').html('');
+            
+            response.forEach(value => {
+              let row=` <div class="col">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+        <span>${value.user_name}</span>
+        <br>
+            </div>`;
+            $('#viewDepartmentLike').append(row)
+            }); 
+            if(response.length == 0)
+            {
+              $('#businessName1').html('<h4>no record found</h4>');
+            }
+            console.log(response);
+         
+        $('#viewUserDetailLikeModel').modal('show');
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
   function viewUserDetailLikeModel(id){
     $('#viewUserDetailLikeModel').modal('show');
     $.ajax({
@@ -414,33 +515,7 @@
   </a>
 </div>`;
 $('#userImage1').append(rowImage);
-//             $('#userImage1').html(`<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-//   <div class="carousel-inner">
-//     <div class="carousel-item active">
-//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="First slide">
-//     </div>
-//     <div class="carousel-item">
-//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="Second slide">
-//     </div>
-//     <div class="carousel-item">
-//       <img class="d-block w-100" src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="Third slide">
-//     </div>
-//   </div>
-//   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-//     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-//     <span class="sr-only">Previous</span>
-//   </a>
-//   <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-//     <span class="carousel-control-next-icon" aria-hidden="true"></span>
-//     <span class="sr-only">Next</span>
-//   </a>
-// </div>`);
-            
-            // $('#userImage1').html(` <img
-            //   src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-            //   alt="" style="width: 300px; height:300px;">`);
-          // }
-            $('#viewDepartmentLike').html('');
+        $('#viewDepartmentLike').html('');
             
             response.forEach(value => {
               let row=` <div class="col">
@@ -496,6 +571,7 @@ $('#userImage1').append(rowImage);
               <br>
               <span>Share:</span>
               <span>${response.department_share}</span>
+              <a href='javascript:void(0)' onclick ='viewUserDetailLikeModel(${response.id})'>view list</a>
               <br>
               <span>Comments:</span>
               <span>${response.department_comment}</span>
