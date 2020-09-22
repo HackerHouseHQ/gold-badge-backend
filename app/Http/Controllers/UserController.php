@@ -113,6 +113,14 @@ class UserController extends Controller
       })->get();
     return $data;
   }
+  public function viewUserDetailCommentModel(Request  $request)
+  {
+    $data = DepartmentComment::with('sub_comment')->where('post_id', $request->id)
+      ->leftjoin("users", function ($join) {
+        $join->on('department_comments.user_id', '=', 'users.id');
+      })->get();
+    return $data;
+  }
   public function delete_post(Request $request)
   {
     $deletePost = Post::where('id', $request->post_id)->delete();

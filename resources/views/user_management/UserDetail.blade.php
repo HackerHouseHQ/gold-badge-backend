@@ -83,7 +83,7 @@
             <div class="key_value_box">
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Full Name:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->first_name}} {{$data->last_name}}</span>
+                <span class="tbl_row value userDetailsColor">{{@$data->first_name}} {{@$data->last_name}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
@@ -364,6 +364,58 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title text-capitalize" id="comment"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="share">
+        <div class="row">
+          <div class="col-6" id="userImage2">
+
+          </div>
+          <div class="col-6" id="viewDepartmentComment">
+
+
+          </div>
+        </div>
+        {{-- <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="viewDepartment">
+
+                  </tbody>
+
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -416,6 +468,20 @@
   });
 </script>
 <script>
+  function viewUserDetailCommentModel(id){
+    $.ajax({
+          url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+console.log(response);
+         
+        $('#viewUserDetailCommentModel').modal('show');
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
   function viewUserDetailShareModel(id){
     // $('#viewUserDetailLikeModel').modal('show');
     $.ajax({
@@ -607,7 +673,7 @@ if(response.post_image.length == 0)
         <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
         <br>
               <span>Full Name:</span>
-              <span>${response.users.first_name+' '+ response.users.last_name}</span>
+              <span>${response.users.first_name}</span>
               <br>
               <span>Posted On:</span>
               <span>${response.created_at.substr(0,10).split('-').reverse().join('/')}</span>
@@ -622,6 +688,7 @@ if(response.post_image.length == 0)
               <br>
               <span>Comments:</span>
               <span>${response.department_comment}</span>
+              <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
               <br>
               <span>Report:</span>
               <span>${response.department_report} </span>
