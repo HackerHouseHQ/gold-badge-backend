@@ -476,7 +476,7 @@ class UserController extends Controller
                     'posts.created_at',
                     'posts.comment as post_content',
                     'posts.flag',
-                    'post.stay_anonymous',
+                    'posts.stay_anonymous',
                     'user_department_follows.department_id',
                     DB::raw('COUNT(posts.department_id) as total_reviews'),
                     DB::raw('AVG(posts.rating) as rating')
@@ -532,7 +532,7 @@ class UserController extends Controller
                     'posts.comment as post_content',
                     'posts.flag',
                     'posts.department_id',
-                    'post.stay_anonymous',
+                    'posts.stay_anonymous',
                     DB::raw('COUNT(posts.department_id) as total_reviews'),
                     DB::raw('AVG(posts.rating) as rating')
                 )
@@ -582,7 +582,7 @@ class UserController extends Controller
                     'posts.comment as post_content',
                     'posts.flag',
                     'posts.department_id',
-                    'post.stay_anonymous',
+                    'posts.stay_anonymous',
                     DB::raw('COUNT(posts.department_id) as total_reviews'),
                     DB::raw('AVG(posts.rating) as rating')
                 )
