@@ -16,6 +16,8 @@ use App\Department;
 use App\DepartmentBadge;
 use Illuminate\Http\Request;
 use App\Exports\DepartmentExport;
+use App\UserDepartmentBadgeFollow;
+use App\UserDepartmentFollow;
 use Maatwebsite\Excel\Facades\Excel;
 
 class DepartmentController extends Controller
@@ -163,6 +165,9 @@ class DepartmentController extends Controller
    public function DepartmentDetail(Request $req)
    {
       $getDetail = Department::with('country_data')->with('state_data')->with('city_data')->whereId($req->id)->first();
+      $noOfbadge = DepartmentBadge::where('department_id', $req->id)->count();
+      $noOfFollowers = UserDepartmentFollow::where('department_id', $req->id)->count();
+      $badgeRating = Post::where('department_id', $req->id)->where('flag', 2)->avg('rating');
       $avgrating = Post::where('department_id', $req->id)->where('flag', 1)->avg('rating');
       $totalrating = Post::where('department_id', $req->id)->where('flag', 1)->count();
       $onerating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 1)->count();
@@ -171,6 +176,9 @@ class DepartmentController extends Controller
       $fourrating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 4)->count();
       $fiverating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 5)->count();
       $data['avgRating'] = $avgrating;
+      $data['badgeRating'] = $badgeRating;
+      $data['noOfbadge'] = $noOfbadge;
+      $data['noOfFollowers'] = $noOfFollowers;
       $data['totalRating'] = $totalrating;
       $data['oneRating'] = $onerating;
       $data['twoRating'] = $tworating;
@@ -184,6 +192,12 @@ class DepartmentController extends Controller
    public function viewDepartmentBadgeModel($id)
    {
       $DepartmentBadgeModelData = DepartmentBadge::where('department_id', $id)->get();
+      foreach ($DepartmentBadgeModelData as $key => $value) {
+         $rating = Post::where('badge_id', $value->id)->avg('rating');
+         $count = Post::where('badge_id', $value->id)->count();
+         $value['rating'] = ($rating) ? number_format($rating, 1) : 0;
+         $value['total_reviews'] = $count;
+      }
       return response()->json($DepartmentBadgeModelData, 200);
    }
    // ******change department statusa as active/inacttive
@@ -225,8 +239,18 @@ class DepartmentController extends Controller
       //  $data = $this->badge->getdata_badge_table($order_by, $offset, $limit_t,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
 
       //$count = $this->badge->getdata_badge_count($order_by,$status_id,$state_id,$country_id,$fromdate,$todate,$search,$city_id);
-      $data = array(1, 2, 3);
-      $count = 1;
+      $data = [];
+      $data1 = [];
+      if ($request->department_id) {
+         $data = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1)->skip($offset)->take($limit_t)->get();
+         $data1 = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1)->get();
+      }
+      if ($request->badge_id) {
+         $data = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2)->skip($offset)->take($limit_t)->get();
+         $data1 = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2)->get();
+      }
+
+      $count = count($data1);
       $getuser = $this->pro_data($data);
       $results = [
          "draw" => intval($draw),
@@ -242,10 +266,12 @@ class DepartmentController extends Controller
       $i = 0;
 
       foreach ($data as $key => $data) {
-         $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>5  <i class='fas fa-star custom_star_iconn' style='margin:3px;'></i></span></span></td>";
-         $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>test hjgdfjgsdhh huddhfjuhjdsh usddhsh  </span> <span style='    display: flex;
-    justify-content: space-between;'><span>view post</span> <span>     John | 18 sept,20202</span></span></td>";
+         $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>" . $data->rating . "<i class='fas fa-star custom_star_iconn' style='margin:3px;'></i></span></span></td>";
+         $comment = ($data->comment) ? $data->comment : " ";
+         $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>" . $comment  . "</span> <span style='    display: flex;
+    justify-content: space-between;'><span>view post</span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
       }
+
       return $arr;
    }
    public function badge_list(Request $request)
@@ -361,6 +387,24 @@ class DepartmentController extends Controller
    public function BadgeDetail(Request $req)
    {
       $getDetail = DepartmentBadge::with('department_data.country_data')->with('department_data.state_data')->with('department_data.city_data')->whereId($req->id)->first();
+      $departmentRating = Post::where('department_id', $getDetail->department_id)->avg('rating');
+      $badgerating = Post::where('badge_id', $req->id)->where('flag', 2)->avg('rating');
+      $noOfFollowers = UserDepartmentBadgeFollow::where('badge_id', $req->id)->count();
+      $totalpost = Post::where('badge_id', $req->id)->where('flag', 2)->count();
+      $onerating = Post::where('badge_id', $req->id)->where('flag', 2)->where('rating', 1)->count();
+      $tworating = Post::where('badge_id', $req->id)->where('flag', 2)->where('rating', 2)->count();
+      $threerating = Post::where('badge_id', $req->id)->where('flag', 2)->where('rating', 3)->count();
+      $fourrating = Post::where('badge_id', $req->id)->where('flag', 2)->where('rating', 4)->count();
+      $fiverating = Post::where('badge_id', $req->id)->where('flag', 2)->where('rating', 5)->count();
+      $data['departmentRating'] = $departmentRating;
+      $data['badgeRating'] = $badgerating;
+      $data['noOfFollowers'] = $noOfFollowers;
+      $data['totalPost'] = $totalpost;
+      $data['oneRating'] = $onerating;
+      $data['twoRating'] = $tworating;
+      $data['threeRating'] = $threerating;
+      $data['fourRating'] = $fourrating;
+      $data['fiveRating'] = $fiverating;
       $data['data'] = $getDetail;
       return view('department_managenment.badgeProfile', $data);
    }

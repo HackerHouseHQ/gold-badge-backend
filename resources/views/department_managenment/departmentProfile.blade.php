@@ -13,25 +13,35 @@
         color: orangered;
     }
 
-    .number_star.new_div {
-        display: flex;
-        justify-content: space-evenly;
-        width: 56px;
+    /* .number_star.new_div {
+      display: flex;
+      justify-content: space-evenly;
+      width: 56px;
+    } */
+
+
+    .row_one {
+        margin-bottom: 8px;
     }
 
     p.number_ratings_black_new {
         font-size: 12px;
+        line-height: 0;
+        width: 25%;
     }
 
     .vertical_baar {
-        margin-top: -3px;
+        margin: 0 10px;
+
         color: grey;
+        line-height: 0;
     }
 
     .main_div_five_rows {
         line-height: 3px;
         width: 100%;
         margin-bottom: -17px;
+        margin-top: 13px;
     }
 
     .wrapper_ratings_review {
@@ -43,6 +53,10 @@
         line-height: 3px;
     }
 
+    span.star_icon {
+        margin-top: -7px;
+    }
+
     .fas.fa-star.custom_star_iconn {
         color: orangered;
         /* width: 10px; */
@@ -50,12 +64,12 @@
         margin-top: -6px;
     }
 
-    #data1_paginate {
-        display: none;
-    }
+    /* #data1_paginate {
+      display: none;
+    } */
 
     .progress-bar-cus {
-        height: 18px;
+        height: 10px;
         line-height: 3px;
     }
 
@@ -65,6 +79,21 @@
         height: 75px;
         border-radius: 50%;
         margin-bottom: 10px;
+    }
+
+    .sorting_asc:before {
+        content: '';
+        display: none;
+    }
+
+    .sorting_asc:after {
+        content: '';
+        display: none;
+    }
+
+    .rating_icon {
+        width: 11px;
+        margin: 0 5px;
     }
 </style>
 <div class="header bg-primary pb-6">
@@ -119,7 +148,8 @@
                                             @endif
 
                                         </div>
-
+                                        <input type="hidden" name="department_id" id="department_id"
+                                            value="{{$data->id}}">
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
@@ -136,23 +166,25 @@
                                                 City <a class="float-right">{{@$data->city_data->city_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Avg. Rating <a class="float-right">0</a>
+                                                Avg. Rating <a class="float-right">
+                                                    {{($avgRating) ? number_format($avgRating ,1) : 0}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                No. of badge <a class="float-right">0</a>
+                                                No. of badge <a class="float-right">{{$noOfbadge}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Badge Rating <a class="float-right">0</a>
+                                                Badge Rating <a
+                                                    class="float-right">{{($badgeRating) ? number_format($badgeRating ,1) : 0}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                No. of followers <a class="float-right">0</a>
+                                                No. of followers <a class="float-right">{{$noOfFollowers}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Registered On <a
                                                     class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Total Reviews <a class="float-right">0</a>
+                                                Total Reviews <a class="float-right">{{$totalRating}}</a>
                                             </li>
                                         </ul>
 
@@ -277,17 +309,19 @@
                                                     <p class="number_ratings_grey" style="margin-top:-20px;">
                                                         {{$totalRating}}</p>
                                                 </div>
-                                                <div class="col-md-2">
+                                                <div class="col-md-3">
                                                     <div class="main_div_five_rows">
                                                         <div class="row_one">
                                                             <div class="number_star new_div">
                                                                 <p class="number_ratings_black_new">5</p>
 
                                                                 <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                    <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">{{$fiveRating}}</p>
+                                                                <p class="number_ratings_black_new">
+                                                                    {{$fiveRating}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="row_one">
@@ -295,10 +329,12 @@
                                                                 <p class="number_ratings_black_new">4</p>
 
                                                                 <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                    <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">{{$fourRating}}</p>
+                                                                <p class="number_ratings_black_new">
+                                                                    {{$fourRating}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="row_one">
@@ -306,7 +342,8 @@
                                                                 <p class="number_ratings_black_new">3</p>
 
                                                                 <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                    <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$threeRating}}</p>
@@ -317,7 +354,8 @@
                                                                 <p class="number_ratings_black_new">2</p>
 
                                                                 <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                    <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$twoRating}}</p>
@@ -325,10 +363,11 @@
                                                         </div>
                                                         <div class="row_one">
                                                             <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
+                                                                <p class="number_ratings_black_new">1</p>
 
                                                                 <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                    <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$oneRating}}</p>
@@ -458,18 +497,32 @@
     $(document).ready(function(){
     var dataTable = $('#data1').DataTable({
  
-    "searching": false,
-            'processing': true,
-            'serverSide': true,
-            "bFilter": true,
-            "bInfo": false,
-            "lengthChange": false,
-            "bAutoWidth": false,
+        language: {
+      searchPlaceholder: "Department Name",
+      paginate: {
+          previous: '<i class="fas fa-angle-left"></i>',
+          next:     '<i class="fas fa-angle-right"></i>'
+      },
+      aria: {
+          paginate: {
+              previous: 'Previous',
+              next:     'Next'
+          }
+      }
+  },
+  "pageLength": 5,
+     "searching": false,
+     'processing': true,
+     'serverSide': true,
+     "bFilter": false,
+     "bInfo": false,
+     "lengthChange": false,
+     "bAutoWidth": true,
             'ajax': {
             'url':"{{route('department_profile_list')}}",
                     'data': function(data){
-//            var status_id = $('#status_id').val();
-//          data.status_id = status_id;
+           var department_id = $('#department_id').val();
+         data.department_id = department_id;
 //          var state_id = $('#state_id').val();
 //          data.state_id = state_id;
 //          var country_id = $('#country_id').val();
@@ -518,8 +571,8 @@
                   <tr>
                     <td> ${++i} </td>
                     <td class="text-capitalize">${value.badge_number}</td>
-                    <td class="text-capitalize">0</td>
-                    <td class="text-capitalize">0</td>
+                    <td class="text-capitalize">${value.rating}</td>
+                    <td class="text-capitalize">${value.total_reviews}</td>
                     <td class="text-capitalize"><a href="${url}">View Profile</a></td>
                    </tr>
                   `;
