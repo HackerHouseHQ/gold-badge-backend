@@ -272,7 +272,9 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-6" id="userImage1">
-
+            <img
+              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+              alt="" style="width: 300px; height:300px;">
           </div>
           <div class="col-6" id="viewDepartmentLike">
 
@@ -325,7 +327,9 @@
       <div class="modal-body" id="share">
         <div class="row">
           <div class="col-6" id="userImage2">
-
+            <img
+              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+              alt="" style="width: 300px; height:300px;">
           </div>
           <div class="col-6" id="viewDepartmentShare">
 
@@ -585,7 +589,8 @@ $('#userImage2').append(rowImage);
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>`;
+</div>`; 
+
 $('#userImage1').append(rowImage);
         $('#viewDepartmentLike').html('');
             

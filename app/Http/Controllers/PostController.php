@@ -13,6 +13,7 @@ use Validator;
 
 use App\Department;
 use App\DepartmentBadge;
+use App\DepartmentReport;
 use App\UserDepartmentBadgeFollow;
 use App\UserDepartmentFollow;
 use Illuminate\Http\Request;
@@ -231,9 +232,11 @@ class PostController extends Controller
       $count = UserDepartmentFollow::where('user_id', $request->user_id)->count();
       $countBadge = UserDepartmentBadgeFollow::where('user_id', $request->user_id)->count();
       $countPost  = Post::where('user_id', $request->user_id)->count();
+      $countReport  = DepartmentReport::where('user_id', $request->user_id)->count();
       $user['total_department_follows'] = $count;
       $user['total_department_badge_follows'] = $countBadge;
       $user['total_reviews'] = $countPost;
+      $user['total_report'] = $countReport;
       return view('post.post-detail', ['data' => $user]);
    }
    public function PostDepartmentDetail(Request $request)

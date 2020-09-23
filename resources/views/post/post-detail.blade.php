@@ -80,7 +80,7 @@
                                                     class="float-right">{{@$data->total_department_badge_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Reported Reviews <a class="float-right">0</a>
+                                                Reported Reviews <a class="float-right">{{@$data->total_report}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Total Reviews <a class="float-right">{{@$data->total_reviews}}</a>
