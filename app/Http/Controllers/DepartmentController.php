@@ -35,9 +35,7 @@ class DepartmentController extends Controller
    }
    public function department_list(Request $request)
    {
-      echo "<pre>";
-      print_r($request->all());
-      die;
+      // echo"<pre>"; print_r($request->all()); die;
       $order_by = $_GET['order'][0]['dir'];
       $columnIndex = $_GET['order'][0]['column'];
       $columnName = $_GET['columns'][$columnIndex]['data'];
