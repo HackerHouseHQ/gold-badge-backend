@@ -149,11 +149,7 @@ class UserController extends Controller
             }
             $badges = DepartmentBadge::getDepartmentBadge($countryId, $stateId, $cityId);
 
-            if (count($department) > 0) {
-                return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $departmentAll, 'departmentBadges' => $badges));
-            } else {
-                return res_success('No record found', (object) array('departmentFollowList' => $department));
-            }
+            return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $departmentAll, 'departmentBadges' => $badges));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }

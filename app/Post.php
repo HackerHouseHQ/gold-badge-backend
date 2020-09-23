@@ -186,6 +186,10 @@ class Post extends Model
    {
       return $this->hasMany('App\PostImage', 'post_id');
    }
+   public function post_images()
+   {
+      return $this->hasMany('App\PostImage', 'post_id', 'post_id');
+   }
    public static function getPost($search,  $department_id, $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id)
    {
       $query = self::query()->select(
@@ -220,6 +224,7 @@ class Post extends Model
             $q->wheredate('posts.created_at', '<=', $todate);
          });
       }
+      $query->with('post_images');
       $query->skip($offset);
       $query->take($limit_t);
       $query = $query->latest('posts.created_at')->get();
@@ -258,7 +263,7 @@ class Post extends Model
       )
          ->leftjoin("departments", function ($join) {
             $join->on('posts.department_id', '=', 'departments.id');
-         })->where('user_id', $user_id);
+         })->where('user_id', $user_id)->with('post_image');
       if ($search) {
          $query->orwhere('department_name', 'like', '%' . $search . '%');
       }
@@ -275,7 +280,6 @@ class Post extends Model
             $q->wheredate('posts.created_at', '<=', $todate);
          });
       }
-
       $query = $query->latest('posts.created_at')->get();
       $arr = [];
       $post_data = [];
