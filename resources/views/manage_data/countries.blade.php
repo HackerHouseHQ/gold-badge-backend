@@ -494,7 +494,7 @@
                row += `
                <tr>
               <td>${i++}</td>
-              <td class="text-capitalize">${value.country_data.country_name}</td>
+              <td class="text-capitalize">${value.department_name}</td>
               <td class="text-capitalize">${value.state_data.state_name}</td>
               <td class="text-capitalize">${(value.city_data) ? value.city_data.city_name : "" }</td>
               <td class="text-capitalize">${(value.avgRating) ? value.avgRating.toFixed(1) : 0 }</td>
