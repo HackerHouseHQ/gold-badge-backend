@@ -668,7 +668,7 @@ if(response.post_image.length == 0)
           //     alt="" style="width: 300px; height:300px;">`);
           // }
             $('#viewDepartment').html('');
-            
+            // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
          let row=` <div class="col">
         <span><img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
         <br>
@@ -688,7 +688,6 @@ if(response.post_image.length == 0)
               <br>
               <span>Comments:</span>
               <span>${response.department_comment}</span>
-              <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
               <br>
               <span>Report:</span>
               <span>${response.department_report} </span>

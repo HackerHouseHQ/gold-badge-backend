@@ -55,7 +55,7 @@
     }
 
     .progress-bar-cus {
-        height: 10px;
+        height: 18px;
         line-height: 3px;
     }
 
@@ -158,10 +158,10 @@
 
                                         {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
                                         <div class="text-center">
-                                            <a href='javascript:void(0)'
-                                                onclick='viewDepartmentBadgeModel1({{$data->id}})'><span
-                                                    class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
-                                            </a>
+                                            <a href="javascript:void(0)"
+                                                onclick=" viewDepartmentBadgeModel1({{$data->id}})">
+                                                <span class="tbl_row_new1 view_modd_dec"><b>View
+                                                        Badge List</b></span></a>
                                         </div>
 
                                     </div>
@@ -265,7 +265,8 @@
                                             <div class="row">
                                                 <div class="col-md-2">
                                                     <div class="number_star" style="margin-top:17px;">
-                                                        <p class="number_ratings_black">4.1</p>
+                                                        <p class="number_ratings_black">
+                                                            {{($avgRating) ? number_format($avgRating ,1) : 0}}</p>
 
                                                         <span class="star_icon">
                                                             <i class="fas fa-star custom_star_iconn"
@@ -273,9 +274,10 @@
                                                             <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
                                                         </span>
                                                     </div>
-                                                    <p class="number_ratings_grey" style="margin-top:-20px;">672</p>
+                                                    <p class="number_ratings_grey" style="margin-top:-20px;">
+                                                        {{$totalRating}}</p>
                                                 </div>
-                                                <div class="col-md-4">
+                                                <div class="col-md-2">
                                                     <div class="main_div_five_rows">
                                                         <div class="row_one">
                                                             <div class="number_star new_div">
@@ -285,7 +287,40 @@
                                                                     <i class="fas fa-star custom_star_iconn"></i>
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
+                                                                <p class="number_ratings_black_new">{{$fiveRating}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row_one">
+                                                            <div class="number_star new_div">
+                                                                <p class="number_ratings_black_new">4</p>
+
+                                                                <span class="star_icon">
+                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                </span>
+                                                                <span class="vertical_baar">|</span>
+                                                                <p class="number_ratings_black_new">{{$fourRating}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row_one">
+                                                            <div class="number_star new_div">
+                                                                <p class="number_ratings_black_new">3</p>
+
+                                                                <span class="star_icon">
+                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                </span>
+                                                                <span class="vertical_baar">|</span>
+                                                                <p class="number_ratings_black_new">{{$threeRating}}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row_one">
+                                                            <div class="number_star new_div">
+                                                                <p class="number_ratings_black_new">2</p>
+
+                                                                <span class="star_icon">
+                                                                    <i class="fas fa-star custom_star_iconn"></i>
+                                                                </span>
+                                                                <span class="vertical_baar">|</span>
+                                                                <p class="number_ratings_black_new">{{$twoRating}}</p>
                                                             </div>
                                                         </div>
                                                         <div class="row_one">
@@ -296,40 +331,7 @@
                                                                     <i class="fas fa-star custom_star_iconn"></i>
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="row_one">
-                                                            <div class="number_star new_div">
-                                                                <p class="number_ratings_black_new">5</p>
-
-                                                                <span class="star_icon">
-                                                                    <i class="fas fa-star custom_star_iconn"></i>
-                                                                </span>
-                                                                <span class="vertical_baar">|</span>
-                                                                <p class="number_ratings_black_new">230</p>
+                                                                <p class="number_ratings_black_new">{{$oneRating}}</p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -339,7 +341,8 @@
 
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-primary" style="width: 80%">
+                                                            <div class="progress-bar bg-primary"
+                                                                style="width: {{$fiveRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -347,7 +350,8 @@
 
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-danger" style="width: 75%">
+                                                            <div class="progress-bar bg-danger"
+                                                                style="width: {{$fourRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -355,7 +359,8 @@
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-success" style="width: 60%">
+                                                            <div class="progress-bar bg-success"
+                                                                style="width: {{$threeRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -363,14 +368,16 @@
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-warning" style="width: 50%">
+                                                            <div class="progress-bar bg-warning"
+                                                                style="width: {{$twoRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-bar-cus">
-                                                            <div class="progress-bar bg-warning" style="width: 50%">
+                                                            <div class="progress-bar bg-warning"
+                                                                style="width: {{$oneRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -403,8 +410,47 @@
             </div>
         </div>
     </div>
+    {{-- model view badge --}}
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-capitalize" id="businessName"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="table-responsive">
+                                <div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="tbl_row">SN.</span></th>
+                                                <th> <span class="tbl_row">Badge Number</span> </th>
+                                                <th> <span class="tbl_row">Rating</span> </th>
+                                                <th> <span class="tbl_row">Reviews</span> </th>
+                                                <th> <span class="tbl_row">Action</span> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="businessDetails">
 
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{-- end model view badge --}}
 </div>
+
 
 @endsection
 @section('script')
@@ -455,46 +501,44 @@
 </script>
 <script type="text/javascript">
     function viewDepartmentBadgeModel1(id){
-    // alert(id); 
-
-    $.ajax({
-    url: "{{ route('viewDepartmentBadgeModel') }}/" + id,
+         $.ajax({
+            url: "{{ route('viewDepartmentBadgeModel') }}/" + id, 
             type: 'get',
             success: function (response) {
-            // console.log(response);
-            if (response[0]) {
-            $('#businessDetails').html('');
-            var i = 0;
-            $.each(response, function(key, value){
-
-            var url = '{{ route("BadgeDetail", ":id") }}';
-            url = url.replace(':id', 'id=' + value.id);
-            let row = `
-                <tr>
-                  <td> ${++i} </td>
-                  <td class="text-capitalize">${value.badge_number}</td>
-                  <td class="text-capitalize">0</td>
-                  <td class="text-capitalize">0</td>
-                  <td class="text-capitalize"><a href="${url}">View Profile</a></td>
-                  <td></td>
-                 </tr>
-                `;
-            $('#businessDetails').append(row)
-            })
-            } else {
-            let row = `
-                <tr>
-                  <td colspan="7"> Record not found! </td>
-                </tr>
-                `;
-            $('#businessDetails').html(row);
-            }
-            $('#exampleModalCenter').modal('show');
-            },
-            error: function(err) {
+              // console.log(response);
+            if(response[0]) {
+                $('#businessDetails').html('');
+                var i = 0;
+                $.each(response, function(key, value){
+  
+                  var url = '{{ route("BadgeDetail", ":id") }}';
+                   url = url.replace(':id','id='+value.id);
+  
+                  let row = `
+                  <tr>
+                    <td> ${++i} </td>
+                    <td class="text-capitalize">${value.badge_number}</td>
+                    <td class="text-capitalize">0</td>
+                    <td class="text-capitalize">0</td>
+                    <td class="text-capitalize"><a href="${url}">View Profile</a></td>
+                   </tr>
+                  `;
+                  $('#businessDetails').append(row)
+                })
+              } else {
+                let row = `
+                  <tr>
+                    <td colspan="7"> Record not found! </td>
+                  </tr>
+                  `;
+                  $('#businessDetails').html(row);
+              }
+               $('#exampleModalCenter').modal('show');
+          },
+          error: function(err) {
             console.log(err);
-            }
-    });
+          }
+        });
     }
 </script>
 <script>

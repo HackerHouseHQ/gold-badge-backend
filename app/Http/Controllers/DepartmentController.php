@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;;
 
-use Illuminate\Http\Request;
-
 use DB;
-use Storage;
+
 use Auth;
 use Session;
-use Validator;
+use Storage;
+use App\Post;
 use Importer;
+use Validator;
 
 
 use App\Department;
 use App\DepartmentBadge;
+use Illuminate\Http\Request;
 use App\Exports\DepartmentExport;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -73,8 +74,9 @@ class DepartmentController extends Controller
 
 
          $arr[$key]['name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
-         $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>0</span></td>";
-         $arr[$key]['rating'] = "<td><span class='tbl_row_new'>0</span></td>";
+         $arr[$key]['reviews'] = "<td><span class='tbl_row_new'>" . $data->total_reviews . "</span></td>";
+         $rating = ($data->rating)  ? number_format($data->rating, 2) : 0;
+         $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" .  $rating . "</span></td>";
          $arr[$key]['registered_on'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->created_at)) . "</span></td>";
          if ($data->status == 1) {
             $view1 = $view . $inactive;
@@ -161,6 +163,20 @@ class DepartmentController extends Controller
    public function DepartmentDetail(Request $req)
    {
       $getDetail = Department::with('country_data')->with('state_data')->with('city_data')->whereId($req->id)->first();
+      $avgrating = Post::where('department_id', $req->id)->where('flag', 1)->avg('rating');
+      $totalrating = Post::where('department_id', $req->id)->where('flag', 1)->count();
+      $onerating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 1)->count();
+      $tworating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 2)->count();
+      $threerating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 3)->count();
+      $fourrating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 4)->count();
+      $fiverating = Post::where('department_id', $req->id)->where('flag', 1)->where('rating', 5)->count();
+      $data['avgRating'] = $avgrating;
+      $data['totalRating'] = $totalrating;
+      $data['oneRating'] = $onerating;
+      $data['twoRating'] = $tworating;
+      $data['threeRating'] = $threerating;
+      $data['fourRating'] = $fourrating;
+      $data['fiveRating'] = $fiverating;
       $data['data'] = $getDetail;
       return view('department_managenment.departmentProfile', $data);
    }

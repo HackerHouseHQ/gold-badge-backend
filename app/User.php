@@ -395,7 +395,7 @@ class User extends Authenticatable
          // 'posts.created_at',
          'posts.badge_id',
          'department_badges.badge_number',
-         DB::raw('COUNT(posts.department_id) as total_reviews')
+         DB::raw('COUNT(posts.badge_id) as total_reviews')
 
       )
          ->leftjoin("posts", function ($join) {
@@ -407,7 +407,8 @@ class User extends Authenticatable
          ->leftjoin("department_badges", function ($join) {
             $join->on('posts.badge_id', '=', 'department_badges.id');
          })
-         ->where('posts.user_id', $user_id)->where('posts.flag', 2);
+         ->where('user_department_badge_follows.user_id', $user_id)->where('posts.flag', 2)
+         ->groupBy('departments.id');
       if ($search) {
          $query->Where(function ($q) use ($search) {
             $q->orwhere('departments.department_name', 'like', '%' . $search . '%');
@@ -418,7 +419,6 @@ class User extends Authenticatable
       $query->skip($offset);
       $query->take($limit_t);
       $query = $query->latest('posts.created_at')->get();
-
       return $query;
    }
    public static function getPostBadgeFollowingCount($user_id, $search)
@@ -434,9 +434,10 @@ class User extends Authenticatable
          // 'departments.created_at',
          // 'reason_id',
          // 'posts.created_at',
-         DB::raw('COUNT(posts.department_id) as total_reviews'),
+
          'posts.badge_id',
-         'department_badges.badge_number'
+         'department_badges.badge_number',
+         DB::raw('COUNT(posts.badge_id) as total_reviews')
       )
          ->leftjoin("posts", function ($join) {
             $join->on('user_department_badge_follows.badge_id', '=', 'posts.badge_id');
@@ -447,7 +448,8 @@ class User extends Authenticatable
          ->leftjoin("department_badges", function ($join) {
             $join->on('posts.badge_id', '=', 'department_badges.id');
          })
-         ->where('posts.user_id', $user_id)->where('posts.flag', 2);
+         ->where('user_department_badge_follows.user_id', $user_id)->where('posts.flag', 2)
+         ->groupBy('departments.id');
       if ($search) {
          $query->Where(function ($q) use ($search) {
             $q->orwhere('departments.department_name', 'like', '%' . $search . '%');

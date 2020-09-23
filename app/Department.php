@@ -57,6 +57,14 @@ class Department extends Model
       // $data = $query->get()->toArray();
       // $data = DB::getQueryLog();
       // echo"<pre>";print_r($data);  die;
+      if (!empty($data)) {
+         foreach ($data as $key => $value) {
+            $post = Post::where('department_id', $value->id)->where('flag', 1)->count();
+            $rating = Post::where('department_id', $value->id)->where('flag', 1)->avg('rating');
+            $value['total_reviews'] = $post;
+            $value['rating'] = $rating;
+         }
+      }
       return $data;
    }
    public function getdata_count($order_by, $status_id, $state_id, $country_id, $fromdate, $todate, $search)
