@@ -18,8 +18,9 @@ class Department extends Model
       $query = self::query()->with('country_data')->with('state_data')->with('city_data')->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
+
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       if (!empty($search)) {
@@ -73,8 +74,8 @@ class Department extends Model
 
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       if (!empty($search)) {
@@ -123,6 +124,14 @@ class Department extends Model
       $query = self::query()->where('country_id', $countryId);
       $query->with('city_data', 'state_data', 'country_data', 'post_data');
       $data = $query->get();
+      foreach ($data as $key => $value) {
+         $avgRating =   Post::where('department_id', $value->id)->where('flag', 1)->avg('rating');
+         $total_reviews  = Post::where('department_id', $value->id)->where('flag', 1)->count();
+         $badges = DepartmentBadge::where('department_id', $value->id)->count();
+         $value['avgRating'] = $avgRating;
+         $value['total_reviews'] = $total_reviews;
+         $value['badges'] = $badges;
+      }
       return $data;
    }
    public static function  getDepartmentList($country_id, $state_id, $city_id)

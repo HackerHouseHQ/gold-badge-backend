@@ -469,6 +469,7 @@
           url: "{{ route('viewDeparmentModel') }}/" + id, 
           type: 'get',
           success: function (response) {
+            
             if(response.length >0)
             {
             $('#viewDepartment').html('');
@@ -489,15 +490,16 @@
                   </thead>
                   <tbody>`;
             $.each(response, function(key, value){
+           console.log(value);
                row += `
                <tr>
               <td>${i++}</td>
               <td class="text-capitalize">${value.country_data.country_name}</td>
               <td class="text-capitalize">${value.state_data.state_name}</td>
-              <td class="text-capitalize">${value.city_data.city_name}</td>
-              <td class="text-capitalize">${(value.post_data != null) ? value.post_data.rating : 0 }</td>
-              <td class="text-capitalize">120 reviews</td>
-              <td class="text-capitalize">10 badges</td>
+              <td class="text-capitalize">${(value.city_data) ? value.city_data.city_name : "" }</td>
+              <td class="text-capitalize">${(value.avgRating) ? value.avgRating.toFixed(1) : 0 }</td>
+              <td class="text-capitalize">${(value.total_reviews) ? value.total_reviews : 0 } reviews</td>
+              <td class="text-capitalize">${value.badges} badges</td>
            </tr>`;
            
             });
