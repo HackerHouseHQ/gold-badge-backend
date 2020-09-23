@@ -258,6 +258,8 @@
 <script>
   function myFunction() {
 document.getElementById("myForm").reset();
+location.reload();
+
 }
 </script>
 {{-- <script>

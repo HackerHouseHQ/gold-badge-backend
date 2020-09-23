@@ -597,6 +597,7 @@ enctype="multipart/form-data" method="POST">
 <script>
   function myFunction() {
 document.getElementById("search_data").reset();
+location.reload();
 }
 </script>
 @endsection
