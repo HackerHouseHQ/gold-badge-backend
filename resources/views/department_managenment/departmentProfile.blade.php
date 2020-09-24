@@ -299,12 +299,36 @@
                                                     <div class="number_star" style="margin-top:17px;">
                                                         <p class="number_ratings_black">
                                                             {{($avgRating) ? number_format($avgRating ,1) : 0}}</p>
-
                                                         <span class="star_icon">
+                                                            @if ($avgRating >= 1 && $avgRating <2)<img
+                                                                src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
+                                                                alt="" class="rating_icon">
+                                                                @endif
+                                                                @if ( $avgRating
+                                                                >=2&& $avgRating <3)<img <img
+                                                                    src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                                    @endif
+                                                                    @if ($avgRating >=3 && $avgRating <4) <img
+                                                                        src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
+                                                                        @endif
+                                                                        @if ($avgRating
+                                                                        >=4 && $avgRating <5) <img
+                                                                            src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
+                                                                            alt="" class="rating_icon">
+                                                                            @endif
+                                                                            @if ( $avgRating==5 ) <img
+                                                                                src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
+                                                                                alt="" class="rating_icon">
+
+                                                                            @endif
+                                                        </span>
+                                                        {{-- <span class="star_icon">
                                                             <i class="fas fa-star custom_star_iconn"
                                                                 style="margin:3px;"></i>
                                                             <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
-                                                        </span>
+                                                        </span> --}}
                                                     </div>
                                                     <p class="number_ratings_grey" style="margin-top:-20px;">
                                                         {{$totalRating}}</p>

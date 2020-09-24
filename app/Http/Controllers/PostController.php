@@ -276,74 +276,116 @@ class PostController extends Controller
    {
       $arr = array();
       $i = 0;
-      $rowImage = "<div id='carouselExampleControls' class='carousel slide' data-ride='carousel'>
-      <div class='carousel-inner'>";
-      $j = 1;
 
-      foreach ($postData as $key => $data2) {
-         if (!empty($data2->post_images)) {
 
-            foreach ($data2->post_images   as $key => $postimage) {
+
+      // foreach ($postData as $key => $data2) {
+      //    $j = 1;
+      //    $rowImage = "";
+      //    if (!empty($data->post_images)) {
+      //       $rowImage = "<div id='carouselExampleControls' class='carousel slide' data-ride='carousel'>
+      //       <div class='carousel-inner'>";
+      //       foreach ($data->post_images   as $key => $postimage) {
+
+      //          $images = ($postimage->image) ? '../storage/uploads/post_department_image/' . $postimage->image : asset("admin_new/assets/img/goldbadge_logo.png");
+      //          if ($j == 1) {
+      //             $rowImage .= " <div class='carousel-item active'>
+      //           <img class='d-block w-100' src='" . $images . "'  alt='First slide'>
+      //         </div>";
+      //          } else {
+      //             $rowImage .= " <div class='carousel-item'>
+      //                 <img class='d-block w-100' src='" . $images . "' style='max-width: 50%;height: auto;' alt='Second slide'>
+      //               </div>";
+      //          }
+
+      //          $j++;
+      //       }
+      //       $rowImage .= "</div>
+      //       <a class='carousel-control-prev' href='#carouselExampleControls' role='button' data-slide='prev'>
+      //         <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+      //         <span class='sr-only'>Previous</span>
+      //       </a>
+      //       <a class='carousel-control-next' href='#carouselExampleControls' role='button' data-slide='next'>
+      //         <span class='carousel-control-next-icon' aria-hidden='true'></span>
+      //         <span class='sr-only'>Next</span>
+      //       </a>
+      //     </div>";
+      //    }
+      // }
+
+      foreach ($postData as $key => $data) {
+         $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
+         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- </br> Review:- $data->comment";
+         $flag = ($data->flag == 1) ? 'department' : 'badges';
+         // $image = ($data->image) ? '../storage/departname/' . $data->image : '';
+
+         $rowImage = "";
+
+         if (count($data->post_images) > 0) {
+            $j = 1;
+
+            $rowImage = "";
+            $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>
+            <div class='carousel-inner'>";
+            foreach ($data->post_images   as $k => $postimage) {
+
                $images = ($postimage->image) ? '../storage/uploads/post_department_image/' . $postimage->image : asset("admin_new/assets/img/goldbadge_logo.png");
                if ($j == 1) {
                   $rowImage .= " <div class='carousel-item active'>
-                <img class='d-block w-100' src='" . $images . "' style='max-width: 50%;height: auto;' alt='First slide'>
+                <img class='d-block ' src='" . $images . "'  alt='First slide'>
               </div>";
                } else {
                   $rowImage .= " <div class='carousel-item'>
-                      <img class='d-block w-100' src='" . $images . "' style='max-width: 50%;height: auto;' alt='Second slide'>
+                      <img class='d-block ' src='" . $images . "'  alt='Second slide'>
                     </div>";
                }
 
                $j++;
             }
-         } else {
+            $rowImage .= "</div>
+            <a class='carousel-control-prev' href='#carouselExampleControls" . $data->post_id  . "' role='button' data-slide='prev'>
+              <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+              <span class='sr-only'>Previous</span>
+            </a>
+            <a class='carousel-control-next' href='#carouselExampleControls" . $data->post_id . "' role='button' data-slide='next'>
+              <span class='carousel-control-next-icon' aria-hidden='true'></span>
+              <span class='sr-only'>Next</span>
+            </a>
+          </div>";
+         }
+         if (count($data->post_images) == 0) {
+            $rowImage = "";
             $k = 1;
+            $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>
+            <div class='carousel-inner'>";
+            $images = asset("admin_new/assets/img/goldbadge_logo.png");
             if ($k == 1) {
                $rowImage .= " <div class='carousel-item active'>
-               <img class='d-block w-100' src='" . asset("admin_new/assets/img/goldbadge_logo.png") . "' style='max-width: 50%;height: auto;' alt='First slide'>
-             </div>";
+             <img class='d-block ' src='" . $images . "'  alt='First slide'>
+           </div>";
             } else {
                $rowImage .= " <div class='carousel-item'>
-               <img class='d-block w-100' src='" . asset("admin_new/assets/img/goldbadge_logo.png") . "' style='max-width: 50%;height: auto;' alt='First slide'>
-             </div>";
+                   <img class='d-block ' src='" . $images . "'  alt='Second slide'>
+                 </div>";
             }
+            $rowImage .= "</div>
+            <a class='carousel-control-prev' href='#carouselExampleControls" . $data->post_id  . "' role='button' data-slide='prev'>
+              <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+              <span class='sr-only'>Previous</span>
+            </a>
+            <a class='carousel-control-next' href='#carouselExampleControls" . $data->post_id . "' role='button' data-slide='next'>
+              <span class='carousel-control-next-icon' aria-hidden='true'></span>
+              <span class='sr-only'>Next</span>
+            </a>
+          </div>";
+            $k++;
          }
-         // foreach ($data2->post_image as $key => $postimage) {
-         //    $images = ($postimage->image) ? '../storage/uploads/post_department_image/' . $postimage->image : "";
-         //    if ($j == 1) {
-         //       $rowImage .= " <div class='carousel-item active'>
-         //     <img class='d-block w-100' src='" . $images . "' style='width: 300px; height:300px;' alt='First slide'>
-         //   </div>";
-         //    } else {
-         //       $rowImage .= " <div class='carousel-item'>
-         //     <img class='d-block w-100' src='" . $images . "' style='width: 300px; height:300px;' alt='Second slide'>
-         //   </div>";
-         //    }
-
-         //    $j++;
-         // }
-      }
-      $rowImage .= "</div>
-      <a class='carousel-control-prev' href='#carouselExampleControls' role='button' data-slide='prev'>
-        <span class='carousel-control-prev-icon' aria-hidden='true'></span>
-        <span class='sr-only'>Previous</span>
-      </a>
-      <a class='carousel-control-next' href='#carouselExampleControls' role='button' data-slide='next'>
-        <span class='carousel-control-next-icon' aria-hidden='true'></span>
-        <span class='sr-only'>Next</span>
-      </a>
-    </div>";
-      foreach ($postData as $key => $data) {
-         $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- </br> Review:- $data->comment";
-         $flag = ($data->flag == 1) ? 'department' : 'badges';
-         $image = ($data->image) ? '../storage/departname/' . $data->image : '';
-         $arr[$key]['image'] = "<td>" . $rowImage . "</td>";
+         $arr[$key]['image'] = "<td class='xyz' style=''>" . $rowImage . "</td>";
          $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data1 . "</span></br></td>";
          $view1 =  $active;
          $arr[$key]['action'] = "<td><span class='tbl_row_new'>" . $view1 . "</span></td>";
       }
+
       return $arr;
    }
    public function delete_post(Request $request)

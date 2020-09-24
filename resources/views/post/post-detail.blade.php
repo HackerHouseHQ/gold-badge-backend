@@ -7,6 +7,31 @@
         border-radius: 50%;
         margin-bottom: 10px;
     }
+
+    td.sorting_1 {
+        width: 47%;
+        padding: 0;
+    }
+
+    img.d-block {
+        width: 65%;
+        text-align: center;
+        margin: 0 auto;
+        display: flex;
+        height: 185px;
+    }
+
+    .carousel-control-prev {
+        left: 0;
+        background: #cea42f;
+
+    }
+
+    .carousel-control-next {
+        right: 0;
+        background: #cea42f;
+
+    }
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -101,24 +126,28 @@
 
                                                     </div>
                                                 </div>
-                                                <div class='col-5'>
+                                                <div class='col-6'>
+                                                    <?php $departmentList = App\Department::get();?>
                                                     <div class="form-group">
-
                                                         <select class="form-control" name="department_id"
                                                             id="department_id">
-                                                            <option value="">Select Department</option>
-                                                            <option value="1">Department1</option>
-                                                            <option value="2">Department2</option>
+                                                            <option value="">Department</option>
+                                                            @foreach($departmentList as $departmenntList)
+                                                            <option value="{{$departmenntList->id}}">
+                                                                {{$departmenntList->department_name}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class='col-5'>
+                                                <div class='col-6'>
+                                                    <?php $departmentBadgeList = App\DepartmentBadge::get();?>
                                                     <div class="form-group">
-
                                                         <select class="form-control" name="badge_id" id="badge_id">
-                                                            <option value="">Select Badge</option>
-                                                            <option value="1">Badge1</option>
-                                                            <option value="2">Badge2</option>
+                                                            <option value="">Badge</option>
+                                                            @foreach($departmentBadgeList as $departmenntBadgeList)
+                                                            <option value="{{$departmenntBadgeList->id}}">
+                                                                {{$departmenntBadgeList->badge_number}}</option>
+                                                            @endforeach
                                                         </select>
                                                     </div>
                                                 </div>

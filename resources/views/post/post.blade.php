@@ -75,20 +75,24 @@
                   </div>
                 </div>
                 <div class='col-4'>
+                  <?php $departmentList = App\Department::get();?>
                   <div class="form-group">
                     <select class="form-control" name="department_id" id="department_id">
                       <option value="">Department</option>
-                      <option value="1">Department1</option>
-                      <option value="2">Department2</option>
+                      @foreach($departmentList as $departmenntList)
+                      <option value="{{$departmenntList->id}}">{{$departmenntList->department_name}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
                 <div class='col-4'>
+                  <?php $departmentBadgeList = App\DepartmentBadge::get();?>
                   <div class="form-group">
                     <select class="form-control" name="badge_id" id="badge_id">
                       <option value="">Badge</option>
-                      <option value="1">Badge1</option>
-                      <option value="2">Badge2</option>
+                      @foreach($departmentBadgeList as $departmenntBadgeList)
+                      <option value="{{$departmenntBadgeList->id}}">{{$departmenntBadgeList->badge_number}}</option>
+                      @endforeach
                     </select>
                   </div>
                 </div>
