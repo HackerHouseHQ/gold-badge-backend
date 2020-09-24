@@ -355,19 +355,19 @@ class PostController extends Controller
          }
          if (count($data->post_images) == 0) {
             $rowImage = "";
-            $k = 1;
+
             $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>
             <div class='carousel-inner'>";
             $images = asset("admin_new/assets/img/goldbadge_logo.png");
-            if ($k == 1) {
-               $rowImage .= " <div class='carousel-item active'>
+
+            $rowImage .= " <div class='carousel-item active'>
              <img class='d-block ' src='" . $images . "'  alt='First slide'>
            </div>";
-            } else {
-               $rowImage .= " <div class='carousel-item'>
+
+            $rowImage .= " <div class='carousel-item'>
                    <img class='d-block ' src='" . $images . "'  alt='Second slide'>
                  </div>";
-            }
+
             $rowImage .= "</div>
             <a class='carousel-control-prev' href='#carouselExampleControls" . $data->post_id  . "' role='button' data-slide='prev'>
               <span class='carousel-control-prev-icon' aria-hidden='true'></span>
@@ -378,7 +378,6 @@ class PostController extends Controller
               <span class='sr-only'>Next</span>
             </a>
           </div>";
-            $k++;
          }
          $arr[$key]['image'] = "<td class='xyz' style=''>" . $rowImage . "</td>";
          $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data1 . "</span></br></td>";
