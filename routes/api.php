@@ -37,6 +37,8 @@ Route::group(['prefix' => 'guest', 'namespace' => 'Api\User'], function () {
 	Route::get('/homepage', 'GuestController@homePage');
 });
 Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
+	Route::post('/send-otp', 'LoginController@sendOtpToMail');
+	Route::post('/verifyOtp', 'LoginController@verifyOtp');
 	Route::get('/countryList', 'UserController@getCountryList');
 	Route::post('/stateList', 'UserController@getStateList');
 	Route::post('/cityList', 'UserController@getCityList');
