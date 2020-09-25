@@ -557,7 +557,7 @@
       </div>
       <div class="comment_partion_div1">
         <span class="font1">${value.comment}</span> 
-        <p style="margin:0;"><span class="font3">${value.comment_like_count}Likes</span> <span class="font3">${value.reply_count}Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
+        <p style="margin:0;"><span class="font3">${value.comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
     padding-left: 5px;
     font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
         </div>
@@ -576,7 +576,7 @@
         </div>
         <div class="comment_partion_div1">
         <span class= "font1">${v.sub_comment}</span> 
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}Likes</span></p>  </div> 
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
          
       </div> `;
            
