@@ -229,6 +229,8 @@ class DepartmentController extends Controller
       $offset = $_GET['start'] ? $_GET['start'] : "0";
       $limit_t = ($_GET['length'] != '-1') ? $_GET['length'] : "";
       $draw = $_GET['draw'];
+      $rating = $_GET['rating'];
+
       //        $status_id = $_GET['status_id'];
       //        $state_id = $_GET['state_id'];
       //        $country_id = $_GET['country_id'];
@@ -242,12 +244,25 @@ class DepartmentController extends Controller
       $data = [];
       $data1 = [];
       if ($request->department_id) {
-         $data = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1)->skip($offset)->take($limit_t)->get();
-         $data1 = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1)->get();
+         $query = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1);
+         if ($rating) {
+            $query->where('rating', $rating);
+         }
+         $data =  $query->skip($offset)->take($limit_t)->get();
+         $query2 = Post::with('users')->where('department_id', $request->department_id)->where('flag', 1);
+         if ($rating) {
+            $query2->where('rating', $rating);
+         }
+         $data1 = $query2->get();
       }
       if ($request->badge_id) {
-         $data = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2)->skip($offset)->take($limit_t)->get();
-         $data1 = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2)->get();
+         $query = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2);
+         if ($rating) {
+            $query->where('rating', $rating);
+         }
+         $data =  $query->skip($offset)->take($limit_t)->get();
+         $query2 = Post::with('users')->where('badge_id', $request->badge_id)->where('flag', 2);
+         $data1 = $query2->get();
       }
 
       $count = count($data1);

@@ -395,6 +395,52 @@
                   </div>
                 </div>
               </div>
+              <div class="col-xl-12 col-md-6">
+                <div class="card bg-gradient-info border-0">
+                  <!-- Card body -->
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+
+                        <?php $post = App\Post::with('users')->where('department_id',
+                               $data->id)->where('flag', 2)->count(); ?>
+
+                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">
+                          Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
+                                <div class="progress progress-xs mt-3 mb-0">
+                                    <div class="progress-bar bg-success" role="progressbar"
+                                        aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
+                                        style="width: 50%;"></div>
+                                </div> --}} </div>
+                      <div class="col-auto">
+                        {{-- <button type="button" class="btn btn-sm btn-neutral mr-0"
+                                    data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="fas fa-ellipsis-h"></i>
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" style="">
+
+
+                                </div> --}}
+                        <div class="form-group" style="margin-bottom: 0;">
+                          <select class="form-control" name="rating" id="rating">
+                            <option value="">Rating</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    {{-- <p class="mt-3 mb-0 text-sm">
+                            <a href="#!" class="text-nowrap text-white font-weight-600">See
+                                details</a>
+                        </p> --}}
+                  </div>
+                </div>
+              </div>
               <div class="tab-content">
                 <div class="active tab-pane" id="activity">
                   <div class="post">
@@ -464,6 +510,8 @@
 //          data.todate = todate;
 //          var search = $('#search').val();
 //          data.search = search;
+var rating = $('#rating').val();
+         data.rating = rating;
           
         }
        },
@@ -481,6 +529,10 @@
 //  $('#search').keyup(function(){
 //     dataTable.draw();
 //  });
+$('#rating').on('change', function() {
+  //alert( this.value );
+  dataTable.draw();
+});
 });
 </script>
 <script>
