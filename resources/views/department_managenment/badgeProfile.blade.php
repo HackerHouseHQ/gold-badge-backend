@@ -289,9 +289,32 @@
                           </p>
 
                           <span class="star_icon">
+                            @if ($badgeRating >= 1 && $badgeRating <2)<img
+                              src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
+                              @endif
+                              @if ( $badgeRating
+                              >=2&& $badgeRating <3)<img <img
+                                src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
+                                @endif
+                                @if ($badgeRating >=3 && $badgeRating <4) <img
+                                  src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt=""
+                                  class="rating_icon">
+                                  @endif
+                                  @if ($badgeRating
+                                  >=4 && $badgeRating <5) <img
+                                    src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt=""
+                                    class="rating_icon">
+                                    @endif
+                                    @if ( $badgeRating==5 ) <img
+                                      src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt=""
+                                      class="rating_icon">
+
+                                    @endif
+                          </span>
+                          {{-- <span class="star_icon">
                             <i class="fas fa-star custom_star_iconn" style="margin:3px;"></i>
                             <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
-                          </span>
+                          </span> --}}
                         </div>
                         <p class="number_ratings_grey" style="margin-top:-20px;">{{$totalPost}}</p>
                       </div>

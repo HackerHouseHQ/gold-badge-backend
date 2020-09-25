@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Post;
 use App\User;
 
-use App\Department;
-use App\DepartmentBadge;
-use App\Rules\MatchOldPassword;
 use App\Admin;
 use App\GuestUser;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Redirect;
+use App\Department;
+use App\DepartmentBadge;
+use Illuminate\Http\Request;
+use App\Rules\MatchOldPassword;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -41,6 +42,8 @@ class HomeController extends Controller
         $data['BadgeCount'] = $badgecount;
         $guestcount = GuestUser::count();
         $data['GuestCount'] = $guestcount;
+        $postCount  = Post::count();
+        $data['postCount'] = $postCount;
         return view('home', $data);
     }
     public function change_password(Request $request)

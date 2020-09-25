@@ -208,7 +208,8 @@ class UserController extends Controller
       $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->post_id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
       $active = "<a style='margin-left: 5px;' href='javascript:void(0)' onclick ='status(" . $data->post_id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
       $arr[$key]['department_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
-      $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $data->badge_number . "</span></td>";
+      $badge_number  = ($data->badge_number) ? $data->badge_number : "------";
+      $arr[$key]['badge_number'] = "<td><span class='tbl_row_new'>" . $badge_number . "</span></td>";
       $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" . $data->rating . "</span></td>";
       $arr[$key]['date'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
       $arr[$key]['likes'] = "<td><span class='tbl_row_new'>" . $data->department_like . "</span></td>";

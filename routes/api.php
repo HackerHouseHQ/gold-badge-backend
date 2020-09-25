@@ -51,6 +51,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/savePostReview', 'UserController@savePostReview');
 		Route::post('/getPostDepartment', 'UserController@getPostDepartment');
 		Route::post('/savePostDepartmentLike', 'UserController@savePostDepartmentLike');
+		Route::post('/saveSubCommentLike', 'PostController@saveSubCommentLike');
+		Route::post('/saveCommentLike', 'PostController@saveCommentLike');
 		Route::post('/savePostDepartmentShare', 'UserController@savePostDepartmentShare');
 		Route::post('/savePostDepartmentComment', 'UserController@savePostDepartmentComment');
 		Route::post('/savePostDepartmentSubComment', 'UserController@savePostDepartmentSubComment');

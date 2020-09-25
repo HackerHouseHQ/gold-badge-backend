@@ -266,10 +266,29 @@ class DepartmentController extends Controller
       $i = 0;
 
       foreach ($data as $key => $data) {
-         $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>" . $data->rating . "<i class='fas fa-star custom_star_iconn' style='margin:3px;'></i></span></span></td>";
+         $icon = "";
+         if ($data->rating >= 1 && $data->rating < 2) {
+            $icon = asset('admin_new/assets/img/pinkbadge_icon.png');
+         }
+         if ($data->rating >= 2 && $data->rating < 3) {
+            $icon = asset('admin_new/assets/img/purplebadge_icon.png');
+         }
+         if ($data->rating >= 3 && $data->rating < 4) {
+            $icon = asset('admin_new/assets/img/bronzebadge_icon.png');
+         }
+         if ($data->rating >= 4 && $data->rating < 5) {
+            $icon = asset('admin_new/assets/img/silverbadge_icon.png');
+         }
+         if ($data->rating == 5) {
+            $icon = asset('admin_new/assets/img/goldbadge_icon.png');
+         }
+         $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>" . $data->rating . "<span class='star_icon'>
+         <img src='" . $icon . "'
+             alt='' class='rating_icon'>
+     </span></span></span></td>";
          $comment = ($data->comment) ? $data->comment : " ";
          $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>" . $comment  . "</span> <span style='    display: flex;
-    justify-content: space-between;'><span>view post</span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
+    justify-content: space-between;'><span></span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
       }
 
       return $arr;
