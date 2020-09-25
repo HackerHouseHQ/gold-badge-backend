@@ -31,6 +31,36 @@
     justify-content: space-between;
   }
 
+  .comment_partion_div1 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 70px;
+    margin-top: -10px
+  }
+
+  .font1 {
+    font-size: 15px;
+    color: #000;
+    font-weight: 600;
+  }
+
+  .font2 {
+    color: #000;
+    font-size: 10px;
+  }
+
+  .font3 {
+    font-size: 14px;
+    color: #000;
+  }
+
+  .comment_partion_div1 {
+    display: flex;
+    flex-direction: column;
+    padding-left: 70px;
+    margin-top: -10px
+  }
+
   .modal-header {
     padding: 0;
   }
@@ -511,6 +541,8 @@
           url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
           type: 'get',
           success: function (response) {
+            $('#userImage2').html(``);
+            $('#comment').html(``);
             if(response.length == 0)
             {
               $('#userImage2').html(``);
@@ -518,6 +550,7 @@
 
               $('#comment').html('<h4>no record found</h4>');
             }
+            
             let row=``;
             $('#viewDepartmentComment').html('');
             response.forEach(value => {
@@ -525,39 +558,37 @@
                 <div class="comment_div">
                   <div class="comment_partion_div">
         <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
-        <span>${value.user_name}</span>
-        <span>${value.date}</span>
+        <span class="font1">${value.user_name}</span>
+        <span class="font2">${value.date}</span>
       </div>
-      <div class="comment_partion_div">
-        <span>${value.comment}</span> 
-        </div> 
-        <div class="comment_partion_div"> <span>${value.comment_like_count}|Likes</span>
-        <span>${value.reply_count}|Reply</span> 
+      <div class="comment_partion_div1">
+        <span class="font1">${value.comment}</span> 
+        <p style="margin:0;"><span class="font3">${value.comment_like_count}Likes</span> <span class="font3">${value.reply_count}Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
+    padding-left: 5px;
+    font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
         </div>
          </div>
             </div>`;
 
-         row +=``
+         row +=`<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
              value.sub_comment.forEach(v => {
-               console.log(v);
-               row +=`<div class="col">
+               row +=`
                 <div class="sub_comment_div">
                   <div class="comment_partion_div">
         <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
         
-        <span>${v.user_name}</span>
-        <span>${v.date}</span>
+        <span class="font1">${v.user_name}</span>
+        <span class ="font2">${v.date}</span>
         </div>
-        <div class="comment_partion_div">
-        <span>${v.sub_comment}</span> 
-        </div>
-        <div class="comment_partion_div">
-        <span>${v.sub_comment_like_count}|Likes</span> </div> 
+        <div class="comment_partion_div1">
+        <span class= "font1">${v.sub_comment}</span> 
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}Likes</span></p>  </div> 
          
-      </div> </div>`;
+      </div> `;
            
                
              });
+             row +=`</div>`;
               
              
             });
@@ -788,6 +819,10 @@ $('#userImage2').append(rowImage);
            location.reload();// refresh same page
         }
     });
+  }
+  function viewSubcomment(id)
+  {
+    $('#view_sub_comment'+id).toggle();
   }
 </script>
 

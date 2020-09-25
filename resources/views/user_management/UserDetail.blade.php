@@ -542,6 +542,8 @@
           url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
           type: 'get',
           success: function (response) {
+            $('#userImage2').html(``);
+            $('#comment').html(``);
             if(response.length == 0)
             {
               $('#userImage2').html(``);
@@ -549,6 +551,7 @@
 
               $('#comment').html('<h4>no record found</h4>');
             }
+          
             let row=``;
             $('#viewDepartmentComment').html('');
             response.forEach(value => {
