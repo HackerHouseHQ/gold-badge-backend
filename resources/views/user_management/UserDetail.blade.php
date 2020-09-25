@@ -22,6 +22,16 @@
     padding: 0;
   }
 
+  .sub_comment_div {
+    margin-bottom: 20px;
+    /* position: absolute; */
+    margin-left: 56px;
+  }
+
+  .comment_div {
+    margin-bottom: 20px;
+  }
+
 
   p.form_fields {
     margin: 0;
@@ -409,7 +419,7 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body" id="share">
+      <div class="modal-body" id="">
         <div class="row">
           {{-- <div class="col-6" id="userImage2">
 
@@ -508,31 +518,51 @@
           url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-          
+            if(response.length == 0)
+            {
+              $('#userImage2').html(``);
+            $('#comment').html(``);
+
+              $('#comment').html('<h4>no record found</h4>');
+            }
             let row=``;
             $('#viewDepartmentComment').html('');
             response.forEach(value => {
               row += ` <div class="col">
-        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+                <div class="comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
         <span>${value.user_name}</span>
-        <span>${value.created_at.substr(0,10).split('-').reverse().join('/')}</span>
-        
-        
-        <br>
+        <span>${value.date}</span>
+      </div>
+      <div class="comment_partion_div">
+        <span>${value.comment}</span> 
+        </div> 
+        <div class="comment_partion_div"> <span>${value.comment_like_count}|Likes</span>
+        <span>${value.reply_count}|Reply</span> 
+        </div>
+         </div>
             </div>`;
-              row +=`<span>${value.comment}</span>  <span>${value.comment_like_count}|Likes</span>
-        <span>${value.reply_count}|Reply</span> <br>`; 
+
          row +=``
              value.sub_comment.forEach(v => {
                console.log(v);
                row +=`<div class="col">
-        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+                <div class="sub_comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        
         <span>${v.user_name}</span>
-        <span>${v.created_at.substr(0,10).split('-').reverse().join('/')}</span>
-        <br>
-            </div>`;
-            row +=`<span>${v.sub_comment}</span>  <span>${v.sub_comment_like_count}|Likes</span>
-         <br>`; 
+        <span>${v.date}</span>
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment}</span> 
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment_like_count}|Likes</span> </div> 
+         
+      </div> </div>`;
+           
                
              });
               

@@ -22,6 +22,47 @@
     border-collapse: collapse;
   }
 
+  .modal-content {
+    padding: 20px;
+  }
+
+  .form_div {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal-header {
+    padding: 0;
+  }
+
+  .sub_comment_div {
+    margin-bottom: 20px;
+    /* position: absolute; */
+    margin-left: 56px;
+  }
+
+  .comment_div {
+    margin-bottom: 20px;
+  }
+
+  p.form_fields {
+    margin: 0;
+    padding-left: 4px;
+    color: #000;
+    font-size: 15px;
+    font-weight: 400;
+    overflow-wrap: break-word;
+    width: 50%;
+    text-align: left;
+  }
+
+  .custom_col_class {
+    width: 85%;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+
   .img-r {
     /*height: 200px; */
     /*width: 200px; */
@@ -200,7 +241,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="padding: 0;">
         <h4 class="modal-title text-capitalize" id="businessName"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -208,12 +249,12 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <img
               src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 300px; height:300px;">
+              alt="" style="width: 240px; height:240px;">
           </div>
-          <div class="col-6" id="viewDepartment">
+          <div class="col-8" id="viewDepartment">
 
 
           </div>
@@ -255,7 +296,7 @@
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="padding: 0;">
         <h4 class="modal-title text-capitalize" id="businessName1"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -307,7 +348,7 @@
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="padding: 0;">
         <h4 class="modal-title text-capitalize" id="share"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -319,6 +360,58 @@
 
           </div>
           <div class="col-6" id="viewDepartmentShare">
+
+
+          </div>
+        </div>
+        {{-- <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="viewDepartment">
+
+                  </tbody>
+
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 0;">
+        <h4 class="modal-title text-capitalize" id="comment"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="">
+        <div class="row">
+          {{-- <div class="col-6" id="userImage2">
+
+          </div> --}}
+          <div class="col-12" id="viewDepartmentComment">
 
 
           </div>
@@ -413,6 +506,72 @@
 });
 </script>
 <script>
+  function viewUserDetailCommentModel(id){
+    $.ajax({
+          url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            if(response.length == 0)
+            {
+              $('#userImage2').html(``);
+            $('#comment').html(``);
+
+              $('#comment').html('<h4>no record found</h4>');
+            }
+            let row=``;
+            $('#viewDepartmentComment').html('');
+            response.forEach(value => {
+              row += ` <div class="col">
+                <div class="comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        <span>${value.user_name}</span>
+        <span>${value.date}</span>
+      </div>
+      <div class="comment_partion_div">
+        <span>${value.comment}</span> 
+        </div> 
+        <div class="comment_partion_div"> <span>${value.comment_like_count}|Likes</span>
+        <span>${value.reply_count}|Reply</span> 
+        </div>
+         </div>
+            </div>`;
+
+         row +=``
+             value.sub_comment.forEach(v => {
+               console.log(v);
+               row +=`<div class="col">
+                <div class="sub_comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        
+        <span>${v.user_name}</span>
+        <span>${v.date}</span>
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment}</span> 
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment_like_count}|Likes</span> </div> 
+         
+      </div> </div>`;
+           
+               
+             });
+              
+             
+            });
+
+            $('#viewDepartmentComment').append(row);
+         
+        $('#viewUserDetailCommentModel').modal('show');
+        
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
   function viewUserDetailLikeModel(id){
     $('#viewUserDetailLikeModel').modal('show');
     $.ajax({
@@ -556,39 +715,54 @@ $('#userImage2').append(rowImage);
           }else{
             $('#userImage').html(` <img
               src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 300px; height:300px;">`);
+              alt="" style="width: 245px; height:245  px;">`);
           }
             $('#viewDepartment').html('');
             
             
-         let row=` <div class="col">
-          <span>Full Name:</span>
-              <span>${response.users.first_name}</span>
-              <br>
-              <span>Posted On:</span>
-              <span>${response.created_at.substr(0,10).split('-').reverse().join('/')}</span>
-              <br>
-              <span>Likes:</span>
-              <span>${response.department_like}</span>
-              <a href='javascript:void(0)' onclick ='viewUserDetailLikeModel(${response.id})'>view list</a>
-              <br>
-              <span>Share:</span>
-              <span>${response.department_share}</span>
-              <a href='javascript:void(0)' onclick ='viewUserDetailShareModel(${response.id})'>view list</a>
-              <br>
-              <span>Comments:</span>
-              <span>${response.department_comment}</span>
-              <br>
-              <span>Report:</span>
-              <span>0</span>
-              <br>
-              <span>Rating:</span>
-              <span>${response.rating}</span>
-              <br>
-              <span>Review:</span>
-              <span>${(response.comment) ? response.comment : " " }</span>
-              <br>
-            </div>`;
+            let row=` <div class="custom_col_class">
+     <img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
+    
+        <div class="form_div">
+              <p class="form_fields">Full Name:</p>
+              <p class="form_fields">${response.users.first_name}</p>
+              </div>
+              <div class="form_div">
+              <p class="form_fields">Posted On:</p>
+              <p class="form_fields">${response.created_at.substr(0,10).split('-').reverse().join('/')}</p>
+              </div>
+          
+              <div class="form_div">
+              <p class="form_fields">Likes:</p>
+              <p class="form_fields" style="padding-right:5px;">${response.department_like}<a href='javascript:void(0)' style="padding-left:10px;" onclick ='viewUserDetailLikeModel(${response.id})'>view list</a></p>
+              </div>
+           
+              <div class="form_div">
+              <p class="form_fields">Share:</p>
+              <p class="form_fields" style="padding-right:5px;">${response.department_share}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailShareModel(${response.id})'>view list</a></p>
+              </div>
+             
+              <div class="form_div">
+              <p class="form_fields">Comments:</p>
+              <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
+              </div>
+            
+              <div class="form_div">
+              <p class="form_fields">Report:</p>
+              <p class="form_fields">${response.department_report} </p>
+              </div>
+            
+              <div class="form_div">
+              <p class="form_fields">Rating:</p>
+              <p class="form_fields">${response.rating}</p>
+              </div>
+            
+              <div class="form_div">
+              <p class="form_fields">Review:</p>
+              <p class="form_fields">${(response.comment) ? response.comment : " " }</p>
+              </div>
+           
+          </div>`;
             $('#viewDepartment').append(row)
         $('#viewUserDetailModel').modal('show');
         },

@@ -20,6 +20,15 @@
     padding: 0;
   }
 
+  .sub_comment_div {
+    margin-bottom: 20px;
+    /* position: absolute; */
+    margin-left: 56px;
+  }
+
+  .comment_div {
+    margin-bottom: 20px;
+  }
 
   p.form_fields {
     margin: 0;
@@ -389,6 +398,58 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 0;">
+        <h4 class="modal-title text-capitalize" id="comment"></h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="">
+        <div class="row">
+          {{-- <div class="col-6" id="userImage2">
+
+          </div> --}}
+          <div class="col-12" id="viewDepartmentComment">
+
+
+          </div>
+        </div>
+        {{-- <div class="row">
+          <div class="col-md-12">
+            <div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Department Name</span> </th>
+                      <th> <span class="tbl_row">State</span> </th>
+                      <th> <span class="tbl_row">City</span> </th>
+                      <th> <span class="tbl_row">Avg Rating</span> </th>
+                      <th> <span class="tbl_row">Reviews</span> </th>
+                      <th> <span class="tbl_row">No. of badges</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="viewDepartment">
+
+                  </tbody>
+
+                </table>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div> --}}
+      </div>
+    </div>
+  </div>
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
@@ -446,6 +507,72 @@
 });
 </script>
 <script>
+  function viewUserDetailCommentModel(id){
+    $.ajax({
+          url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            if(response.length == 0)
+            {
+              $('#userImage2').html(``);
+            $('#comment').html(``);
+
+              $('#comment').html('<h4>no record found</h4>');
+            }
+            let row=``;
+            $('#viewDepartmentComment').html('');
+            response.forEach(value => {
+              row += ` <div class="col">
+                <div class="comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        <span>${value.user_name}</span>
+        <span>${value.date}</span>
+      </div>
+      <div class="comment_partion_div">
+        <span>${value.comment}</span> 
+        </div> 
+        <div class="comment_partion_div"> <span>${value.comment_like_count}|Likes</span>
+        <span>${value.reply_count}|Reply</span> 
+        </div>
+         </div>
+            </div>`;
+
+         row +=``
+             value.sub_comment.forEach(v => {
+               console.log(v);
+               row +=`<div class="col">
+                <div class="sub_comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        
+        <span>${v.user_name}</span>
+        <span>${v.date}</span>
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment}</span> 
+        </div>
+        <div class="comment_partion_div">
+        <span>${v.sub_comment_like_count}|Likes</span> </div> 
+         
+      </div> </div>`;
+           
+               
+             });
+              
+             
+            });
+
+            $('#viewDepartmentComment').append(row);
+         
+        $('#viewUserDetailCommentModel').modal('show');
+        
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
   function viewUserDetailLikeModel(id){
     $('#viewUserDetailLikeModel').modal('show');
     $.ajax({
@@ -618,7 +745,7 @@ $('#userImage2').append(rowImage);
              
               <div class="form_div">
               <p class="form_fields">Comments:</p>
-              <p class="form_fields">${response.department_comment}</p>
+              <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
               </div>
             
               <div class="form_div">

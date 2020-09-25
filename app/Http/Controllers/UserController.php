@@ -135,11 +135,14 @@ class UserController extends Controller
       $replyCount  = DepartmentSubComment::where('comment_id', $value->id)->count();
       $value['comment_like_count'] = $commentLikeCount;
       $value['reply_count'] = $replyCount;
+      $value['date']  = date('d M', strtotime($value->created_at));
       foreach ($value->sub_comment as $key => $v) {
         $subCommentLike = DepartmentSubCommentLike::where('sub_comment_id', $v->sub_comment_id)->count();
         $v['sub_comment_like_count'] = $subCommentLike;
+        $v['date']  = date('d M', strtotime($v->created_at));
       }
     }
+
     return $data;
   }
   public function delete_post(Request $request)
