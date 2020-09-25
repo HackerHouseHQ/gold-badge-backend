@@ -131,8 +131,8 @@ class UserController extends Controller
         $join->on('department_comments.user_id', '=', 'users.id');
       })->get();
     foreach ($data as $key => $value) {
-      $commentLikeCount =  DepartmentCommentLike::where('comment_id', $value->id)->count();
-      $replyCount  = DepartmentSubComment::where('comment_id', $value->id)->count();
+      $commentLikeCount =  DepartmentCommentLike::where('comment_id', $value->comment_id)->count();
+      $replyCount  = DepartmentSubComment::where('comment_id', $value->comment_id)->count();
       $value['comment_like_count'] = $commentLikeCount;
       $value['reply_count'] = $replyCount;
       $value['date']  = date('d M', strtotime($value->created_at));
