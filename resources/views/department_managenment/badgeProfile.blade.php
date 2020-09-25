@@ -13,6 +13,10 @@
     color: orangered;
   }
 
+  span.star_icon1 {
+    margin-top: 7px;
+  }
+
   /* .number_star.new_div {
     display: flex;
     justify-content: space-evenly;
@@ -288,7 +292,7 @@
                           <p class="number_ratings_black"> {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
                           </p>
 
-                          <span class="star_icon">
+                          <span class="star_icon1">
                             @if ($badgeRating >= 1 && $badgeRating <2)<img
                               src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
                               @endif

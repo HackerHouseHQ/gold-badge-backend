@@ -57,6 +57,10 @@
         margin-top: -7px;
     }
 
+    span.star_icon1 {
+        margin-top: 7px;
+    }
+
     .fas.fa-star.custom_star_iconn {
         color: orangered;
         /* width: 10px; */
@@ -299,7 +303,7 @@
                                                     <div class="number_star" style="margin-top:17px;">
                                                         <p class="number_ratings_black">
                                                             {{($avgRating) ? number_format($avgRating ,1) : 0}}</p>
-                                                        <span class="star_icon">
+                                                        <span class="star_icon1">
                                                             @if ($avgRating >= 1 && $avgRating <2)<img
                                                                 src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
                                                                 alt="" class="rating_icon">

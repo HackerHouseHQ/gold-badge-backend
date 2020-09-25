@@ -284,7 +284,7 @@ class DepartmentController extends Controller
          }
          $arr[$key]['rating'] = "<td><span class='tbl_row_new'><span style='display: flex;'>" . $data->rating . "<span class='star_icon'>
          <img src='" . $icon . "'
-             alt='' class='rating_icon'>
+             alt='' class='rating_icon' style='margin-top:9px;'>
      </span></span></span></td>";
          $comment = ($data->comment) ? $data->comment : " ";
          $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>" . $comment  . "</span> <span style='    display: flex;
