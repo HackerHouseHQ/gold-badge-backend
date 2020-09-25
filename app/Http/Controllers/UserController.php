@@ -135,6 +135,10 @@ class UserController extends Controller
       $replyCount  = DepartmentSubComment::where('comment_id', $value->id)->count();
       $value['comment_like_count'] = $commentLikeCount;
       $value['reply_count'] = $replyCount;
+      foreach ($value->sub_comment as $key => $v) {
+        $subCommentLike = DepartmentSubCommentLike::where('sub_comment_id', $v->sub_comment_id)->count();
+        $v['sub_comment_like_count'] = $subCommentLike;
+      }
     }
     return $data;
   }

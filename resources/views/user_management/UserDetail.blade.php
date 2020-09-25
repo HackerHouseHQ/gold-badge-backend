@@ -515,18 +515,26 @@
               row += ` <div class="col">
         <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
         <span>${value.user_name}</span>
-        <span>${value.created_at}</span>
+        <span>${value.created_at.substr(0,10).split('-').reverse().join('/')}</span>
         
         
         <br>
             </div>`;
               row +=`<span>${value.comment}</span>  <span>${value.comment_like_count}|Likes</span>
         <span>${value.reply_count}|Reply</span> <br>`; 
-        //  row +=``
-        //      value.sub_comment.forEach(value => {
-        //        row +=``;
+         row +=``
+             value.sub_comment.forEach(v => {
+               console.log(v);
+               row +=`<div class="col">
+        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+        <span>${v.user_name}</span>
+        <span>${v.created_at.substr(0,10).split('-').reverse().join('/')}</span>
+        <br>
+            </div>`;
+            row +=`<span>${v.sub_comment}</span>  <span>${v.sub_comment_like_count}|Likes</span>
+         <br>`; 
                
-        //      });
+             });
               
              
             });
