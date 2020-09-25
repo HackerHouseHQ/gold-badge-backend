@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Post;
 use App\User;
 use App\Department;
-use App\DepartmentComment;
 use App\DepartmentLike;
-use App\DepartmentReport;
 use App\DepartmentShare;
-use App\Post;
+use App\DepartmentReport;
+use App\DepartmentComment;
 use Illuminate\Http\Request;
+use App\DepartmentSubComment;
+use App\DepartmentCommentLike;
 use App\UserDepartmentRequest;
+use App\DepartmentSubCommentLike;
 use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
@@ -115,10 +118,24 @@ class UserController extends Controller
   }
   public function viewUserDetailCommentModel(Request  $request)
   {
-    $data = DepartmentComment::with('sub_comment')->where('post_id', $request->id)
+    $data = DepartmentComment::with('sub_comment')->select(
+      'department_comments.id as comment_id',
+      'department_comments.user_id',
+      'department_comments.post_id',
+      'department_comments.created_at',
+      'department_comments.comment',
+      'users.image',
+      'users.user_name'
+    )->where('department_comments.post_id', $request->id)
       ->leftjoin("users", function ($join) {
         $join->on('department_comments.user_id', '=', 'users.id');
       })->get();
+    foreach ($data as $key => $value) {
+      $commentLikeCount =  DepartmentCommentLike::where('comment_id', $value->id)->count();
+      $replyCount  = DepartmentSubComment::where('comment_id', $value->id)->count();
+      $value['comment_like_count'] = $commentLikeCount;
+      $value['reply_count'] = $replyCount;
+    }
     return $data;
   }
   public function delete_post(Request $request)

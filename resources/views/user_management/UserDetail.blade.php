@@ -411,10 +411,10 @@
       </div>
       <div class="modal-body" id="share">
         <div class="row">
-          <div class="col-6" id="userImage2">
+          {{-- <div class="col-6" id="userImage2">
 
-          </div>
-          <div class="col-6" id="viewDepartmentComment">
+          </div> --}}
+          <div class="col-12" id="viewDepartmentComment">
 
 
           </div>
@@ -508,9 +508,33 @@
           url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
           type: 'get',
           success: function (response) {
-console.log(response);
+          
+            let row=``;
+            $('#viewDepartmentComment').html('');
+            response.forEach(value => {
+              row += ` <div class="col">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+        <span>${value.user_name}</span>
+        <span>${value.created_at}</span>
+        
+        
+        <br>
+            </div>`;
+              row +=`<span>${value.comment}</span>  <span>${value.comment_like_count}|Likes</span>
+        <span>${value.reply_count}|Reply</span> <br>`; 
+         row +=``
+             value.sub_comment.forEach(value => {
+               row +=``;
+               
+             });
+              
+             
+            });
+
+            $('#viewDepartmentComment').append(row);
          
         $('#viewUserDetailCommentModel').modal('show');
+        
         },
         error: function(err) {
           console.log(err);
@@ -729,7 +753,7 @@ if(response.post_image.length == 0)
              
               <div class="form_div">
               <p class="form_fields">Comments:</p>
-              <p class="form_fields">${response.department_comment}</p>
+              <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
               </div>
             
               <div class="form_div">

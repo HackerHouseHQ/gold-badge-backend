@@ -515,7 +515,7 @@ class UserController extends Controller
                         }
                     }
                 }
-                return res_success('Fetch List', array('recentPostList' => $myPost));
+                return res_success('Fetch List', array('postList' => $myPost));
             }
             if ($request->type == 2) {
                 $user_id = $request->user_id;
@@ -565,7 +565,7 @@ class UserController extends Controller
                         }
                     }
                 }
-                return res_success('Fetch List', array('mostLikedPostList' => $myPost));
+                return res_success('Fetch List', array('postList' => $myPost));
             }
             if ($request->type == 3) {
                 $user_id = $request->user_id;
@@ -615,7 +615,7 @@ class UserController extends Controller
                         }
                     }
                 }
-                return res_success('Fetch List', array('mostSharedPostList' => $myPost));
+                return res_success('Fetch List', array('postList' => $myPost));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
