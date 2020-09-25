@@ -522,11 +522,11 @@
             </div>`;
               row +=`<span>${value.comment}</span>  <span>${value.comment_like_count}|Likes</span>
         <span>${value.reply_count}|Reply</span> <br>`; 
-         row +=``
-             value.sub_comment.forEach(value => {
-               row +=``;
+        //  row +=``
+        //      value.sub_comment.forEach(value => {
+        //        row +=``;
                
-             });
+        //      });
               
              
             });

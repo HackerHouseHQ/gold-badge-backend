@@ -590,7 +590,7 @@ class UserController extends Controller
                     ->leftjoin("users", function ($join) {
                         $join->on('posts.user_id', '=', 'users.id');
                     })
-                    ->where('posts.user_id', $user_id)->groupBy('departments.id')
+                    ->groupBy('departments.id')
                     ->where('flag', 1)
                     ->get();
                 $arrz = array();
