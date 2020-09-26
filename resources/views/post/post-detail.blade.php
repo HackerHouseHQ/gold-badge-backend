@@ -27,6 +27,71 @@
 
     }
 
+    .modal-content {
+        padding: 20px;
+    }
+
+    .font1 {
+        font-size: 15px;
+        color: #000;
+        font-weight: 600;
+    }
+
+    .font2 {
+        color: #000;
+        font-size: 10px;
+    }
+
+    .font3 {
+        font-size: 14px;
+        color: #000;
+    }
+
+    .form_div {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .modal-header {
+        padding: 0;
+    }
+
+    .sub_comment_div {
+        margin-bottom: 20px;
+        /* position: absolute; */
+        margin-left: 56px;
+    }
+
+    .comment_div {
+        margin-bottom: 20px;
+    }
+
+    .comment_partion_div1 {
+        display: flex;
+        flex-direction: column;
+        padding-left: 70px;
+        margin-top: -10px
+    }
+
+
+
+    p.form_fields {
+        margin: 0;
+        padding-left: 4px;
+        color: #000;
+        font-size: 15px;
+        font-weight: 400;
+        overflow-wrap: break-word;
+        width: 50%;
+        text-align: left;
+    }
+
+    .custom_col_class {
+        width: 85%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
     .carousel-control-next {
         right: 0;
         background: #cea42f;
@@ -294,7 +359,58 @@
             </div>
         </div>
     </div>
+    <div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header" style="padding: 0;">
+                    <h4 class="modal-title text-capitalize" id="comment"></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="">
+                    <div class="row">
+                        {{-- <div class="col-6" id="userImage2">
+  
+            </div> --}}
+                        <div class="col-12" id="viewDepartmentComment">
 
+
+                        </div>
+                    </div>
+                    {{-- <div class="row">
+            <div class="col-md-12">
+              <div class="table-responsive">
+                <div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th><span class="tbl_row">SN.</span></th>
+                        <th> <span class="tbl_row">Department Name</span> </th>
+                        <th> <span class="tbl_row">State</span> </th>
+                        <th> <span class="tbl_row">City</span> </th>
+                        <th> <span class="tbl_row">Avg Rating</span> </th>
+                        <th> <span class="tbl_row">Reviews</span> </th>
+                        <th> <span class="tbl_row">No. of badges</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody id="viewDepartment">
+  
+                    </tbody>
+  
+                  </table>
+  
+  
+  
+                </div>
+              </div>
+            </div>
+          </div> --}}
+                </div>
+            </div>
+        </div>
+    </div>
     @endsection
     @section('script')
     {{-- <script type="text/javascript">
@@ -435,5 +551,73 @@ location.reload();
 
       }
     </script>
+    <script>
+        function viewUserDetailCommentModel(id){
+    $.ajax({
+          url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
+          type: 'get',
+          success: function (response) {
+            $('#userImage2').html(``);
+            $('#comment').html(``);
+            if(response.length == 0)
+            {
+              $('#userImage2').html(``);
+            $('#comment').html(``);
 
+              $('#comment').html('<h4>no record found</h4>');
+            }
+          
+            let row=``;
+            $('#viewDepartmentComment').html('');
+            response.forEach(value => {
+              row += ` <div class="col">
+                <div class="comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        <span class="font1">${value.user_name}</span>
+        <span class="font2">${value.date}</span>
+      </div>
+      <div class="comment_partion_div1">
+        <span class="font1">${value.comment}</span> 
+        <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
+    padding-left: 5px;
+    font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
+        </div>
+         </div>
+            </div>`;
+
+         row +=`<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
+             value.sub_comment.forEach(v => {
+               row +=`
+                <div class="sub_comment_div">
+                  <div class="comment_partion_div">
+        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+        
+        <span class="font1">${v.user_name}</span>
+        <span class ="font2">${v.date}</span>
+        </div>
+        <div class="comment_partion_div1">
+        <span class= "font1">${v.sub_comment}</span> 
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
+         
+      </div> `;
+           
+               
+             });
+             row +=`</div>`;
+              
+             
+            });
+
+            $('#viewDepartmentComment').append(row);
+         
+        $('#viewUserDetailCommentModel').modal('show');
+        
+        },
+        error: function(err) {
+          console.log(err);
+        }
+      });
+  }
+    </script>
     @endsection

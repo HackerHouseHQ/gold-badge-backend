@@ -12,11 +12,19 @@ use Validator;
 
 
 use App\Department;
+use App\DepartmentLike;
 use App\DepartmentBadge;
+use App\DepartmentShare;
 use App\DepartmentReport;
-use App\UserDepartmentBadgeFollow;
-use App\UserDepartmentFollow;
+use App\DepartmentComment;
+use App\DepartmentCommentLike;
 use Illuminate\Http\Request;
+use App\DepartmentSubComment;
+use App\DepartmentSubCommentLike;
+use App\DepartmentVote;
+use App\PostImage;
+use App\UserDepartmentFollow;
+use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
@@ -80,7 +88,7 @@ class PostController extends Controller
       $i = 0;
       foreach ($data as $key => $data) {
          $view = "<a href='" . route('postViewDetail', ['user_id' => $data->user_id]) . "'><button type='button' class='btn btn-primary btn-sm'>VIEWDETAIL</button></a>";
-         $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm'>DELETE</button></a>";
+         $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->user_id . "," . $data->flag . ")'><button type='button' class='btn btn-danger btn-sm'>DELETE</button></a>";
          // $inactive = "<a href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
 
          $flag = ($data->flag == 1) ? 'department' : 'badges';
@@ -314,8 +322,13 @@ class PostController extends Controller
       // }
 
       foreach ($postData as $key => $data) {
+         $Like = DepartmentLike::where('post_id', $data->post_id)->count();
+         $share = DepartmentShare::where('post_id', $data->post_id)->count();
+         $report = DepartmentReport::where('post_id', $data->post_id)->count();
+         $comment = DepartmentComment::where('post_id', $data->post_id)->count();
+         $badge_number = ($data->badge_number) ? $data->badge_number : '------';
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- 0 </br> Share:- 0 </br> Report:- 0 </br>Rating:- $data->rating </br> Comments:- </br> Review:- $data->comment";
+         $data1 = "Department:- " . $data->department_name . " </br>Badge Number:- " . $badge_number . " </br>Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- " . $Like . " </br> Share:- " . $share . " </br> Report:-  " . $report . " </br>Rating:- $data->rating </br> Comments:- $comment <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailCommentModel($data->post_id)'>view list</a> </br> Review:- $data->comment";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
          // $image = ($data->image) ? '../storage/departname/' . $data->image : '';
 
@@ -389,7 +402,36 @@ class PostController extends Controller
    }
    public function delete_post(Request $request)
    {
+      DepartmentLike::where('post_id', $request->post_id)->delete();
+      DepartmentShare::where('post_id', $request->post_id)->delete();
+      DepartmentComment::where('post_id', $request->post_id)->delete();
+      DepartmentCommentLike::where('post_id', $request->post_id)->delete();
+      DepartmentReport::where('post_id', $request->post_id)->delete();
+      DepartmentSubCommentLike::where('post_id', $request->post_id)->delete();
+      PostImage::where('post_id', $request->post_id)->delete();
+      DepartmentVote::where('post_id', $request->post_id)->delete();
+      DepartmentSubComment::where('post_id', $request->post_id)->delete();
       $deletePost = Post::where('id', $request->post_id)->delete();
+      return $deletePost;
+   }
+   public function delete_post_user(Request  $request)
+   {
+
+      $data = Post::where('user_id', $request->user_id)->where('flag', $request->flag)->get();
+      foreach ($data as $key => $value) {
+         echo $value->id;
+         DepartmentLike::where('post_id', $value->id)->delete();
+         DepartmentShare::where('post_id', $value->id)->delete();
+         DepartmentSubCommentLike::where('post_id', $value->id)->delete();
+         DepartmentSubComment::where('post_id', $value->id)->delete();
+         DepartmentCommentLike::where('post_id', $value->id)->delete();
+         DepartmentComment::where('post_id', $value->id)->delete();
+         DepartmentReport::where('post_id', $value->id)->delete();
+         PostImage::where('post_id', $value->id)->delete();
+         DepartmentVote::where('post_id', $value->id)->delete();
+      }
+
+      $deletePost = Post::where('user_id', $request->user_id)->where('flag', $request->flag)->delete();
       return $deletePost;
    }
 }

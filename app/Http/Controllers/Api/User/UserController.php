@@ -232,6 +232,24 @@ class UserController extends Controller
             if (!$followdata) {
                 User::where('id', $userInsetId)->delete();
             }
+            if (isset($request->badge_followed) && !empty($request->badge_followed)) {
+                $arr = $request->badge_followed;
+                if (!is_array($arr)) {
+                    $arr = json_decode($arr, true);
+                }
+                foreach ($arr as  $followed) {
+                    $insertFollowed = [
+                        'user_id' => $userInsetId,
+                        'badge_id' => $followed,
+                        'created_at' => CURRENT_DATE,
+                        'updated_at' => CURRENT_DATE,
+                    ];
+                    $followdata =  UserDepartmentBadgeFollow::insert($insertFollowed);
+                }
+            }
+            if (!$followdata) {
+                User::where('id', $userInsetId)->delete();
+            }
 
             $user = User::where('id', $userInsetId)->first();
             $resulToken = $user->createToken('');

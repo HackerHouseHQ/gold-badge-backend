@@ -99,7 +99,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/post-list', 'PostController@post_list')->name('postData');
     Route::get('/postViewDetail', 'PostController@postViewDetail')->name('postViewDetail');
     Route::get('/PostDepartmentDetail', 'PostController@PostDepartmentDetail')->name('PostDepartmentDetail');
-    Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
+    Route::post('/delete_post', 'PostController@delete_post')->name('delete_post');
+    Route::post('/delete_post_user', 'PostController@delete_post_user')->name('delete_post_user');
   });
 
 

@@ -196,7 +196,9 @@ class Post extends Model
          'posts.id as post_id',
          'posts.user_id',
          'posts.department_id',
+         'posts.badge_id',
          'posts.rating',
+         'department_badges.badge_number',
          'posts.comment',
          'posts.flag',
          'departments.department_name',
@@ -207,7 +209,11 @@ class Post extends Model
       )
          ->leftjoin("departments", function ($join) {
             $join->on('posts.department_id', '=', 'departments.id');
-         })->where('user_id', $user_id);
+         })
+         ->leftjoin("department_badges", function ($join) {
+            $join->on('posts.badge_id', '=', 'department_badges.id');
+         })
+         ->where('user_id', $user_id);
       if ($search) {
          $query->orwhere('department_name', 'like', '%' . $search . '%');
       }

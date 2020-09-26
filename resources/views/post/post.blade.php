@@ -401,11 +401,11 @@
 });
 </script>
 <script type="text/javascript">
-  function status(id){
+  function status(id , flag){
        $.ajax({
-      url: "{{route('department_status')}}",
+      url: "{{route('delete_post_user')}}",
       type: "post",
-      data: {'user_id':id ,'_token': "{{ csrf_token() }}"},
+      data: {'user_id':id , 'flag':flag, '_token': "{{ csrf_token() }}"},
         success: function (data) {
             location.reload();// refresh same page
         }

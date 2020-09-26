@@ -134,7 +134,7 @@ class DepartmentController extends Controller
          // die;
       } else {
          $request->validate([
-            'department_name' => 'required',
+            'department_name' => 'required|unique:departments',
             'country' => 'required',
             'state'  => 'required',
             'city'   => 'required',
@@ -406,7 +406,7 @@ class DepartmentController extends Controller
       } else {
          $request->validate([
             'department_id' => 'required',
-            'badge_number' => 'required'
+            'badge_number' => 'required|unique:department_badges'
          ], [
             'department_id.required' => 'Please select department.',
 
