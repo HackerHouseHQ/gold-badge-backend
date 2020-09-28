@@ -278,7 +278,7 @@
 
 <script type="text/javascript">
   function status(id , status){ 
-     alert(id);
+    // alert(id);
     var id =  $("#abc").val(id); 
      
       if(status == 1)
@@ -301,7 +301,7 @@
      '_token': "{{ csrf_token() }}" ,
      'status' : status},
        success: function (response) {
-           console.log(response);
+          //  console.log(response);
            window.location.href="{{route('deprtmentRejectRequest')}}"
           // location.reload();// refresh same page
        }
