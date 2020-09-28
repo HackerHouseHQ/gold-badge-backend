@@ -28,9 +28,12 @@ class DepartmentController extends Controller
             if ($validator->fails()) {
                 return res_validation_error($validator); //Sending Validation Error Message
             }
-            $checkAlredySendRequest = UserDepartmentRequest::where('user_id',  Auth::user()->id)->where('department_name', $request->department_name)->first();
+            $checkAlredySendRequest = UserDepartmentRequest::where('country_id',  Auth::user()->country_id)
+                ->where('state_id',  Auth::user()->state_id)
+                ->where('city_id',  Auth::user()->city_id)
+                ->where('department_name', $request->department_name)->first();
             if ($checkAlredySendRequest) {
-                throw new Exception(trans('You have already send request'), DATA_EXISTS);
+                throw new Exception(trans('This department is already under verification.'), DATA_EXISTS);
             }
             $insertArray = [
                 'user_id' => Auth::user()->id,
