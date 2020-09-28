@@ -76,7 +76,7 @@ class UserDepartmentFollow extends Model
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })->where('user_department_follows.user_id', $user_id)
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(10);
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataLike($user_id)
@@ -116,7 +116,7 @@ class UserDepartmentFollow extends Model
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('like_count', 'DESC')->paginate(10);
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('like_count', 'DESC')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataShare($user_id)
@@ -155,7 +155,7 @@ class UserDepartmentFollow extends Model
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
 
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('share_count', 'DESC')->paginate(10);
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('share_count', 'DESC')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataGuest($user_id)
@@ -194,7 +194,7 @@ class UserDepartmentFollow extends Model
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
 
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(10);
+            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
         return $query;
     }
 }
