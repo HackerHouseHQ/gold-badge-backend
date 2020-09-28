@@ -17,6 +17,7 @@ class CreateUserOtpLoginsTable extends Migration
             $table->id();
             $table->string('email');
             $table->string('otp');
+            $table->boolean('status')->default(0);
             $table->timestamps();
         });
     }

@@ -74,18 +74,22 @@ class LoginController extends Controller
             $email = $request->email;
             $checkEmailExistence = UserOtpLogin::where('email', $request->email)->first();
             $otp = $request->otp;
-            if ($checkEmailExistence) {
+            if ($checkEmailExistence->status == 0) {
                 $differnece = $checkEmailExistence->created_at->diffInMinutes(Carbon::now());
                 if ($checkEmailExistence->otp == $otp) {
                     if ($differnece  > 5) {
                         return res_success('Otp expired');
                     } else {
-                        $checkEmailExistence->delete();
+                        $checkEmailExistence->status = 1;
+                        $checkEmailExistence->save();
                         return res_success('Otp matched successfully.');
                     }
                 } else {
                     return res(402, 'Otp does not match');
                 }
+            }
+            if ($checkEmailExistence->status == 1) {
+                return res_success('Email is already verified.');
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
