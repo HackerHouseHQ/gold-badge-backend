@@ -870,7 +870,8 @@ class UserController extends Controller
                 $request->all(),
                 [
 
-                    'mobile_no' => 'required|numeric|digits:10'
+                    'mobile_no' => 'numeric|digits:10',
+                    'email' =>  'email'
 
 
                 ]
@@ -883,6 +884,7 @@ class UserController extends Controller
                 return res_validation_error($validator); //Sending Validation Error Message
             }
             $user = User::where('mobil_no', $request->mobile_no)->first();
+
             if (!$user) {
                 throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
             }
