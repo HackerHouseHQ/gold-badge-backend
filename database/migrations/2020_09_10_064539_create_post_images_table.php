@@ -18,6 +18,7 @@ class CreatePostImagesTable extends Migration
             $table->unsignedBigInteger('post_id');
             $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->string('image');
+            $table->boolean('media_type')->comment(' 0 => video 1=>image');
             $table->timestamps();
         });
     }

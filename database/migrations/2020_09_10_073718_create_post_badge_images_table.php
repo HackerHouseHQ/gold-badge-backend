@@ -19,6 +19,7 @@ class CreatePostBadgeImagesTable extends Migration
             $table->integer('department_id');
             $table->integer('badge_id');
             $table->string('image');
+            $table->boolean('media_type')->comment(' 0 => video 1=>image');
             $table->timestamps();
         });
     }
