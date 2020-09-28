@@ -620,4 +620,10 @@ location.reload();
       });
   }
     </script>
+    <script>
+        function viewSubcomment(id)
+        {
+          $('#view_sub_comment'+id).toggle();
+        }
+    </script>
     @endsection
