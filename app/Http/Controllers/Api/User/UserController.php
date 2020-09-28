@@ -921,13 +921,14 @@ class UserController extends Controller
             $departmentBadge = UserDepartmentBadgeFollow::whereHas('badge.department_data', $callback)->whereHas('badge', $callback)->with(['badge.department_data' => $callback, 'badge' => $callback])
                 ->where('user_id', $request->user_id)->get();
 
-            $department = UserDepartmentFollow::whereHas('departments', $callback)->with(['departments' => $callback])->where('user_id', $request->user_id)->get();
+            $department = UserDepartmentFollow::whereHas('departments', $callback)->with(['departments.badges' => $callback])->where('user_id', $request->user_id)->get();
             $arrDepartment = [];
             foreach ($department as $key => $value) {
                 $arrDepartment[] = [
                     'user_id' => $value->user_id,
                     'department_id' => $value->department_id ?? "",
-                    'department_name' => $value->departments->department_name ?? ""
+                    'department_name' => $value->departments->department_name ?? "",
+                    'badges' => $value->departments->badges
 
                 ];
             }

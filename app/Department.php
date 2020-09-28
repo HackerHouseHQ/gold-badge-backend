@@ -12,6 +12,11 @@ class Department extends Model
 
    protected $fillable = ['country_id', 'state_id', 'city_id', 'department_name', 'image', 'status'];
 
+   public function badges()
+   {
+      return $this->hasMany('App\DepartmentBadge', 'department_id')->select('id as badge_id', 'department_id', 'badge_number');
+   }
+
    public function getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search)
    {
       // DB::enableQueryLog();

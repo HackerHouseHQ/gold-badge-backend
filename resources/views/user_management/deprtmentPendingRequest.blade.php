@@ -278,7 +278,7 @@
 
 <script type="text/javascript">
   function status(id , status){ 
-     // alert(id);
+     alert(id);
     var id =  $("#abc").val(id); 
      
       if(status == 1)
@@ -288,7 +288,7 @@
       }
      
        
-//       return false;
+
 
   }
   function reject(id  , status)
@@ -300,9 +300,10 @@
      data: {'departId':id ,
      '_token': "{{ csrf_token() }}" ,
      'status' : status},
-       success: function (data) {
-           console.log(data);
-           location.reload();// refresh same page
+       success: function (response) {
+           console.log(response);
+           window.location.href="{{route('deprtmentRejectRequest')}}"
+          // location.reload();// refresh same page
        }
    });
       

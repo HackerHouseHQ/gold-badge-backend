@@ -352,6 +352,7 @@ class UserController extends Controller
   }
   public function acceptDepartmentRequest(Request $request)
   {
+
     $deprtmentRequestId = $request->departId;
     //print_r($deprtmentRequestId);die;
     // $status_data = UserDepartmentRequest::where('id',$deprtmentRequestId)->first();
@@ -382,7 +383,7 @@ class UserController extends Controller
         return redirect('/user_management/departmentRequest');
       }
     } else {
-      return redirect('/user_management/deprtmentRejectRequest');
+      return true;
     }
     // if($status == 1){
     // $user = Department::where('id', $user_id)->update(['status' => 2]);
@@ -434,7 +435,7 @@ class UserController extends Controller
       // $inactive = "<a href='javascript:void(0)' onclick = 'status(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
       if ($type == 0) {
         $accept = "<a href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 1 . ")'><button type='button' class='btn btn-success btn-sm'>ACCEPT</button></a>";
-        $reject = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>REJECT</button></a>";
+        $reject = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='reject(" . $data->id . ',' . 2 . ")'><button type='button' class='btn btn-danger btn-sm'>REJECT</button></a>";
         $arr[$key]['action'] = $accept . $reject;
       }
       $arr[$key]['d_name'] = "<td><span class='tbl_row_new'>" . $data->department_name . "</span></td>";
