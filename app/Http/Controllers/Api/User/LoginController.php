@@ -35,7 +35,7 @@ class LoginController extends Controller
             $checkEmailExistence = UserOtpLogin::where('email', $request->email)->first();
             if ($checkEmailExistence) {
                 $otp = rand(1000, 9999);
-                $updateOtp  = UserOtpLogin::where('email', $request->email)->update(['otp' => $otp, 'created_at' => Carbon::now()]);
+                $updateOtp  = UserOtpLogin::where('email', $request->email)->update(['otp' => $otp, 'created_at' => Carbon::now(), 'status' => 0]);
             } else {
                 $otp = rand(1000, 9999);
                 $insertArray = ['email' => $request->email, 'otp' => $otp];
