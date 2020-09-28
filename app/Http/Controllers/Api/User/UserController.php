@@ -883,11 +883,22 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return res_validation_error($validator); //Sending Validation Error Message
             }
-            $user = User::where('mobil_no', $request->mobile_no)->first();
-
-            if (!$user) {
-                throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
+            if (empty($request->mobile_no) && empty($request->email)) {
+                throw new Exception(trans('Email or Mobile number is Required'), 418);
             }
+            if ($request->mobile_no) {
+                $user = User::where('mobil_no', $request->mobile_no)->first();
+                if (!$user) {
+                    throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
+                }
+            }
+            if ($request->email) {
+                $email = User::where('email', $request->email)->first();
+                if (!$email) {
+                    throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
+                }
+            }
+
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
             $token->save();

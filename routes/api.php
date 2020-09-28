@@ -60,6 +60,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/savePostReport', 'UserController@savePostReport');
 		Route::post('/savePostVote', 'UserController@savePostVote');
 		Route::post('/deparmentBadgeList', 'UserController@deparmentBadgeList');
-		Route::post('saveDpartmentRequest', 'DepartmentController@saveDpartmentRequest');
+		Route::post('saveDpartmentRequest', 'DepartmentController@saveDepartmentRequest');
 	});
 });
