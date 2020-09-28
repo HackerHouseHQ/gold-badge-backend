@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
-    public function saveDpartmentRequest(Request $request)
+    public function saveDepartmentRequest(Request $request)
     {
         try {
             $validator = Validator::make(
