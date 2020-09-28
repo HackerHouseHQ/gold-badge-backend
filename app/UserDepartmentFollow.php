@@ -36,7 +36,7 @@ class UserDepartmentFollow extends Model
     public function post_image()
     {
         $siteUrl = env('APP_URL');
-        return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"));
+        return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
     }
     public  static function getPostDepartmentData($user_id)
     {
