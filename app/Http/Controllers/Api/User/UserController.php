@@ -866,12 +866,13 @@ class UserController extends Controller
          */
 
         try {
+
             $validator = Validator::make(
                 $request->all(),
                 [
 
-                    'mobile_no' => 'numeric|digits:10',
-                    'email' =>  'email'
+                    'mobile_no' => 'numeric|digits:10|nullable',
+                    'email' =>  'email|nullable'
 
 
                 ]
@@ -883,7 +884,7 @@ class UserController extends Controller
             if ($validator->fails()) {
                 return res_validation_error($validator); //Sending Validation Error Message
             }
-            if (empty($request->mobile_no) && empty($request->email)) {
+            if ($request->mobile_no === null && $request->email === null) {
                 throw new Exception(trans('Email or Mobile number is Required'), 418);
             }
             if ($request->mobile_no) {
