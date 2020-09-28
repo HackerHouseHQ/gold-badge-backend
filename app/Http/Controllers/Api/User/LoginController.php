@@ -89,7 +89,7 @@ class LoginController extends Controller
                 }
             }
             if ($checkEmailExistence->status == 1) {
-                return res_success('Otp is already verified.');
+                return res(410, 'Otp is already verified.');
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
