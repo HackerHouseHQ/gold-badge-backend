@@ -894,9 +894,9 @@ class UserController extends Controller
                 }
             }
             if ($request->email) {
-                $email = User::where('email', $request->email)->first();
-                if (!$email) {
-                    throw new Exception(trans('messages.numberNotExists'), NOT_EXISTS);
+                $user = User::where('email', $request->email)->first();
+                if (!$user) {
+                    throw new Exception(trans('Email does not exists.'), NOT_EXISTS);
                 }
             }
 
