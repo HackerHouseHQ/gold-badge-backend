@@ -329,8 +329,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'nullable|array',
-                        // 'upLoadFile.*' => 'required'
-
+                        'media_type' =>  'boolean|nullable' // 0 =>video , 1 => image
                     ]
                 );
                 /**
@@ -372,6 +371,7 @@ class UserController extends Controller
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,
+                            'media_type' => $request->media_type,
                             'created_at' => CURRENT_DATE,
                             'updated_at' => CURRENT_DATE
                         ];
@@ -396,6 +396,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         'upLoadFile' => 'required|array',
+                        'media_type' => 'boolean|nullable' // 0 =>video , 1 => image
                         // 'upLoadFile.*' => 'required'
                     ]
                 );
@@ -452,6 +453,7 @@ class UserController extends Controller
                             'department_id' => $departmentId,
                             'badge_id' => $badgeId,
                             'image'  => $filename,
+                            'media_type' => $request->media_type,
                             'created_at' => CURRENT_DATE,
                             'updated_at' => CURRENT_DATE
                         ];

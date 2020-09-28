@@ -19,7 +19,7 @@
     /* Hidden by default */
     position: fixed;
     /* Stay in place */
-    z-index: 1;
+    z-index: 3;
     /* Sit on top */
     padding-top: 100px;
     /* Location of the box */
@@ -903,7 +903,7 @@ if(response.post_image.length == 0)
             $('#viewDepartment').html('');
             // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
          let row=` <div class="custom_col_class">
-     <img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
+     <img src="../storage/uploads/user_image/${response.users.image}"  alt="user-image" class="avatar" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
     
         <div class="form_div">
               <p class="form_fields">Full Name:</p>
