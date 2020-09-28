@@ -366,9 +366,18 @@ class UserController extends Controller
         $data['state_id'] = $requestData->state_id;
         $data['city_id'] = $requestData->city_id;
         if ($request->departmentImage) {
-          $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
-          $data['image'] = $departmentImage;
+          $file = $request->departmentImage;
+          $extension = $file->getClientOriginalExtension();
+          $filename = time()  . "." . $extension;
+          $path = storage_path() . '/app/public/departname';
+          $file->move($path, $filename);
+          // $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+          $data['image'] = $filename;
         }
+        // if ($request->departmentImage) {
+        //   $departmentImage = Storage::disk('public')->put('departname', $request->departmentImage);
+        //   $data['image'] = $departmentImage;
+        // }
         $insertData = Department::create($data);
         return redirect('/user_management/departmentRequest');
       }
