@@ -918,17 +918,31 @@ class UserController extends Controller
             $callback = function ($query) {
                 $query->where('status', ACTIVE);
             };
+            $siteUrl = env('APP_URL');
+
             $departmentBadge = UserDepartmentBadgeFollow::whereHas('badge.department_data', $callback)->whereHas('badge', $callback)->with(['badge.department_data' => $callback, 'badge' => $callback])
                 ->where('user_id', $request->user_id)->get();
 
             $department = UserDepartmentFollow::whereHas('departments', $callback)->with(['departments.badges' => $callback])->where('user_id', $request->user_id)->get();
             $arrDepartment = [];
             foreach ($department as $key => $value) {
+                $departmentRating = Post::where('department_id', $value->department_id)->where('flag', 1)->avg('rating');
+                $departmentReviews =  Post::where('department_id', $value->department_id)->where('flag', 1)->count();
+                foreach ($value->departments->badges as $key => $badge) {
+                    $badgeRating = Post::where('department_id', $badge->department_id)->where('badge_id', $badge->badge_id)->where('flag', 2)->avg('rating');
+                    $badgeReviews = Post::where('department_id', $badge->department_id)->where('badge_id', $badge->badge_id)->where('flag', 2)->count();
+                    $badge['total_reviews'] = $badgeReviews;
+                    $badge['rating'] = ($badgeRating) ? $badgeRating : 0;
+                }
                 $arrDepartment[] = [
                     'user_id' => $value->user_id,
                     'department_id' => $value->department_id ?? "",
                     'department_name' => $value->departments->department_name ?? "",
-                    'badges' => $value->departments->badges
+                    'department_image' => ($value->departments->image) ? $siteUrl = env('APP_URL') . 'storage/departname/' . $value->departments->image : null,
+                    'total_reviews' => $departmentReviews,
+                    'rating' => ($departmentRating) ? $departmentRating : 0,
+                    'badges' => $value->departments->badges,
+
 
                 ];
             }
