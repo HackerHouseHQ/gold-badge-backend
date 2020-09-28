@@ -165,9 +165,12 @@ class Department extends Model
    }
    public static function getDepartmentListAll($country_id, $state_id, $city_id)
    {
+      $siteUrl = env('APP_URL');
       $query = self::query()->select(
          'departments.id as department_id',
-         'departments.department_name'
+         'departments.department_name',
+         DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image) as department_image")
+
       )->where('status', ACTIVE);
       if ($country_id) {
          $query->Where('departments.country_id', $country_id);
