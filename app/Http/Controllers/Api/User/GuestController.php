@@ -20,24 +20,32 @@ class GuestController extends Controller
     }
     public function guestLogin(Request $request)
     {
-        if ($request->device_id) {
-            $guest = GuestUser::where('device_id', $request->device_id)->first();
-            if ($guest) {
-                $guest->is_active = 1;
-                $guest->save();
-                return res_success('Login sucessfully');
-            } else {
-                $insertArray = ['device_id' => $request->device_id];
-                $createGuest = GuestUser::create($insertArray);
-                return res_success('Login successfully');
+        try {
+            if ($request->device_id) {
+                $guest = GuestUser::where('device_id', $request->device_id)->first();
+                if ($guest) {
+                    $guest->is_active = 1;
+                    $guest->save();
+                    return res_success('Login sucessfully');
+                } else {
+                    $insertArray = ['device_id' => $request->device_id];
+                    $createGuest = GuestUser::create($insertArray);
+                    return res_success('Login successfully');
+                }
             }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
     }
     public function guestLogout(Request $request)
     {
-        if ($request->device_id) {
-            $guestLogout = GuestUser::where('device_id', $request->device_id)->update(['is_active' => 0]);
-            return res_success('Logout successfully');
+        try {
+            if ($request->device_id) {
+                $guestLogout = GuestUser::where('device_id', $request->device_id)->update(['is_active' => 0]);
+                return res_success('Logout successfully');
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
     }
     public function homepage(Request $request)
