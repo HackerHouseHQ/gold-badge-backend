@@ -61,10 +61,12 @@
         <div class="col-3">
         </div>
         <div class="col-3">
-          <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
+          <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top"
+            data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
         </div>
         <div class="col-3">
-          <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
+          <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
+            data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
         </div>
         <div class="col-3">
         </div>
@@ -123,7 +125,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
+                        name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -133,7 +136,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
+                        name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -141,7 +145,8 @@
                 <div class='col-2'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
                   </div>
 
                 </div>
@@ -283,8 +288,7 @@
     $("#country_id").change(function() {
       var country_id = $(this).val();
       $.ajax({
-        url: '{{route('
-        get_state ')}}',
+        url: "{{route('get_state')}}",
         type: 'get',
         data: {
           country_id: country_id
@@ -312,8 +316,7 @@
       var state_id = $(this).val();
       // alert(state_id);
       $.ajax({
-        url: '{{route('
-        get_city ')}}',
+        url: "{{route('get_city')}}",
         type: 'get',
         data: {
           state_id: state_id
