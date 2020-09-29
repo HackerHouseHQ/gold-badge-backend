@@ -508,7 +508,6 @@ class UserController extends Controller
                     ->leftjoin("users", function ($join) {
                         $join->on('posts.user_id', '=', 'users.id');
                     })
-
                     ->where('user_department_follows.user_id', $user_id)->groupBy('departments.id')
                     ->where('flag', 1)
                     ->get();
@@ -796,6 +795,17 @@ class UserController extends Controller
                 ->leftjoin("users", function ($join) {
                     $join->on('department_comments.user_id', '=', 'users.id');
                 })->get();
+            foreach ($getComment as $key => $value) {
+                $like_count = DepartmentCommentLike::where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
+                $reply_count = DepartmentSubComment::where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
+
+                $value['comment_like_count'] = $like_count;
+                $value['comment_reply_count'] = $reply_count;
+                foreach ($value->sub_comment as $k => $v) {
+                    $like_sub_count =   DepartmentSubCommentLike::where('sub_comment_id', $v->sub_comment_id)->where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
+                    $v['sub_comment_reply_count'] = $like_sub_count;
+                }
+            }
             return res_success('Comment List', array('commentList' => $getComment));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());

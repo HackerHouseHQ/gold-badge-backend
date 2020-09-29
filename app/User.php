@@ -333,7 +333,7 @@ class User extends Authenticatable
          ->leftjoin("posts", function ($join) {
             $join->on('user_department_follows.department_id', '=', 'posts.department_id');
          })
-         ->groupBy('departments.id')
+         ->groupBy('user_department_follows.department_id')
          ->where('user_department_follows.user_id', $user_id)->where('posts.flag', 1);
       if ($search) {
          $query->Where(function ($q) use ($search) {
@@ -368,7 +368,7 @@ class User extends Authenticatable
          ->leftjoin("posts", function ($join) {
             $join->on('user_department_follows.department_id', '=', 'posts.department_id');
          })
-         ->groupBy('departments.id')
+         ->groupBy('user_department_follows.department_id')
          ->where('user_department_follows.user_id', $user_id)->where('posts.flag', 1);
       if ($search) {
          $query->Where(function ($q) use ($search) {

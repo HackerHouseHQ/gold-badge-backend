@@ -116,6 +116,9 @@ class UserController extends Controller
       })->get();
     return $data;
   }
+  public function viewUserDetailBadgeRating(Request $request)
+  {
+  }
   public function viewUserDetailCommentModel(Request  $request)
   {
     $data = DepartmentComment::with('sub_comment')->select(

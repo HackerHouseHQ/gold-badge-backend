@@ -585,6 +585,54 @@
         </div>
     </div>
 </div>
+<div class="modal fade" id="viewUserDetailBadgeList" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="badge"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="">
+                {{-- <div class="row">
+                    <div class="col-6" id="userImage2">
+
+          </div>
+                    <div class="col-12" id="viewDepartmentBadge">
+
+
+                    </div>
+                </div> --}}
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+                            <div>
+                                <table class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th><span class="tbl_row">SN.</span></th>
+                                            <th> <span class="tbl_row">Reason Question</span> </th>
+                                            <th> <span class="tbl_row">Rating</span> </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="viewDepartment">
+
+                                    </tbody>
+
+                                </table>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Trigger the Modal -->
 {{-- <img id="myImg" src="img_snow.jpg" alt="user name" style="width:100%;max-width:300px"> --}}
 
@@ -658,6 +706,17 @@
     });
 </script>
 <script>
+    function viewUserDetailBadgeList(id){
+
+        $.ajax({
+            url: "{{ route('viewUserDetailBadgeRating') }}/" + id,
+            type: 'get',
+            success: function(response) {
+               // $('#viewUserDetailBadgeList').modal('show');
+            }
+        });
+        
+    }
     function viewUserDetailCommentModel(id) {
         $.ajax({
             url: "{{ route('viewUserDetailCommentModel') }}/" + id,
@@ -939,7 +998,11 @@
             
               <div class="form_div">
               <p class="form_fields">Rating:</p>
+              
+
+             
               <p class="form_fields">${response.rating}</p>
+        
               </div>
             
               <div class="form_div">
@@ -1007,6 +1070,7 @@
     span.onclick = function() {
         modal.style.display = "none";
     }
+    // ${(response.badge_id) ? `<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeList(${response.id})'>view list</a>`: ``}
 </script>
 
 @endsection

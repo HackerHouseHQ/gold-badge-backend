@@ -64,6 +64,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/viewUserDetailLikeModel/{id?}', 'UserController@viewUserDetailLikeModel')->name('viewUserDetailLikeModel');
     Route::get('/viewUserDetailShareModel/{id?}', 'UserController@viewUserDetailShareModel')->name('viewUserDetailShareModel');
     Route::get('/viewUserDetailCommentModel/{id?}', 'UserController@viewUserDetailCommentModel')->name('viewUserDetailCommentModel');
+    Route::get('/viewUserDetailBadgeRating/{id?}', 'UserController@viewUserDetailBadgeRating')->name('viewUserDetailBadgeRating');
 
 
 
