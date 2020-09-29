@@ -1006,7 +1006,7 @@
             $("#country_id").change(function() {
                 var country_id = $(this).val();
                 $.ajax({
-                    url: "{{route('get_state')}}"",
+                    url: "{{route('get_state')}}",
                     type: 'get',
                     data: {
                         country_id: country_id
