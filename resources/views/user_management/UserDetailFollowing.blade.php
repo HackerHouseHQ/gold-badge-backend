@@ -124,6 +124,7 @@
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
               <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
               <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
+              <li class="breadcrumb-item"><a href={{route('user')}}>User</a></li>
               <li class="breadcrumb-item active" aria-current="page">Following Department</li>
             </ol>
           </nav>
