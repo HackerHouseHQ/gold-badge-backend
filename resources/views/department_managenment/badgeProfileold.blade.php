@@ -72,8 +72,7 @@
             <div class="card-body box-profile">
               <div class="text-center">
                 @if(!empty($data->image))
-                <img src="{{env('APP_URL').'/storage/app/public/departname/' .$data->department_data->image}}"
-                  alt="Avatar" class="avatar1">
+                <img src="{{env('APP_URL').'/storage/app/public/departname/' .$data->department_data->image}}" alt="Avatar" class="avatar1">
                 @else
                 <img src="{{url('goldbadge_logo.png')}}" alt="Avatar" class="avatar1">
                 @endif
@@ -139,11 +138,9 @@
                       <span class="from_to_select">
                         <label for="from_text" class="serach_by_text">From</label>
 
-                        <input type="date" class="from_control" name="fromdate" id="fromdate"
-                          style="-webkit-appearance: media-slider;">
+                        <input type="date" class="from_control" name="fromdate" id="fromdate" style="-webkit-appearance: media-slider;">
                         <label for="to_text" class="serach_by_text">To</label>
-                        <input type="date" class="from_control" name="todate" id="todate"
-                          style="-webkit-appearance: media-slider;">
+                        <input type="date" class="from_control" name="todate" id="todate" style="-webkit-appearance: media-slider;">
                       </span>
                       <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                       <button type="button" id="search_data1" class="apply_btnn">Apply</button>
@@ -238,47 +235,51 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#data1').DataTable({
-     "searching": false,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": false,
-     "lengthChange": false,
-     "bAutoWidth": false,
-     'ajax': {
-        'url':"{{route('department_profile_list')}}",
-       'data': function(data){
-//            var status_id = $('#status_id').val();
-//          data.status_id = status_id;
-//          var state_id = $('#state_id').val();
-//          data.state_id = state_id;
-//          var country_id = $('#country_id').val();
-//          data.country_id = country_id;
-//           var fromdate = $('#fromdate').val();
-//          data.fromdate = fromdate;
-//          var todate = $('#todate').val();
-//          data.todate = todate;
-//          var search = $('#search').val();
-//          data.search = search;
-          
+  $(document).ready(function() {
+    var dataTable = $('#data1').DataTable({
+      "searching": false,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": false,
+      "lengthChange": false,
+      "bAutoWidth": false,
+      'ajax': {
+        'url': "{{route('department_profile_list')}}",
+        'data': function(data) {
+          //            var status_id = $('#status_id').val();
+          //          data.status_id = status_id;
+          //          var state_id = $('#state_id').val();
+          //          data.state_id = state_id;
+          //          var country_id = $('#country_id').val();
+          //          data.country_id = country_id;
+          //           var fromdate = $('#fromdate').val();
+          //          data.fromdate = fromdate;
+          //          var todate = $('#todate').val();
+          //          data.todate = todate;
+          //          var search = $('#search').val();
+          //          data.search = search;
+
         }
-       },
-    'columns': [
-        { data: 'rating' } ,
-        { data: 'reviews' }
-    ],
-     "columnDefs": [
-    { "width": "10%", "targets": 0 }
-  ]
+      },
+      'columns': [{
+          data: 'rating'
+        },
+        {
+          data: 'reviews'
+        }
+      ],
+      "columnDefs": [{
+        "width": "10%",
+        "targets": 0
+      }]
+    });
+    //  $('#search_data1').click(function(){
+    //     dataTable.draw();
+    //  });
+    //  $('#search').keyup(function(){
+    //     dataTable.draw();
+    //  });
   });
-//  $('#search_data1').click(function(){
-//     dataTable.draw();
-//  });
-//  $('#search').keyup(function(){
-//     dataTable.draw();
-//  });
-});
 </script>
 @endsection

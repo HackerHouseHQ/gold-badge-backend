@@ -22,8 +22,7 @@
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
           <div class="row-lg-6 row-5">
             <a href="{{route('countries')}}" class="btn btn-sm btn-neutral">Manage Countries</a>
-            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral"
-              style="background-color:#fb6340;color:#fff;">Manage Ethnicity</a>
+            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral" style="background-color:#fb6340;color:#fff;">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
 
@@ -48,30 +47,20 @@
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <div class="row">
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #e4bd46; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}"
-                    class="btn btn-sm btn-neutral">Add Country +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">Add Country +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}"
-                    class="btn btn-sm btn-neutral">Add State +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">Add State +</a></button>
               </div>
 
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}"
-                    class="btn btn-sm btn-neutral">Add City +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">Add City +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"><a
-                    style="background-color: #fb6340;  color:#fff;font-size: 15px;"
-                    href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
+                <button type="button" class="btn btn-default"><a style="background-color: #fb6340;  color:#fff;font-size: 15px;" href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
               </div>
               <div class="col-3 py-2">
-                <button type="button" class="btn btn-default"><a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
-                    href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
+                <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
                     +</a></button>
               </div>
             </div>
@@ -92,11 +81,9 @@
               @foreach($data as $ethnicityData)
               <tr>
                 <td><span class='tbl_row_new'>{{$ethnicityData->ethnicity_name}}</span></td>
-                <td><span class='tbl_row_new'> <button class="btn btn-info btn-sm" data-toggle="modal"
-                      data-target="#exampleModalCenter" onclick="openModal({{$ethnicityData->id}})">
+                <td><span class='tbl_row_new'> <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModalCenter" onclick="openModal({{$ethnicityData->id}})">
                       Edit</button><span class='tbl_row_new'></td>
-                <td><button class="btn btn-danger btn-sm"><a style="color:#fff;"
-                      href="{{route('DeleteEthnicity',$ethnicityData->id)}}">Delete</a></button>
+                <td><button class="btn btn-danger btn-sm"><a style="color:#fff;" href="{{route('DeleteEthnicity',$ethnicityData->id)}}">Delete</a></button>
                 </td>
               </tr>
               @endforeach
@@ -109,8 +96,7 @@
 </div>
 
 {{-- model edit --}}
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -145,16 +131,16 @@
 @section('script')
 <script type="text/javascript">
   function openModal(id) {
-      // alert(id);
-      $.ajax({
-          url: "{{ route('Show_edit_ethnicity') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-          // $('#businessName').html(response.genderData);
-          
-           
-              $('#businessDetails').html('');
-            let row = `
+    // alert(id);
+    $.ajax({
+      url: "{{ route('Show_edit_ethnicity') }}/" + id,
+      type: 'get',
+      success: function(response) {
+        // $('#businessName').html(response.genderData);
+
+
+        $('#businessDetails').html('');
+        let row = `
               
                 <b>Ethnicity Name</b>
                 <input type="hidden" name="id" value = "${response.id}">
@@ -162,37 +148,37 @@
               
  
             `;
-              $('#businessDetails').append(row);
-              // $('#businessDetails').html(row);
-          
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
-    }
+        $('#businessDetails').append(row);
+        // $('#businessDetails').html(row);
+
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  }
 </script>
 <script>
-  $('#datatable-basic').dataTable( {
+  $('#datatable-basic').dataTable({
     language: {
       searchPlaceholder: "Ethnicity",
       paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
+        previous: '<i class="fas fa-angle-left"></i>',
+        next: '<i class="fas fa-angle-right"></i>'
       },
       aria: {
-          paginate: {
-              previous: 'Previous',
-              next:     'Next'
-          }
+        paginate: {
+          previous: 'Previous',
+          next: 'Next'
+        }
       }
-  },
-     "searching": true,
-     'processing': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true
-} );
+    },
+    "searching": true,
+    'processing': true,
+    "bFilter": true,
+    "bInfo": true,
+    "lengthChange": true,
+    "bAutoWidth": true
+  });
 </script>
 @endsection

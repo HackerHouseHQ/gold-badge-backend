@@ -52,8 +52,7 @@
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
           <div class="row-lg-6 row-5">
-            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral"
-              style="background-color:#fb6340;color:#fff;">Manage Countries</a>
+            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral" style="background-color:#fb6340;color:#fff;">Manage Countries</a>
             <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
@@ -91,30 +90,20 @@
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <div class="row">
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #fb6340; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}"
-                    class="btn btn-sm btn-neutral">Add Country +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #fb6340; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">Add Country +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}"
-                    class="btn btn-sm btn-neutral">Add State +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">Add State +</a></button>
               </div>
 
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}"
-                    class="btn btn-sm btn-neutral">Add City +</a></button>
+                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">Add City +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"><a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
-                    href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
+                <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
               </div>
               <div class="col-3 py-2">
-                <button type="button" class="btn btn-default"><a
-                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
-                    href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
+                <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
                     +</a></button>
               </div>
             </div>
@@ -145,8 +134,7 @@
 </div>
 
 {{-- model view city --}}
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header custom_modal_header">
@@ -181,8 +169,7 @@
 </div>
 {{-- end model view city --}}
 {{-- model Edit city --}}
-<div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:100%">
       <div class="modal-header custom_modal_header">
@@ -219,8 +206,7 @@
 </div>
 {{-- end model Edit city --}}
 {{-- model view department --}}
-<div class="modal fade" id="viewDepartmentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="viewDepartmentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:150%">
       <div class="modal-header custom_modal_header">
@@ -241,8 +227,7 @@
 </div>
 {{-- end model view department --}}
 {{-- model Edit country --}}
-<div class="modal fade" id="EditCountrymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="EditCountrymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:100%">
       <div class="modal-header custom_modal_header">
@@ -319,64 +304,73 @@
 
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Country , State Name",
-      "emptyTable":     "No data found.",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Country , State Name",
+        "emptyTable": "No data found.",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": true,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-    'ajax': {
-       'url':"{{route('countryList')}}",
-       'data': function(data){
-     
-        
-       }
-    },
-    'columns': [
-        { data: 'SN' } ,
-        { data: 'country_name' } ,
-        { data: 'state_name' },
-        { data: 'city_name' },
-        { data: 'view' },
+        }
+      },
+      "searching": true,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('countryList')}}",
+        'data': function(data) {
+
+
+        }
+      },
+      'columns': [{
+          data: 'SN'
+        },
+        {
+          data: 'country_name'
+        },
+        {
+          data: 'state_name'
+        },
+        {
+          data: 'city_name'
+        },
+        {
+          data: 'view'
+        },
         // { data: 'view' },
-    ]
+      ]
+    });
+    $('#search').keyup(function() {
+      dataTable.draw();
+    });
   });
-  $('#search').keyup(function(){
-     dataTable.draw();
-  });
-});
 </script>
 <script type="text/javascript">
-  function viewCityModel1(id){
+  function viewCityModel1(id) {
     // alert(id);
-     $.ajax({
-          url: "{{ route('viewCityModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            
-          if(response.length) {
-            console.log('aaa--',response);
-            $('#noData').html('');
-            // $('#noData').css("display","block"); 
-              var i = 0;
-              let row = `<div class="table-responsive">
+    $.ajax({
+      url: "{{ route('viewCityModel') }}/" + id,
+      type: 'get',
+      success: function(response) {
+
+        if (response.length) {
+          console.log('aaa--', response);
+          $('#noData').html('');
+          // $('#noData').css("display","block"); 
+          var i = 0;
+          let row = `<div class="table-responsive">
               <div>
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -386,50 +380,50 @@
                     </tr>
                   </thead>
                   <tbody id="businessDetails">`;
-              $.each(response, function(key, value){
-                row += `
+          $.each(response, function(key, value) {
+            row += `
                 <tr>
                   <td> ${++i} </td>
                   <td class="text-capitalize">${value.city_name}</td>
                  </tr>
                 `;
-               
-              })
-               row +=`    </tbody>
+
+          })
+          row += `    </tbody>
                 </table>
               </div>
             </div>`;
-              $('#noData').append(row)
-            } else {
-              console.log('else');
-              // let row = `
-              //   <tr>
-              //     <td colspan="7"> Record not found! </td>
-              //   </tr>
-              //   `;
-              $('#noData').html("No city found.");
-                // $('#noData').css("display","none");
-            }
-             $('#exampleModalCenter').modal('show');
-        },
-        error: function(err) {
-          console.log(err);
+          $('#noData').append(row)
+        } else {
+          console.log('else');
+          // let row = `
+          //   <tr>
+          //     <td colspan="7"> Record not found! </td>
+          //   </tr>
+          //   `;
+          $('#noData').html("No city found.");
+          // $('#noData').css("display","none");
         }
-      });
-  }  
+        $('#exampleModalCenter').modal('show');
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
+  }
 
-    function EditCityModel1(id){
+  function EditCityModel1(id) {
     // alert(id);
-     $.ajax({
-          url: "{{ route('viewCityModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            console.log(response);
-          if(response) {
-              $('#EditCity').html('');
-              var i = 0;
-              $.each(response, function(key, value){
-                let row = `
+    $.ajax({
+      url: "{{ route('viewCityModel') }}/" + id,
+      type: 'get',
+      success: function(response) {
+        console.log(response);
+        if (response) {
+          $('#EditCity').html('');
+          var i = 0;
+          $.each(response, function(key, value) {
+            let row = `
                 
                     <form action="{{route('editCityModelView')}}" method ="GET">
                  
@@ -447,34 +441,34 @@
                   </form>
                 
                 `;
-                $('#EditCity').append(row)
-              })
-            } else {
-              let row = `
+            $('#EditCity').append(row)
+          })
+        } else {
+          let row = `
                 <tr>
                   <td colspan="7"> Record not found! </td>
                 </tr>
                 `;
-                $('#EditCity').html(row);
-            }
-             $('#EditCitymodel1').modal('show');
-        },
-        error: function(err) {
-          console.log(err);
+          $('#EditCity').html(row);
         }
-      });
+        $('#EditCitymodel1').modal('show');
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   }
-   function viewDepartmentModel1(id){
+
+  function viewDepartmentModel1(id) {
     $.ajax({
-          url: "{{ route('viewDeparmentModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            
-            if(response.length >0)
-            {
-            $('#viewDepartment').html('');
-            var i = 1;
-            let row=` <div class="table-responsive">
+      url: "{{ route('viewDeparmentModel') }}/" + id,
+      type: 'get',
+      success: function(response) {
+
+        if (response.length > 0) {
+          $('#viewDepartment').html('');
+          var i = 1;
+          let row = ` <div class="table-responsive">
               <div>
                 <table class="table table-bordered table-hover">
                   <thead>
@@ -489,9 +483,9 @@
                     </tr>
                   </thead>
                   <tbody>`;
-            $.each(response, function(key, value){
-           console.log(value);
-               row += `
+          $.each(response, function(key, value) {
+            console.log(value);
+            row += `
                <tr>
               <td>${i++}</td>
               <td class="text-capitalize">${value.department_name}</td>
@@ -501,99 +495,99 @@
               <td class="text-capitalize">${(value.total_reviews) ? value.total_reviews : 0 } reviews</td>
               <td class="text-capitalize">${value.badges} badges</td>
            </tr>`;
-           
-            });
-            row +=`  </tbody>
+
+          });
+          row += `  </tbody>
 </table>
 </div>
 </div>`;
-            $('#viewDepartment').append(row);
-            }
-            else{
-              $('#viewDepartment').html('<div>No record found.</div>');
-            }
-             
-        $('#viewDepartmentModel').modal('show');
-          },
-        error: function(err) {
-          console.log(err);
+          $('#viewDepartment').append(row);
+        } else {
+          $('#viewDepartment').html('<div>No record found.</div>');
         }
-      });
-    }
-   
-      // $('#viewDepartment').html('');
-      //   var i = 0;
-      //   let row = `
-      //     <tr>
-      //        <td> 1 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
-      //     <tr>
-      //        <td> 2 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
-      //     <tr>
-      //        <td> 3 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
-      //     <tr>
-      //        <td> 4 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
-      //     <tr>
-      //        <td> 5 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
-      //     <tr>
-      //        <td> 6 </td>
-      //        <td class="text-capitalize"> India</td>
-      //        <td class="text-capitalize">UP</td>
-      //        <td class="text-capitalize">Varanasi</td>
-      //        <td class="text-capitalize">Rating 4</td>
-      //        <td class="text-capitalize">120 reviews</td>
-      //        <td class="text-capitalize">10 badges</td>
-      //     </tr>
 
-      //   `;
-      //   $('#viewDepartment').append(row)
-      //   $('#viewDepartmentModel').modal('show');
-      // }
-      function EditCountryModel1(id , country_name) {
-        $('#country_id').val(id);
-        $('#country_name').val(country_name);
-        $('#EditCountrymodel1').modal('show');
+        $('#viewDepartmentModel').modal('show');
+      },
+      error: function(err) {
+        console.log(err);
       }
-      function EditStateModel1(id , state_name) {
-     
-        $('#state_id').val(id);
-        $('#state_name').val(state_name);
-        
-        $('#EditStatemodel1').modal('show');
-      }
+    });
+  }
+
+  // $('#viewDepartment').html('');
+  //   var i = 0;
+  //   let row = `
+  //     <tr>
+  //        <td> 1 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+  //     <tr>
+  //        <td> 2 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+  //     <tr>
+  //        <td> 3 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+  //     <tr>
+  //        <td> 4 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+  //     <tr>
+  //        <td> 5 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+  //     <tr>
+  //        <td> 6 </td>
+  //        <td class="text-capitalize"> India</td>
+  //        <td class="text-capitalize">UP</td>
+  //        <td class="text-capitalize">Varanasi</td>
+  //        <td class="text-capitalize">Rating 4</td>
+  //        <td class="text-capitalize">120 reviews</td>
+  //        <td class="text-capitalize">10 badges</td>
+  //     </tr>
+
+  //   `;
+  //   $('#viewDepartment').append(row)
+  //   $('#viewDepartmentModel').modal('show');
+  // }
+  function EditCountryModel1(id, country_name) {
+    $('#country_id').val(id);
+    $('#country_name').val(country_name);
+    $('#EditCountrymodel1').modal('show');
+  }
+
+  function EditStateModel1(id, state_name) {
+
+    $('#state_id').val(id);
+    $('#state_name').val(state_name);
+
+    $('#EditStatemodel1').modal('show');
+  }
 </script>
 @endsection

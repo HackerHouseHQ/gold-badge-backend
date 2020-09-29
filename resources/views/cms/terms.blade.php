@@ -1,10 +1,8 @@
 @extends('admin_dash.main')
 @section('content')
-<link rel="stylesheet" type="text/css"
-  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
-<link rel="stylesheet" type="text/css"
-  href="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/components/bootstrap/dist/css/bootstrap-theme.min.css">
+<link rel="stylesheet" type="text/css" href="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/components/bootstrap/dist/css/bootstrap-theme.min.css">
 <style>
   .dropdown-menu li a,
   .btn {
@@ -71,8 +69,7 @@
               @csrf
               <div class="card-body pad">
                 <div class="mb-3">
-                  <textarea class="textarea" name="terms" placeholder="Enter text ..."
-                    style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;">{{@$Terms->terms}}</textarea>
+                  <textarea class="textarea" name="terms" placeholder="Enter text ..." style="width: 100%; height: 200px; font-size: 14px; line-height: 18px;">{{@$Terms->terms}}</textarea>
                 </div>
                 <div class="row">
                   <div class="col-12 text-center">
@@ -95,8 +92,7 @@
 
 @endsection
 @section('script')
-<script
-  src="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/components/wysihtml5x/dist/wysihtml5x-toolbar.min.js">
+<script src="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/components/wysihtml5x/dist/wysihtml5x-toolbar.min.js">
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script> -->
@@ -106,10 +102,10 @@
 <script src="http://bootstrap-wysiwyg.github.io/bootstrap3-wysiwyg/dist/bootstrap3-wysihtml5.min.js"></script>
 <script>
   $('.textarea').wysihtml5({
-            toolbar: {
-                fa: true
-            }
-        });
+    toolbar: {
+      fa: true
+    }
+  });
 </script>
 </script>
 

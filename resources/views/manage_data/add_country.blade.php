@@ -45,8 +45,7 @@
               {{ csrf_field() }}
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">County Name</label>
-                <input type="text" class="form-control" name="country_name" id="exampleFormControlInput1"
-                  value="{{ old('counry_name') }}" placeholder="Enter Country Name">
+                <input type="text" class="form-control" name="country_name" id="exampleFormControlInput1" value="{{ old('counry_name') }}" placeholder="Enter Country Name">
               </div>
               <div class="form-group">
                 OR
@@ -68,8 +67,7 @@
 
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a style="color : white;" href="{{route('countries')}}"><button type="button"
-                    class="btn btn btn-info">Back</button></a>
+                <a style="color : white;" href="{{route('countries')}}"><button type="button" class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>

@@ -1002,60 +1002,62 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function () {
-        $("#country_id").change(function(){
-        var country_id = $(this).val();
+        $(document).ready(function() {
+            $("#country_id").change(function() {
+                var country_id = $(this).val();
                 $.ajax({
-                url: '{{route('get_state')}}',
-                        type: 'get',
-                        data: {country_id:country_id},
-                        dataType: 'json',
-                        success:function(response){
+                    url: "{{route('get_state')}}"",
+                    type: 'get',
+                    data: {
+                        country_id: country_id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
                         var len = response.length;
-                                $("#state_id").empty();
-                                $("#state_id").append("<option value=''>Please Select</option>");
-                                for (var i = 0; i < len; i++){
-                        var id = response[i]['id'];
-                                var name = response[i]['name'];
-                                $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
+                        $("#state_id").empty();
+                        $("#state_id").append("<option value=''>Please Select</option>");
+                        for (var i = 0; i < len; i++) {
+                            var id = response[i]['id'];
+                            var name = response[i]['name'];
+                            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
                         }
-                        }
+                    }
                 });
+            });
         });
-        }
-        );
     </script>
     <script type="text/javascript">
-        $(document).ready(function () {
-            $("#state_id").change(function(){
-            // alert('dfshj');
-            var state_id = $(this).val();
-                    // alert(state_id);
-                    $.ajax({
-                    url: '{{route('get_city')}}',
-                            type: 'get',
-                            data: {state_id:state_id},
-                            dataType: 'json',
-                            success:function(response){
-                            var len = response.length;
-                                    $("#city_id").empty();
-                                    $("#city_id").append("<option value=''>Please Select</option>");
-                                    for (var i = 0; i < len; i++){
+        $(document).ready(function() {
+            $("#state_id").change(function() {
+                // alert('dfshj');
+                var state_id = $(this).val();
+                // alert(state_id);
+                $.ajax({
+                    url: "{{route('get_city')}}",
+                    type: 'get',
+                    data: {
+                        state_id: state_id
+                    },
+                    dataType: 'json',
+                    success: function(response) {
+                        var len = response.length;
+                        $("#city_id").empty();
+                        $("#city_id").append("<option value=''>Please Select</option>");
+                        for (var i = 0; i < len; i++) {
                             var id = response[i]['id'];
-                                    var name = response[i]['name'];
-                                    $("#city_id").append("<option value='" + id + "'>" + name + "</option>");
-                            }
-                            }
+                            var name = response[i]['name'];
+                            $("#city_id").append("<option value='" + id + "'>" + name + "</option>");
+                        }
                     }
-                    );
+                });
+            });
         });
-    });
     </script>
     <script>
         function myFunction() {
-  document.getElementById("search_data").reset();
-  location.reload();
-  }
+            document.getElementById("search_data").reset();
+            location.reload();
+        }
     </script>
 </body>
 

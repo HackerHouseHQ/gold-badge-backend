@@ -61,12 +61,10 @@
         <div class="col-3">
         </div>
         <div class="col-3">
-          <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top"
-            data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
+          <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
         </div>
         <div class="col-3">
-          <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
-            data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
+          <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
         </div>
         <div class="col-3">
         </div>
@@ -94,7 +92,7 @@
                   </div>
                 </div>
                 <div class='col-4'>
-                  <?php $countryList = App\Country::get();?>
+                  <?php $countryList = App\Country::get(); ?>
                   <div class="form-group">
                     <select class="form-control" name="country_id" id="country_id">
                       <option value="">Select Country</option>
@@ -125,8 +123,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -136,8 +133,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -145,8 +141,7 @@
                 <div class='col-2'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()"
-                      class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
                   </div>
 
                 </div>
@@ -231,7 +226,7 @@
               <form class="form-horizontal" action="{{route('AddBadge')}}" method="POST" enctype="multipart/form-data">
                 {{ csrf_field() }}
                 <div class="card-body">
-                  <?php $departmentName = App\Department::where('status',1)->get(); ?>
+                  <?php $departmentName = App\Department::where('status', 1)->get(); ?>
                   <div class="form-group row">
                     <select class="form-control select2" style="width: 100%;" id="department_id" name="department_id">
                       <option value="">Department Name</option>
@@ -284,83 +279,89 @@
 @section('script')
 {{-- filter --}}
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#country_id").change(function(){
-        var country_id = $(this).val();
-        $.ajax({
-            url: '{{route('get_state')}}',
-            type: 'get',
-            data: {country_id:country_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#state_id").empty();
-            $("#state_id").append("<option value=''>Please Select State</option>");
+  $(document).ready(function() {
+    $("#country_id").change(function() {
+      var country_id = $(this).val();
+      $.ajax({
+        url: '{{route('
+        get_state ')}}',
+        type: 'get',
+        data: {
+          country_id: country_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#state_id").empty();
+          $("#state_id").append("<option value=''>Please Select State</option>");
 
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#state_id").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#state_id").change(function(){
+  $(document).ready(function() {
+    $("#state_id").change(function() {
       // alert('dfshj');
-        var state_id = $(this).val();
-        // alert(state_id);
-        $.ajax({
-            url: '{{route('get_city')}}',
-            type: 'get',
-            data: {state_id:state_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#city_id").empty();
-            $("#city_id").append("<option value=''>Please Select City</option>");
+      var state_id = $(this).val();
+      // alert(state_id);
+      $.ajax({
+        url: '{{route('
+        get_city ')}}',
+        type: 'get',
+        data: {
+          state_id: state_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#city_id").empty();
+          $("#city_id").append("<option value=''>Please Select City</option>");
 
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#city_id").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#city_id").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
 {{-- end filter --}}
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": true,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-        'url':"{{route('badge_list')}}",
-       'data': function(data){
-            var status_id = $('#status_id').val();
+        }
+      },
+      "searching": true,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('badge_list')}}",
+        'data': function(data) {
+          var status_id = $('#status_id').val();
           data.status_id = status_id;
           var state_id = $('#state_id').val();
           data.state_id = state_id;
@@ -368,52 +369,66 @@
           data.country_id = country_id;
           var city_id = $('#city_id').val();
           data.city_id = city_id;
-           var fromdate = $('#fromdate').val();
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
           //  var search = $('#search').val();
           // data.search = search;
         }
-       },
-    'columns': [
-        { data: 'badge_name' } ,
-        { data: 'department_name' },
-        { data: 'badge_rating' },
-        { data: 'department_rating' },
-        { data: 'registered_on' },
-        { data: 'view' },
-    ]
+      },
+      'columns': [{
+          data: 'badge_name'
+        },
+        {
+          data: 'department_name'
+        },
+        {
+          data: 'badge_rating'
+        },
+        {
+          data: 'department_rating'
+        },
+        {
+          data: 'registered_on'
+        },
+        {
+          data: 'view'
+        },
+      ]
+    });
+    $('#search_data1').click(function() {
+      dataTable.draw();
+    });
+    //  $('#search').keyup(function(){
+    //    dataTable.draw();
+    // });
   });
-  $('#search_data1').click(function(){
-     dataTable.draw();
-  });
-  //  $('#search').keyup(function(){
-  //    dataTable.draw();
-  // });
-});
 </script>
 <script type="text/javascript">
-  function status(id){
-       $.ajax({
+  function status(id) {
+    $.ajax({
       url: "{{route('badge_status')}}",
       type: "post",
-      data: {'user_id':id ,'_token': "{{ csrf_token() }}"},
-        success: function (data) {
-            location.reload();// refresh same page
-        }
+      data: {
+        'user_id': id,
+        '_token': "{{ csrf_token() }}"
+      },
+      success: function(data) {
+        location.reload(); // refresh same page
+      }
     });
   }
 </script>
 <script type="text/javascript">
-  @if (count($errors) > 0)
-      $('#badge').modal('show');
+  @if(count($errors) > 0)
+  $('#badge').modal('show');
   @endif
 </script>
 <script>
   function myFunction() {
-document.getElementById("search_data").reset();
-}
+    document.getElementById("search_data").reset();
+  }
 </script>
 
 @endsection

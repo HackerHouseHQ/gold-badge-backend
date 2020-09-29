@@ -41,13 +41,11 @@
               </ul>
             </div>
             @endif
-            <form class="form-horizontal" method="POST" action="{{route('add_ethnicity')}}"
-              enctype="multipart/form-data">
+            <form class="form-horizontal" method="POST" action="{{route('add_ethnicity')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">Ethnicity Name</label>
-                <input type="text" class="form-control" name="ethnicity_name" id="exampleFormControlInput1"
-                  value="{{ old('ethnicity_name') }}" placeholder="Enter Ethnicity Name">
+                <input type="text" class="form-control" name="ethnicity_name" id="exampleFormControlInput1" value="{{ old('ethnicity_name') }}" placeholder="Enter Ethnicity Name">
               </div>
               <div class="form-group">
                 OR
@@ -69,8 +67,7 @@
 
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a style="color : white;" href="{{route('ethnicity')}}"><button type="button"
-                    class="btn btn btn-info">Back</button></a>
+                <a style="color : white;" href="{{route('ethnicity')}}"><button type="button" class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>

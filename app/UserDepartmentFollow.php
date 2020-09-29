@@ -33,7 +33,7 @@ class UserDepartmentFollow extends Model
                 $join->on('department_votes.user_id', '=', 'users.id');
             });
     }
-    public function post_image()
+    public function post_images()
     {
         $siteUrl = env('APP_URL');
         return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
@@ -76,7 +76,7 @@ class UserDepartmentFollow extends Model
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })->where('user_department_follows.user_id', $user_id)
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
+            ->where('flag', 1)->with('post_images')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataLike($user_id)
@@ -97,9 +97,6 @@ class UserDepartmentFollow extends Model
             DB::raw('COUNT(department_likes.post_id) as like_count'),
             DB::raw('COUNT(department_shares.post_id) as share_count'),
             DB::raw('COUNT(department_comments.post_id) as comment_count')
-
-
-
         )
             ->leftjoin("departments", function ($join) {
                 $join->on('posts.department_id', '=', 'departments.id');
@@ -116,7 +113,7 @@ class UserDepartmentFollow extends Model
             ->leftjoin("department_comments", function ($join) {
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('like_count', 'DESC')->paginate(ITEM_PER_PAGE);
+            ->where('flag', 1)->with('post_images')->with('post_vote')->groupBy('posts.id')->orderBy('like_count', 'DESC')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataShare($user_id)
@@ -155,7 +152,7 @@ class UserDepartmentFollow extends Model
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
 
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->orderBy('share_count', 'DESC')->paginate(ITEM_PER_PAGE);
+            ->where('flag', 1)->with('post_images')->with('post_vote')->groupBy('posts.id')->orderBy('share_count', 'DESC')->paginate(ITEM_PER_PAGE);
         return $query;
     }
     public  static function getPostDepartmentDataGuest($user_id)
@@ -194,7 +191,7 @@ class UserDepartmentFollow extends Model
                 $join->on('department_comments.post_id', '=', 'posts.id');
             })
 
-            ->where('flag', 1)->with('post_image')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
+            ->where('flag', 1)->with('post_images')->with('post_vote')->groupBy('posts.id')->latest('posts.created_at')->paginate(ITEM_PER_PAGE);
         return $query;
     }
 }

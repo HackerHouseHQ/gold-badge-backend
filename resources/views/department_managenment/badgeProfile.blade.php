@@ -141,8 +141,7 @@
                   <div class="card-body box-profile">
                     <div class="text-center">
                       @if(!empty($data->department_data->image))
-                      <img src="{{'../storage/departname/' .$data->department_data->image}}" alt="Avatar"
-                        class="avatar1">
+                      <img src="{{'../storage/departname/' .$data->department_data->image}}" alt="Avatar" class="avatar1">
                       @else
                       <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar" class="avatar1">
 
@@ -191,8 +190,7 @@
 
                     {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
                     {{-- <div class="text-center">
-                      <a href='javascript:void(0)' onclick='viewDepartmentBadgeModel1({{$data->id}})'><span
-                      class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
+                      <a href='javascript:void(0)' onclick='viewDepartmentBadgeModel1({{$data->id}})'><span class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
                     </a>
                   </div> --}}
 
@@ -226,8 +224,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select from date" type="text" value=""
-                              name="fromdate" id="fromdate">
+                            <input class="form-control datepicker" placeholder="Select from date" type="text" value="" name="fromdate" id="fromdate">
                           </div>
                         </div>
                       </div>
@@ -237,8 +234,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select to date" type="text" value=""
-                              name="todate" id="todate">
+                            <input class="form-control datepicker" placeholder="Select to date" type="text" value="" name="todate" id="todate">
                           </div>
                         </div>
                       </div>
@@ -246,8 +242,7 @@
                       <div class='col-2'>
                         <div class="d-flex">
                           <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                          <button type="button" value="Reset form" onclick="myFunction()"
-                            class="btn btn-info apply_btnn">Reset</button>
+                          <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
                         </div>
 
                       </div>
@@ -293,25 +288,17 @@
                           </p>
 
                           <span class="star_icon1">
-                            @if ($badgeRating >= 1 && $badgeRating <2)<img
-                              src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
+                            @if ($badgeRating >= 1 && $badgeRating <2)<img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
                               @endif
                               @if ( $badgeRating
-                              >=2&& $badgeRating <3)<img <img
-                                src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
+                              >=2&& $badgeRating <3)<img <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
                                 @endif
-                                @if ($badgeRating >=3 && $badgeRating <4) <img
-                                  src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                @if ($badgeRating >=3 && $badgeRating <4) <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="rating_icon">
                                   @endif
                                   @if ($badgeRating
-                                  >=4 && $badgeRating <5) <img
-                                    src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt=""
-                                    class="rating_icon">
+                                  >=4 && $badgeRating <5) <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="rating_icon">
                                     @endif
-                                    @if ( $badgeRating==5 ) <img
-                                      src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt=""
-                                      class="rating_icon">
+                                    @if ( $badgeRating==5 ) <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="rating_icon">
 
                                     @endif
                           </span>
@@ -330,8 +317,7 @@
                               <p class="number_ratings_black_new">Honesty</p>
 
                               <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="rating_icon">
                               </span>
                               <span class="vertical_baar">|</span>
                               <p class="number_ratings_black_new">{{$fiveRating}}</p>
@@ -342,8 +328,7 @@
                               <p class="number_ratings_black_new">Communication</p>
 
                               <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="rating_icon">
                               </span>
                               <span class="vertical_baar">|</span>
                               <p class="number_ratings_black_new">{{$fourRating}}</p>
@@ -354,8 +339,7 @@
                               <p class="number_ratings_black_new">Respect</p>
 
                               <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="rating_icon">
                               </span>
                               <span class="vertical_baar">|</span>
                               <p class="number_ratings_black_new">{{$threeRating}}</p>
@@ -366,8 +350,7 @@
                               <p class="number_ratings_black_new">Better</p>
 
                               <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
                               </span>
                               <span class="vertical_baar">|</span>
                               <p class="number_ratings_black_new">{{$twoRating}}</p>
@@ -378,8 +361,7 @@
                               <p class="number_ratings_black_new">Good</p>
 
                               <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
+                                <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
                               </span>
                               <span class="vertical_baar">|</span>
                               <p class="number_ratings_black_new">{{$oneRating}}</p>
@@ -402,8 +384,10 @@
                     <div class="row">
                       <div class="col">
 
-                        <?php $post = App\Post::with('users')->where('department_id',
-                               $data->id)->where('flag', 2)->count(); ?>
+                        <?php $post = App\Post::with('users')->where(
+                          'department_id',
+                          $data->id
+                        )->where('flag', 2)->count(); ?>
 
                         <h5 class="card-title text-uppercase text-muted mb-0 text-white">
                           Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
@@ -471,76 +455,80 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#data1').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#data1').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-  "pageLength": 5,
-     "searching": false,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": false,
-     "lengthChange": false,
-     "bAutoWidth": false,
-     'ajax': {
-        'url':"{{route('department_profile_list')}}",
-       'data': function(data){
-        var badge_id = $('#badge_id').val();
-         data.badge_id = badge_id;
-//            var status_id = $('#status_id').val();
-//          data.status_id = status_id;
-//          var state_id = $('#state_id').val();
-//          data.state_id = state_id;
-//          var country_id = $('#country_id').val();
-//          data.country_id = country_id;
-//           var fromdate = $('#fromdate').val();
-//          data.fromdate = fromdate;
-//          var todate = $('#todate').val();
-//          data.todate = todate;
-//          var search = $('#search').val();
-//          data.search = search;
-var rating = $('#rating').val();
-         data.rating = rating;
-          
         }
-       },
-    'columns': [
-        { data: 'rating' } ,
-        { data: 'reviews' }
-    ],
-     "columnDefs": [
-    { "width": "10%", "targets": 0 }
-  ]
+      },
+      "pageLength": 5,
+      "searching": false,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": false,
+      "lengthChange": false,
+      "bAutoWidth": false,
+      'ajax': {
+        'url': "{{route('department_profile_list')}}",
+        'data': function(data) {
+          var badge_id = $('#badge_id').val();
+          data.badge_id = badge_id;
+          //            var status_id = $('#status_id').val();
+          //          data.status_id = status_id;
+          //          var state_id = $('#state_id').val();
+          //          data.state_id = state_id;
+          //          var country_id = $('#country_id').val();
+          //          data.country_id = country_id;
+          //           var fromdate = $('#fromdate').val();
+          //          data.fromdate = fromdate;
+          //          var todate = $('#todate').val();
+          //          data.todate = todate;
+          //          var search = $('#search').val();
+          //          data.search = search;
+          var rating = $('#rating').val();
+          data.rating = rating;
+
+        }
+      },
+      'columns': [{
+          data: 'rating'
+        },
+        {
+          data: 'reviews'
+        }
+      ],
+      "columnDefs": [{
+        "width": "10%",
+        "targets": 0
+      }]
+    });
+    //  $('#search_data1').click(function(){
+    //     dataTable.draw();
+    //  });
+    //  $('#search').keyup(function(){
+    //     dataTable.draw();
+    //  });
+    $('#rating').on('change', function() {
+      //alert( this.value );
+      dataTable.draw();
+    });
   });
-//  $('#search_data1').click(function(){
-//     dataTable.draw();
-//  });
-//  $('#search').keyup(function(){
-//     dataTable.draw();
-//  });
-$('#rating').on('change', function() {
-  //alert( this.value );
-  dataTable.draw();
-});
-});
 </script>
 <script>
   function myFunction() {
-document.getElementById("search_data").reset();
-location.reload();
+    document.getElementById("search_data").reset();
+    location.reload();
 
-}
+  }
 </script>
 @endsection

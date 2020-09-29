@@ -143,25 +143,21 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
                                             @if(!empty($data->image))
-                                            <img src="{{'../storage/departname/' .$data->image}}" alt="Avatar"
-                                                class="avatar1">
+                                            <img src="{{'../storage/departname/' .$data->image}}" alt="Avatar" class="avatar1">
                                             @else
-                                            <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar"
-                                                class="avatar1">
+                                            <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar" class="avatar1">
 
                                             @endif
 
                                         </div>
-                                        <input type="hidden" name="department_id" id="department_id"
-                                            value="{{$data->id}}">
+                                        <input type="hidden" name="department_id" id="department_id" value="{{$data->id}}">
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
                                                 Department <a class="float-right">{{@$data->department_name}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Country <a
-                                                    class="float-right">{{@$data->country_data->country_name}}</a>
+                                                Country <a class="float-right">{{@$data->country_data->country_name}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 State <a class="float-right">{{@$data->state_data->state_name}}</a>
@@ -177,15 +173,13 @@
                                                 No. of badge <a class="float-right">{{$noOfbadge}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Badge Rating <a
-                                                    class="float-right">{{($badgeRating) ? number_format($badgeRating ,1) : 0}}</a>
+                                                Badge Rating <a class="float-right">{{($badgeRating) ? number_format($badgeRating ,1) : 0}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 No. of followers <a class="float-right">{{$noOfFollowers}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Registered On <a
-                                                    class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
+                                                Registered On <a class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Total Reviews <a class="float-right">{{$totalRating}}</a>
@@ -194,8 +188,7 @@
 
                                         {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
                                         <div class="text-center">
-                                            <a href="javascript:void(0)"
-                                                onclick=" viewDepartmentBadgeModel1({{$data->id}})">
+                                            <a href="javascript:void(0)" onclick=" viewDepartmentBadgeModel1({{$data->id}})">
                                                 <span class="tbl_row_new1 view_modd_dec"><b>View
                                                         Badge List</b></span></a>
                                         </div>
@@ -211,8 +204,7 @@
                                             <div class='row'>
                                                 <div class='col-12'>
                                                     <div class="form-group">
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            placeholder="Search By User Name">
+                                                        <input class="form-control form-control-sm" type="text" placeholder="Search By User Name">
 
                                                     </div>
                                                 </div>
@@ -229,12 +221,9 @@
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker"
-                                                                placeholder="Select from date" type="text" value=""
-                                                                name="fromdate" id="fromdate">
+                                                            <input class="form-control datepicker" placeholder="Select from date" type="text" value="" name="fromdate" id="fromdate">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -242,23 +231,17 @@
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker"
-                                                                placeholder="Select to date" type="text" value=""
-                                                                name="todate" id="todate">
+                                                            <input class="form-control datepicker" placeholder="Select to date" type="text" value="" name="todate" id="todate">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" placeholder="Look for user" name="search2"
-                                                    id="search2" class="search_input">
+                                                <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                                                 <div class='col-2'>
                                                     <div class="d-flex">
-                                                        <button type="button" id="search_data1"
-                                                            class="btn btn-primary apply_btnn">Apply</button>
-                                                        <button type="button" value="Reset form" onclick="myFunction()"
-                                                            class="btn btn-info apply_btnn">Reset</button>
+                                                        <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                                                        <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
                                                     </div>
 
 
@@ -304,27 +287,17 @@
                                                         <p class="number_ratings_black">
                                                             {{($avgRating) ? number_format($avgRating ,1) : 0}}</p>
                                                         <span class="star_icon1">
-                                                            @if ($avgRating >= 1 && $avgRating <2)<img
-                                                                src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
-                                                                alt="" class="rating_icon">
+                                                            @if ($avgRating >= 1 && $avgRating <2)<img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
                                                                 @endif
                                                                 @if ( $avgRating
-                                                                >=2&& $avgRating <3)<img <img
-                                                                    src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
-                                                                    alt="" class="rating_icon">
+                                                                >=2&& $avgRating <3)<img <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
                                                                     @endif
-                                                                    @if ($avgRating >=3 && $avgRating <4) <img
-                                                                        src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    @if ($avgRating >=3 && $avgRating <4) <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="rating_icon">
                                                                         @endif
                                                                         @if ($avgRating
-                                                                        >=4 && $avgRating <5) <img
-                                                                            src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
-                                                                            alt="" class="rating_icon">
+                                                                        >=4 && $avgRating <5) <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="rating_icon">
                                                                             @endif
-                                                                            @if ( $avgRating==5 ) <img
-                                                                                src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
-                                                                                alt="" class="rating_icon">
+                                                                            @if ( $avgRating==5 ) <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="rating_icon">
 
                                                                             @endif
                                                         </span>
@@ -344,8 +317,7 @@
                                                                 <p class="number_ratings_black_new">5</p>
 
                                                                 <span class="star_icon">
-                                                                    <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">
@@ -357,8 +329,7 @@
                                                                 <p class="number_ratings_black_new">4</p>
 
                                                                 <span class="star_icon">
-                                                                    <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">
@@ -370,8 +341,7 @@
                                                                 <p class="number_ratings_black_new">3</p>
 
                                                                 <span class="star_icon">
-                                                                    <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$threeRating}}</p>
@@ -382,8 +352,7 @@
                                                                 <p class="number_ratings_black_new">2</p>
 
                                                                 <span class="star_icon">
-                                                                    <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$twoRating}}</p>
@@ -394,8 +363,7 @@
                                                                 <p class="number_ratings_black_new">1</p>
 
                                                                 <span class="star_icon">
-                                                                    <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
-                                                                        alt="" class="rating_icon">
+                                                                    <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
                                                                 </span>
                                                                 <span class="vertical_baar">|</span>
                                                                 <p class="number_ratings_black_new">{{$oneRating}}</p>
@@ -408,8 +376,7 @@
 
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-primary"
-                                                                style="width: {{$fiveRating}}%">
+                                                            <div class="progress-bar bg-primary" style="width: {{$fiveRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -417,8 +384,7 @@
 
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-danger"
-                                                                style="width: {{$fourRating}}%">
+                                                            <div class="progress-bar bg-danger" style="width: {{$fourRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -426,8 +392,7 @@
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-success"
-                                                                style="width: {{$threeRating}}%">
+                                                            <div class="progress-bar bg-success" style="width: {{$threeRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -435,16 +400,14 @@
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
-                                                            <div class="progress-bar bg-warning"
-                                                                style="width: {{$twoRating}}%">
+                                                            <div class="progress-bar bg-warning" style="width: {{$twoRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <!-- /.progress-group -->
                                                     <div class="progress-group">
                                                         <div class="progress progress-bar-cus">
-                                                            <div class="progress-bar bg-warning"
-                                                                style="width: {{$oneRating}}%">
+                                                            <div class="progress-bar bg-warning" style="width: {{$oneRating}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -462,8 +425,10 @@
                                             <div class="row">
                                                 <div class="col">
 
-                                                    <?php $post = App\Post::with('users')->where('department_id',
-                                                   $data->id)->where('flag', 1)->count(); ?>
+                                                    <?php $post = App\Post::with('users')->where(
+                                                        'department_id',
+                                                        $data->id
+                                                    )->where('flag', 1)->count(); ?>
 
                                                     <h5 class="card-title text-uppercase text-muted mb-0 text-white">
                                                         Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
@@ -527,8 +492,7 @@
         </div>
     </div>
     {{-- model view badge --}}
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -571,87 +535,90 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function(){
-    var dataTable = $('#data1').DataTable({
-        language: {
-        searchPlaceholder: "Department Name",
-        paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-        },
-        aria: {
-          paginate: {
-              previous: 'Previous',
-              next:     'Next'
-          }
-        }
-        },
-     "pageLength": 5,
-     "searching": false,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": false,
-     "bInfo": false,
-     "lengthChange": false,
-     "bAutoWidth": true,
-            'ajax': {
-            'url':"{{route('department_profile_list')}}",
-                    'data': function(data){
-           var department_id = $('#department_id').val();
-         data.department_id = department_id;
-//          var state_id = $('#state_id').val();
-//          data.state_id = state_id;
-//          var country_id = $('#country_id').val();
-//          data.country_id = country_id;
-//           var fromdate = $('#fromdate').val();
-//          data.fromdate = fromdate;
-//          var todate = $('#todate').val();
-//          data.todate = todate;
-//          var search = $('#search').val();
-//          data.search = search;
-         var rating = $('#rating').val();
-         data.rating = rating;
-
+    $(document).ready(function() {
+        var dataTable = $('#data1').DataTable({
+            language: {
+                searchPlaceholder: "Department Name",
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>'
+                },
+                aria: {
+                    paginate: {
+                        previous: 'Previous',
+                        next: 'Next'
                     }
+                }
             },
-            'columns': [
-            { data: 'rating' },
-            { data: 'reviews' }
-            ],
-            "columnDefs": [
-            { "width": "10%", "targets": 0 }
-            ]
-    });
-//  $('#search_data1').click(function(){
-//     dataTable.draw();
-//  });
+            "pageLength": 5,
+            "searching": false,
+            'processing': true,
+            'serverSide': true,
+            "bFilter": false,
+            "bInfo": false,
+            "lengthChange": false,
+            "bAutoWidth": true,
+            'ajax': {
+                'url': "{{route('department_profile_list')}}",
+                'data': function(data) {
+                    var department_id = $('#department_id').val();
+                    data.department_id = department_id;
+                    //          var state_id = $('#state_id').val();
+                    //          data.state_id = state_id;
+                    //          var country_id = $('#country_id').val();
+                    //          data.country_id = country_id;
+                    //           var fromdate = $('#fromdate').val();
+                    //          data.fromdate = fromdate;
+                    //          var todate = $('#todate').val();
+                    //          data.todate = todate;
+                    //          var search = $('#search').val();
+                    //          data.search = search;
+                    var rating = $('#rating').val();
+                    data.rating = rating;
 
- $('#rating').on('change', function() {
-  //alert( this.value );
-  dataTable.draw();
-});
-//  $('#search').keyup(function(){
-//     dataTable.draw();
-//  });
+                }
+            },
+            'columns': [{
+                    data: 'rating'
+                },
+                {
+                    data: 'reviews'
+                }
+            ],
+            "columnDefs": [{
+                "width": "10%",
+                "targets": 0
+            }]
+        });
+        //  $('#search_data1').click(function(){
+        //     dataTable.draw();
+        //  });
+
+        $('#rating').on('change', function() {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        //  $('#search').keyup(function(){
+        //     dataTable.draw();
+        //  });
     });
-    
 </script>
 <script type="text/javascript">
-    function viewDepartmentBadgeModel1(id){
-         $.ajax({
-            url: "{{ route('viewDepartmentBadgeModel') }}/" + id, 
+    function viewDepartmentBadgeModel1(id) {
+        $.ajax({
+            url: "{{ route('viewDepartmentBadgeModel') }}/" + id,
             type: 'get',
-            success: function (response) {
-              // console.log(response);
-            if(response[0]) {
-                $('#businessDetails').html('');
-                var i = 0;
-                $.each(response, function(key, value){
-  
-                  var url = '{{ route("BadgeDetail", ":id") }}';
-                   url = url.replace(':id','id='+value.id);
-  
-                  let row = `
+            success: function(response) {
+                // console.log(response);
+                if (response[0]) {
+                    $('#businessDetails').html('');
+                    var i = 0;
+                    $.each(response, function(key, value) {
+
+                        var url = '{{ route("BadgeDetail", ":id") }}';
+                        url = url.replace(':id', 'id=' + value.id);
+
+                        let row = `
                   <tr>
                     <td> ${++i} </td>
                     <td class="text-capitalize">${value.badge_number}</td>
@@ -660,30 +627,29 @@
                     <td class="text-capitalize"><a href="${url}">View Profile</a></td>
                    </tr>
                   `;
-                  $('#businessDetails').append(row)
-                })
-              } else {
-                let row = `
+                        $('#businessDetails').append(row)
+                    })
+                } else {
+                    let row = `
                   <tr>
                     <td colspan="7"> Record not found! </td>
                   </tr>
                   `;
-                  $('#businessDetails').html(row);
-              }
-               $('#exampleModalCenter').modal('show');
-          },
-          error: function(err) {
-            console.log(err);
-          }
+                    $('#businessDetails').html(row);
+                }
+                $('#exampleModalCenter').modal('show');
+            },
+            error: function(err) {
+                console.log(err);
+            }
         });
     }
 </script>
 <script>
     function myFunction() {
-  document.getElementById("search_data").reset();
-location.reload();
+        document.getElementById("search_data").reset();
+        location.reload();
 
-  }
-  
+    }
 </script>
 @endsection

@@ -101,7 +101,7 @@
                         <label class="tbl_row labell">DOB:</label>
                       </div>
                       <div class="key_value_box_div">
-                        <?php $r_date = date("d/m/Y", strtotime($data->dob));?>
+                        <?php $r_date = date("d/m/Y", strtotime($data->dob)); ?>
                         <p class="tbl_row value">{{$r_date}}</p>
                       </div>
                       <div class="key_value_box_div">
@@ -211,8 +211,7 @@
   </div>
 </div>
 {{-- model view department --}}
-<div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -224,9 +223,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-6" id="userImage">
-            <img
-              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 300px; height:300px;">
+            <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="" style="width: 300px; height:300px;">
           </div>
           <div class="col-6" id="viewDepartment">
 
@@ -269,74 +266,91 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function() {
     var dataTable = $('#example1').DataTable({
-       "searching": false,
-       'processing': true,
-       'serverSide': true,
-       "bFilter": true,
-       "bInfo": false,
-       "lengthChange": false,
-       "bAutoWidth": false,
-       'ajax': {
-          'url':"{{route('UserDetailData')}}",
-          'data': function(data){
-              var user_id = $('#user_id').val();
-            data.user_id = user_id;
-               var search = $('#search').val();
-            data.search = search;
-            //   var status_id = $('#status_id').val();
-            // data.status_id = status_id;
-            // var state_id = $('#state_id').val();
-            // data.state_id = state_id;
-            // var country_id = $('#country_id').val();
-            // data.country_id = country_id;
-            //  var fromdate = $('#fromdate').val();
-            // data.fromdate = fromdate;
-            // var todate = $('#todate').val();
-            // data.todate = todate;
-          }
-         },
-      'columns': [
-          { data: 'department_name' },
-          { data: 'badge_number' } ,
-          {data :'date'},
-          { data: 'rating' },
-          {data :'likes'},
-          {data :'share'} ,
-          {data : 'comment'},
-          {data :'report'},
-          { data: 'action' },
+      "searching": false,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": false,
+      "lengthChange": false,
+      "bAutoWidth": false,
+      'ajax': {
+        'url': "{{route('UserDetailData')}}",
+        'data': function(data) {
+          var user_id = $('#user_id').val();
+          data.user_id = user_id;
+          var search = $('#search').val();
+          data.search = search;
+          //   var status_id = $('#status_id').val();
+          // data.status_id = status_id;
+          // var state_id = $('#state_id').val();
+          // data.state_id = state_id;
+          // var country_id = $('#country_id').val();
+          // data.country_id = country_id;
+          //  var fromdate = $('#fromdate').val();
+          // data.fromdate = fromdate;
+          // var todate = $('#todate').val();
+          // data.todate = todate;
+        }
+      },
+      'columns': [{
+          data: 'department_name'
+        },
+        {
+          data: 'badge_number'
+        },
+        {
+          data: 'date'
+        },
+        {
+          data: 'rating'
+        },
+        {
+          data: 'likes'
+        },
+        {
+          data: 'share'
+        },
+        {
+          data: 'comment'
+        },
+        {
+          data: 'report'
+        },
+        {
+          data: 'action'
+        },
       ]
     });
-     $('#search_data1').click(function(){
-       dataTable.draw();
+    $('#search_data1').click(function() {
+      dataTable.draw();
     });
-    $('#search').keyup(function(){
-         dataTable.draw();
-      });
+    $('#search').keyup(function() {
+      dataTable.draw();
+    });
   });
 </script>
 <script>
-  function viewUserDetailModel(id){
+  function viewUserDetailModel(id) {
     // alert(id);
     $.ajax({
-          url: "{{ route('viewUserDetailModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            console.log(response.departments.image);
-            if(typeof response.departments.image != "undefined"){ 
-            $('#userImage').html(`<img
+      url: "{{ route('viewUserDetailModel') }}/" + id,
+      type: 'get',
+      success: function(response) {
+        console.log(response.departments.image);
+        if (typeof response.departments.image != "undefined") {
+          $('#userImage').html(`<img
               src="${response.departments.image}"
               alt="" style="width: 300px; height:300px;">`);
-          }else{
-            $('#userImage').html(` <img
+        } else {
+          $('#userImage').html(` <img
               src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
               alt="" style="width: 300px; height:300px;">`);
-          }
-            $('#viewDepartment').html('');
-            
-         let row=` <div class="col">
+        }
+        $('#viewDepartment').html('');
+
+        let row = ` <div class="col">
 
         <span><img src="${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle;
   width: 50px;
@@ -368,30 +382,33 @@
               <span></span>
               <br>
             </div>`;
-            $('#viewDepartment').append(row)
+        $('#viewDepartment').append(row)
         $('#viewUserDetailModel').modal('show');
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
-      
+      },
+      error: function(err) {
+        console.log(err);
       }
+    });
+
+  }
 </script>
 <script type="text/javascript">
-  function status(id){
-       $.ajax({
+  function status(id) {
+    $.ajax({
       url: "{{route('delete_post')}}",
       type: "get",
-      data: {'post_id':id ,'_token': "{{ csrf_token() }}"},
-        success: function (data) {
-            //alert();
+      data: {
+        'post_id': id,
+        '_token': "{{ csrf_token() }}"
+      },
+      success: function(data) {
+        //alert();
         //  $(".cancel").(function(){
-              
-//   $(this).parent("tr:first").remove()
-// })
-           location.reload();// refresh same page
-        }
+
+        //   $(this).parent("tr:first").remove()
+        // })
+        location.reload(); // refresh same page
+      }
     });
   }
 </script>

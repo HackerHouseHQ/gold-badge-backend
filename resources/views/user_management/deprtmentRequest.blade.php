@@ -38,16 +38,10 @@
                   data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
                   id="approve">Approved</a></li> -->
 
-            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #61cf8a;"
-                href="{{route('departmentRequest')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
-                data-align="center" data-type="success" data-icon="ni ni-bell-55">Approved</a></li>
+            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #61cf8a;" href="{{route('departmentRequest')}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Approved</a></li>
 
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
-                id="pending" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
-                data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}"
-                id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
-                data-type="success" data-icon="ni ni-bell-55">Rejected</a>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}" id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Rejected</a>
             </li>
           </ul>
         </div>
@@ -75,8 +69,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -86,8 +79,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -95,8 +87,7 @@
                 <div class='col-2'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()"
-                      class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
                   </div>
 
 
@@ -193,63 +184,80 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
+  $(document).ready(function() {
     var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": true,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-       'url':"{{route('UserRequestData')}}",
-       'data': function(data){
-            data.type = 1;
-            // var search = $('#search').val();
-            // data.search = search; 
-            var fromdate = $('#fromdate').val();
+        }
+      },
+      "searching": true,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('UserRequestData')}}",
+        'data': function(data) {
+          data.type = 1;
+          // var search = $('#search').val();
+          // data.search = search; 
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
         }
-       },
-    'columns': [
-        { data: 'd_name' },
-        { data: 'country' },
-        { data: 'state' },
-        { data: 'city' },
-        { data: 'username' } ,
-        { data: 'reg_date' },
-        { data: 'u_name' },
-        { data: 'email' },
-        { data: 'contact' }
-    ]
+      },
+      'columns': [{
+          data: 'd_name'
+        },
+        {
+          data: 'country'
+        },
+        {
+          data: 'state'
+        },
+        {
+          data: 'city'
+        },
+        {
+          data: 'username'
+        },
+        {
+          data: 'reg_date'
+        },
+        {
+          data: 'u_name'
+        },
+        {
+          data: 'email'
+        },
+        {
+          data: 'contact'
+        }
+      ]
+    });
+    $('#search').keyup(function() {
+      dataTable.draw();
+    });
   });
-  $('#search').keyup(function(){
-     dataTable.draw();
-  });
-});
 </script>
 
 <script>
   function myFunction() {
-document.getElementById("search_data").reset();
-location.reload();
-}
+    document.getElementById("search_data").reset();
+    location.reload();
+  }
 </script>
 
 

@@ -186,9 +186,12 @@ class Post extends Model
    {
       return $this->hasMany('App\PostImage', 'post_id');
    }
+
    public function post_images()
    {
-      return $this->hasMany('App\PostImage', 'post_id', 'post_id');
+      $siteUrl = env('APP_URL');
+
+      return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
    }
    public static function getPost($search,  $department_id, $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id)
    {

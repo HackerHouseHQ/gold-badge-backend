@@ -83,6 +83,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/department_status', 'DepartmentController@department_status')->name('department_status');
     Route::get('/department_profile_list', 'DepartmentController@department_profile_list')->name('department_profile_list');
 
+
     Route::post('/AddBadge', 'DepartmentController@AddBadge')->name('AddBadge');
     Route::get('/badge_list', 'DepartmentController@badge_list')->name('badge_list');
     Route::post('/badge_status', 'DepartmentController@badge_status')->name('badge_status');

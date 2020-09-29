@@ -135,15 +135,13 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
 
-                                            <img class="avatar1" src="../storage/uploads/user_image/{{$data->image}}"
-                                                alt="User profile picture">
+                                            <img class="avatar1" src="../storage/uploads/user_image/{{$data->image}}" alt="User profile picture">
                                         </div>
                                         <input type="hidden" id="user_id" value="{{$data->id}}">
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
-                                                Full Name <a
-                                                    class="float-right">{{$data->first_name ." ". $data->last_name}}</a>
+                                                Full Name <a class="float-right">{{$data->first_name ." ". $data->last_name}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Username <a class="float-right">{{@$data->user_name}}</a>
@@ -158,16 +156,13 @@
                                                 Ethnicity <a class="float-right">{{@$data->ethnicity}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                D.O.B.<a
-                                                    class="float-right">{{date("d-m-y", strtotime(@$data->dob))}}</a>
+                                                D.O.B.<a class="float-right">{{date("d-m-y", strtotime(@$data->dob))}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Following Departments <a
-                                                    class="float-right">{{@$data->total_department_follows}}</a>
+                                                Following Departments <a class="float-right">{{@$data->total_department_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Following Badges <a
-                                                    class="float-right">{{@$data->total_department_badge_follows}}</a>
+                                                Following Badges <a class="float-right">{{@$data->total_department_badge_follows}}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Reported Reviews <a class="float-right">{{@$data->total_report}}</a>
@@ -186,16 +181,14 @@
                                             <div class='row'>
                                                 <div class='col-12'>
                                                     <div class="form-group">
-                                                        <input class="form-control form-control-sm" type="text"
-                                                            placeholder="Search By Name.Badge,Department,Country,State,City....">
+                                                        <input class="form-control form-control-sm" type="text" placeholder="Search By Name.Badge,Department,Country,State,City....">
 
                                                     </div>
                                                 </div>
                                                 <div class='col-6'>
-                                                    <?php $departmentList = App\Department::get();?>
+                                                    <?php $departmentList = App\Department::get(); ?>
                                                     <div class="form-group">
-                                                        <select class="form-control" name="department_id"
-                                                            id="department_id">
+                                                        <select class="form-control" name="department_id" id="department_id">
                                                             <option value="">Department</option>
                                                             @foreach($departmentList as $departmenntList)
                                                             <option value="{{$departmenntList->id}}">
@@ -205,7 +198,7 @@
                                                     </div>
                                                 </div>
                                                 <div class='col-6'>
-                                                    <?php $departmentBadgeList = App\DepartmentBadge::get();?>
+                                                    <?php $departmentBadgeList = App\DepartmentBadge::get(); ?>
                                                     <div class="form-group">
                                                         <select class="form-control" name="badge_id" id="badge_id">
                                                             <option value="">Badge</option>
@@ -220,12 +213,9 @@
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker"
-                                                                placeholder="Select from date" type="text" value=""
-                                                                name="fromdate" id="fromdate">
+                                                            <input class="form-control datepicker" placeholder="Select from date" type="text" value="" name="fromdate" id="fromdate">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -233,23 +223,17 @@
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
-                                                                <span class="input-group-text"><i
-                                                                        class="ni ni-calendar-grid-58"></i></span>
+                                                                <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                                                             </div>
-                                                            <input class="form-control datepicker"
-                                                                placeholder="Select to date" type="text" value=""
-                                                                name="todate" id="todate">
+                                                            <input class="form-control datepicker" placeholder="Select to date" type="text" value="" name="todate" id="todate">
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" placeholder="Look for user" name="search2"
-                                                    id="search2" class="search_input">
+                                                <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
                                                 <div class='col-2 d-flex'>
 
-                                                    <button type="button" id="search_data1"
-                                                        class="btn btn-primary apply_btnn">Apply</button>
-                                                    <button type="button" value="Reset form" onclick="myFunction()"
-                                                        class="btn btn-info apply_btnn">Reset</button>
+                                                    <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
+                                                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
 
                                                 </div>
                                             </div>
@@ -359,8 +343,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header" style="padding: 0;">
@@ -459,118 +442,124 @@
     }
     </script> --}}
     <script type="text/javascript">
-        $(document).ready(function(){
-    var dataTable = $('#data1').DataTable({
-        language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
-          paginate: {
-              previous: 'Previous',
-              next:     'Next'
-          }
-      }
-  },
-       "searching": false,
-       'processing': true,
-       'serverSide': true,
-       "bFilter": true,
-       "bInfo": false,
-       "lengthChange": false,
-       "bAutoWidth": false,
-       "pageLength": 2,
-       "orderable":false,
-       'ajax': {
-          'url':"{{route('PostDepartmentDetail')}}",
-         'data': function(data){
-        //       var status_id = $('#status_id').val();
-        //     data.status_id = status_id;
-        //     var state_id = $('#state_id').val();
-        //     data.state_id = state_id;
-        //     var country_id = $('#country_id').val();
-        //     data.country_id = country_id;
-        //     var city_id = $('#city_id').val();
-        //     data.city_id = city_id;
-            var user_id = $('#user_id').val();
-            data.user_id = user_id;
-            var department_id = $('#department_id').val();
-            data.department_id = department_id;
-            var badge_id = $('#badge_id').val();
-            data.badge_id = badge_id;
-             var fromdate = $('#fromdate').val();
-            data.fromdate = fromdate;
-            var todate = $('#todate').val();
-            data.todate = todate;
-           
-            
-         }
-         },
-         columnDefs: [
-    {
-         className: "cancel", "targets": [ -1 ] 
-    }
-  ],
-      'columns': [
-        { data: 'image' } ,
-          { data: 'userName' } ,
-           { data: 'action' },
-      ]
-    });
-    $('#search_data1').click(function(){
-       dataTable.draw();
-    });
-    $('#search').keyup(function(){
-       dataTable.draw();
-    });
-  });
+        $(document).ready(function() {
+            var dataTable = $('#data1').DataTable({
+                language: {
+                    searchPlaceholder: "Department Name",
+                    paginate: {
+                        previous: '<i class="fas fa-angle-left"></i>',
+                        next: '<i class="fas fa-angle-right"></i>'
+                    },
+                    aria: {
+                        paginate: {
+                            previous: 'Previous',
+                            next: 'Next'
+                        }
+                    }
+                },
+                "searching": false,
+                'processing': true,
+                'serverSide': true,
+                "bFilter": true,
+                "bInfo": false,
+                "lengthChange": false,
+                "bAutoWidth": false,
+                "pageLength": 2,
+                "orderable": false,
+                'ajax': {
+                    'url': "{{route('PostDepartmentDetail')}}",
+                    'data': function(data) {
+                        //       var status_id = $('#status_id').val();
+                        //     data.status_id = status_id;
+                        //     var state_id = $('#state_id').val();
+                        //     data.state_id = state_id;
+                        //     var country_id = $('#country_id').val();
+                        //     data.country_id = country_id;
+                        //     var city_id = $('#city_id').val();
+                        //     data.city_id = city_id;
+                        var user_id = $('#user_id').val();
+                        data.user_id = user_id;
+                        var department_id = $('#department_id').val();
+                        data.department_id = department_id;
+                        var badge_id = $('#badge_id').val();
+                        data.badge_id = badge_id;
+                        var fromdate = $('#fromdate').val();
+                        data.fromdate = fromdate;
+                        var todate = $('#todate').val();
+                        data.todate = todate;
+
+
+                    }
+                },
+                columnDefs: [{
+                    className: "cancel",
+                    "targets": [-1]
+                }],
+                'columns': [{
+                        data: 'image'
+                    },
+                    {
+                        data: 'userName'
+                    },
+                    {
+                        data: 'action'
+                    },
+                ]
+            });
+            $('#search_data1').click(function() {
+                dataTable.draw();
+            });
+            $('#search').keyup(function() {
+                dataTable.draw();
+            });
+        });
     </script>
     <script type="text/javascript">
-        function status(id){
-         $.ajax({
-        url: "{{route('delete_post')}}",
-        type: "post",
-        data: {'post_id':id ,'_token': "{{ csrf_token() }}"},
-          success: function (data) {
-              //alert();
-          //  $(".cancel").(function(){
-                
-//   $(this).parent("tr:first").remove()
-// })
-             location.reload();// refresh same page
-          }
-      });
-    }
+        function status(id) {
+            $.ajax({
+                url: "{{route('delete_post')}}",
+                type: "post",
+                data: {
+                    'post_id': id,
+                    '_token': "{{ csrf_token() }}"
+                },
+                success: function(data) {
+                    //alert();
+                    //  $(".cancel").(function(){
+
+                    //   $(this).parent("tr:first").remove()
+                    // })
+                    location.reload(); // refresh same page
+                }
+            });
+        }
     </script>
     <script>
         function myFunction() {
-      document.getElementById("search_data").reset();
-location.reload();
+            document.getElementById("search_data").reset();
+            location.reload();
 
-      }
+        }
     </script>
     <script>
-        function viewUserDetailCommentModel(id){
-    $.ajax({
-          url: "{{ route('viewUserDetailCommentModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            $('#userImage2').html(``);
-            $('#comment').html(``);
-            if(response.length == 0)
-            {
-              $('#userImage2').html(``);
-            $('#comment').html(``);
+        function viewUserDetailCommentModel(id) {
+            $.ajax({
+                url: "{{ route('viewUserDetailCommentModel') }}/" + id,
+                type: 'get',
+                success: function(response) {
+                    $('#userImage2').html(``);
+                    $('#comment').html(``);
+                    if (response.length == 0) {
+                        $('#userImage2').html(``);
+                        $('#comment').html(``);
 
-              $('#comment').html('<h4>no record found</h4>');
-            }
-          
-            let row=``;
-            $('#viewDepartmentComment').html('');
-            response.forEach(value => {
-              row += ` <div class="col">
+                        $('#comment').html('<h4>no record found</h4>');
+                    }
+
+                    let row = ``;
+                    $('#viewDepartmentComment').html('');
+                    response.forEach(value => {
+                        row += ` <div class="col">
                 <div class="comment_div">
                   <div class="comment_partion_div">
         <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
@@ -586,9 +575,9 @@ location.reload();
          </div>
             </div>`;
 
-         row +=`<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
-             value.sub_comment.forEach(v => {
-               row +=`
+                        row += `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
+                        value.sub_comment.forEach(v => {
+                            row += `
                 <div class="sub_comment_div">
                   <div class="comment_partion_div">
         <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
@@ -601,29 +590,28 @@ location.reload();
        <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
          
       </div> `;
-           
-               
-             });
-             row +=`</div>`;
-              
-             
-            });
 
-            $('#viewDepartmentComment').append(row);
-         
-        $('#viewUserDetailCommentModel').modal('show');
-        
-        },
-        error: function(err) {
-          console.log(err);
+
+                        });
+                        row += `</div>`;
+
+
+                    });
+
+                    $('#viewDepartmentComment').append(row);
+
+                    $('#viewUserDetailCommentModel').modal('show');
+
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
         }
-      });
-  }
     </script>
     <script>
-        function viewSubcomment(id)
-        {
-          $('#view_sub_comment'+id).toggle();
+        function viewSubcomment(id) {
+            $('#view_sub_comment' + id).toggle();
         }
     </script>
     @endsection

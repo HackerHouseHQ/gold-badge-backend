@@ -24,8 +24,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
   <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">
-  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}"
-    type="text/css">
+  <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css')}}" type="text/css">
   <!-- Argon CSS -->
   <link rel="stylesheet" href="{{asset('admin_new/assets/css/argon.css?v=1.2.0')}}" type="text/css">
 </head>
@@ -144,8 +143,7 @@
       <!-- Page content -->
       <div class="container">
         <div class='row'>
-          <div class='col-12 d-flex justify-content-center'><img class='my-3' width="200" height="200"
-              src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt=""></div>
+          <div class='col-12 d-flex justify-content-center'><img class='my-3' width="200" height="200" src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt=""></div>
         </div>
 
         <div class="row justify-content-center">
@@ -164,8 +162,7 @@
                   <div class="form-group{{ $errors->has('email') ? ' has-error':''}}">
                     <label for="email" class="col-md-3 control-label"></label>
                     <div class="col-md-6">
-                      <input id="email" type="email" class="form-control cstm_form_cls_login"
-                        placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
+                      <input id="email" type="email" class="form-control cstm_form_cls_login" placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
                     </div>
                   </div>
                   @if ($errors->has('email'))
@@ -176,8 +173,7 @@
                   <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                     <label for="password" class="col-md-3 control-label"></label>
                     <div class="col-md-6">
-                      <input id="password" type="text" placeholder="Enter your password"
-                        class="form-control cstm_form_cls_login" name="password" required>
+                      <input id="password" type="text" placeholder="Enter your password" class="form-control cstm_form_cls_login" name="password" required>
 
                     </div>
 
@@ -207,8 +203,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                       </div>
-                      <input id="email" type="email" class="form-control " placeholder="Enter your email" name="email"
-                        value="{{ old('email') }}" required autofocus>
+                      <input id="email" type="email" class="form-control " placeholder="Enter your email" name="email" value="{{ old('email') }}" required autofocus>
 
                     </div>
                   </div>
@@ -217,8 +212,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                       </div>
-                      <input id="password" type="password" placeholder="Enter your password" class="form-control "
-                        name="password" required>
+                      <input id="password" type="password" placeholder="Enter your password" class="form-control " name="password" required>
                       {{-- <input class="form-control" placeholder="Password" type="password"> --}}
                     </div>
                   </div>

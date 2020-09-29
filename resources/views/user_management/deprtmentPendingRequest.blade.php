@@ -38,16 +38,9 @@
 
         <div class="col-lg-6 col-6 d-flex justify-content-end">
           <ul class="nav nav-tabs abc" style="border-bottom: 1px solid #5e72e3;">
-            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #f7fafc;"
-                href="{{route('departmentRequest')}}" class="btn btn-secondary" data-toggle="notify"
-                data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
-                id="approve">Approved</a></li>
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
-                id="pending" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center"
-                data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}"
-                id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
-                data-type="success" data-icon="ni ni-bell-55">Rejected</a>
+            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #f7fafc;" href="{{route('departmentRequest')}}" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55" id="approve">Approved</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}" id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Rejected</a>
             </li>
           </ul>
         </div>
@@ -60,15 +53,13 @@
             aria-labelledby="notify-colors-component-tab">
             <a href="{{route('department')}}" class="btn btn-info" data-toggle="notify" data-placement="top"
         data-align="center" data-type="info" data-icon="ni ni-bell-55">Department List</a>
-        <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
-          data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
+        <a href="{{route('badge')}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Badge List</a>
 
 
       </div>
       <div id="notify-colors-html" class="tab-pane fade" role="tabpanel" aria-labelledby="notify-colors-html-tab">
         <figure class="highlight">
-          <pre
-            class=" language-html"><code class=" language-html" data-lang="html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-info<span class="token punctuation">"</span></span> <span class="token attr-name">data-toggle</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>notify<span class="token punctuation">"</span></span> <span class="token attr-name">data-placement</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>top<span class="token punctuation">"</span></span> <span class="token attr-name">data-align</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span> <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span> <span class="token attr-name">data-icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ni ni-bell-55<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Info<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+          <pre class=" language-html"><code class=" language-html" data-lang="html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-info<span class="token punctuation">"</span></span> <span class="token attr-name">data-toggle</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>notify<span class="token punctuation">"</span></span> <span class="token attr-name">data-placement</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>top<span class="token punctuation">"</span></span> <span class="token attr-name">data-align</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span> <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>info<span class="token punctuation">"</span></span> <span class="token attr-name">data-icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ni ni-bell-55<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Info<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
             
             <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>btn btn-success<span class="token punctuation">"</span></span> <span class="token attr-name">data-toggle</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>notify<span class="token punctuation">"</span></span> <span class="token attr-name">data-placement</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>top<span class="token punctuation">"</span></span> <span class="token attr-name">data-align</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>center<span class="token punctuation">"</span></span> <span class="token attr-name">data-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>success<span class="token punctuation">"</span></span> <span class="token attr-name">data-icon</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>ni ni-bell-55<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>Success<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
             
@@ -99,8 +90,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -110,8 +100,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -119,8 +108,7 @@
                 <div class='col-2'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()"
-                      class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
 
                   </div>
 
@@ -216,133 +204,157 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-     
-  var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": true,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-       'url':"{{route('UserRequestData')}}",
-       'data': function(data){
-            data.type = 0;
-            // var search = $('#search').val();
-            // data.search = search; 
-             var fromdate = $('#fromdate').val();
+        }
+      },
+      "searching": true,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('UserRequestData')}}",
+        'data': function(data) {
+          data.type = 0;
+          // var search = $('#search').val();
+          // data.search = search; 
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
         }
-       },
-    'columns': [
-        { data: 'd_name' },
-        { data: 'country' },
-        { data: 'state' },
-        { data: 'city' },
-        { data: 'username' } ,
-        { data: 'reg_date' },
-        { data: 'u_name' },
-        { data: 'email' },
-        { data: 'contact' },       
-       { data: 'action' },
-    ]
+      },
+      'columns': [{
+          data: 'd_name'
+        },
+        {
+          data: 'country'
+        },
+        {
+          data: 'state'
+        },
+        {
+          data: 'city'
+        },
+        {
+          data: 'username'
+        },
+        {
+          data: 'reg_date'
+        },
+        {
+          data: 'u_name'
+        },
+        {
+          data: 'email'
+        },
+        {
+          data: 'contact'
+        },
+        {
+          data: 'action'
+        },
+      ]
+    });
+    $('#search_data1').click(function() {
+      //   alert();
+      dataTable.draw();
+    });
+    $('#search').keyup(function() {
+      dataTable.draw();
+      // alert('f');
+    });
   });
-   $('#search_data1').click(function(){
-    //   alert();
-     dataTable.draw();
-  });
-  $('#search').keyup(function(){
-     dataTable.draw();
-    // alert('f');
-  });
-});
 </script>
 
 
 <script type="text/javascript">
-  function status(id , status){ 
+  function status(id, status) {
     // alert(id);
-    var id =  $("#abc").val(id); 
-     
-      if(status == 1)
-      {
-       
-       $('#uploadModal').modal('show');
-      }
-     
-       
+    var id = $("#abc").val(id);
+
+    if (status == 1) {
+
+      $('#uploadModal').modal('show');
+    }
+
+
 
 
   }
-  function reject(id  , status)
-      {
-      $.ajax({
-        
-     url: "{{route('acceptDepartmentRequest')}}",
-     type: "post",
-     data: {'departId':id ,
-     '_token': "{{ csrf_token() }}" ,
-     'status' : status},
-       success: function (response) {
-          //  console.log(response);
-           window.location.href="{{route('deprtmentRejectRequest')}}"
-          // location.reload();// refresh same page
-       }
-   });
-      
-      }    
+
+  function reject(id, status) {
+    $.ajax({
+
+      url: "{{route('acceptDepartmentRequest')}}",
+      type: "post",
+      data: {
+        'departId': id,
+        '_token': "{{ csrf_token() }}",
+        'status': status
+      },
+      success: function(response) {
+        //  console.log(response);
+        window.location.href = "{{route('deprtmentRejectRequest')}}"
+        // location.reload();// refresh same page
+      }
+    });
+
+  }
 </script>
 <script>
-  $('#btn_upload').click(function(){
- //alert($("#abc").val());
- var id = $("#abc").val();
- var status = $('#status').val();
+  $('#btn_upload').click(function() {
+    //alert($("#abc").val());
+    var id = $("#abc").val();
+    var status = $('#status').val();
     var fd = new FormData();
     var files = $('#file')[0].files[0];
-    fd.append('file',files);
-///onsole.log(files);
+    fd.append('file', files);
+    ///onsole.log(files);
     // AJAX request
     $.ajax({
       url: "{{route('acceptDepartmentRequest')}}",
       type: 'post',
-     data: {'img':fd ,'deprtmentRequestId':id,'_token': "{{ csrf_token() }}" , 
-     'status' : 1},
-     //data: {'img':fd ,'deprtmentRequestId':id},
+      data: {
+        'img': fd,
+        'deprtmentRequestId': id,
+        '_token': "{{ csrf_token() }}",
+        'status': 1
+      },
+      //data: {'img':fd ,'deprtmentRequestId':id},
       contentType: json,
-     processData: false,
-//      beforeSend: function (xhr) {
-//            var token = $('meta[name="csrf_token"]').attr('content');
-//            if (token) {
-//                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
-//            }                
-//        },
-      success: function(response){
-          console.log(response);
-          return false;
-           location.reload();
-//        if(response != 0){
-//          // Show image preview
-//          $('#preview').append("<img src='"+response+"' width='100' height='100' style='display: inline-block;'>");
-//        }else{
-//          alert('file not uploaded');
-//        }
+      processData: false,
+      //      beforeSend: function (xhr) {
+      //            var token = $('meta[name="csrf_token"]').attr('content');
+      //            if (token) {
+      //                  return xhr.setRequestHeader('X-CSRF-TOKEN', token);
+      //            }                
+      //        },
+      success: function(response) {
+        console.log(response);
+        return false;
+        location.reload();
+        //        if(response != 0){
+        //          // Show image preview
+        //          $('#preview').append("<img src='"+response+"' width='100' height='100' style='display: inline-block;'>");
+        //        }else{
+        //          alert('file not uploaded');
+        //        }
       }
     });
   });
@@ -478,8 +490,8 @@ var dataTable = $('#data1').DataTable({
 </script> --}}
 <script>
   function myFunction() {
-document.getElementById("search_data").reset();
-}
+    document.getElementById("search_data").reset();
+  }
 </script>
 
 

@@ -27,8 +27,7 @@
             Department</a> --}}
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-          <button type="button" class="btn btn-info down_btn_new_clss_notification" data-toggle="modal"
-            data-target="#myModal" />Send Notification</button>
+          <button type="button" class="btn btn-info down_btn_new_clss_notification" data-toggle="modal" data-target="#myModal" />Send Notification</button>
           {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
             Department</a> --}}
         </div>
@@ -63,8 +62,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -74,8 +72,7 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
-                        name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -83,8 +80,7 @@
                 <div class='col-3'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()"
-                      class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
                   </div>
 
                 </div>
@@ -160,8 +156,7 @@
             <input class="form-control" type="title" name="title" placeholder="Notification Title" value=""><br>
           </div>
           <div class="form-group">
-            <textarea class="form-control" name="desscription" placeholder="Desscription"
-              style="width: 100%; height: 159; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;"></textarea>
+            <textarea class="form-control" name="desscription" placeholder="Desscription" style="width: 100%; height: 159; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;"></textarea>
           </div>
           <div class="form-group notifiction_send_btn text-center">
             <button type="submit" class="btn btn-primary">Save</button>
@@ -177,8 +172,7 @@
 </div>
 {{-- close model --}}
 {{-- model view city --}}
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -195,8 +189,7 @@
           </div>
           <div class="form-group">
             Desscription:-
-            <textarea class="form-control" readonly name="desscription" id="desscription1"
-              style="width: 100%; height: 159; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;"></textarea>
+            <textarea class="form-control" readonly name="desscription" id="desscription1" style="width: 100%; height: 159; font-size: 18px; line-height: 34px; border: 1px solid #dddddd; padding: 10px;background: #ffffff;"></textarea>
           </div>
 
         </form>
@@ -211,87 +204,95 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": false,
-    //  'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-        'url':"{{route('notificationList')}}",
-        'data': function(data){
-           var date1 = $('#date1').val();
+        }
+      },
+      "searching": false,
+      //  'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('notificationList')}}",
+        'data': function(data) {
+          var date1 = $('#date1').val();
           data.date1 = date1;
-           var fromdate = $('#fromdate').val();
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
         }
-       },
-    'columns': [
-        { data: 'message' } ,
-        { data: 'time' },
-        { data: 'date' },
-        {data :'view'}
-       
-      
-      
-    ]
+      },
+      'columns': [{
+          data: 'message'
+        },
+        {
+          data: 'time'
+        },
+        {
+          data: 'date'
+        },
+        {
+          data: 'view'
+        }
+
+
+
+      ]
+    });
+    $('#search_data1').click(function() {
+      dataTable.draw();
+    });
   });
- $('#search_data1').click(function(){
-     dataTable.draw();
-  });
-});
-function viewNotificationModel1(id){
+
+  function viewNotificationModel1(id) {
     // alert(id);
-     $.ajax({
-          url: "{{ route('viewNotificationModel') }}/" + id, 
-          type: 'get',
-          success: function (response) {
-            console.log(response);
-            var space=" ";
-          if(response) {
-            
-           $('#title1').val(response.title ) ;
-           $('#desscription1').val(response.message);
-              
-            } else {
-              let row = `
+    $.ajax({
+      url: "{{ route('viewNotificationModel') }}/" + id,
+      type: 'get',
+      success: function(response) {
+        console.log(response);
+        var space = " ";
+        if (response) {
+
+          $('#title1').val(response.title);
+          $('#desscription1').val(response.message);
+
+        } else {
+          let row = `
                 <span>
                   Record not found! 
                 </span>
                 `;
-                $('#notificationDetail').html(row);
-            }
-             $('#exampleModalCenter').modal('show');
-        },
-        error: function(err) {
-          console.log(err);
+          $('#notificationDetail').html(row);
         }
-      });
+        $('#exampleModalCenter').modal('show');
+      },
+      error: function(err) {
+        console.log(err);
+      }
+    });
   }
 </script>
 <script>
   function myFunction() {
-document.getElementById("search_data").reset();
-location.reload();
+    document.getElementById("search_data").reset();
+    location.reload();
 
-}
+  }
 </script>
 @endsection

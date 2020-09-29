@@ -93,7 +93,7 @@
                   </div>
                 </div>
                 <div class='col-4'>
-                  <?php $countryList = App\Country::get();?>
+                  <?php $countryList = App\Country::get(); ?>
                   <div class="form-group">
                     <select class="form-control" name="country_id" id="country_id">
                       <option value="">Select Country</option>
@@ -183,7 +183,7 @@
                   </span>
                   <span class="div_cover_sell">
                     <span>
-                      <?php $countryList =  App\Country::get();?>
+                      <?php $countryList =  App\Country::get(); ?>
                       <select name="country_id" id="country_id">
                         <option value="">Country</option>
                         @foreach($countryList as $counntryList)
@@ -279,81 +279,85 @@
 @section('script')
 {{-- filter --}}
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#country_id").change(function(){
-                $("#state_id").append("<option value=''>Please Select</option>");
-        var country_id = $(this).val();
-        $.ajax({
-            url: '{{route('get_state')}}',
-            type: 'get',
-            data: {country_id:country_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#state_id").empty();
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#state_id").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+  $(document).ready(function() {
+    $("#country_id").change(function() {
+      $("#state_id").append("<option value=''>Please Select</option>");
+      var country_id = $(this).val();
+      $.ajax({
+        url: "{{route('get_state')}}"",
+        type: 'get',
+        data: {
+          country_id: country_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#state_id").empty();
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#state_id").change(function(){
+  $(document).ready(function() {
+    $("#state_id").change(function() {
       // alert('dfshj');
-        $("#city_id").append("<option value=''>Please Select</option>");
-        var state_id = $(this).val();
-        // alert(state_id);
-        $.ajax({
-            url: '{{route('get_city')}}',
-            type: 'get',
-            data: {state_id:state_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#city_id").empty();
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#city_id").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+      $("#city_id").append("<option value=''>Please Select</option>");
+      var state_id = $(this).val();
+      // alert(state_id);
+      $.ajax({
+        url: "{{route('get_city')}}",
+        type: 'get',
+        data: {
+          state_id: state_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#city_id").empty();
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#city_id").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
 {{-- end filter --}}
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#datatable-basic').DataTable({
-       language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": true,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-        'url':"{{route('postData')}}",
-       'data': function(data){
-            var status_id = $('#status_id').val();
+        }
+      },
+      "searching": true,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('postData')}}",
+        'data': function(data) {
+          var status_id = $('#status_id').val();
           data.status_id = status_id;
           var state_id = $('#state_id').val();
           data.state_id = state_id;
@@ -365,90 +369,110 @@
           data.department_id = department_id;
           var badge_id = $('#badge_id').val();
           data.badge_id = badge_id;
-           var fromdate = $('#fromdate').val();
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
           // var search = $('#search').val();
           // data.search = search;
-          
+
         }
-       },
-    'columns': [
-        { data: 'userName' } ,
-        { data: 'fullName' },
-        { data: 'postedOn' },
-        { data: 'postedAbout' },
-        { data: 'rating' },
-         { data: 'action' },
-    ]
+      },
+      'columns': [{
+          data: 'userName'
+        },
+        {
+          data: 'fullName'
+        },
+        {
+          data: 'postedOn'
+        },
+        {
+          data: 'postedAbout'
+        },
+        {
+          data: 'rating'
+        },
+        {
+          data: 'action'
+        },
+      ]
+    });
+    $('#search_data1').click(function() {
+      dataTable.draw();
+    });
+    $('#search').keyup(function() {
+      dataTable.draw();
+    });
   });
-  $('#search_data1').click(function(){
-     dataTable.draw();
-  });
-  $('#search').keyup(function(){
-     dataTable.draw();
-  });
-});
 </script>
 <script type="text/javascript">
-  function status(id){
-       $.ajax({
+  function status(id) {
+    $.ajax({
       url: "{{route('department_status')}}",
       type: "post",
-      data: {'user_id':id ,'_token': "{{ csrf_token() }}"},
-        success: function (data) {
-            location.reload();// refresh same page
-        }
+      data: {
+        'user_id': id,
+        '_token': "{{ csrf_token() }}"
+      },
+      success: function(data) {
+        location.reload(); // refresh same page
+      }
     });
   }
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#country1").change(function(){
-        var country_id = $(this).val();
-        // alert(country_id);
-        $.ajax({
-            url: '{{route('get_state')}}',
-            type: 'get',
-            data: {country_id:country_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#state").empty();
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#state").append("<option value=''>Please Select</option>");
-                $("#state").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+  $(document).ready(function() {
+    $("#country1").change(function() {
+      var country_id = $(this).val();
+      // alert(country_id);
+      $.ajax({
+        url: '{{route('
+        get_state ')}}',
+        type: 'get',
+        data: {
+          country_id: country_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#state").empty();
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#state").append("<option value=''>Please Select</option>");
+            $("#state").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#state").change(function(){
+  $(document).ready(function() {
+    $("#state").change(function() {
       // alert('dfshj');
-        var state_id = $(this).val();
-        // alert(state_id);
-        $.ajax({
-            url: '{{route('get_city')}}',
-            type: 'get',
-            data: {state_id:state_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#city1").empty();
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#city1").append("<option value=''>Please Select</option>");
-                $("#city1").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+      var state_id = $(this).val();
+      // alert(state_id);
+      $.ajax({
+        url: '{{route('
+        get_city ')}}',
+        type: 'get',
+        data: {
+          state_id: state_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#city1").empty();
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#city1").append("<option value=''>Please Select</option>");
+            $("#city1").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>

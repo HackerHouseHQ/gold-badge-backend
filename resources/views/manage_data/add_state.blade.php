@@ -43,7 +43,7 @@
             @endif
             <form class="form-horizontal" method="POST" action="{{route('add_state')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
-              <?php $countryList =  App\Country::get();?>
+              <?php $countryList =  App\Country::get(); ?>
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">Country</label>
                 <select class="form-control" name="country_id" id="country_id">
@@ -55,8 +55,7 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">State Name</label>
-                <input type="text" class="form-control" name="state_name" value="{{ old('state_name') }}"
-                  placeholder="Enter State Name">
+                <input type="text" class="form-control" name="state_name" value="{{ old('state_name') }}" placeholder="Enter State Name">
               </div>
               <div class="form-group">
                 OR
@@ -77,8 +76,7 @@
               </div>
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a style="color : white;" href="{{route('countries')}}"><button type="button"
-                    class="btn btn btn-info">Back</button></a>
+                <a style="color : white;" href="{{route('countries')}}"><button type="button" class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>
@@ -122,48 +120,53 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-  var dataTable = $('#datatable-basic').DataTable({
-    language: {
-      searchPlaceholder: "Department Name",
-      paginate: {
+  $(document).ready(function() {
+    var dataTable = $('#datatable-basic').DataTable({
+      language: {
+        searchPlaceholder: "Department Name",
+        paginate: {
           previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
+          next: '<i class="fas fa-angle-right"></i>'
+        },
+        aria: {
           paginate: {
-              previous: 'Previous',
-              next:     'Next'
+            previous: 'Previous',
+            next: 'Next'
           }
-      }
-  },
-     "searching": false,
-     'processing': true,
-     'serverSide': true,
-     "bFilter": true,
-     "bInfo": true,
-     "lengthChange": true,
-     "bAutoWidth": true,
-     'ajax': {
-        'url':"{{route('notificationList')}}",
-        'data': function(data){
-           var date1 = $('#date1').val();
+        }
+      },
+      "searching": false,
+      'processing': true,
+      'serverSide': true,
+      "bFilter": true,
+      "bInfo": true,
+      "lengthChange": true,
+      "bAutoWidth": true,
+      'ajax': {
+        'url': "{{route('notificationList')}}",
+        'data': function(data) {
+          var date1 = $('#date1').val();
           data.date1 = date1;
-           var fromdate = $('#fromdate').val();
+          var fromdate = $('#fromdate').val();
           data.fromdate = fromdate;
           var todate = $('#todate').val();
           data.todate = todate;
         }
-       },
-    'columns': [
-        { data: 'message' } ,
-        { data: 'time' },
-        { data: 'date' },
-    ]
+      },
+      'columns': [{
+          data: 'message'
+        },
+        {
+          data: 'time'
+        },
+        {
+          data: 'date'
+        },
+      ]
+    });
+    $('#search_data1').click(function() {
+      dataTable.draw();
+    });
   });
- $('#search_data1').click(function(){
-     dataTable.draw();
-  });
-});
 </script>
 @endsection

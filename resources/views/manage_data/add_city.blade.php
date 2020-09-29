@@ -43,7 +43,7 @@
             @endif
             <form class="form-horizontal" method="POST" action="{{route('add_city')}}" enctype="multipart/form-data">
               {{ csrf_field() }}
-              <?php $countryList =  App\Country::get();?>
+              <?php $countryList =  App\Country::get(); ?>
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">County</label>
                 <select class="form-control" name="country_id" id="country_id">
@@ -61,8 +61,7 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">City Name</label>
-                <input type="text" class="form-control" name="city_name" value="{{ old('city_name') }}"
-                  placeholder="Enter City Name">
+                <input type="text" class="form-control" name="city_name" value="{{ old('city_name') }}" placeholder="Enter City Name">
               </div>
               <div class="form-group">
                 OR
@@ -83,8 +82,7 @@
               </div>
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a style="color : white;" href="{{route('countries')}}"><button type="button"
-                    class="btn btn btn-info">Back</button></a>
+                <a style="color : white;" href="{{route('countries')}}"><button type="button" class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>
@@ -128,24 +126,27 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function(){
-    $("#country_id").change(function(){
-        var country_id = $(this).val();
-        $.ajax({
-            url: '{{route('get_state')}}',
-            type: 'get',
-            data: {country_id:country_id},
-            dataType: 'json',
-            success:function(response){
-            var len = response.length;
-            $("#state_id").empty();
-              for( var i = 0; i<len; i++){
-                var id = response[i]['id'];
-                var name = response[i]['name'];
-                $("#state_id").append("<option value='"+id+"'>"+name+"</option>");
-              }
-            }
-        });
+  $(document).ready(function() {
+    $("#country_id").change(function() {
+      var country_id = $(this).val();
+      $.ajax({
+        url: '{{route('
+        get_state ')}}',
+        type: 'get',
+        data: {
+          country_id: country_id
+        },
+        dataType: 'json',
+        success: function(response) {
+          var len = response.length;
+          $("#state_id").empty();
+          for (var i = 0; i < len; i++) {
+            var id = response[i]['id'];
+            var name = response[i]['name'];
+            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
+          }
+        }
+      });
     });
   });
 </script>
