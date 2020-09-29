@@ -798,12 +798,16 @@ class UserController extends Controller
             foreach ($getComment as $key => $value) {
                 $like_count = DepartmentCommentLike::where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
                 $reply_count = DepartmentSubComment::where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
+                $is_comment_like = DepartmentCommentLike::where('user_id', $user_id)->where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->first();
 
                 $value['comment_like_count'] = $like_count;
                 $value['comment_reply_count'] = $reply_count;
+                $value['is_commment_like'] = ($is_comment_like)  ?   $is_comment_like->status : 0;
                 foreach ($value->sub_comment as $k => $v) {
                     $like_sub_count =   DepartmentSubCommentLike::where('sub_comment_id', $v->sub_comment_id)->where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->count();
-                    $v['sub_comment_reply_count'] = $like_sub_count;
+                    $is_sub_comment_like = DepartmentSubCommentLike::where('user_id', $user_id)->where('sub_comment_id', $v->sub_comment_id)->where('comment_id', $value->comment_id)->where('post_id', $value->post_id)->first();
+                    $v['sub_comment_like_count'] = $like_sub_count;
+                    $v['is_sub_commment_like'] = ($is_sub_comment_like) ? $is_sub_comment_like->status : 0;
                 }
             }
             return res_success('Comment List', array('commentList' => $getComment));
