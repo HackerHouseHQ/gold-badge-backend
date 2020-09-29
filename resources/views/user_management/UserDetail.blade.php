@@ -961,9 +961,11 @@
 </script>
 <script type="text/javascript">
     function status(id) {
+
+       
         $.ajax({
             url: "{{route('delete_post')}}",
-            type: "get",
+            type: "post",
             data: {
                 'post_id': id,
                 '_token': "{{ csrf_token() }}"

@@ -216,19 +216,24 @@
 
           <div class="middlepane" style="float:right">
 
-            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
+            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
           </div>
           <div class="rightpane">
-            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Reviews</a>
+            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Reviews</a>
           </div>
         </div>
         <div class="card-body">
 
           <div class="middlepane" style="float:right">
-            <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Badge</a>
+            <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info"
+              data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+              data-icon="ni ni-bell-55">Badge</a>
           </div>
           <div class="rightpane">
-            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Department</a>
+            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Department</a>
           </div>
         </div>
 
@@ -256,7 +261,8 @@
 </div>
 
 {{-- model view department --}}
-<div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding: 0;">
@@ -269,7 +275,9 @@
       <div class="modal-body">
         <div class="row">
           <div class="col-4">
-            <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg" alt="" style="width: 245px; height:245px;">
+            <img
+              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+              alt="" style="width: 245px; height:245px;">
           </div>
           <div class="col-8" id="viewDepartment">
 
@@ -309,7 +317,8 @@
   </div>
 </div>
 {{-- end model view department --}}
-<div class="modal fade" id="viewUserDetailLikeModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="viewUserDetailLikeModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -360,7 +369,8 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -411,7 +421,8 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header" style="padding: 0;">
@@ -794,7 +805,7 @@
   function status(id) {
     $.ajax({
       url: "{{route('delete_post')}}",
-      type: "get",
+      type: "post",
       data: {
         'post_id': id,
         '_token': "{{ csrf_token() }}"
