@@ -380,7 +380,7 @@ class UserController extends Controller
         //   $data['image'] = $departmentImage;
         // }
         $insertData = Department::create($data);
-        return redirect('/user_management/departmentRequest');
+        return redirect('/user_management/deprtmentPendingRequest');
       }
     } else {
       return true;
