@@ -61,7 +61,8 @@
               </div>
               <div class="form-group">
                 <label class="form-control-label" for="exampleFormControlInput1">City Name</label>
-                <input type="text" class="form-control" name="city_name" value="{{ old('city_name') }}" placeholder="Enter City Name">
+                <input type="text" class="form-control" name="city_name" value="{{ old('city_name') }}"
+                  placeholder="Enter City Name">
               </div>
               <div class="form-group">
                 OR
@@ -82,7 +83,8 @@
               </div>
               <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Save</button>
-                <a style="color : white;" href="{{route('countries')}}"><button type="button" class="btn btn btn-info">Back</button></a>
+                <a style="color : white;" href="{{route('countries')}}"><button type="button"
+                    class="btn btn btn-info">Back</button></a>
               </div>
             </form>
           </div>
@@ -130,8 +132,7 @@
     $("#country_id").change(function() {
       var country_id = $(this).val();
       $.ajax({
-        url: '{{route('
-        get_state ')}}',
+        url: "{{route('get_state')}}"",
         type: 'get',
         data: {
           country_id: country_id
