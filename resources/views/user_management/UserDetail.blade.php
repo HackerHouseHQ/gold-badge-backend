@@ -589,7 +589,7 @@
 {{-- <img id="myImg" src="img_snow.jpg" alt="user name" style="width:100%;max-width:300px"> --}}
 
 <!-- The Modal -->
-<div id="myModal" class=" img-modal">
+<div id="myModal" class="img-modal">
 
     <!-- The Close Button -->
     <span class="img-close">&times;</span>
@@ -906,7 +906,7 @@
                 $('#viewDepartment').html('');
                 // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
                 let row = ` <div class="custom_col_class">
-     <img src="../storage/uploads/user_image/${response.users.image}"  alt="user-image" class="avatar" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
+     <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
     
         <div class="form_div">
               <p class="form_fields">Full Name:</p>

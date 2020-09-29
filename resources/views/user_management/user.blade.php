@@ -280,31 +280,6 @@
 
   }
 </script>
-{{-- <script>
-  $(document).ready(function () {
-          $('#datatable-basic').DataTable({
-            language: {
-      paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next:     '<i class="fas fa-angle-right"></i>'
-      },
-      aria: {
-          paginate: {
-              previous: 'Previous',
-              next:     'Next'
-          }
-      }
-  },
-              "columns": [
-                  { "data": "name" },
-                  { "data": "position" },
-                  { "data": "office" },
-                  { "data": "age" },
-                  { "data": "start_date" },
-                  { "data": "salary" }
-              ]
-          });
-      });
-</script> --}}
+
 
 @endsection

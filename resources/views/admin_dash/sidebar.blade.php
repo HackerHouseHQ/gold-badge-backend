@@ -4,7 +4,8 @@
     <div class="sidenav-header  d-flex  align-items-center">
       <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
         <!--<img src="{{asset('admin_new/assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">-->
-        <img src="http://13.235.176.85/gold_badge/public/admin_css/images/follow_logo.png" class="navbar-brand-img" alt="..."> Gold Badge
+        <img src="http://13.235.176.85/gold_badge/public/admin_css/images/follow_logo.png" class="navbar-brand-img"
+          alt="..."> Gold Badge
       </a>
       <div class=" ml-auto ">
         <!-- Sidenav toggler -->
@@ -82,9 +83,19 @@
                  || request()->route()->getName()=='report' || request()->route()->getName()=='add_country') active
             @endif">
               <i class="far fa-chart-bar text-primary"></i>
-              <span class="nav-link-text">Manage Report </span>
+              <span class="nav-link-text">Manage Data</span>
             </a>
           </li>
+          {{-- <li class="nav-item">
+            <a href="{{ route('countries') }}" class="nav-link @if(request()->route()->getName()=='countries'
+          || request()->route()->getName()=='ethnicity' || request()->route()->getName()=='gender'
+          || request()->route()->getName()=='report' || request()->route()->getName()=='add_country') active
+          @endif">
+          <i class="far fa-chart-bar text-primary"></i>
+          <span class="nav-link-text">Reported Posts</span>
+          </a>
+          </li> --}}
+
           <!--          <li class="nav-item">
             <a class="nav-link" href="#navbar-components" data-toggle="collapse" role="button" aria-expanded="false"
               aria-controls="navbar-components">
