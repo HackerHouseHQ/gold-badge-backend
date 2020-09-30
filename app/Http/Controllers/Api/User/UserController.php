@@ -214,6 +214,7 @@ class UserController extends Controller
             ];
 
             $userInsetId = User::insertGetId($insertData);
+
             if (isset($request->department_followed) && !empty($request->department_followed)) {
                 $arr = $request->department_followed;
                 if (!is_array($arr)) {
@@ -229,9 +230,7 @@ class UserController extends Controller
                     $followdata =  UserDepartmentFollow::insert($insertFollowed);
                 }
             }
-            if (!$followdata) {
-                User::where('id', $userInsetId)->delete();
-            }
+
             if (isset($request->badges_followed) && !empty($request->badges_followed)) {
                 $arr = $request->badges_followed;
                 if (!is_array($arr)) {
@@ -247,9 +246,7 @@ class UserController extends Controller
                     $followdata =  UserDepartmentBadgeFollow::insert($insertbadgesFollowed);
                 }
             }
-            if (!$followdata) {
-                User::where('id', $userInsetId)->delete();
-            }
+
 
             $user = User::where('id', $userInsetId)->first();
             $resulToken = $user->createToken('');
