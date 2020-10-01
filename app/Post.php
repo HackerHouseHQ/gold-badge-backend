@@ -16,7 +16,7 @@ class Post extends Model
    {
       $siteUrl = env('APP_URL');
 
-      return $this->hasMany('App\DepartmentVote', 'post_id', 'post_id')->select(
+      return $this->hasMany('App\DepartmentVote', 'post_id')->select(
          'department_votes.id as vote_id',
          'department_votes.rating',
          'user_id',

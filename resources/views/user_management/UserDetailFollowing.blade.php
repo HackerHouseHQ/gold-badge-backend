@@ -613,7 +613,7 @@
       success: function(response) {
         $('#userImage1').html(``);
         $('#businessName1').html('');
-        let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+        let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">`;
         let i = 1;
         response.forEach(value => {
@@ -675,19 +675,21 @@
       success: function(response) {
         $('#share').html(``);
         $('#userImage2').html(``);
-
-        let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">`;
+        let image_length = 0 ;
+        response.forEach(value => {
+          image_length = value.post_images.length });
+        let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                          <div class="carousel-inner">`;
         let i = 1;
         response.forEach(value => {
           value.post_images.forEach(image => {
             if (i == 1) {
               rowImage += ` <div class="carousel-item active">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
     </div>`;
             } else {
               rowImage += ` <div class="carousel-item">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
     </div>`;
             }
 

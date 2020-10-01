@@ -383,13 +383,11 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="image"></div>
                     <div class="col-4" id="userImage">
                         <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
                             alt="" style="width: 240px; height:240px;">
                     </div>
                     <div class="col-8" id="viewDepartment">
-
 
                     </div>
                 </div>
@@ -793,7 +791,7 @@
                 $('#share').html(``);
                 $('#userImage2').html(``);
 
-                let rowImage = `<div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
+                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
   <div class="carousel-inner">`;
                 let i = 1;
                 response.forEach(value => {
@@ -856,8 +854,8 @@
             success: function(response) {
                 $('#userImage1').html(``);
                 $('#businessName1').html('');
-                let rowImage = `<div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">`;
+                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
+                                 <div class="carousel-inner">`;
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
@@ -870,7 +868,6 @@
       <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
     </div>`;
                         }
-
                         i++;
                     });
                 });
@@ -918,7 +915,8 @@
             type: 'get',
             success: function(response) {
                 $('#userImage').html(``);
-                let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
+
+                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
                 rowImage += `<ol class="carousel-indicators">`;
                 let j=0;
                     response.post_image.forEach(image => {
@@ -935,12 +933,11 @@
  rowImage += `</ol>`;
            rowImage += `<div class="carousel-inner">`;
                 let i = 1;
-
                 response.post_image.forEach(image => {
                     if (i == 1) {
                         rowImage += ` <div class="carousel-item active">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
-    </div>`;
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
+                                </div>`;
                     } else {
                         rowImage += ` <div class="carousel-item">
       <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
@@ -980,9 +977,9 @@
                 $('#viewDepartment').html('');
                 // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
                 let row = ` <div class="custom_col_class">
-     <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
+                                 <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
     
-        <div class="form_div">
+             <div class="form_div">
               <p class="form_fields">Full Name:</p>
               <p class="form_fields">${response.users.first_name}</p>
               </div>

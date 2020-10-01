@@ -75,7 +75,7 @@ class GuestController extends Controller
                 // // Creating deaprtment ids array from array of arrays
                 // $departmentIdsArray     =   array_column($departmentIds, 'department_id');
                 $siteUrl = env('APP_URL');
-                $posts  =   Post::with(['post_images'])
+                $posts  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
@@ -109,7 +109,7 @@ class GuestController extends Controller
             if ($request->type == 2) { //most liked post list
                 $user_id = $request->user_id;
                 $siteUrl = env('APP_URL');
-                $posts  =   Post::with(['post_images'])
+                $posts  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
@@ -144,7 +144,7 @@ class GuestController extends Controller
             {
                 $user_id = $request->user_id;
                 $siteUrl = env('APP_URL');
-                $posts  =   Post::with(['post_images'])
+                $posts  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
