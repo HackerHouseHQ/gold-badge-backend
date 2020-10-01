@@ -83,7 +83,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('created_at', 'DESC')
-                    ->get();
+                    ->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -117,7 +117,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('post_like_count', 'desc')
-                    ->get();
+                    ->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -152,7 +152,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('post_share_count', 'desc')
-                    ->get();
+                    ->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
