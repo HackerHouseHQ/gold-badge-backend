@@ -28,7 +28,7 @@ use App\Http\Controllers\Controller;
 use App\ReviewReasons;
 use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -323,7 +323,7 @@ class UserController extends Controller
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
-                        'upLoadFile' => 'nullable|array',
+                        // 'upLoadFile' => 'nullable|array',
                         'media_type' =>  'boolean|nullable' // 0 =>video , 1 => image
                     ]
                 );
@@ -392,7 +392,7 @@ class UserController extends Controller
                         'comment' => 'required|string',
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
-                        'upLoadFile' => 'required|array',
+                        // 'upLoadFile' => 'required|array',
                         'media_type' => 'boolean|nullable' // 0 =>video , 1 => image
                         // 'upLoadFile.*' => 'required'
                     ]
