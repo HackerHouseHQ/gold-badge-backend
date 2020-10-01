@@ -224,8 +224,9 @@
         <div class="card-body" style="background-color: #edce46;border-radius: 5px; border: 3px solid #6b6c7d;">
 
           <div class="middlepane" style="float:right">
-            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
-              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
+            <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-success"
+              data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+              data-icon="ni ni-bell-55">Followings</a>
           </div>
           <div class="rightpane">
             <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"

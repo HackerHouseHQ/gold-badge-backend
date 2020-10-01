@@ -25,21 +25,22 @@ use App\DepartmentVote;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\ReviewReasons;
 use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\Validator;
 
 
 class UserController extends Controller
 {
+    /**
+     * Show country List.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function getCountryList()
     {
-        /**
-         * Show country List.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $country = Country::select('id as country_id', 'country_name')->get();
             if (count($country) > 0) {
@@ -51,16 +52,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * Show state List.
+     *
+     * @param int $countryId
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function getStateList(Request $request)
     {
-        /**
-         * Show state List.
-         *
-         * @param int $countryId
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $countryId = $request->country_id;
             $state =  CountryState::select('id as state_id', 'country_id', 'state_name')->where('country_id',  $countryId)->get();
@@ -73,16 +74,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * Show city List.
+     *
+     * @param int $countryId , $stateId
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function getCityList(Request $request)
     {
-        /**
-         * Show city List.
-         *
-         * @param int $countryId , $stateId
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $countryId = $request->country_id;
             $stateId = $request->state_id;
@@ -99,16 +100,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * Check mobile number existence.
+     *
+     * @param int $mobileNumber
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function checkMobileNoExistence(Request $request)
     {
-        /**
-         * Check mobile number existence.
-         *
-         * @param int $mobileNumber
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $mobileNumber = $request->mobile_no;
             $checkmobile = User::where('mobil_no', $mobileNumber)->first();
@@ -122,16 +123,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * fetch department list.
+     *
+     * @param int $countryId , $stateId , $cityId
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function DepartmentList(Request $request)
     {
-        /**
-         * fetch department list.
-         *
-         * @param int $countryId , $stateId , $cityId
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
 
         try {
             $countryId = $request->country_id;
@@ -156,16 +157,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * sign up user.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
+
     public function signUp(Request $request)
     {
-        /**
-         * sign up user.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
-
         try {
             $validator = Validator::make(
                 $request->all(),
@@ -231,15 +232,12 @@ class UserController extends Controller
                 }
             }
 
-            if (isset($request->badges_followed) && !empty($request->badges_followed)) {
-                $arr = $request->badges_followed;
-                if (!is_array($arr)) {
-                    $arr = json_decode($arr, true);
-                }
-                foreach ($arr as  $followed) {
+            if (isset($request->badges_followed)) {
+                $arrbadges = json_decode($request->badges_followed, true);
+                foreach ($arrbadges as  $badge) {
                     $insertbadgesFollowed = [
                         'user_id' => $userInsetId,
-                        'badge_id' => $followed,
+                        'badge_id' => $badge,
                         'created_at' => CURRENT_DATE,
                         'updated_at' => CURRENT_DATE,
                     ];
@@ -262,15 +260,15 @@ class UserController extends Controller
         }
     }
 
+    /**
+     * Check username  and email existence.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function checkUserNameEmail(Request $request)
     {
-        /**
-         * Check username  and email existence.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $email = $request->email;
             $username =  $request->user_name;
@@ -305,16 +303,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save post review .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function savePostReview(Request $request)
     {
 
-        /**
-         * save post review .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             if ($request->type == 1) { //department 
                 $validator = Validator::make(
@@ -341,6 +339,7 @@ class UserController extends Controller
                 $userId = $request->user_id;
                 $stayAnonymous = $request->stay_anonymous;
                 $uploadFile  = $request->upLoadFile;
+                $user_rating  = $request->user_rating;
                 $insertPostDepartment = [
                     'user_id' => $userId,
                     'department_id' => $departmentId,
@@ -348,6 +347,7 @@ class UserController extends Controller
                     'comment' => $comment,
                     'stay_anonymous' => $stayAnonymous,
                     'flag' => 1,
+                    'user_rating' => $user_rating,
                     'created_at' => CURRENT_DATE,
                     'updated_at' => CURRENT_DATE
                 ];
@@ -410,29 +410,38 @@ class UserController extends Controller
                 $userId = $request->user_id;
                 $stayAnonymous = $request->stay_anonymous;
                 $uploadFile  = $request->upLoadFile;
+                $total_rating = $request->total_rating;
+                $user_rating  = $request->user_rating;
+                $insertPostBadge = [
+                    'user_id' => $userId,
+                    'department_id' => $departmentId,
+                    'badge_id' => $badgeId,
+                    'rating' => $total_rating,
+                    'comment' => $comment,
+                    'stay_anonymous' => $stayAnonymous,
+                    'rating' => $total_rating,
+                    'flag' => 2,
+                    'user_rating' => $user_rating,
+                    'created_at' => CURRENT_DATE,
+                    'updated_at' => CURRENT_DATE
+                ];
+                $insertPostBadgeId = Post::insertGetId($insertPostBadge);
                 if (isset($ratingArr) && !empty($ratingArr)) {
                     $arr = $ratingArr;
                     if (!is_array($arr)) {
                         $arr = json_decode($arr, true);
                     }
-                    foreach ($arr as $rating) {
-                        $insertPostBadge = [
-                            'user_id' => $userId,
-                            'department_id' => $departmentId,
-                            'badge_id' => $badgeId,
-                            'rating' => $rating,
-                            'comment' => $comment,
-                            'stay_anonymous' => $stayAnonymous,
-                            'reason_id' => $rating['reason_id'],
-                            'rating' => $rating['rating'],
-                            'flag' => 2,
+                    foreach ($arr as $ratings) {
+                        $insertRatingArray = [
+                            'post_id' => $insertPostBadgeId,
+                            'reason_id' => $ratings['reason_id'],
+                            'rating' => $ratings['rating'],
                             'created_at' => CURRENT_DATE,
                             'updated_at' => CURRENT_DATE
                         ];
-                        $insertData = Post::insert($insertPostBadge);
+                        $insertReason = ReviewReasons::insert($insertRatingArray);
                     }
                 }
-
                 if (isset($uploadFile) && !empty($uploadFile)) {
                     $arr = $uploadFile;
                     if (!is_array($arr)) {
@@ -443,210 +452,160 @@ class UserController extends Controller
                         $file = $image;
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
-                        $path = storage_path() . '/app/public/uploads/post_badge_image';
+                        $path = storage_path() . '/app/public/uploads/post_department_image';
                         $file->move($path, $filename);
                         $insertArray = [
-                            'user_id' => $userId,
-                            'department_id' => $departmentId,
-                            'badge_id' => $badgeId,
+                            'post_id' => $insertPostBadgeId,
                             'image'  => $filename,
                             'media_type' => $request->media_type,
                             'created_at' => CURRENT_DATE,
                             'updated_at' => CURRENT_DATE
                         ];
-                        $insertData = PostBadgeImage::insert($insertArray);
+                        $insertData = PostImage::insert($insertArray);
                         $i++;
                     }
                 }
-                if ($insertData) {
-                    return res_success('Post Saved Successfully');
-                }
+                return res_success('Post Saved Successfully');
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
 
+    /**
+     * get post department .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function getPostDepartment(Request $request)
     {
-        // echo "fvf"; die;
-        /**
-         * get post department .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
+
         try {
-            if ($request->type == 1) {
-                //  echo "da"; die;
+            if ($request->type == 1) { //recent post list
                 $user_id = $request->user_id;
-                $myPost = UserDepartmentFollow::getPostDepartmentData($user_id);
-                $query = UserDepartmentFollow::query()->select(
-                    'posts.user_id',
-                    'posts.id as post_id',
-                    'users.user_name',
-                    'users.image as user_image',
-                    'departments.department_name',
-                    'posts.created_at',
-                    'posts.comment as post_content',
-                    'posts.flag',
-                    'posts.stay_anonymous',
-                    'user_department_follows.department_id',
-                    DB::raw('COUNT(posts.department_id) as total_reviews'),
-                    DB::raw('AVG(posts.rating) as rating')
-                )
-                    ->leftjoin("departments", function ($join) {
-                        $join->on('user_department_follows.department_id', '=', 'departments.id');
-                    })
-                    ->leftjoin("posts", function ($join) {
-                        $join->on('user_department_follows.department_id', '=', 'posts.department_id');
-                    })
-                    ->leftjoin("users", function ($join) {
-                        $join->on('posts.user_id', '=', 'users.id');
-                    })
-                    ->where('user_department_follows.user_id', $user_id)->groupBy('departments.id')
-                    ->where('flag', 1)
-                    ->get();
-                $arrz = array();
-                foreach ($myPost as $key => $value) {
-                    foreach ($query as $k => $v) {
-                        if ($v->flag == 1 && $value->flag == 1 && $v->department_id == $value->department_id) {
-                            $isdepartmentLike = DepartmentLike::where('post_id', $value->post_id)->where('user_id', $user_id)->first();
-                            // $departmentShareCount = DepartmentShare::where('post_id', $value->post_id)->count();
-                            // $departmentCommentCount = DepartmentComment::where('post_id', $value->post_id)->count();
-                            $value['total_reviews'] = $v->total_reviews;
-                            $value['rating'] = number_format($v->rating,  1);
-                            if ($isdepartmentLike) {
-                                $value['is_liked'] = ($isdepartmentLike->status == 1) ? 1 : 0;
-                            } else {
-                                $value['is_liked'] = 0;
-                            }
+                // Getting department ids followed by the user
+                $departmentIds  =   UserDepartmentFollow::select('department_id')->where('user_id', $user_id)->get()->toArray();
+                // Creating deaprtment ids array from array of arrays
+                $departmentIdsArray     =   array_column($departmentIds, 'department_id');
+                $siteUrl = env('APP_URL');
 
-
-                            // $value['like_count'] = $departmentLikeCount;
-                            // $value['comment_count'] = $departmentCommentCount;
-                            // $value['share_count'] = $departmentShareCount;
-                            unset($value->flag);
-                        }
-                    }
-                }
-                return res_success('Fetch List', array('postList' => $myPost));
-            }
-            if ($request->type == 2) {
-                $user_id = $request->user_id;
-                $myPost = UserDepartmentFollow::getPostDepartmentDataLike($user_id);
-                $query = Post::query()->select(
-                    'posts.user_id',
-                    'posts.id as post_id',
-                    'users.user_name',
-                    'users.image as user_image',
-                    'departments.department_name',
-                    'posts.created_at',
-                    'posts.comment as post_content',
-                    'posts.flag',
-                    'posts.department_id',
-                    'posts.stay_anonymous',
-                    DB::raw('COUNT(posts.department_id) as total_reviews'),
-                    DB::raw('AVG(posts.rating) as rating')
-                )
-                    ->leftjoin("departments", function ($join) {
-                        $join->on('posts.department_id', '=', 'departments.id');
-                    })
-                    ->leftjoin("users", function ($join) {
-                        $join->on('posts.user_id', '=', 'users.id');
-                    })
-                    ->groupBy('departments.id')
-                    ->where('flag', 1)
+                $posts  =   Post::with(['post_images'])
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                    ->withCount('post_comment')
+                    ->withCount('post_like')
+                    ->withCount('post_share')
+                    ->whereIn('department_id', $departmentIdsArray)
+                    ->orderBy('created_at', 'DESC')
                     ->get();
-                $arrz = array();
-                foreach ($myPost as $key => $value) {
-                    foreach ($query as $k => $v) {
-                        if ($v->flag == 1 && $value->flag == 1 && $v->department_id == $value->department_id) {
-                            // $departmentLikeCount = DepartmentLike::where('post_id', $value->post_id)->count();
-                            // $departmentShareCount = DepartmentShare::where('post_id', $value->post_id)->count();
-                            // $departmentCommentCount = DepartmentComment::where('post_id', $value->post_id)->count();
-                            $value['total_reviews'] = $v->total_reviews;
-                            $value['rating'] = number_format($v->rating,  1);
-                            // $value['like_count'] = $departmentLikeCount;
-                            // $value['comment_count'] = $departmentCommentCount;
-                            // $value['share_count'] = $departmentShareCount;
-                            $isdepartmentLike = DepartmentLike::where('post_id', $value->post_id)->where('user_id', $user_id)->first();
-                            if ($isdepartmentLike) {
-                                $value['is_liked'] = ($isdepartmentLike->status == 1) ? 1 : 0;
-                            } else {
-                                $value['is_liked'] = 0;
-                            }
-                            unset($value->flag);
-                        }
+                foreach ($posts as $post) {
+                    if ($post->flag == 1) {
+                        $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->total_reviews    =   $departmentPostData->count();
+                        $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   null;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
+                    } else if ($post->flag == 2) {
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                        $post->total_reviews    =   $badgePostData->count();
+                        $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
                     }
+                    unset($post->rating);
+                    unset($post->reason_id);
+                    unset($post->updated_at);
                 }
-                return res_success('Fetch List', array('postList' => $myPost));
+                return res_success('Fetch List', array('postList' => $posts));
             }
-            if ($request->type == 3) {
+            if ($request->type == 2) { //most liked post list
                 $user_id = $request->user_id;
-                $myPost = UserDepartmentFollow::getPostDepartmentDataShare($user_id);
-                $query = Post::query()->select(
-                    'posts.user_id',
-                    'posts.id as post_id',
-                    'users.user_name',
-                    'users.image as user_image',
-                    'departments.department_name',
-                    'posts.created_at',
-                    'posts.comment as post_content',
-                    'posts.flag',
-                    'posts.department_id',
-                    'posts.stay_anonymous',
-                    DB::raw('COUNT(posts.department_id) as total_reviews'),
-                    DB::raw('AVG(posts.rating) as rating')
-                )
-                    ->leftjoin("departments", function ($join) {
-                        $join->on('posts.department_id', '=', 'departments.id');
-                    })
-                    ->leftjoin("users", function ($join) {
-                        $join->on('posts.user_id', '=', 'users.id');
-                    })
-                    ->groupBy('departments.id')
-                    ->where('flag', 1)
+                $siteUrl = env('APP_URL');
+                $posts  =   Post::with(['post_images'])
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                    ->withCount('post_comment')
+                    ->withCount('post_like')
+                    ->withCount('post_share')
+                    ->orderBy('post_like_count', 'desc')
                     ->get();
-                $arrz = array();
-                foreach ($myPost as $key => $value) {
-                    foreach ($query as $k => $v) {
-                        if ($v->flag == 1 && $value->flag == 1 && $v->department_id == $value->department_id) {
-                            // $departmentLikeCount = DepartmentLike::where('post_id', $value->post_id)->count();
-                            // $departmentShareCount = DepartmentShare::where('post_id', $value->post_id)->count();
-                            // $departmentCommentCount = DepartmentComment::where('post_id', $value->post_id)->count();
-                            $value['total_reviews'] = $v->total_reviews;
-                            $value['rating'] = number_format($v->rating,  1);
-                            $isdepartmentLike = DepartmentLike::where('post_id', $value->post_id)->where('user_id', $user_id)->first();
-                            if ($isdepartmentLike) {
-                                $value['is_liked'] = ($isdepartmentLike->status == 1) ? 1 : 0;
-                            } else {
-                                $value['is_liked'] = 0;
-                            }
-                            // $value['like_count'] = $departmentLikeCount;
-                            // $value['comment_count'] = $departmentCommentCount;
-                            // $value['share_count'] = $departmentShareCount;
-                            unset($value->flag);
-                        }
+                foreach ($posts as $post) {
+                    if ($post->flag == 1) {
+                        $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->total_reviews    =   $departmentPostData->count();
+                        $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   null;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
+                    } else if ($post->flag == 2) {
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                        $post->total_reviews    =   $badgePostData->count();
+                        $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
                     }
+                    unset($post->rating);
+                    unset($post->reason_id);
+                    unset($post->updated_at);
                 }
-                return res_success('Fetch List', array('postList' => $myPost));
+                return res_success('Fetch List', array('postList' => $posts));
+            }
+            if ($request->type == 3) //most shared post list
+            {
+                $user_id = $request->user_id;
+                $siteUrl = env('APP_URL');
+                $posts  =   Post::with(['post_images'])
+                    ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                    ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                    ->withCount('post_comment')
+                    ->withCount('post_like')
+                    ->withCount('post_share')
+                    ->orderBy('post_share_count', 'desc')
+                    ->get();
+                foreach ($posts as $post) {
+                    if ($post->flag == 1) {
+                        $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->total_reviews    =   $departmentPostData->count();
+                        $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   null;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
+                    } else if ($post->flag == 2) {
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                        $post->total_reviews    =   $badgePostData->count();
+                        $post->avg_rating       =    ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                        $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                        $post->is_liked          = ($post_liked) ? 1 : 0;
+                    }
+                    unset($post->rating);
+                    unset($post->reason_id);
+                    unset($post->updated_at);
+                }
+                return res_success('Fetch List', array('postList' => $posts));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
 
+    /**
+     * save post department Like .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function savePostDepartmentLike(Request $request)
     {
-        /**
-         * save post department Like .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -671,15 +630,15 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save post department Share .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function savePostDepartmentShare(Request $request)
     {
-        /**
-         * save post department Share .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -702,15 +661,16 @@ class UserController extends Controller
         }
     }
 
+
+    /**
+     * save post department comment .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function  savePostDepartmentComment(Request $request)
     {
-        /**
-         * save post department comment .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -726,23 +686,38 @@ class UserController extends Controller
                 'created_at' => CURRENT_DATE,
                 'updated_at' => CURRENT_DATE
             ];
-            $insertData = DepartmentComment::insert($insertArray);
-            if ($insertData) {
-                return res_success('Your comment has been saved successfully.');
-            }
+            $insertDataId = DepartmentComment::insertGetId($insertArray);
+            $siteUrl = env('APP_URL');
+            $comment_like_count  = DepartmentCommentLike::where('comment_id', $insertDataId)->count();
+            $comment_reply_count = DepartmentSubComment::where('comment_id', $insertDataId)->count();
+            $is_comment_like = DepartmentCommentLike::where('comment_id', $insertDataId)->first();
+            $user = User::select('user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
+            $data = [
+                "comment_id" => $insertDataId,
+                "user_id" => $user_id,
+                "post_id" => $post_id,
+                "comment" => $comment,
+                "user_name" => $user->user_name,
+                "user_image" => $user->user_image,
+                "comment_like_count" => $comment_like_count,
+                "comment_reply_count" => $comment_reply_count,
+                "is_commment_like" => ($is_comment_like) ? 1 : 0
+            ];
+
+            return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save post department sub comment .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function  savePostDepartmentSubComment(Request $request)
     {
-        /**
-         * save post department sub comment .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -760,23 +735,39 @@ class UserController extends Controller
                 'created_at' => CURRENT_DATE,
                 'updated_at' => CURRENT_DATE
             ];
-            $insertData = DepartmentSubComment::insert($insertArray);
-            if ($insertData) {
-                return res_success('Your sub comment has been saved successfully.');
-            }
+            $insertDataId = DepartmentSubComment::insertGetId($insertArray);
+            $sub_comment_data = DepartmentSubComment::whereId($insertDataId)->first();
+            $siteUrl = env('APP_URL');
+            $sub_comment_like_count = DepartmentSubCommentLike::where('sub_comment_id', $insertDataId)->count();
+            $is_sub_commment_like = DepartmentSubCommentLike::where('sub_comment_id', $insertDataId)->first();
+            $user = User::select('user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
+
+            $data = [
+                "sub_comment_id" =>  $insertDataId,
+                "comment_id" => $comment_id,
+                "user_id" => $user_id,
+                "post_id" => $post_id,
+                "sub_comment" => $sub_comment,
+                "user_name" => $user->user_name,
+                "created_at" => $sub_comment_data->created_at,
+                "user_image" => $user->user_image,
+                "sub_comment_like_count" => $sub_comment_like_count,
+                "is_sub_commment_like" => ($is_sub_commment_like) ? 1 : 0
+            ];
+            return res_success('Your sub comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     *  post department  comment  list.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function getPostDepartmentCommentList(Request $request)
     {
-        /**
-         *  post department  comment  list.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $user_id = $request->user_id;
             $post_id = $request->post_id;
@@ -812,15 +803,15 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save post department  report.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function savePostReport(Request $request)
     {
-        /**
-         * save post department  report.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $user_id = $request->user_id;
             $post_id = $request->post_id;
@@ -840,15 +831,15 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save post department  vote.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function savePostVote(Request $request)
     {
-        /**
-         * save post department  vote.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $user_id = $request->user_id;
             $post_id = $request->post_id;
@@ -868,16 +859,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * login.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
+
     public function login(Request $request)
     {
-        /**
-         * login.
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
-
         try {
 
             $validator = Validator::make(
@@ -925,6 +916,13 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * department badge list.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function deparmentBadgeList(Request $request)
     {
         try {

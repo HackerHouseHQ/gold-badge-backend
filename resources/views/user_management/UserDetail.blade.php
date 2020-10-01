@@ -383,6 +383,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
+                    <div class="image"></div>
                     <div class="col-4" id="userImage">
                         <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
                             alt="" style="width: 240px; height:240px;">
@@ -917,8 +918,22 @@
             type: 'get',
             success: function(response) {
                 $('#userImage').html(``);
-                let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">`;
+                let rowImage = `<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
+                rowImage += `<ol class="carousel-indicators">`;
+                let j=0;
+                    response.post_image.forEach(image => {
+                        if(j ==0 )
+                        {
+                            rowImage += `<li data-target="#carouselExampleControls" data-slide-to="${j}" class="active"></li>`;
+                         
+                        }
+                        else{
+                            rowImage +=`<li data-target="#carouselExampleControls" data-slide-to="${j}"></li>`;
+                        }
+                        j++;
+                    });
+ rowImage += `</ol>`;
+           rowImage += `<div class="carousel-inner">`;
                 let i = 1;
 
                 response.post_image.forEach(image => {

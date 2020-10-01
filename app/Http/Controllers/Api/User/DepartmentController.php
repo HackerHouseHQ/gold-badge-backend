@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Validator;
 
 class DepartmentController extends Controller
 {
+
+    /**
+     * save department request .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function saveDepartmentRequest(Request $request)
     {
         try {

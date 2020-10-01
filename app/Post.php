@@ -28,6 +28,7 @@ class Post extends Model
             $join->on('department_votes.user_id', '=', 'users.id');
          });
    }
+
    public function users()
    {
       return $this->belongsTo('App\User', 'user_id');
@@ -35,6 +36,10 @@ class Post extends Model
    public function departments()
    {
       return $this->belongsTo('App\Department', 'department_id');
+   }
+   public function badges()
+   {
+      return $this->belongsTo('App\DepartmentBadge', 'badge_id');
    }
    public function departmentBadge()
    {
@@ -191,7 +196,7 @@ class Post extends Model
    {
       $siteUrl = env('APP_URL');
 
-      return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
+      return $this->hasMany('App\PostImage', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
    }
    public static function getPost($search,  $department_id, $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id)
    {
@@ -239,21 +244,21 @@ class Post extends Model
       $query = $query->latest('posts.created_at')->get();
       $arr = [];
       $post_data = [];
-      foreach ($query as $key => $value) {
-         if ($value->badge_id == null) {
-            array_push($arr, $value->badge_id);
-            array_push($post_data, $value);
-         } else {
-            if (!in_array($value->badge_id, $arr)) {
-               array_push($arr, $value->badge_id);
-               array_push($post_data, $value);
+      // foreach ($query as $key => $value) {
+      //    if ($value->badge_id == null) {
+      //       array_push($arr, $value->badge_id);
+      //       array_push($post_data, $value);
+      //    } else {
+      //       if (!in_array($value->badge_id, $arr)) {
+      //          array_push($arr, $value->badge_id);
+      //          array_push($post_data, $value);
 
-               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-                  ->avg('rating');
-            }
-         }
-      }
-      return $post_data;
+      //          $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+      //             ->avg('rating');
+      //       }
+      //    }
+      // }
+      return $query;
    }
    public static function getPostCount($search,  $department_id, $badge_id, $fromdate, $todate, $user_id)
    {
@@ -292,20 +297,40 @@ class Post extends Model
       $query = $query->latest('posts.created_at')->get();
       $arr = [];
       $post_data = [];
-      foreach ($query as $key => $value) {
-         if ($value->badge_id == null) {
-            array_push($arr, $value->badge_id);
-            array_push($post_data, $value);
-         } else {
-            if (!in_array($value->badge_id, $arr)) {
-               array_push($arr, $value->badge_id);
-               array_push($post_data, $value);
+      // foreach ($query as $key => $value) {
+      //    if ($value->badge_id == null) {
+      //       array_push($arr, $value->badge_id);
+      //       array_push($post_data, $value);
+      //    } else {
+      //       if (!in_array($value->badge_id, $arr)) {
+      //          array_push($arr, $value->badge_id);
+      //          array_push($post_data, $value);
 
-               $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-                  ->avg('rating');
-            }
-         }
-      }
-      return count($post_data);
+      //          $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
+      //             ->avg('rating');
+      //       }
+      //    }
+      // }
+      return count($query);
+   }
+
+   public function post_comment()
+   {
+      return $this->hasMany('App\DepartmentComment', 'post_id');
+   }
+
+   public function post_like()
+   {
+      return $this->hasMany('App\DepartmentLike', 'post_id');
+   }
+
+   public function post_share()
+   {
+      return $this->hasMany('App\DepartmentShare', 'post_id');
+   }
+
+   public function follow_check()
+   {
+      return $this->hasMany('App\UserDepartmentFollow', 'department_id');
    }
 }

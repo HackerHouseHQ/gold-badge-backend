@@ -737,6 +737,7 @@
       url: "{{ route('viewUserDetailModel') }}/" + id,
       type: 'get',
       success: function(response) {
+       
         if (typeof response.departments.image != "undefined") {
 
           $('#userImage').html(`<img

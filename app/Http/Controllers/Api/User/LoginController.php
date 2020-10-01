@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
+    /**
+     * send otp to mail .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function sendOtpToMail(Request $request)
     {
         try {
@@ -53,6 +60,13 @@ class LoginController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * verify otp .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function verifyOtp(Request $request)
     {
         try {

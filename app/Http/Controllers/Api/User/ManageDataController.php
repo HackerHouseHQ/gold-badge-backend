@@ -9,6 +9,13 @@ use App\Http\Controllers\Controller;
 
 class ManageDataController extends Controller
 {
+    /**
+     * reason question list .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function reasonQuestionList()
     {
         try {

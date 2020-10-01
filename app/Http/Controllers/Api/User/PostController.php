@@ -10,15 +10,15 @@ use App\Http\Controllers\Controller;
 
 class PostController extends Controller
 {
+    /**
+     * save post department Like .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function saveCommentLike(Request $request)
     {
-        /**
-         * save post department Like .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -45,15 +45,15 @@ class PostController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    /**
+     * save sub comment Like .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
     public function saveSubCommentLike(Request $request)
     {
-        /**
-         * save post department Like .
-         *
-         * @return Json
-         * @author Ratnesh Kumar 
-         * 
-         */
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;

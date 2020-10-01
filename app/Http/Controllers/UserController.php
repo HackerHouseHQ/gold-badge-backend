@@ -89,6 +89,9 @@ class UserController extends Controller
   public function viewUserDetailModel(Request $req)
   {
     $data = Post::with('users')->with('departments')->with('post_image')->where('id', $req->id)->first();
+    if (!$data) {
+      return $data;
+    }
     $likeCount =  DepartmentLike::where('post_id', $data->id)->count();
     $shareCount = DepartmentShare::where('post_id', $data->id)->count();
     $commentCount  = DepartmentComment::where('post_id', $data->id)->count();
