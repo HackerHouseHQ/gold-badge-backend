@@ -1208,15 +1208,36 @@
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
-                        if (i == 1) {
+                      if (i == 1) {
+                        if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-    <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
-  </div>`;
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
+
+                        } else {
+                            rowImage += ` <div class="carousel-item active">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
+                                </div>`;
+                        }
+                    } else {
+                        if (image.media_type == 0) {
+                            rowImage += ` <div class="carousel-item">
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
                         } else {
                             rowImage += ` <div class="carousel-item">
-    <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
-  </div>`;
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
+                                         </div>`;
+
                         }
+
+                    }
 
                         i++;
                     });
@@ -1277,15 +1298,36 @@
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
-                        if (i == 1) {
+                      if (i == 1) {
+                        if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-                                      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
-                                      </div>`;
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
+
+                        } else {
+                            rowImage += ` <div class="carousel-item active">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
+                                </div>`;
+                        }
+                    } else {
+                        if (image.media_type == 0) {
+                            rowImage += ` <div class="carousel-item">
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
                         } else {
                             rowImage += ` <div class="carousel-item">
-                                       <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
-                                      </div>`;
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
+                                         </div>`;
+
                         }
+
+                    }
                         i++;
                     });
                 });

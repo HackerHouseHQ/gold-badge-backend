@@ -303,7 +303,7 @@ class DepartmentController extends Controller
      </span></span></span></td>";
          $comment = ($data->comment) ? $data->comment : " ";
          $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>" . $comment  . "</span> <span style='    display: flex;
-    justify-content: space-between;'><span></span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
+    justify-content: space-between;'><span><a href='javascript:void(0)' onclick='viewUserDetailModel($data->id)'>VIEW POST</a></span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
       }
 
       return $arr;
