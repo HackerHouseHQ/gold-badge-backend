@@ -198,6 +198,12 @@ class Post extends Model
 
       return $this->hasMany('App\PostImage', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as post_department_image"), 'media_type');
    }
+   public function post_imagess()
+   {
+      $siteUrl = env('APP_URL');
+
+      return $this->hasMany('App\PostImage', 'post_id', 'post_id')->select('id', 'post_id', DB::raw("CONCAT('$siteUrl','storage/uploads/post_department_image/', image) as image"), 'media_type');
+   }
    public static function getPost($search,  $department_id, $badge_id, $fromdate, $todate, $order_by, $limit_t, $offset, $user_id)
    {
       $query = self::query()->select(
@@ -238,7 +244,7 @@ class Post extends Model
             $q->wheredate('posts.created_at', '<=', $todate);
          });
       }
-      $query->with('post_images');
+      $query->with('post_imagess');
       $query->skip($offset);
       $query->take($limit_t);
       $query = $query->latest('posts.created_at')->get();

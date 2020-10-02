@@ -1,5 +1,294 @@
 @extends('admin_dash.main')
 <style type="text/css">
+  #myVideo {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #myVideo:hover {
+    opacity: 0.7;
+  }
+
+  /* The Modal (background) */
+  .video-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 3;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+  }
+
+  /* Modal Content (Image) */
+  .video-modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+
+  /* Caption of Modal Image (Image Text) - Same Width as the Image */
+  /* #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    } */
+
+  /* Add Animation - Zoom in the Modal */
+  .video-modal-content,
+  /* #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    } */
+
+  @keyframes zoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* The Close Button */
+  .video-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .video-close:hover,
+  .video-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px) {
+    .video-modal-content {
+      width: 100%;
+    }
+  }
+
+  #myPostImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #myPostImg:hover {
+    opacity: 0.7;
+  }
+
+  /* The Modal (background) */
+  .post-img-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 3;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+  }
+
+  /* Modal Content (Image) */
+  .post-img-modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+
+  /* Caption of Modal Image (Image Text) - Same Width as the Image */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+
+  /* Add Animation - Zoom in the Modal */
+  .post-img-modal-content,
+  #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+
+  @keyframes zoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* The Close Button */
+  .post-img-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .post-img-close:hover,
+  .post-img-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px) {
+    .post-img-modal-content {
+      width: 100%;
+    }
+  }
+
+  /* Style the Image Used to Trigger the Modal */
+  #myImg {
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  #myImg:hover {
+    opacity: 0.7;
+  }
+
+  /* The Modal (background) */
+  .img-modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 3;
+    /* Sit on top */
+    padding-top: 100px;
+    /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.9);
+    /* Black w/ opacity */
+  }
+
+  /* Modal Content (Image) */
+  .img-modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+  }
+
+  /* Caption of Modal Image (Image Text) - Same Width as the Image */
+  #caption {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+    text-align: center;
+    color: #ccc;
+    padding: 10px 0;
+    height: 150px;
+  }
+
+  /* Add Animation - Zoom in the Modal */
+  .img-modal-content,
+  #caption {
+    animation-name: zoom;
+    animation-duration: 0.6s;
+  }
+
+  @keyframes zoom {
+    from {
+      transform: scale(0)
+    }
+
+    to {
+      transform: scale(1)
+    }
+  }
+
+  /* The Close Button */
+  .img-close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #f1f1f1;
+    font-size: 40px;
+    font-weight: bold;
+    transition: 0.3s;
+  }
+
+  .img-close:hover,
+  .img-close:focus {
+    color: #bbb;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  /* 100% Image Width on Smaller Screens */
+  @media only screen and (max-width: 700px) {
+    .img-modal-content {
+      width: 100%;
+    }
+  }
+
   .leftpane {
     width: 20%;
     height: 100%;
@@ -112,6 +401,12 @@
     background-color: #fff;
     border-bottom: 1px solid rgba(0, 0, 0, .125);
   }
+
+  .modal_rating_icon {
+    width: 10px;
+    margin-top: -2px;
+    margin-left: 2px;
+  }
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -144,14 +439,15 @@
 
           <div class="leftpane">
             <div class="img-r">
-              <img src="../storage/uploads/user_image/{{$data->image}}" alt="user-image">
+              <img src="../storage/uploads/user_image/{{$data->image}}" id="myImg" alt="user-image">
             </div>
           </div>
           <div class="middlepane">
             <div class="key_value_box">
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Full Name:</label>
-                <span class="tbl_row value userDetailsColor">{{@$data->first_name}} {{@$data->last_name}}</span>
+                <span class="tbl_row value userDetailsColor">{{@$data->first_name}}
+                  {{@$data->last_name}}</span>
               </div>
               <div class="key_value_box_div">
                 <label class="tbl_row labell">Username:</label>
@@ -213,7 +509,7 @@
         </div>
         <!-- tab-->
         <!-- tab-->
-        <div class="card-body" style="background-color: #edce46;border-radius: 5px; border: 3px solid #6b6c7d;">
+        <div class="card-body" style="background-color: #e8d84cc2;border-radius: 5px; border: 3px solid #6b6c7d;">
 
           <div class="middlepane" style="float:right">
 
@@ -222,7 +518,8 @@
           </div>
           <div class="rightpane">
             <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
-              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Reviews</a>
+              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">
+              Reviews</a>
           </div>
         </div>
         <div class="card-body">
@@ -322,7 +619,7 @@
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="padding: 0;">
         <h4 class="modal-title text-capitalize" id="businessName1"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -373,7 +670,7 @@
 <div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog"
   aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
+    <div class="modal-content" style="padding: 0;">
       <div class="modal-header">
         <h4 class="modal-title text-capitalize" id="share"></h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -474,88 +771,359 @@
     </div>
   </div>
 </div>
+<div class="modal fade" id="viewUserDetailBadgeRating" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_modal_header">
+        <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12" id="reason_list">
+            {{-- <div class="table-responsive">
+                <div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th><span class="tbl_row">SN.</span></th>
+                        <th> <span class="tbl_row">City Name</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody id="businessDetails">
+  
+                    </tbody>
+                  </table>
+                </div>
+              </div> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="viewUserDetailVoteRating" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header custom_modal_header">
+        <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-12" id="vote_list">
+            {{-- <div class="table-responsive">
+                <div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th><span class="tbl_row">SN.</span></th>
+                        <th> <span class="tbl_row">City Name</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody id="businessDetails">
+  
+                    </tbody>
+                  </table>
+                </div>
+              </div> --}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{-- end model view city --}}
+<!-- Trigger the Modal -->
+{{-- <img id="myImg" src="img_snow.jpg" alt="user name" style="width:100%;max-width:300px"> --}}
+
+<!-- The Modal -->
+<div id="myModal" class="img-modal">
+
+  <!-- The Close Button -->
+  <span class="img-close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="img-modal-content" id="img01">
+
+</div>
+<div id="myPostModal" class="post-img-modal">
+
+  <!-- The Close Button -->
+  <span class="post-img-close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <img class="post-img-modal-content" id="imgPost01">
+
+</div>
+<div id="videoModal" class="video-modal">
+
+  <!-- The Close Button -->
+  <span class="video-close">&times;</span>
+
+  <!-- Modal Content (The Image) -->
+  <video width="320" height="240" controls id="video01">
+    <source src="" type="video/mp4">
+    <source src="" type="video/ogg">
+  </video>
+  {{-- <video class="video-modal-content" id="video01"> --}}
+
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function() {
+  $(document).ready(function () {
 
-    var dataTable = $('#datatable-basic').DataTable({
-      language: {
-        paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next: '<i class="fas fa-angle-right"></i>'
-        },
-        aria: {
-          paginate: {
-            previous: 'Previous',
-            next: 'Next'
-          }
-        }
-      },
-      "searching": true,
-      'processing': true,
-      'serverSide': true,
-      "bFilter": true,
-      "bInfo": true,
-      "lengthChange": true,
-      "bAutoWidth": true,
-      'ajax': {
-        'url': "{{route('UserDetailFollowingData')}}",
-        'data': function(data) {
-          var user_id = $('#user_id').val();
-          data.user_id = user_id;
+        var dataTable = $('#datatable-basic').DataTable({
+            language: {
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>'
+                },
+                aria: {
+                    paginate: {
+                        previous: 'Previous',
+                        next: 'Next'
+                    }
+                }
+            },
+            "searching": true,
+            'processing': true,
+            'serverSide': true,
+            "bFilter": true,
+            "bInfo": true,
+            "lengthChange": true,
+            "bAutoWidth": true,
+            'ajax': {
+                'url': "{{route('UserDetailFollowingData')}}",
+                'data': function (data) {
+                    var user_id = $('#user_id').val();
+                    data.user_id = user_id;
 
-          // var state_id = $('#state_id').val();
-          // data.state_id = state_id;
-          // var country_id = $('#country_id').val();
-          // data.country_id = country_id;
-          //  var fromdate = $('#fromdate').val();
-          // data.fromdate = fromdate;
-          // var todate = $('#todate').val();
-          // data.todate = todate;
-        }
-      },
-      'columns': [{
-          data: 'department_name'
-        },
-        {
-          data: 'reviews'
-        },
-        {
-          data: 'rating'
-        },
-        {
-          data: 'action'
-        },
-      ]
+                    // var state_id = $('#state_id').val();
+                    // data.state_id = state_id;
+                    // var country_id = $('#country_id').val();
+                    // data.country_id = country_id;
+                    //  var fromdate = $('#fromdate').val();
+                    // data.fromdate = fromdate;
+                    // var todate = $('#todate').val();
+                    // data.todate = todate;
+                }
+            },
+            'columns': [{
+                    data: 'department_name'
+                },
+                {
+                    data: 'reviews'
+                },
+                {
+                    data: 'rating'
+                },
+                {
+                    data: 'action'
+                },
+            ]
+        });
+        $('#search_data1').click(function () {
+            dataTable.draw();
+        });
+        $('#search').keyup(function () {
+            dataTable.draw();
+        });
     });
-    $('#search_data1').click(function() {
-      dataTable.draw();
-    });
-    $('#search').keyup(function() {
-      dataTable.draw();
-    });
-  });
+
 </script>
 <script>
-  function viewUserDetailCommentModel(id) {
-    $.ajax({
-      url: "{{ route('viewUserDetailCommentModel') }}/" + id,
-      type: 'get',
-      success: function(response) {
-        $('#userImage2').html(``);
-        $('#comment').html(``);
-        if (response.length == 0) {
-          $('#userImage2').html(``);
-          $('#comment').html(``);
+  var ratingImage = {
+        ratings: function (rating) {
+            var ratingIcon = "";
+            if (rating >= 1 && rating < 2) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="modal_rating_icon">`
+            }
+            if (rating >= 2 && rating < 3) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
 
-          $('#comment').html('<h4>no record found</h4>');
+
+            if (rating >= 3 && rating < 4) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            if (rating >=
+                4 && rating < 5) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            if (rating == 5) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            return ratingIcon;
         }
+    }
 
-        let row = ``;
-        $('#viewDepartmentComment').html('');
-        response.forEach(value => {
-          row += ` <div class="col">
+    function viewUserDetailVoteRating(id) {
+        $.ajax({
+            url: "{{ route('viewUserDetailVoteRating') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                if (response.length) {
+                    console.log('aaa--', response);
+                    $('#vote_list').html('');
+                    // $('#noData').css("display","block"); 
+                    var i = 0;
+                    let row = `<div class="table-responsive">
+                                    <div>
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th><span class="tbl_row">SN.</span></th>
+                                                    <th> <span class="tbl_row">Department</span> </th>
+                                                    <th> <span class="tbl_row">Badge Number</span> </th>
+                                                    <th> <span class="tbl_row">User Name</span> </th>
+                                                    <th> <span class="tbl_row">Rating</span> </th>
+                                                </tr>
+                                            </thead>
+                                        <tbody id="businessDetails">`;
+                    $.each(response, function (key, value) {
+                        row += `<tr>
+                                    <td> ${++i} </td>
+                                    <td class="text-capitalize">${value.department_name}</td>
+                                    <td class="text-capitalize">${value.badge_number}</td>
+                                    <td class="text-capitalize">${value.user_name}</td>
+                                    <td class="text-capitalize">${value.rating} <span>${ratingImage.ratings(value.rating)}</span></td>
+                                </tr>`;
+                    })
+                    row += `</tbody>
+                            </table>
+                        </div>
+                    </div>`;
+                    $('#vote_list').append(row)
+                } else {
+                    $('#vote_list').html('');
+                    let row = `<div class="table-responsive">
+                                <div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="tbl_row">SN.</span></th>
+                                                <th> <span class="tbl_row">Department</span> </th>
+                                                <th> <span class="tbl_row">Badge Number</span> </th>
+                                                <th> <span class="tbl_row">User Name</span> </th>
+                                                <th> <span class="tbl_row">Rating</span> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="businessDetails">
+                                            <tr>
+                                              <td colspan="7"> Record not found! </td>
+                                            </tr>`;
+                    $('#vote_list').append(row)
+                }
+                $('#viewUserDetailVoteRating').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    }
+
+    function viewUserDetailBadgeRating(id) {
+
+        $.ajax({
+            url: "{{ route('viewUserDetailBadgeRating') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                if (response.length) {
+                    console.log('aaa--', response);
+                    $('#reason_list').html('');
+                    // $('#noData').css("display","block"); 
+                    var i = 0;
+                    let row = `<div class="table-responsive">
+      <div>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th><span class="tbl_row">SN.</span></th>
+              <th> <span class="tbl_row">Reason Question</span> </th>
+              <th> <span class="tbl_row">Rating</span> </th>
+              <th> <span class="tbl_row">Badge Number</span> </th>
+            </tr>
+          </thead>
+          <tbody id="businessDetails">`;
+                    $.each(response, function (key, value) {
+                        row += `
+        <tr>
+          <td> ${++i} </td>
+          <td class="text-capitalize">${value.name}</td>
+          <td class="text-capitalize">${value.rating}<span>${ratingImage.ratings(value.rating)}</span></td>
+          <td class="text-capitalize">${value.badge_number}</td>
+         </tr>
+        `;
+
+                    })
+                    row += `    </tbody>
+        </table>
+      </div>
+    </div>`;
+                    $('#reason_list').append(row)
+                } else {
+                    $('#reason_list').html('');
+                    let row = `<div class="table-responsive">
+      <div>
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <th><span class="tbl_row">SN.</span></th>
+              <th> <span class="tbl_row">Reason Question</span> </th>
+              <th> <span class="tbl_row">Rating</span> </th>
+              <th> <span class="tbl_row">Badge Number</span> </th>
+            </tr>
+          </thead>
+          <tbody id="businessDetails">
+    <tr>
+      <td colspan="7"> Record not found! </td>
+    </tr>
+    `;
+                    $('#reason_list').append(row)
+                    // $('#noData').css("display","none");
+                }
+                $('#viewUserDetailBadgeRating').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    }
+
+    function viewUserDetailCommentModel(id) {
+        $.ajax({
+            url: "{{ route('viewUserDetailCommentModel') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                $('#userImage2').html(``);
+                $('#comment').html(``);
+                if (response.length == 0) {
+                    $('#userImage2').html(``);
+                    $('#comment').html(``);
+
+                    $('#comment').html('<h4>no record found</h4>');
+                }
+
+                let row = ``;
+                $('#viewDepartmentComment').html('');
+                response.forEach(value => {
+                    row += ` <div class="col">
                 <div class="comment_div">
                   <div class="comment_partion_div">
         <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
@@ -571,9 +1139,10 @@
          </div>
             </div>`;
 
-          row += `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
-          value.sub_comment.forEach(v => {
-            row += `
+                    row +=
+                        `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
+                    value.sub_comment.forEach(v => {
+                        row += `
                 <div class="sub_comment_div">
                   <div class="comment_partion_div">
         <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
@@ -588,115 +1157,123 @@
       </div> `;
 
 
-          });
-          row += `</div>`;
+                    });
+                    row += `</div>`;
 
 
-        });
+                });
 
-        $('#viewDepartmentComment').append(row);
+                $('#viewDepartmentComment').append(row);
 
-        $('#viewUserDetailCommentModel').modal('show');
+                $('#viewUserDetailCommentModel').modal('show');
 
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    });
-  }
-
-  function viewUserDetailLikeModel(id) {
-    $('#viewUserDetailLikeModel').modal('show');
-    $.ajax({
-      url: "{{ route('viewUserDetailLikeModel') }}/" + id,
-      type: 'get',
-      success: function(response) {
-        $('#userImage1').html(``);
-        $('#businessName1').html('');
-        let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">`;
-        let i = 1;
-        response.forEach(value => {
-          value.post_images.forEach(image => {
-            if (i == 1) {
-              rowImage += ` <div class="carousel-item active">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
-    </div>`;
-            } else {
-              rowImage += ` <div class="carousel-item">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
-    </div>`;
+            },
+            error: function (err) {
+                console.log(err);
             }
-
-            i++;
-          });
         });
-        rowImage += `</div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>`;
-        $('#userImage1').append(rowImage);
-        $('#viewDepartmentLike').html('');
+    }
 
-        response.forEach(value => {
-          let row = ` <div class="col">
-        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
-        <span>${value.user_name}</span>
-        <br>
-            </div>`;
-          $('#viewDepartmentLike').append(row)
-        });
-        if (response.length == 0) {
-          $('#userImage1').html(``);
-          $('#viewDepartmentLike').html('');
-          $('#businessName1').html('no record found</>');
-        }
-        console.log(response);
-
+    function viewUserDetailLikeModel(id) {
         $('#viewUserDetailLikeModel').modal('show');
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    });
-  }
+        $.ajax({
+            url: "{{ route('viewUserDetailLikeModel') }}/" + id,
+            type: 'get',
+            success: function (response) {
 
-  function viewUserDetailShareModel(id) {
-    // $('#viewUserDetailLikeModel').modal('show');
-    $.ajax({
-      url: "{{ route('viewUserDetailShareModel') }}/" + id,
-      type: 'get',
-      success: function(response) {
-        $('#share').html(``);
-        $('#userImage2').html(``);
-        let image_length = 0 ;
-        response.forEach(value => {
-          image_length = value.post_images.length });
-        let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                if (response.length == 0) {
+                    $('#userImage1').html(``);
+                    $('#viewDepartmentLike').html('');
+                    $('#businessName1').html('no record found</>');
+                    return false;
+                }
+                $('#userImage1').html(``);
+                $('#businessName1').html('');
+                let image_length = 0;
+                response.forEach(value => {
+                    image_length = value.post_images.length
+                });
+                let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
+                                 <div class="carousel-inner">`;
+                let i = 1;
+                response.forEach(value => {
+                    value.post_images.forEach(image => {
+                        if (i == 1) {
+                            rowImage += ` <div class="carousel-item active">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
+                                        </div>`;
+                        } else {
+                            rowImage += ` <div class="carousel-item">
+                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
+                                        </div>`;
+                        }
+                        i++;
+                    });
+                });
+                rowImage += `</div>
+                            <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                                    </a>
+                             <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                            </a>
+                            </div>`;
+
+                $('#userImage1').append(rowImage);
+                $('#viewDepartmentLike').html('');
+
+                response.forEach(value => {
+                    let row = ` <div class="col">
+                                <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+                                    <span>${value.user_name}</span>
+                                    <br>
+                                     </div>`;
+                    $('#viewDepartmentLike').append(row)
+                });
+
+                console.log(response);
+
+                $('#viewUserDetailLikeModel').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    function viewUserDetailShareModel(id) {
+        // $('#viewUserDetailLikeModel').modal('show');
+        $.ajax({
+            url: "{{ route('viewUserDetailShareModel') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                $('#share').html(``);
+                $('#userImage2').html(``);
+                let image_length = 0;
+                response.forEach(value => {
+                    image_length = value.post_images.length
+                });
+                let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                           <div class="carousel-inner">`;
-        let i = 1;
-        response.forEach(value => {
-          value.post_images.forEach(image => {
-            if (i == 1) {
-              rowImage += ` <div class="carousel-item active">
+                let i = 1;
+                response.forEach(value => {
+                    value.post_images.forEach(image => {
+                        if (i == 1) {
+                            rowImage += ` <div class="carousel-item active">
       <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
     </div>`;
-            } else {
-              rowImage += ` <div class="carousel-item">
+                        } else {
+                            rowImage += ` <div class="carousel-item">
       <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
     </div>`;
-            }
+                        }
 
-            i++;
-          });
-        });
-        rowImage += `</div>
+                        i++;
+                    });
+                });
+                rowImage += `</div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
@@ -706,56 +1283,115 @@
     <span class="sr-only">Next</span>
   </a>
 </div>`;
-        $('#userImage2').append(rowImage);
-        $('#viewDepartmentShare').html('');
+                $('#userImage2').append(rowImage);
+                $('#viewDepartmentShare').html('');
 
-        response.forEach(value => {
-          let row = ` <div class="col">
+                response.forEach(value => {
+                    let row = ` <div class="col">
         <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
         <span>${value.user_name}</span>
         <br>
             </div>`;
-          $('#viewDepartmentShare').append(row)
+                    $('#viewDepartmentShare').append(row)
+                });
+                if (response.length == 0) {
+                    $('#userImage2').html(``);
+                    $('#share').html(``);
+
+                    $('#share').html('<h4>no record found</h4>');
+                }
+                console.log(response);
+
+                $('#viewUserDetailShareModel').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
         });
-        if (response.length == 0) {
-          $('#userImage2').html(``);
-          $('#share').html(``);
+    }
 
-          $('#share').html('<h4>no record found</h4>');
-        }
-        console.log(response);
+    function viewUserDetailModel(id) {
+        // alert(id);
+        $.ajax({
+            url: "{{ route('viewUserDetailModel') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                $('#userImage').html(``);
 
-        $('#viewUserDetailShareModel').modal('show');
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    });
-  }
+                let rowImage =
+                    `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
 
-  function viewUserDetailModel(id) {
-    // alert(id);
-    $.ajax({
-      url: "{{ route('viewUserDetailModel') }}/" + id,
-      type: 'get',
-      success: function(response) {
-       
-        if (typeof response.departments.image != "undefined") {
+                rowImage += `<div class="carousel-inner">`;
+                let i = 1;
+                response.post_image.forEach(image => {
+                    if (i == 1) {
+                        if (image.media_type == 0) {
+                            rowImage += ` <div class="carousel-item active">
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
 
-          $('#userImage').html(`<img
-                src="../storage/departname/${response.departments.image}"
-                alt="" style="width: 300px; height:300px;">`);
-        } else {
-          $('#userImage').html(` <img
-                src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-                alt="" style="width: 300px; height:300px;">`);
-        }
-        $('#viewDepartment').html('');
+                        } else {
+                            rowImage += ` <div class="carousel-item active">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
+                                </div>`;
+                        }
+                    } else {
+                        if (image.media_type == 0) {
+                            rowImage += ` <div class="carousel-item">
+                                <video width="320" height="240" controls autoplay id="myVideo">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
+                                    <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
+                                </video>
+                                </div>`;
+                        } else {
+                            rowImage += ` <div class="carousel-item">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
+                                         </div>`;
 
-        let row = ` <div class="custom_col_class">
-     <img src="../storage/uploads/user_image/${response.users.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
+                        }
+
+                    }
+
+
+                    i++;
+                });
+
+                rowImage += `</div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                    </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                    </a>
+                      </div>`;
+                $('#userImage').append(rowImage);
+                if (response.post_image.length == 0) {
+                    $('#userImage').html(` <img
+              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+              alt="" style="width: 245px; height:245px;">`);
+
+                }
+                //   if(typeof response.departments.image != "undefined"){ 
+
+                //   $('#userImage').html(`<img
+                //     src="../storage/departname/${response.departments.image}"
+                //     alt="" style="width: 300px; height:300px;">`);
+                // }else{
+                //   $('#userImage').html(` <img
+                //     src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                //     alt="" style="width: 300px; height:300px;">`);
+                // }
+                $('#viewDepartment').html('');
+                // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
+                let row = ` <div class="custom_col_class">
+                                 <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
     
-        <div class="form_div">
+             <div class="form_div">
               <p class="form_fields">Full Name:</p>
               <p class="form_fields">${response.users.first_name}</p>
               </div>
@@ -786,7 +1422,11 @@
             
               <div class="form_div">
               <p class="form_fields">Rating:</p>
-              <p class="form_fields">${response.rating}</p>
+              <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
+              </div>
+              <div class="form_div">
+              <p class="form_fields">Vote:</p>
+              <p class="form_fields"><a href='javascript:void(0)'style="padding-left:0px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
             
               <div class="form_div">
@@ -795,38 +1435,107 @@
               </div>
            
           </div>`;
-        $('#viewDepartment').append(row)
-        $('#viewUserDetailModel').modal('show');
-      },
-      error: function(err) {
-        console.log(err);
-      }
-    });
 
-  }
+                $('#viewDepartment').append(row)
+                $('#viewUserDetailModel').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    }
+
 </script>
 <script type="text/javascript">
   function status(id) {
-    $.ajax({
-      url: "{{route('delete_post')}}",
-      type: "post",
-      data: {
-        'post_id': id,
-        '_token': "{{ csrf_token() }}"
-      },
-      success: function(data) {
-        //alert();
-        //  $(".cancel").(function(){
+        $.ajax({
+            url: "{{route('delete_post')}}",
+            type: "post",
+            data: {
+                'post_id': id,
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function (data) {
+                //alert();
+                //  $(".cancel").(function(){
 
-        //   $(this).parent("tr:first").remove()
-        // })
-        location.reload(); // refresh same page
-      }
-    });
-  }
+                //   $(this).parent("tr:first").remove()
+                // })
+                location.reload(); // refresh same page
+            }
+        });
+    }
 
-  function viewSubcomment(id) {
-    $('#view_sub_comment' + id).toggle();
-  }
+    function viewSubcomment(id) {
+        $('#view_sub_comment' + id).toggle();
+    }
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var img = document.getElementById("myImg");
+    var modalImg = document.getElementById("img01");
+    // var captionText = document.getElementById("caption");
+    img.onclick = function () {
+        modal.style.display = "block";
+        modalImg.src = this.src;
+        // captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("img-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+        modal.style.display = "none";
+    }
+    ///////////////////////VIDEO/////////////////////////////////////////
+    //////////////////////VIDEO???????????????
+    // Get the modal
+    var video_modal = document.getElementById("videoModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var video = document.getElementById("myVideo");
+    var modalVideo = document.getElementById("video01");
+    // var captionText = document.getElementById("caption");
+    video.onclick = function () {
+        video_modal.style.display = "block";
+        modalVideo.src = this.src;
+        // captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span1 = document.getElementsByClassName("video-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span2.onclick = function () {
+        video_modal.style.display = "none";
+    }
+    ///////////////////////MY POST IMAGE/////////////////////////////////////////
+    //////////////////////MY POST IMAGE???????????????
+    // Get the modal
+    var postmodal = document.getElementById("myPostModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgPost = document.getElementById("myPostImg");
+    console.log(imgPost);
+    var modalPostImg = document.getElementById("imgPost01");
+    // var captionText = document.getElementById("caption");
+    imgPost.onclick = function () {
+        alert('hello');
+        postmodal.style.display = "block";
+        modalPostImg.src = this.src;
+        // captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var spanPost = document.getElementsByClassName("post-img-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    spanPost.onclick = function () {
+        postmodal.style.display = "none";
+    }
+
 </script>
 @endsection

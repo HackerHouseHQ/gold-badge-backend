@@ -326,31 +326,59 @@ class PostController extends Controller
          $share = DepartmentShare::where('post_id', $data->post_id)->count();
          $report = DepartmentReport::where('post_id', $data->post_id)->count();
          $comment = DepartmentComment::where('post_id', $data->post_id)->count();
+         $total_media = count($data->post_imagess);
          $badge_number = ($data->badge_number) ? $data->badge_number : '------';
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Department:- " . $data->department_name . " </br>Badge Number:- " . $badge_number . " </br>Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- " . $Like . " </br> Share:- " . $share . " </br> Report:-  " . $report . " </br>Rating:- $data->rating </br> Comments:- $comment <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailCommentModel($data->post_id)'>view list</a> </br> Review:- $data->comment";
+         $data1 = "Department:- " . $data->department_name . " </br>Badge Number:- " . $badge_number . " </br>Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- " . $Like . " </br> Share:- " . $share . " </br> Report:-  " . $report . " </br>Rating:- $data->rating <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailBadgeRating($data->post_id)'>view list</a> </br> Comments:- $comment <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailCommentModel($data->post_id)'>view list</a> </br> Vote:-  <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailVoteRating($data->post_id)'>view list</a></br> Total media:- $total_media</br> Review:- $data->comment";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
          // $image = ($data->image) ? '../storage/departname/' . $data->image : '';
 
          $rowImage = "";
-
-         if (count($data->post_images) > 0) {
+         if (count($data->post_imagess) > 0) {
             $j = 1;
-
             $rowImage = "";
             $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>
             <div class='carousel-inner'>";
-            foreach ($data->post_images   as $k => $postimage) {
+            foreach ($data->post_imagess   as $k => $postimage) {
 
-               $images = ($postimage->image) ? '../storage/uploads/post_department_image/' . $postimage->image : asset("admin_new/assets/img/goldbadge_logo.png");
+               $images = ($postimage->image) ? $postimage->image : asset("admin_new/assets/img/goldbadge_logo.png");
                if ($j == 1) {
-                  $rowImage .= " <div class='carousel-item active'>
-                <img class='d-block ' src='" . $images . "'  alt='First slide'>
-              </div>";
+
+                  if ($postimage->media_type == 0) {
+                     $rowImage .= " <div class='carousel-item active'>
+   <video style = '    width: 68%;
+   text-align: center;
+   margin: 0px auto;
+   display: flex;
+   height: 204px;
+   margin-top: -40px;' controls autoplay id='myVideo'>
+                            <source src='" . $images . "' type='video/mp4'>
+                            <source src='" . $images . "' type='video/ogg'>
+                        </video>
+      </div>";
+                  } else {
+                     $rowImage .= " <div class='carousel-item active'>
+   <img class='d-block' id='myPostImg' src='" . $images . "'  alt='First slide'>
+ </div>";
+                  }
                } else {
-                  $rowImage .= " <div class='carousel-item'>
-                      <img class='d-block ' src='" . $images . "'  alt='Second slide'>
-                    </div>";
+                  if ($postimage->media_type == 0) {
+                     $rowImage .= " <div class='carousel-item'>
+                    <video style = '    width: 68%;
+                    text-align: center;
+                    margin: 0px auto;
+                    display: flex;
+                    height: 204px;
+                    margin-top: -40px;' controls autoplay id='myVideo'>
+                    <source src='" . $images . "' type='video/mp4'>
+                    <source src='" . $images . "' type='video/ogg'>
+                </video>
+                  </div>";
+                  } else {
+                     $rowImage .= " <div class='carousel-item'>
+                     <img class='d-block id='myPostImg' ' src='" . $images . "'  alt='Second slide'>
+                   </div>";
+                  }
                }
 
                $j++;
@@ -366,7 +394,7 @@ class PostController extends Controller
             </a>
           </div>";
          }
-         if (count($data->post_images) == 0) {
+         if (count($data->post_imagess) === 0) {
             $rowImage = "";
 
             $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Post;
 use App\User;
 use App\Department;
+use App\ReviewReasons;
 use App\DepartmentLike;
+use App\DepartmentVote;
 use App\DepartmentShare;
 use App\DepartmentReport;
 use App\DepartmentComment;
@@ -111,6 +113,7 @@ class UserController extends Controller
       })->get();
     return $data;
   }
+
   public function viewUserDetailShareModel(Request  $request)
   {
     $data = DepartmentShare::with('post_images')->where('post_id', $request->id)
@@ -119,8 +122,54 @@ class UserController extends Controller
       })->get();
     return $data;
   }
+  public function viewUserDetailVoteRating(Request $request)
+  {
+    $data = DepartmentVote::where('post_id', $request->id)
+
+      ->select(
+        'department_votes.post_id',
+        'department_votes.user_id',
+        'department_votes.rating',
+        'department_badges.badge_number',
+        'departments.department_name',
+        'users.user_name'
+      )
+      ->leftjoin("posts", function ($join) {
+        $join->on('posts.id', '=', 'department_votes.post_id');
+      })
+      ->leftjoin("users", function ($join) {
+        $join->on('users.id', '=', 'department_votes.user_id');
+      })
+      ->leftjoin("departments", function ($join) {
+        $join->on('departments.id', '=', 'posts.department_id');
+      })
+      ->leftjoin("department_badges", function ($join) {
+        $join->on('posts.badge_id', '=', 'department_badges.id');
+      })
+      ->get();
+    return $data;
+  }
   public function viewUserDetailBadgeRating(Request $request)
   {
+    $data = ReviewReasons::where('post_id', $request->id)
+      ->select(
+        'review_reasons.post_id',
+        'review_reasons.reason_id',
+        'review_reasons.rating',
+        'department_badges.badge_number',
+        'report_reassons.name'
+      )
+      ->leftjoin("posts", function ($join) {
+        $join->on('posts.id', '=', 'review_reasons.post_id');
+      })
+      ->leftjoin("report_reassons", function ($join) {
+        $join->on('report_reassons.id', '=', 'review_reasons.reason_id');
+      })
+      ->leftjoin("department_badges", function ($join) {
+        $join->on('posts.badge_id', '=', 'department_badges.id');
+      })
+      ->get();
+    return $data;
   }
   public function viewUserDetailCommentModel(Request  $request)
   {

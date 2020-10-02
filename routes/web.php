@@ -65,9 +65,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/viewUserDetailShareModel/{id?}', 'UserController@viewUserDetailShareModel')->name('viewUserDetailShareModel');
     Route::get('/viewUserDetailCommentModel/{id?}', 'UserController@viewUserDetailCommentModel')->name('viewUserDetailCommentModel');
     Route::get('/viewUserDetailBadgeRating/{id?}', 'UserController@viewUserDetailBadgeRating')->name('viewUserDetailBadgeRating');
-
-
-
+    Route::get('/viewUserDetailVoteRating/{id?}', 'UserController@viewUserDetailVoteRating')->name('viewUserDetailVoteRating');
     Route::get('/delete_post', 'PostController@delete_post')->name('delete_post');
   });
 

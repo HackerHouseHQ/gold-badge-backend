@@ -2,6 +2,198 @@
 
 
 <style type="text/css">
+    #myVideo {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myVideo:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .video-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+    .video-modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    /* #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    } */
+
+    /* Add Animation - Zoom in the Modal */
+    .video-modal-content,
+    /* #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    } */
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .video-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .video-close:hover,
+    .video-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .video-modal-content {
+            width: 100%;
+        }
+    }
+
+    #myPostImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myPostImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .post-img-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+    .post-img-modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation - Zoom in the Modal */
+    .post-img-modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .post-img-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .post-img-close:hover,
+    .post-img-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .post-img-modal-content {
+            width: 100%;
+        }
+    }
+
     /* Style the Image Used to Trigger the Modal */
     #myImg {
         border-radius: 5px;
@@ -198,6 +390,12 @@
         border-radius: 100px;
         overflow: hidden;
         border: 7px solid #f6f6f6;
+    }
+
+    .modal_rating_icon {
+        width: 10px;
+        margin-top: -2px;
+        margin-left: 2px;
     }
 </style>
 @section('content')
@@ -584,54 +782,78 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="viewUserDetailBadgeList" tabindex="-1" role="dialog"
+
+{{-- model view city --}}
+<div class="modal fade" id="viewUserDetailBadgeRating" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header" style="padding: 0;">
-                <h4 class="modal-title text-capitalize" id="badge"></h4>
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="">
-                {{-- <div class="row">
-                    <div class="col-6" id="userImage2">
-
-          </div>
-                    <div class="col-12" id="viewDepartmentBadge">
-
-
-                    </div>
-                </div> --}}
+            <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-12">
-                        <div class="table-responsive">
-                            <div>
-                                <table class="table table-bordered table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th><span class="tbl_row">SN.</span></th>
-                                            <th> <span class="tbl_row">Reason Question</span> </th>
-                                            <th> <span class="tbl_row">Rating</span> </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="viewDepartment">
-
-                                    </tbody>
-
-                                </table>
-
-
-
-                            </div>
-                        </div>
+                    <div class="col-12" id="reason_list">
+                        {{-- <div class="table-responsive">
+                <div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th><span class="tbl_row">SN.</span></th>
+                        <th> <span class="tbl_row">City Name</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody id="businessDetails">
+  
+                    </tbody>
+                  </table>
+                </div>
+              </div> --}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="viewUserDetailVoteRating" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="vote_list">
+                        {{-- <div class="table-responsive">
+                <div>
+                  <table class="table table-bordered table-hover">
+                    <thead>
+                      <tr>
+                        <th><span class="tbl_row">SN.</span></th>
+                        <th> <span class="tbl_row">City Name</span> </th>
+                      </tr>
+                    </thead>
+                    <tbody id="businessDetails">
+  
+                    </tbody>
+                  </table>
+                </div>
+              </div> --}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- end model view city --}}
 <!-- Trigger the Modal -->
 {{-- <img id="myImg" src="img_snow.jpg" alt="user name" style="width:100%;max-width:300px"> --}}
 
@@ -645,10 +867,32 @@
     <img class="img-modal-content" id="img01">
 
 </div>
+<div id="myPostModal" class="post-img-modal">
+
+    <!-- The Close Button -->
+    <span class="post-img-close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="post-img-modal-content" id="imgPost01">
+
+</div>
+<div id="videoModal" class="video-modal">
+
+    <!-- The Close Button -->
+    <span class="video-close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <video width="320" height="240" controls id="video01">
+        <source src="" type="video/mp4">
+        <source src="" type="video/ogg">
+    </video>
+    {{-- <video class="video-modal-content" id="video01"> --}}
+
+</div>
 @endsection
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var dataTable = $('#datatable-basic').DataTable({
             language: {
                 paginate: {
@@ -671,7 +915,7 @@
             "bAutoWidth": true,
             'ajax': {
                 'url': "{{route('UserDetailData')}}",
-                'data': function(data) {
+                'data': function (data) {
                     var user_id = $('#user_id').val();
                     data.user_id = user_id;
                 }
@@ -696,31 +940,186 @@
                 data: 'action'
             }, ]
         });
-        $('#search_data1').click(function() {
+        $('#search_data1').click(function () {
             dataTable.draw();
         });
-        $('#search').keyup(function() {
+        $('#search').keyup(function () {
             dataTable.draw();
         });
     });
+
 </script>
 <script>
-    function viewUserDetailBadgeList(id){
+    var ratingImage = {
+        ratings: function (rating) {
+            var ratingIcon = "";
+            if (rating >= 1 && rating < 2) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="modal_rating_icon">`
+            }
+            if (rating >= 2 && rating < 3) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+
+
+            if (rating >= 3 && rating < 4) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            if (rating >=
+                4 && rating < 5) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            if (rating == 5) {
+                ratingIcon =
+                    `<img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+            }
+            return ratingIcon;
+        }
+    }
+
+    function viewUserDetailVoteRating(id) {
+        $.ajax({
+            url: "{{ route('viewUserDetailVoteRating') }}/" + id,
+            type: 'get',
+            success: function (response) {
+                if (response.length) {
+                    console.log('aaa--', response);
+                    $('#vote_list').html('');
+                    // $('#noData').css("display","block"); 
+                    var i = 0;
+                    let row = `<div class="table-responsive">
+                                    <div>
+                                        <table class="table table-bordered table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th><span class="tbl_row">SN.</span></th>
+                                                    <th> <span class="tbl_row">Department</span> </th>
+                                                    <th> <span class="tbl_row">Badge Number</span> </th>
+                                                    <th> <span class="tbl_row">User Name</span> </th>
+                                                    <th> <span class="tbl_row">Rating</span> </th>
+                                                </tr>
+                                            </thead>
+                                        <tbody id="businessDetails">`;
+                    $.each(response, function (key, value) {
+                        row += `<tr>
+                                    <td> ${++i} </td>
+                                    <td class="text-capitalize">${value.department_name}</td>
+                                    <td class="text-capitalize">${value.badge_number}</td>
+                                    <td class="text-capitalize">${value.user_name}</td>
+                                    <td class="text-capitalize">${value.rating} <span>${ratingImage.ratings(value.rating)}</span></td>
+                                </tr>`;
+                    })
+                    row += `</tbody>
+                            </table>
+                        </div>
+                    </div>`;
+                    $('#vote_list').append(row)
+                } else {
+                    $('#vote_list').html('');
+                    let row = `<div class="table-responsive">
+                                <div>
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th><span class="tbl_row">SN.</span></th>
+                                                <th> <span class="tbl_row">Department</span> </th>
+                                                <th> <span class="tbl_row">Badge Number</span> </th>
+                                                <th> <span class="tbl_row">User Name</span> </th>
+                                                <th> <span class="tbl_row">Rating</span> </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="businessDetails">
+                                            <tr>
+                                              <td colspan="7"> Record not found! </td>
+                                            </tr>`;
+                    $('#vote_list').append(row)
+                }
+                $('#viewUserDetailVoteRating').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        });
+
+    }
+
+    function viewUserDetailBadgeRating(id) {
 
         $.ajax({
             url: "{{ route('viewUserDetailBadgeRating') }}/" + id,
             type: 'get',
-            success: function(response) {
-               // $('#viewUserDetailBadgeList').modal('show');
+            success: function (response) {
+                if (response.length) {
+                    console.log('aaa--', response);
+                    $('#reason_list').html('');
+                    // $('#noData').css("display","block"); 
+                    var i = 0;
+                    let row = `<div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Reason Question</span> </th>
+                      <th> <span class="tbl_row">Rating</span> </th>
+                      <th> <span class="tbl_row">Badge Number</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="businessDetails">`;
+                    $.each(response, function (key, value) {
+                        row += `
+                <tr>
+                  <td> ${++i} </td>
+                  <td class="text-capitalize">${value.name}</td>
+                  <td class="text-capitalize">${value.rating}<span>${ratingImage.ratings(value.rating)}</span></td>
+                  <td class="text-capitalize">${value.badge_number}</td>
+                 </tr>
+                `;
+
+                    })
+                    row += `    </tbody>
+                </table>
+              </div>
+            </div>`;
+                    $('#reason_list').append(row)
+                } else {
+                    $('#reason_list').html('');
+                    let row = `<div class="table-responsive">
+              <div>
+                <table class="table table-bordered table-hover">
+                  <thead>
+                    <tr>
+                      <th><span class="tbl_row">SN.</span></th>
+                      <th> <span class="tbl_row">Reason Question</span> </th>
+                      <th> <span class="tbl_row">Rating</span> </th>
+                      <th> <span class="tbl_row">Badge Number</span> </th>
+                    </tr>
+                  </thead>
+                  <tbody id="businessDetails">
+            <tr>
+              <td colspan="7"> Record not found! </td>
+            </tr>
+            `;
+                    $('#reason_list').append(row)
+                    // $('#noData').css("display","none");
+                }
+                $('#viewUserDetailBadgeRating').modal('show');
+            },
+            error: function (err) {
+                console.log(err);
             }
         });
-        
+
     }
+
     function viewUserDetailCommentModel(id) {
         $.ajax({
             url: "{{ route('viewUserDetailCommentModel') }}/" + id,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
                 $('#userImage2').html(``);
                 $('#comment').html(``);
                 if (response.length == 0) {
@@ -749,7 +1148,8 @@
                         </div>
                     </div>`;
 
-                    row += `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
+                    row +=
+                        `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
                     value.sub_comment.forEach(v => {
                         row += `
                 <div class="sub_comment_div">
@@ -776,7 +1176,7 @@
                 $('#viewUserDetailCommentModel').modal('show');
 
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -787,22 +1187,33 @@
         $.ajax({
             url: "{{ route('viewUserDetailShareModel') }}/" + id,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
                 $('#share').html(``);
                 $('#userImage2').html(``);
+                if (response.length == 0) {
+                    $('#userImage2').html(``);
+                    $('#share').html(``);
 
-                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
-  <div class="carousel-inner">`;
+                    $('#share').html('<h4>no record found</h4>');
+                    $('#viewUserDetailShareModel').modal('show');
+                    return false;
+                }
+                let image_length = 0;
+                response.forEach(value => {
+                    image_length = value.post_images.length
+                });
+                let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls2" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">`;
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
                             rowImage += ` <div class="carousel-item active">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="First slide">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
     </div>`;
                         } else {
                             rowImage += ` <div class="carousel-item">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 300px; height:300px;" alt="Second slide">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
     </div>`;
                         }
 
@@ -830,17 +1241,12 @@
             </div>`;
                     $('#viewDepartmentShare').append(row)
                 });
-                if (response.length == 0) {
-                    $('#userImage2').html(``);
-                    $('#share').html(``);
 
-                    $('#share').html('<h4>no record found</h4>');
-                }
                 console.log(response);
 
                 $('#viewUserDetailShareModel').modal('show');
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -851,58 +1257,65 @@
         $.ajax({
             url: "{{ route('viewUserDetailLikeModel') }}/" + id,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
+
+                if (response.length == 0) {
+                    $('#userImage1').html(``);
+                    $('#viewDepartmentLike').html('');
+                    $('#businessName1').html('no record found</>');
+                    return false;
+                }
                 $('#userImage1').html(``);
                 $('#businessName1').html('');
-                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
+                let image_length = 0;
+                response.forEach(value => {
+                    image_length = value.post_images.length
+                });
+                let rowImage = `<h4>Total Media${image_length}</h4><div id="carouselExampleControls1" class="carousel slide" data-ride="carousel">
                                  <div class="carousel-inner">`;
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
                             rowImage += ` <div class="carousel-item active">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
-    </div>`;
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
+                                        </div>`;
                         } else {
                             rowImage += ` <div class="carousel-item">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
-    </div>`;
+                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
+                                        </div>`;
                         }
                         i++;
                     });
                 });
                 rowImage += `</div>
-  <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div>`;
+                            <a class="carousel-control-prev" href="#carouselExampleControls1" role="button" data-slide="prev">
+                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                                    </a>
+                             <a class="carousel-control-next" href="#carouselExampleControls1" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="sr-only">Next</span>
+                            </a>
+                            </div>`;
 
                 $('#userImage1').append(rowImage);
                 $('#viewDepartmentLike').html('');
 
                 response.forEach(value => {
                     let row = ` <div class="col">
-        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
-        <span>${value.user_name}</span>
-        <br>
-            </div>`;
+                                <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
+                                    <span>${value.user_name}</span>
+                                    <br>
+                                     </div>`;
                     $('#viewDepartmentLike').append(row)
                 });
-                if (response.length == 0) {
-                    $('#userImage1').html(``);
-                    $('#viewDepartmentLike').html('');
-                    $('#businessName1').html('no record found</>');
-                }
+
                 console.log(response);
 
                 $('#viewUserDetailLikeModel').modal('show');
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -913,64 +1326,52 @@
         $.ajax({
             url: "{{ route('viewUserDetailModel') }}/" + id,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
                 $('#userImage').html(``);
 
-                let rowImage = `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
-//                 rowImage += `<ol class="carousel-indicators">`;
-//                 let j=0;
-//                     response.post_image.forEach(image => {
-//                         if(j ==0 )
-//                         {
-//                             rowImage += `<li data-target="#carouselExampleControls" data-slide-to="${j}" class="active"></li>`;
-                         
-//                         }
-//                         else{
-//                             rowImage +=`<li data-target="#carouselExampleControls" data-slide-to="${j}"></li>`;
-//                         }
-//                         j++;
-//                     });
-//  rowImage += `</ol>`;
-           rowImage += `<div class="carousel-inner">`;
+                let rowImage =
+                    `<h4>Total media ${response.post_image.length}</h4><div id="carouselExampleControls" class="carousel slide" data-ride="carousel">`;
+
+                rowImage += `<div class="carousel-inner">`;
                 let i = 1;
                 response.post_image.forEach(image => {
                     if (i == 1) {
-                        if(image.media_type ==0 ){
+                        if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-                                <video width="320" height="240" controls>
+                                <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        }else{
+                        } else {
                             rowImage += ` <div class="carousel-item active">
-                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="First slide">
+                                        <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
                         }
                     } else {
-                        if(image.media_type ==0 ){
+                        if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item">
-                                <video width="320" height="240" controls>
+                                <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        }else{
+                        } else {
                             rowImage += ` <div class="carousel-item">
-      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" style="width: 245px; height:245px;" alt="Second slide">
+      <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
     </div>`;
 
                         }
-                  
+
                     }
-                    
+
 
                     i++;
                 });
 
                 rowImage += `</div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
     <span class="sr-only">Previous</span>
   </a>
@@ -1032,11 +1433,11 @@
             
               <div class="form_div">
               <p class="form_fields">Rating:</p>
-              
-
-             
-              <p class="form_fields">${response.rating}</p>
-        
+              <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
+              </div>
+              <div class="form_div">
+              <p class="form_fields">Vote:</p>
+              <p class="form_fields"><a href='javascript:void(0)'style="padding-left:0px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
             
               <div class="form_div">
@@ -1049,17 +1450,18 @@
                 $('#viewDepartment').append(row)
                 $('#viewUserDetailModel').modal('show');
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
 
     }
+
 </script>
 <script type="text/javascript">
     function status(id) {
 
-       
+
         $.ajax({
             url: "{{route('delete_post')}}",
             type: "post",
@@ -1067,7 +1469,7 @@
                 'post_id': id,
                 '_token': "{{ csrf_token() }}"
             },
-            success: function(data) {
+            success: function (data) {
                 //alert();
                 //  $(".cancel").(function(){
 
@@ -1075,7 +1477,7 @@
                 // })
                 location.reload(); // refresh same page
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
@@ -1091,7 +1493,7 @@
     var img = document.getElementById("myImg");
     var modalImg = document.getElementById("img01");
     // var captionText = document.getElementById("caption");
-    img.onclick = function() {
+    img.onclick = function () {
         modal.style.display = "block";
         modalImg.src = this.src;
         // captionText.innerHTML = this.alt;
@@ -1101,10 +1503,56 @@
     var span = document.getElementsByClassName("img-close")[0];
 
     // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
+    span.onclick = function () {
         modal.style.display = "none";
     }
-    // ${(response.badge_id) ? `<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeList(${response.id})'>view list</a>`: ``}
+    ///////////////////////VIDEO/////////////////////////////////////////
+    //////////////////////VIDEO???????????????
+    // Get the modal
+    var video_modal = document.getElementById("videoModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var video = document.getElementById("myVideo");
+    var modalVideo = document.getElementById("video01");
+    // var captionText = document.getElementById("caption");
+    video.onclick = function () {
+        video_modal.style.display = "block";
+        modalVideo.src = this.src;
+        // captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var span1 = document.getElementsByClassName("video-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    span2.onclick = function () {
+        video_modal.style.display = "none";
+    }
+    ///////////////////////MY POST IMAGE/////////////////////////////////////////
+    //////////////////////MY POST IMAGE???????????????
+    // Get the modal
+    var postmodal = document.getElementById("myPostModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgPost = document.getElementById("myPostImg");
+    console.log(imgPost);
+    var modalPostImg = document.getElementById("imgPost01");
+    // var captionText = document.getElementById("caption");
+    imgPost.onclick = function () {
+        alert('hello');
+        postmodal.style.display = "block";
+        modalPostImg.src = this.src;
+        // captionText.innerHTML = this.alt;
+    }
+
+    // Get the <span> element that closes the modal
+    var spanPost = document.getElementsByClassName("post-img-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    spanPost.onclick = function () {
+        postmodal.style.display = "none";
+    }
+
 </script>
 
 @endsection
