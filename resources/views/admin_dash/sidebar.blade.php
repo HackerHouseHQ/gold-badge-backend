@@ -2,7 +2,7 @@
   <div class="scrollbar-inner">
     <!-- Brand -->
     <div class="sidenav-header  d-flex  align-items-center">
-      <a class="navbar-brand" href="../../pages/dashboards/dashboard.html">
+      <a class="navbar-brand" href="{{route('home')}}">
         <!--<img src="{{asset('admin_new/assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">-->
         <img src="http://13.235.176.85/gold_badge/public/admin_css/images/follow_logo.png" class="navbar-brand-img"
           alt="..."> Gold Badge

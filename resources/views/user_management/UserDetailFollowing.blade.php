@@ -1468,7 +1468,7 @@
               </div>
               <div class="form_div">
               <p class="form_fields">Vote:</p>
-              <p class="form_fields"><a href='javascript:void(0)'style="padding-left:0px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
+              <p class="form_fields">${response.vote}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
             
               <div class="form_div">

@@ -7,6 +7,7 @@ use Exception;
 use App\GuestUser;
 use App\DepartmentLike;
 use App\DepartmentBadge;
+use App\DepartmentShare;
 use Illuminate\Http\Request;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,8 @@ class GuestController extends Controller
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -99,6 +102,8 @@ class GuestController extends Controller
                         $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -126,6 +131,8 @@ class GuestController extends Controller
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -133,6 +140,8 @@ class GuestController extends Controller
                         $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -161,6 +170,8 @@ class GuestController extends Controller
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -168,6 +179,8 @@ class GuestController extends Controller
                         $post->avg_rating       =    ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);

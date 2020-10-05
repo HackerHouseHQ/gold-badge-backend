@@ -98,11 +98,12 @@ class UserController extends Controller
     $shareCount = DepartmentShare::where('post_id', $data->id)->count();
     $commentCount  = DepartmentComment::where('post_id', $data->id)->count();
     $reportCount = DepartmentReport::where('post_id', $data->id)->count();
+    $vote = DepartmentVote::where('post_id', $data->id)->count();
     $data['department_like'] = $likeCount;
     $data['department_share'] = $shareCount;
     $data['department_comment'] = $commentCount;
     $data['department_report'] = $reportCount;
-
+    $data['vote'] = $vote;
     return $data;
   }
   public function viewUserDetailLikeModel(Request  $request)

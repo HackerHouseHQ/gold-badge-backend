@@ -38,10 +38,15 @@
                   data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
                   id="approve">Approved</a></li> -->
 
-            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #61cf8a;" href="{{route('departmentRequest')}}" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Approved</a></li>
-
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
-            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}" id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center" data-type="success" data-icon="ni ni-bell-55">Rejected</a>
+            <li class="show" style="margin-right: 0px !important"><a style="border-bottom: 2px solid #61cf8a;"
+                href="{{route('departmentRequest')}}" class="btn btn-success" data-toggle="notify" data-placement="top"
+                data-align="center" data-type="success" data-icon="ni ni-bell-55">Approved</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
+                id="pending" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
+                data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}"
+                id="reject" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
+                data-type="success" data-icon="ni ni-bell-55">Rejected</a>
             </li>
           </ul>
         </div>
@@ -69,7 +74,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="fromdate" id="fromdate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
+                        name="fromdate" id="fromdate">
                     </div>
                   </div>
                 </div>
@@ -79,7 +85,8 @@
                       <div class="input-group-prepend">
                         <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
                       </div>
-                      <input class="form-control datepicker" placeholder="Select date" type="text" value="" name="todate" id="todate">
+                      <input class="form-control datepicker" placeholder="Select date" type="text" value=""
+                        name="todate" id="todate">
                     </div>
                   </div>
                 </div>
@@ -87,7 +94,8 @@
                 <div class='col-2'>
                   <div class="row">
                     <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                    <button type="button" value="Reset form" onclick="myFunction()" class="btn btn-info apply_btnn">Reset</button>
+                    <button type="button" value="Reset form" onclick="myFunction()"
+                      class="btn btn-info apply_btnn">Reset</button>
                   </div>
 
 

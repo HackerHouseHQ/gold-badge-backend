@@ -505,17 +505,21 @@ class UserController extends Controller
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
                         $post->total_reviews    =   $badgePostData->count();
                         $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -539,17 +543,21 @@ class UserController extends Controller
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post->total_reviews    =   $badgePostData->count();
                         $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -574,10 +582,12 @@ class UserController extends Controller
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -585,6 +595,8 @@ class UserController extends Controller
                         $post->avg_rating       =    ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                        $post->is_shared          = ($post_shared) ? 1 : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -642,10 +654,10 @@ class UserController extends Controller
         try {
             $post_id = $request->post_id;
             $user_id = $request->user_id;
-            // $alreadyLiked = DepartmentShare::where('user_id', $user_id)->where('post_id', $post_id)->first();
-            // if ($alreadyLiked) {
-            //     throw new Exception('You have already liked this post.', DATA_EXISTS);
-            // }
+            $alreadyShared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post_id)->first();
+            if ($alreadyShared) {
+                throw new Exception('You have already shared this post.', DATA_EXISTS);
+            }
             $insertArray = [
                 'post_id' => $post_id,
                 'user_id' => $user_id,

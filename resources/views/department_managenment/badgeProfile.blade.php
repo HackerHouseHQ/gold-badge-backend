@@ -282,7 +282,8 @@
 
                       </li>
                       <li class="list-group-item">
-                        Badge Rating <a class="float-right"> {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
+                        Badge Rating <a class="float-right">
+                          {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
                         </a>
                       </li>
                       <li class="list-group-item">
@@ -396,7 +397,8 @@
                     <div class="row">
                       <div class="col-md-2">
                         <div class="number_star" style="margin-top:17px;">
-                          <p class="number_ratings_black"> {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
+                          <p class="number_ratings_black">
+                            {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
                           </p>
 
                           <span class="star_icon1">
@@ -427,7 +429,8 @@
                             <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
                           </span> --}}
                         </div>
-                        <p class="number_ratings_grey" style="margin-top:-20px;">{{$totalPost}}</p>
+                        <p class="number_ratings_grey" style="margin-top:-20px;">{{$totalPost}}
+                        </p>
                       </div>
                       <div class="col-md-10">
                         <div class="main_div_five_rows">
@@ -509,10 +512,7 @@
                     <div class="row">
                       <div class="col">
 
-                        <?php $post = App\Post::with('users')->where(
-                          'department_id',
-                          $data->id
-                        )->where('flag', 2)->count(); ?>
+                        <?php $post = App\Post::with("users")->where("department_id", $data->department_id )->where("flag", 2)->count(); ?>
 
                         <h5 class="card-title text-uppercase text-muted mb-0 text-white">
                           Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
@@ -865,81 +865,83 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function() {
-    var dataTable = $('#data1').DataTable({
-      language: {
-        searchPlaceholder: "Department Name",
-        paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next: '<i class="fas fa-angle-right"></i>'
-        },
-        aria: {
-          paginate: {
-            previous: 'Previous',
-            next: 'Next'
-          }
-        }
-      },
-      "pageLength": 5,
-      "searching": false,
-      'processing': true,
-      'serverSide': true,
-      "bFilter": true,
-      "bInfo": false,
-      "lengthChange": false,
-      "bAutoWidth": false,
-      'ajax': {
-        'url': "{{route('department_profile_list')}}",
-        'data': function(data) {
-          var badge_id = $('#badge_id').val();
-          data.badge_id = badge_id;
-          //            var status_id = $('#status_id').val();
-          //          data.status_id = status_id;
-          //          var state_id = $('#state_id').val();
-          //          data.state_id = state_id;
-          //          var country_id = $('#country_id').val();
-          //          data.country_id = country_id;
-          //           var fromdate = $('#fromdate').val();
-          //          data.fromdate = fromdate;
-          //          var todate = $('#todate').val();
-          //          data.todate = todate;
-          //          var search = $('#search').val();
-          //          data.search = search;
-          var rating = $('#rating').val();
-          data.rating = rating;
+  $(document).ready(function () {
+        var dataTable = $('#data1').DataTable({
+            language: {
+                searchPlaceholder: "Department Name",
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>'
+                },
+                aria: {
+                    paginate: {
+                        previous: 'Previous',
+                        next: 'Next'
+                    }
+                }
+            },
+            "pageLength": 5,
+            "searching": false,
+            'processing': true,
+            'serverSide': true,
+            "bFilter": true,
+            "bInfo": false,
+            "lengthChange": false,
+            "bAutoWidth": false,
+            'ajax': {
+                'url': "{{route('department_profile_list')}}",
+                'data': function (data) {
+                    var badge_id = $('#badge_id').val();
+                    data.badge_id = badge_id;
+                    //            var status_id = $('#status_id').val();
+                    //          data.status_id = status_id;
+                    //          var state_id = $('#state_id').val();
+                    //          data.state_id = state_id;
+                    //          var country_id = $('#country_id').val();
+                    //          data.country_id = country_id;
+                    //           var fromdate = $('#fromdate').val();
+                    //          data.fromdate = fromdate;
+                    //          var todate = $('#todate').val();
+                    //          data.todate = todate;
+                    //          var search = $('#search').val();
+                    //          data.search = search;
+                    var rating = $('#rating').val();
+                    data.rating = rating;
 
-        }
-      },
-      'columns': [{
-          data: 'rating'
-        },
-        {
-          data: 'reviews'
-        }
-      ],
-      "columnDefs": [{
-        "width": "10%",
-        "targets": 0
-      }]
+                }
+            },
+            'columns': [{
+                    data: 'rating'
+                },
+                {
+                    data: 'reviews'
+                }
+            ],
+            "columnDefs": [{
+                "width": "10%",
+                "targets": 0
+            }]
+        });
+        //  $('#search_data1').click(function(){
+        //     dataTable.draw();
+        //  });
+        //  $('#search').keyup(function(){
+        //     dataTable.draw();
+        //  });
+        $('#rating').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
     });
-    //  $('#search_data1').click(function(){
-    //     dataTable.draw();
-    //  });
-    //  $('#search').keyup(function(){
-    //     dataTable.draw();
-    //  });
-    $('#rating').on('change', function() {
-      //alert( this.value );
-      dataTable.draw();
-    });
-  });
+
 </script>
 <script>
   function myFunction() {
-    document.getElementById("search_data").reset();
-    location.reload();
+        document.getElementById("search_data").reset();
+        location.reload();
 
-  }
+    }
+
 </script>
 <script>
   var ratingImage = {
@@ -1200,35 +1202,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
 
                         i++;
                     });
@@ -1290,35 +1292,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
                         i++;
                     });
                 });
@@ -1490,6 +1492,7 @@
         });
 
     }
+
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
