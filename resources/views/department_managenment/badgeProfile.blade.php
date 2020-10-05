@@ -512,7 +512,7 @@
                     <div class="row">
                       <div class="col">
 
-                        <?php $post = App\Post::with("users")->where("department_id", $data->department_id )->where("flag", 2)->count(); ?>
+                        <?php $post = App\Post::with("users")->where("badge_id", $data->id )->where("flag", 2)->count(); ?>
 
                         <h5 class="card-title text-uppercase text-muted mb-0 text-white">
                           Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>

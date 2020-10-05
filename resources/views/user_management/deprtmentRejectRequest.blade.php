@@ -39,9 +39,16 @@
                 href="{{route('departmentRequest')}}" class="btn btn-secondary" data-toggle="notify"
                 data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"
                 id="approve">Approved</a></li>
+            <?php $pending = App\UserDepartmentRequest::where("status", 0)->count(); ?>
+            @if ($pending > 0)
+            <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
+                id="pending" class="btn btn-danger" data-toggle="notify" data-placement="top" data-align="center"
+                data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            @else
             <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentPendingRequest')}}"
                 id="pending" class="btn btn-secondary" data-toggle="notify" data-placement="top" data-align="center"
                 data-type="success" data-icon="ni ni-bell-55">Pending</a></li>
+            @endif
             <li class="show" style="margin-right: 0px !important"><a href="{{route('deprtmentRejectRequest')}}"
                 id="reject" class="btn btn-success" data-toggle="notify" data-placement="top" data-align="center"
                 data-type="success" data-icon="ni ni-bell-55">Rejected</a>
