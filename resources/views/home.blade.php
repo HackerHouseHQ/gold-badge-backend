@@ -445,6 +445,8 @@
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
                                 <!-- Card body -->
+                                {{-- <div id="messages"></div>
+                                <button class="btn btn-danger send-msg">Send message</button> --}}
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
@@ -1058,6 +1060,30 @@
             document.getElementById("search_data").reset();
             location.reload();
         }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
+        // let date_ob = new Date();
+        // var time = '10:02:10';
+        // var room_id = '34322312';
+        var socket = io.connect('http://localhost:4001');
+
+    $(".send-msg").click(function(e){
+        var room = 987687999;//$('#room').val();
+        var sender_id = 4;//$('#user').val();
+        var receiver_id = 2;//$('#user').val();
+        var message = "Hello user";
+        var array = {
+            "room_id":room,
+            "sender_id":sender_id ,
+            "receiver_id" : receiver_id ,
+            "message" : message
+        };
+        socket.emit('send_message', array);
+        socket.on('send_message', function(val){
+           console.log(val);
+        });
+        });
     </script>
 </body>
 
