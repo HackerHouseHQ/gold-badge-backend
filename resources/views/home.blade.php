@@ -445,10 +445,10 @@
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
                                 <!-- Card body -->
-                                {{-- <div id="messages"></div>
+                                <div id="messages"></div>
                                 <button class="btn btn-danger send-msg">Send message</button>
 
-                                <button class="btn btn-success user-list">User List</button> --}}
+                                <button class="btn btn-success user-list">User List</button>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
@@ -1006,8 +1006,8 @@
 
 
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#country_id").change(function() {
+        $(document).ready(function () {
+            $("#country_id").change(function () {
                 var country_id = $(this).val();
                 $.ajax({
                     url: "{{route('get_state')}}",
@@ -1016,23 +1016,25 @@
                         country_id: country_id
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
                         var len = response.length;
                         $("#state_id").empty();
                         $("#state_id").append("<option value=''>Please Select</option>");
                         for (var i = 0; i < len; i++) {
                             var id = response[i]['id'];
                             var name = response[i]['name'];
-                            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
+                            $("#state_id").append("<option value='" + id + "'>" + name +
+                                "</option>");
                         }
                     }
                 });
             });
         });
+
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
-            $("#state_id").change(function() {
+        $(document).ready(function () {
+            $("#state_id").change(function () {
                 // alert('dfshj');
                 var state_id = $(this).val();
                 // alert(state_id);
@@ -1043,56 +1045,60 @@
                         state_id: state_id
                     },
                     dataType: 'json',
-                    success: function(response) {
+                    success: function (response) {
                         var len = response.length;
                         $("#city_id").empty();
                         $("#city_id").append("<option value=''>Please Select</option>");
                         for (var i = 0; i < len; i++) {
                             var id = response[i]['id'];
                             var name = response[i]['name'];
-                            $("#city_id").append("<option value='" + id + "'>" + name + "</option>");
+                            $("#city_id").append("<option value='" + id + "'>" + name +
+                                "</option>");
                         }
                     }
                 });
             });
         });
+
     </script>
     <script>
         function myFunction() {
             document.getElementById("search_data").reset();
             location.reload();
         }
+
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
     <script>
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
-        var socket = io.connect('http://localhost:4005');
-    $(".send-msg").click(function(e){
-        var room = 8621516254;//$('#room').val();
-        var sender_id = 4;//$('#user').val();
-        var receiver_id = 2;//$('#user').val();
-        var message = "Hello user";
-        var array = {
-            "room_id":'',
-            "sender_id":4 ,
-            "receiver_id" : 5,
-            "message" : "hello"
-        };
-        socket.emit('send_message', array);
-        socket.on('send_message', function(val){
-           console.log(val);
+          var port_url = "{{env('PORT_URL')}}";
+        var socket = io.connect(port_url);
+        $(".send-msg").click(function (e) {
+            var room = 8621516254; //$('#room').val();
+            var sender_id = 4; //$('#user').val();
+            var receiver_id = 2; //$('#user').val();
+            var message = "Hello user";
+            var array = {
+                "room_id": '',
+                "sender_id": 4,
+                "receiver_id": 5,
+                "message": "hello"
+            };
+            socket.emit('send_message', array);
+            socket.on('send_message', function (val) {
+                console.log(val);
+            });
         });
-        });
-        $(".user-list").click(function(e){
-        var array = {
-            "room_id":1924903593,
-        };
-        socket.emit('user_list', array);
-        socket.on('user_list', function(val){
-           console.log(val);
-        });
+        $(".user-list").click(function (e) {
+            var array = {
+                "room_id": 1924903593,
+            };
+            socket.emit('user_list', array);
+            socket.on('user_list', function (val) {
+                console.log(val);
+            });
         });
         // $(".user-list").click(function(e){
         // var array = {
@@ -1104,6 +1110,7 @@
         //    console.log(val);
         // });
         // });
+
     </script>
 
 </body>
