@@ -1,4 +1,5 @@
 const connection = require("./database");
+require('dotenv').config();
 //var users = new Users();
 module.exports = {
     val: io => {
@@ -60,7 +61,7 @@ module.exports = {
                 });
             });
             socket.on("user_list", function (input, result) {
-                var image_url = "http://localhost/gold_badge/storage/uploads/user_image/";
+                var image_url = `${process.env.APP_URL}` + "storage/uploads/user_image/";
                 var get_user_list = "SELECT  room_id, sender_id, receiver_id, message , c.created_at ,u.id as user_id, u.first_name , CONCAT('" + image_url + "', u.image) as image, u.user_name FROM chats c  LEFT JOIN users u ON c.sender_id = u.id OR c.receiver_id = u.id GROUP BY u.id  ORDER BY c.created_at DESC";
                 connection.query(get_user_list, (error, rows, fields) => {
                     if (error) {

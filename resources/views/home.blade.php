@@ -1068,8 +1068,7 @@
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
-        var socket = io.connect('http://localhost:4001');
-
+        var socket = io.connect('http://localhost:4005');
     $(".send-msg").click(function(e){
         var room = 8621516254;//$('#room').val();
         var sender_id = 4;//$('#user').val();
