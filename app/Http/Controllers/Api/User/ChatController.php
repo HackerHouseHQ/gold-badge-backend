@@ -36,13 +36,14 @@ class ChatController extends Controller
     public function send_message(Request $request)
     {
 
-        $data = Chat::create([
-            'sender_id' => $request->sender_id,
-            'receiver_id' => $request->receiver_id,
-            'send_from' => $request->send_from,
-            'message' => $request->message,
-        ]);
+        // $data = Chat::create([
+        //     'sender_id' => $request->sender_id,
+        //     'receiver_id' => $request->receiver_id,
+        //     'send_from' => $request->send_from,
+        //     'message' => $request->message,
+        // ]);
         //thats only
-        return response()->json($data);
+        $data = Chat::select('room_id', 'receiver_id', 'sender_id', 'message', 'created_at')->where('sender_id', 2)->where('receiver_id', 5)->get();
+        return res(true, 'SUCCESS', $data);
     }
 }

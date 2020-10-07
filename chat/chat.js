@@ -7,7 +7,7 @@ module.exports = {
             console.log("hello");
             socket.on("send_message", function (input, result) {
                 var genrate_room_id = Math.floor(1000000000 + Math.random() * 9000000000);
-                var check_sender_receiver = "SELECT `sender_id` , `receiver_id` , `room_id` , `message`, `created_at` FROM `chats` WHERE sender_id = " + input.sender_id + " AND receiver_id  = " + input.receiver_id;
+                var check_sender_receiver = "SELECT `sender_id` , `receiver_id` , `room_id` , `message`, `created_at` FROM `chats` WHERE sender_id = " + input.sender_id + " AND receiver_id  = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(check_sender_receiver, (error, rows, fields) => {
                     if (error) {
                         socket.emit("send_message", {
@@ -55,6 +55,45 @@ module.exports = {
 
                         });
 
+                    }
+                    // connected!
+                });
+            });
+            socket.on("user_list", function (input, result) {
+                var image_url = "http://localhost/gold_badge/storage/uploads/user_image/";
+                var get_user_list = "SELECT  room_id, sender_id, receiver_id, message , c.created_at ,u.id as user_id, u.first_name , CONCAT('" + image_url + "', u.image) as image, u.user_name FROM chats c  LEFT JOIN users u ON c.sender_id = u.id OR c.receiver_id = u.id GROUP BY u.id  ORDER BY c.created_at DESC";
+                connection.query(get_user_list, (error, rows, fields) => {
+                    if (error) {
+                        socket.emit("user_list", {
+                            status: false,
+                            message: error,
+                            result: rows
+                        });
+                    } else {
+                        socket.emit("user_list", {
+                            status: true,
+                            message: 'SUCCESS',
+                            result: rows
+                        });
+                    }
+                    // connected!
+                });
+            });
+            socket.on("user_chat_list", function (input, result) {
+                var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
+                connection.query(get_chat_user_list, (error, rows, fields) => {
+                    if (error) {
+                        socket.emit("user_chat_list", {
+                            status: false,
+                            message: error,
+                            result: rows
+                        });
+                    } else {
+                        socket.emit("user_chat_list", {
+                            status: true,
+                            message: 'SUCCESS',
+                            result: rows
+                        });
                     }
                     // connected!
                 });
