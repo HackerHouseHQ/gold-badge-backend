@@ -84,7 +84,7 @@
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <form action="" id="search_data" class="search_data_row_class">
               <div class='row'>
-                <div class='col-4'>
+                <div class='col-3'>
                   <div class="form-group">
                     <select class="form-control" name="status_id" id="status_id">
                       <option value="">status</option>
@@ -93,7 +93,7 @@
                     </select>
                   </div>
                 </div>
-                <div class='col-4'>
+                <div class='col-3'>
                   <?php $countryList = App\Country::get(); ?>
                   <div class="form-group">
                     <select class="form-control" name="country_id" id="country_id">
@@ -105,14 +105,14 @@
                   </div>
                 </div>
 
-                <div class='col-4'>
+                <div class='col-3'>
                   <div class="form-group">
                     <select class="form-control" name="state_id" id="state_id">
                       <option value="">Select State</option>
                     </select>
                   </div>
                 </div>
-                <div class='col-4'>
+                <div class='col-3'>
                   <div class="form-group">
                     <select class="form-control" name="city_id" id="city_id">
                       <option value="">City</option>
@@ -406,6 +406,30 @@
     //  $('#search').keyup(function(){
     //    dataTable.draw();
     // });
+    $('#status_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#country_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#state_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#fromdate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#todate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#city_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
   });
 </script>
 <script type="text/javascript">

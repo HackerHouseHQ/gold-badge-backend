@@ -67,5 +67,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/deparmentBadgeList', 'UserController@deparmentBadgeList');
 		Route::post('/saveDepartmentRequest', 'DepartmentController@saveDepartmentRequest');
 		Route::get('/reasonList', 'ManageDataController@reasonQuestionList');
+		Route::post('/postProfile', 'PostController@postProfile');
+		Route::post('/departmentFollow', 'DepartmentController@departmentFollow');
+		Route::post('/myAcivity', 'PostController@myAcivity');
 	});
 });

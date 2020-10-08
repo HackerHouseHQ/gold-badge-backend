@@ -6,6 +6,7 @@ use Exception;
 use Illuminate\Http\Request;
 use App\UserDepartmentRequest;
 use App\Http\Controllers\Controller;
+use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -56,6 +57,30 @@ class DepartmentController extends Controller
             return res_success('Request saved successfully.');
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function departmentFollow(Request $request)
+    {
+        $user_id = $request->user_id;
+        $department_id = $request->department_id;
+        $followedDepartment = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->first();
+        if ($followedDepartment) {
+            if ($followedDepartment->status == 0) {
+                $update = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->update(['status' => 1]);
+                return res_success('Department followed successfully');
+            } else {
+                $update = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->update(['status' => 0]);
+                return res_success('Department Unfollowed successfully');
+            }
+        } else {
+            $insertFollowed = [
+                'user_id' => $user_id,
+                'department_id' => $department_id,
+                'created_at' => CURRENT_DATE,
+                'updated_at' => CURRENT_DATE,
+            ];
+            $followdata =  UserDepartmentFollow::insert($insertFollowed);
+            return res_success('Department followed successfully');
         }
     }
 }

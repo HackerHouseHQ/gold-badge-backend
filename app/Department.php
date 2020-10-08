@@ -17,7 +17,7 @@ class Department extends Model
       return $this->hasMany('App\DepartmentBadge', 'department_id')->select('id as badge_id', 'department_id', 'badge_number');
    }
 
-   public function getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search)
+   public function getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $city_id)
    {
       // DB::enableQueryLog();
       $query = self::query()->with('country_data')->with('state_data')->with('city_data')->orderBy('created_at', 'asc');
@@ -57,6 +57,11 @@ class Department extends Model
             $q->where('state_id', $state_id);
          });
       }
+      if (!empty($city_id)) {
+         $query->Where(function ($q) use ($city_id) {
+            $q->where('city_id', $city_id);
+         });
+      }
       $query->skip($offset);
       $query->take($limit_t);
       $data = $query->get(); //->toArray();
@@ -73,12 +78,13 @@ class Department extends Model
       }
       return $data;
    }
-   public function getdata_count($order_by, $status_id, $state_id, $country_id, $fromdate, $todate, $search)
+   public function getdata_count($order_by, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $city_id)
    {
-      $query = self::query()->orderBy('created_at', 'asc');
-
+      // DB::enableQueryLog();
+      $query = self::query()->with('country_data')->with('state_data')->with('city_data')->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
+
             $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
             $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
@@ -102,10 +108,35 @@ class Department extends Model
             $q->where('status', $status_id);
          });
       }
-      // $que
-      $data = $query->get();
-      $total = $data->count();
-      return $total;
+      if (!empty($country_id)) {
+         $query->Where(function ($q) use ($country_id) {
+            $q->where('country_id', $country_id);
+         });
+      }
+      if (!empty($state_id)) {
+         $query->Where(function ($q) use ($state_id) {
+            $q->where('state_id', $state_id);
+         });
+      }
+      if (!empty($city_id)) {
+         $query->Where(function ($q) use ($city_id) {
+            $q->where('city_id', $city_id);
+         });
+      }
+
+      $data = $query->get(); //->toArray();
+      // $data = $query->get()->toArray();
+      // $data = DB::getQueryLog();
+      // echo"<pre>";print_r($data);  die;
+      if (!empty($data)) {
+         foreach ($data as $key => $value) {
+            $post = Post::where('department_id', $value->id)->where('flag', 1)->count();
+            $rating = Post::where('department_id', $value->id)->where('flag', 1)->avg('rating');
+            $value['total_reviews'] = $post;
+            $value['rating'] = $rating;
+         }
+      }
+      return count($data);
    }
 
    public function country_data()

@@ -31,8 +31,8 @@ var Layout = (function () {
             .addClass("g-sidenav-show g-sidenav-pinned");
         $("body").append(
             '<div class="backdrop d-xl-none" data-action="sidenav-unpin" data-target=' +
-                $("#sidenav-main").data("target") +
-                " />"
+            $("#sidenav-main").data("target") +
+            " />"
         );
 
         // Store the sidenav state in a cookie session
@@ -51,9 +51,9 @@ var Layout = (function () {
 
     // Set sidenav state from cookie
 
-    var $sidenavState = Cookies.get("sidenav-state")
-        ? Cookies.get("sidenav-state")
-        : "pinned";
+    var $sidenavState = Cookies.get("sidenav-state") ?
+        Cookies.get("sidenav-state") :
+        "pinned";
 
     if ($(window).width() > 1200) {
         if ($sidenavState == "pinned") {
@@ -233,10 +233,8 @@ var Charts = (function () {
                 global: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    defaultColor:
-                        mode == "dark" ? colors.gray[700] : colors.gray[600],
-                    defaultFontColor:
-                        mode == "dark" ? colors.gray[700] : colors.gray[600],
+                    defaultColor: mode == "dark" ? colors.gray[700] : colors.gray[600],
+                    defaultFontColor: mode == "dark" ? colors.gray[700] : colors.gray[600],
                     defaultFontFamily: fonts.base,
                     defaultFontSize: 13,
                     layout: {
@@ -267,10 +265,9 @@ var Charts = (function () {
                         },
                         arc: {
                             backgroundColor: colors.theme["primary"],
-                            borderColor:
-                                mode == "dark"
-                                    ? colors.gray[800]
-                                    : colors.white,
+                            borderColor: mode == "dark" ?
+                                colors.gray[800] :
+                                colors.white,
                             borderWidth: 4,
                         },
                     },
@@ -660,8 +657,7 @@ var Popover = (function () {
 
         var options = {
             trigger: "focus",
-            template:
-                '<div class="popover ' +
+            template: '<div class="popover ' +
                 $popoverClass +
                 '" role="tooltip"><div class="arrow"></div><h3 class="popover-header"></h3><div class="popover-body"></div></div>',
         };
@@ -697,9 +693,9 @@ var ScrollTo = (function () {
 
     function scrollTo($this) {
         var $el = $this.attr("href");
-        var offset = $this.data("scroll-to-offset")
-            ? $this.data("scroll-to-offset")
-            : 0;
+        var offset = $this.data("scroll-to-offset") ?
+            $this.data("scroll-to-offset") :
+            0;
         var options = {
             scrollTop: $($el).offset().top - offset,
         };
@@ -846,12 +842,10 @@ var BarsChart = (function () {
             type: "bar",
             data: {
                 labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [
-                    {
-                        label: "Sales",
-                        data: [25, 20, 30, 22, 17, 29],
-                    },
-                ],
+                datasets: [{
+                    label: "Sales",
+                    data: [25, 20, 30, 22, 17, 29],
+                }, ],
             },
         });
 
@@ -883,22 +877,20 @@ var SalesChart = (function () {
             type: "line",
             options: {
                 scales: {
-                    yAxes: [
-                        {
-                            gridLines: {
-                                lineWidth: 1,
-                                color: Charts.colors.gray[900],
-                                zeroLineColor: Charts.colors.gray[900],
-                            },
-                            ticks: {
-                                callback: function (value) {
-                                    if (!(value % 10)) {
-                                        return "$" + value + "k";
-                                    }
-                                },
+                    yAxes: [{
+                        gridLines: {
+                            lineWidth: 1,
+                            color: Charts.colors.gray[900],
+                            zeroLineColor: Charts.colors.gray[900],
+                        },
+                        ticks: {
+                            callback: function (value) {
+                                if (!(value % 10)) {
+                                    return "$" + value + "k";
+                                }
                             },
                         },
-                    ],
+                    }, ],
                 },
                 tooltips: {
                     callbacks: {
@@ -935,12 +927,10 @@ var SalesChart = (function () {
                     "Nov",
                     "Dec",
                 ],
-                datasets: [
-                    {
-                        label: "Performance",
-                        data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
-                    },
-                ],
+                datasets: [{
+                    label: "Performance",
+                    data: [0, 20, 10, 30, 15, 40, 20, 60, 60],
+                }, ],
             },
         });
 
@@ -1054,16 +1044,16 @@ var noUiSlider = (function () {
             f = [d, e];
 
         noUiSlider.create(c, {
-            start: [
-                parseInt(d.getAttribute("data-range-value-low")),
-                parseInt(e.getAttribute("data-range-value-high")),
-            ],
-            connect: !0,
-            range: {
-                min: parseInt(c.getAttribute("data-range-value-min")),
-                max: parseInt(c.getAttribute("data-range-value-max")),
-            },
-        }),
+                start: [
+                    parseInt(d.getAttribute("data-range-value-low")),
+                    parseInt(e.getAttribute("data-range-value-high")),
+                ],
+                connect: !0,
+                range: {
+                    min: parseInt(c.getAttribute("data-range-value-min")),
+                    max: parseInt(c.getAttribute("data-range-value-max")),
+                },
+            }),
             c.noUiSlider.on("update", function (a, b) {
                 f[b].textContent = a[b];
             });

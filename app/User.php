@@ -21,6 +21,18 @@ class User extends Authenticatable
    protected $casts = [
       'email_verified_at' => 'datetime',
    ];
+   public function country_data()
+   {
+      return $this->belongsTo('App\Country', 'country_id');
+   }
+   public function state_data()
+   {
+      return $this->belongsTo('App\CountryState', 'state_id');
+   }
+   public function city_data()
+   {
+      return $this->belongsTo('App\City', 'city_id');
+   }
    public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id)
    {
       $query = self::query()->orderBy('created_at', 'asc');
@@ -62,6 +74,8 @@ class User extends Authenticatable
    {
       $query = self::query()->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
+         $fromdate =  date('Y-m-d', strtotime($fromdate));
+         $todate =  date('Y-m-d', strtotime($todate));
          $query->Where(function ($q) use ($fromdate, $todate) {
             $q->wheredate('created_at', '>=', $fromdate);
             $q->wheredate('created_at', '<=', $todate);
@@ -83,9 +97,14 @@ class User extends Authenticatable
          });
       }
 
-      $data = $query->get();
-      $total = $data->count();
-      return $total;
+      $data = $query->get(); //->toArray();
+      // $data = $query->get()->toArray();
+      // echo"<pre>";print_r($data);  die;
+      foreach ($data as $key => $value) {
+         $count  = Post::where('user_id', $value->id)->count();
+         $value['total_reviews'] = $count;
+      }
+      return count($data);
    }
    public static function getPostDepartment($user_id, $search, $offset, $limit_t)
    {

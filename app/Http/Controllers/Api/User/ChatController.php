@@ -5,17 +5,33 @@ namespace App\Http\Controllers\Api\User;
 use App\Chat;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Factory;
 use App\Http\Controllers\Controller;
+
 
 class ChatController extends Controller
 {
     public function user_list(Request $request)
     {
-        $users = User::WhereNotIn('id', [$request->user_id])->get();
+        $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', 'users.image', 'users.id as user_id')
+            ->leftJoin('users', 'users.id', '=', 'chats.sender_id')
+            ->where('receiver_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
+        $chat_list2 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', 'users.image', 'users.id as user_id')
+            ->leftJoin('users', 'users.id', '=', 'chats.receiver_id')
+            ->where('sender_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
 
-        return response()->json($users);
+        $data = array_merge($chat_list1, $chat_list2);
+        $arr = [];
+        $room_id_array = [];
+        foreach ($data as $key => $value) {
+            if (!in_array($value['room_id'], $room_id_array)) {
+                $room_id_array[] = $value['room_id'];
+                $arr[] = $value;
+            }
+        }
+
+        return res_success(trans('messages.successFetchList'), array('userList' => $arr));
     }
-
     public function auth_user(Request $request)
     {
         $user = User::findOrfail($request->user_id);

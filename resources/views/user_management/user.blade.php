@@ -8,7 +8,8 @@
           <h6 class="h2 text-white d-inline-block mb-0">User Management</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a></li>
+              <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
+              </li>
               <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
               <li class="breadcrumb-item active" aria-current="page">User</li>
             </ol>
@@ -53,7 +54,8 @@
                     <select class="form-control" name="country_id" id="country_id">
                       <option value="">Select Country</option>
                       @foreach($countryList as $counntryList)
-                      <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
+                      <option value="{{$counntryList->id}}">{{$counntryList->country_name}}
+                      </option>
                       @endforeach
                     </select>
                   </div>
@@ -164,121 +166,146 @@
 
 </script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    $("#country_id").change(function() {
-      var country_id = $(this).val();
-      $.ajax({
-        url: "{{route('get_state')}}",
-        type: 'get',
-        data: {
-          country_id: country_id
-        },
-        dataType: 'json',
-        success: function(response) {
-          var len = response.length;
+  $(document).ready(function () {
+        $("#country_id").change(function () {
+            var country_id = $(this).val();
+            $.ajax({
+                url: "{{route('get_state')}}",
+                type: 'get',
+                data: {
+                    country_id: country_id
+                },
+                dataType: 'json',
+                success: function (response) {
+                    var len = response.length;
 
-          $("#state_id").empty();
-          $("#state_id").append("<option value=''>Select State</option>");
-          for (var i = 0; i < len; i++) {
-            var id = response[i]['id'];
-            var name = response[i]['name'];
-            $("#state_id").append("<option value='" + id + "'>" + name + "</option>");
-          }
-        }
-      });
+                    $("#state_id").empty();
+                    $("#state_id").append("<option value=''>Select State</option>");
+                    for (var i = 0; i < len; i++) {
+                        var id = response[i]['id'];
+                        var name = response[i]['name'];
+                        $("#state_id").append("<option value='" + id + "'>" + name +
+                            "</option>");
+                    }
+                }
+            });
+        });
     });
-  });
+
 </script>
 <script type="text/javascript">
-  $(document).ready(function() {
-    var dataTable = $('#datatable-basic').DataTable({
-      language: {
-        paginate: {
-          previous: '<i class="fas fa-angle-left"></i>',
-          next: '<i class="fas fa-angle-right"></i>'
-        },
-        aria: {
-          paginate: {
-            previous: 'Previous',
-            next: 'Next'
-          }
-        }
-      },
-      "searching": false,
-      'processing': true,
-      'serverSide': true,
-      "bFilter": true,
-      "bInfo": true,
-      "lengthChange": true,
-      "bAutoWidth": true,
-      'ajax': {
-        'url': "{{route('userList')}}",
-        'data': function(data) {
-          var status_id = $('#status_id').val();
-          data.status_id = status_id;
-          var state_id = $('#state_id').val();
-          data.state_id = state_id;
-          var country_id = $('#country_id').val();
-          data.country_id = country_id;
-          var fromdate = $('#fromdate').val();
-          data.fromdate = fromdate;
-          var todate = $('#todate').val();
-          data.todate = todate;
-        }
-      },
-      'columns': [{
-          data: 'name'
-        },
-        {
-          data: 'contact'
-        },
-        {
-          data: 'email'
-        },
-        {
-          data: 'username'
-        },
-        {
-          data: 'registered_on'
-        },
-        {
-          data: 'review'
-        },
-        {
-          data: 'view'
-        },
-      ]
+  $(document).ready(function () {
+        var dataTable = $('#datatable-basic').DataTable({
+            language: {
+                paginate: {
+                    previous: '<i class="fas fa-angle-left"></i>',
+                    next: '<i class="fas fa-angle-right"></i>'
+                },
+                aria: {
+                    paginate: {
+                        previous: 'Previous',
+                        next: 'Next'
+                    }
+                }
+            },
+            "searching": false,
+            'processing': true,
+            'serverSide': true,
+            "bFilter": true,
+            "bInfo": true,
+            "lengthChange": true,
+            "bAutoWidth": true,
+            'ajax': {
+                'url': "{{route('userList')}}",
+                'data': function (data) {
+                    var status_id = $('#status_id').val();
+                    data.status_id = status_id;
+                    var state_id = $('#state_id').val();
+                    data.state_id = state_id;
+                    var country_id = $('#country_id').val();
+                    data.country_id = country_id;
+                    var fromdate = $('#fromdate').val();
+                    data.fromdate = fromdate;
+                    var todate = $('#todate').val();
+                    data.todate = todate;
+                }
+            },
+            'columns': [{
+                    data: 'name'
+                },
+                {
+                    data: 'contact'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'username'
+                },
+                {
+                    data: 'registered_on'
+                },
+                {
+                    data: 'review'
+                },
+                {
+                    data: 'view'
+                },
+            ]
+        });
+
+        //   $("#status_id").keyup(function(){
+
+        // });
+        $('#search_data1').click(function () {
+            dataTable.draw();
+        });
+        $('#status_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#country_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#state_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#fromdate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#todate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
     });
 
-    //   $("#status_id").keyup(function(){
-
-    // });
-    $('#search_data1').click(function() {
-      dataTable.draw();
-    });
-  });
 </script>
 <script type="text/javascript">
   function status(id) {
-    $.ajax({
-      url: "{{route('change_status')}}",
-      type: "post",
-      data: {
-        'user_id': id,
-        '_token': "{{ csrf_token() }}"
-      },
-      success: function(data) {
-        location.reload(); // refresh same page
-      }
-    });
-  }
+        $.ajax({
+            url: "{{route('change_status')}}",
+            type: "post",
+            data: {
+                'user_id': id,
+                '_token': "{{ csrf_token() }}"
+            },
+            success: function (data) {
+                location.reload(); // refresh same page
+            }
+        });
+    }
+
 </script>
 <script>
   function myFunction() {
-    document.getElementById("myForm").reset();
-    location.reload();
+        document.getElementById("myForm").reset();
+        location.reload();
 
-  }
+    }
+
 </script>
 
 
