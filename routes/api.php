@@ -38,7 +38,6 @@ Route::group(['prefix' => 'guest', 'namespace' => 'Api\User'], function () {
 	Route::get('/homepage', 'GuestController@homePage');
 });
 Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
-	Route::get('/users/list/{user_id}', 'ChatController@user_list');
 	Route::get('auth/user/{user_id}', 'ChatController@auth_user');
 	Route::get('/chat/list/{sender_id}/{receiver_id}', 'ChatController@user_chat_list');
 	Route::post('/send_message', 'ChatController@send_message');
@@ -70,5 +69,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/postProfile', 'PostController@postProfile');
 		Route::post('/departmentFollow', 'DepartmentController@departmentFollow');
 		Route::post('/myAcivity', 'PostController@myAcivity');
+		Route::post('/chats/list', 'ChatController@user_list');
 	});
 });
