@@ -26,12 +26,21 @@ module.exports = {
                             room_id,
                             input.message
                         ];
+                        let current = new Date();
+                        console.log(current);
+                        var msgArr = {
+                            sender_id: input.sender_id,
+                            receiver_id: input.receiver_id,
+                            room_id: room_id,
+                            message: input.message,
+                            created_at: current
+                        };
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
                                 socket.emit("send_message", {
                                     status: false,
                                     message: error,
-                                    result: rows
+                                    result: msgArr
                                 });
                             } else {
                                 var fetch_message = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` =" + input.sender_id + " AND `receiver_id` =" + input.receiver_id;
@@ -41,13 +50,13 @@ module.exports = {
                                         socket.emit("send_message", {
                                             status: false,
                                             message: error,
-                                            result: rows
+                                            result: msgArr
                                         });
                                     } else {
                                         socket.emit("send_message", {
                                             status: true,
                                             message: 'SUCCESS',
-                                            result: rows
+                                            result: msgArr
                                         });
                                     }
 

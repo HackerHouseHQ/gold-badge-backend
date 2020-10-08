@@ -49,6 +49,7 @@
         .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
             background: #e2b52dd1 !important;
         }
+
     </style>
 </head>
 
@@ -1073,7 +1074,7 @@
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
-          var port_url = "{{env('PORT_URL')}}";
+        var port_url = "{{env('PORT_URL')}}";
         var socket = io.connect(port_url);
         $(".send-msg").click(function (e) {
             var room = 8621516254; //$('#room').val();
