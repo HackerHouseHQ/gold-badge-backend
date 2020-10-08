@@ -6,6 +6,7 @@ use App\Chat;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Factory;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
@@ -13,10 +14,11 @@ class ChatController extends Controller
 {
     public function user_list(Request $request)
     {
-        $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', 'users.image', 'users.id as user_id')
+        $siteUrl = env('APP_URL');
+        $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
             ->leftJoin('users', 'users.id', '=', 'chats.sender_id')
             ->where('receiver_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
-        $chat_list2 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', 'users.image', 'users.id as user_id')
+        $chat_list2 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
             ->leftJoin('users', 'users.id', '=', 'chats.receiver_id')
             ->where('sender_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
 
