@@ -63,13 +63,13 @@ class DepartmentController extends Controller
     {
         $user_id = $request->user_id;
         $department_id = $request->department_id;
-        $followedDepartment = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->first();
+        $followedDepartment = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->first();
         if ($followedDepartment) {
             if ($followedDepartment->status == 0) {
-                $update = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->update(['status' => 1]);
+                $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 1]);
                 return res_success('Department followed successfully');
             } else {
-                $update = UserDepartmentFollow::where('user_id', $user_id)->where('departmen_id', $department_id)->update(['status' => 0]);
+                $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 0]);
                 return res_success('Department Unfollowed successfully');
             }
         } else {
