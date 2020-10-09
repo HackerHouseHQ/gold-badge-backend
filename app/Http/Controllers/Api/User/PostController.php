@@ -134,7 +134,7 @@ class PostController extends Controller
         return res_success('Fetch List', array('postUserData' => $user_data,  'postList' => $posts));
     }
 
-    public function myAcivity(Request $request)
+    public function myActivity(Request $request)
     {
         $user_id = $request->user_id;
         $postLiked =  $this->postLiked($user_id)->toArray();
@@ -154,7 +154,7 @@ class PostController extends Controller
             else
                 return 0;
         });
-        return res_success('Fetch List', array('postList' => $arr));
+        return res_success(trans('messages.successFetchList'), array('postList' => $arr));
     }
     private function postLiked($user_id)
     { // post like by user 
