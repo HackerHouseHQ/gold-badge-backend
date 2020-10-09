@@ -28,13 +28,14 @@ module.exports = {
                         ];
                         let current = new Date();
                         console.log(current);
-                        var msgArr = {
+
+                        var msgArr = [{
                             sender_id: input.sender_id,
                             receiver_id: input.receiver_id,
                             room_id: room_id,
                             message: input.message,
                             created_at: current
-                        };
+                        }];
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
                                 socket.emit("send_message", {
