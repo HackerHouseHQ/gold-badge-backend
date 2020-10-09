@@ -452,6 +452,14 @@
             //alert( this.value );
             dataTable.draw();
         });
+        $('#department_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#badge_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        })
     });
 
 </script>

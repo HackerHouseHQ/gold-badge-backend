@@ -16,6 +16,7 @@ use App\DepartmentSubComment;
 use App\DepartmentSubCommentLike;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostController extends Controller
 {
@@ -154,7 +155,25 @@ class PostController extends Controller
             else
                 return 0;
         });
-        return res_success(trans('messages.successFetchList'), array('postList' => $arr));
+
+        // Get current page form url e.x. &page=1
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+
+        // Create a new Laravel collection from the array data
+        $productCollection = collect($arr);
+
+        // Define how many products we want to be visible in each page
+        $perPage = 1;
+
+        // Slice the collection to get the products to display in current page
+        $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+
+        // Create our paginator and pass it to the view
+        $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), $perPage);
+
+        // set url path for generted links
+        $paginatedproducts->setPath($request->url());
+        return res_success(trans('messages.successFetchList'), array('postList' => $paginatedproducts));
     }
     private function postLiked($user_id)
     { // post like by user 
