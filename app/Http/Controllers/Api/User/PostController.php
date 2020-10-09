@@ -137,15 +137,24 @@ class PostController extends Controller
     public function myAcivity(Request $request)
     {
         $user_id = $request->user_id;
-        $postLiked =  $this->postLiked($user_id);
-        $postShared = $this->postShared($user_id);
-        $postPosted =  $this->postPosted($user_id);
-        $postCommented = $this->postCommented($user_id);
-        $postCommentedLike  = $this->postCommentLike($user_id);
-        $postSubComment = $this->postSubComment($user_id);
-        $postSubCommentLike = $this->postSubCommenLike($user_id);
-
-        return res_success('Fetch List', array('postList' => ""));
+        $postLiked =  $this->postLiked($user_id)->toArray();
+        $postShared = $this->postShared($user_id)->toArray();
+        $postPosted =  $this->postPosted($user_id)->toArray();
+        $postCommented = $this->postCommented($user_id)->toArray();
+        $postCommentedLike  = $this->postCommentLike($user_id)->toArray();
+        $postSubComment = $this->postSubComment($user_id)->toArray();
+        $postSubCommentLike = $this->postSubCommenLike($user_id)->toArray();
+        $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike);
+        // Desc sort
+        usort($arr, function ($time1, $time2) {
+            if (strtotime($time1['created_at']) < strtotime($time2['created_at']))
+                return 1;
+            else if (strtotime($time1['created_at']) > strtotime($time2['created_at']))
+                return -1;
+            else
+                return 0;
+        });
+        return res_success('Fetch List', array('postList' => $arr));
     }
     private function postLiked($user_id)
     { // post like by user 
