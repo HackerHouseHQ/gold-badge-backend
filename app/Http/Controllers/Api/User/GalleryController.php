@@ -54,7 +54,7 @@ class GalleryController extends Controller
                 DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_image/', image) as image"),
                 'created_at'
             )->where('user_id', Auth::user()->id)->get();
-            return res_success(trans('messages.successFetchList'), $data);
+            return res_success(trans('messages.successFetchList'), array('galleryImages' => $data));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
