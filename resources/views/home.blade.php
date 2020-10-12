@@ -446,8 +446,8 @@
                         <div class="col-xl-3 col-md-6">
                             <div class="card card-stats">
                                 <!-- Card body -->
-                                {{-- <div id="messages"></div>
-                                <button class="btn btn-danger send-msg">Send message</button>
+                                <div id="messages"></div>
+                                {{-- <button class="btn btn-danger send-msg">Send message</button>
 
                                 <button class="btn btn-success user-list">User List</button> --}}
                                 <div class="card-body">

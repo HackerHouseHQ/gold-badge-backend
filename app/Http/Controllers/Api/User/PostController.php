@@ -94,86 +94,95 @@ class PostController extends Controller
     }
     public function postProfile(Request $request)
     {
-        $user_id = $request->user_id;
-        $siteUrl = env('APP_URL');
-        $user_data = User::with('country_data', 'state_data', 'city_data')->where('id', $user_id)->first();
-        $posts  =   Post::with(['post_images', 'post_vote'])
-            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
-            ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
-            ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
-            ->withCount('post_comment')
-            ->withCount('post_like')
-            ->withCount('post_share')
-            ->where('user_id', $user_id)
-            ->where('stay_anonymous', 0)
-            ->orderBy('created_at', 'DESC')
-            ->paginate(50);
-        foreach ($posts as $post) {
-            if ($post->flag == 1) {
-                $departmentPostData = Post::where('department_id', $post->department_id)->get();
-                $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
-                $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
-                $post->total_reviews    =   $departmentPostData->count();
-                $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
-                $post->badge_name       =   null;
-                $post->is_liked          = ($post_liked) ? 1 : 0;
-                $post->is_shared          = ($post_shared) ? 1 : 0;
-            } else if ($post->flag == 2) {
-                $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
-                $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
-                $badgePostData = Post::where('badge_id', $post->badge_id)->get();
-                $post->total_reviews    =   $badgePostData->count();
-                $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
-                $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
-                $post->is_liked          = ($post_liked) ? 1 : 0;
-                $post->is_shared          = ($post_shared) ? 1 : 0;
+
+        try {
+            $user_id = $request->user_id;
+            $siteUrl = env('APP_URL');
+            $user_data = User::with('country_data', 'state_data', 'city_data')->where('id', $user_id)->first();
+            $user_data->image = $siteUrl . 'storage/uploads/user_image/' . $user_data->image;
+            $posts  =   Post::with(['post_images', 'post_vote'])
+                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                ->withCount('post_comment')
+                ->withCount('post_like')
+                ->withCount('post_share')
+                ->where('user_id', $user_id)
+                ->where('stay_anonymous', 0)
+                ->orderBy('created_at', 'DESC')
+                ->paginate(50);
+            foreach ($posts as $post) {
+                if ($post->flag == 1) {
+                    $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post->total_reviews    =   $departmentPostData->count();
+                    $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   null;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                } else if ($post->flag == 2) {
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                    $post->total_reviews    =   $badgePostData->count();
+                    $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                }
+                unset($post->rating);
+                unset($post->reason_id);
+                unset($post->updated_at);
             }
-            unset($post->rating);
-            unset($post->reason_id);
-            unset($post->updated_at);
+            return res_success('Fetch List', array('postUserData' => $user_data,  'postList' => $posts));
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
-        return res_success('Fetch List', array('postUserData' => $user_data,  'postList' => $posts));
     }
 
     public function myActivity(Request $request)
     {
-        $user_id = $request->user_id;
-        $postLiked =  $this->postLiked($user_id)->toArray();
-        $postShared = $this->postShared($user_id)->toArray();
-        $postPosted =  $this->postPosted($user_id)->toArray();
-        $postCommented = $this->postCommented($user_id)->toArray();
-        $postCommentedLike  = $this->postCommentLike($user_id)->toArray();
-        $postSubComment = $this->postSubComment($user_id)->toArray();
-        $postSubCommentLike = $this->postSubCommenLike($user_id)->toArray();
-        $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike);
-        // Desc sort
-        usort($arr, function ($time1, $time2) {
-            if (strtotime($time1['created_at']) < strtotime($time2['created_at']))
-                return 1;
-            else if (strtotime($time1['created_at']) > strtotime($time2['created_at']))
-                return -1;
-            else
-                return 0;
-        });
+        try {
+            $user_id = $request->user_id;
+            $postLiked =  $this->postLiked($user_id)->toArray();
+            $postShared = $this->postShared($user_id)->toArray();
+            $postPosted =  $this->postPosted($user_id)->toArray();
+            $postCommented = $this->postCommented($user_id)->toArray();
+            $postCommentedLike  = $this->postCommentLike($user_id)->toArray();
+            $postSubComment = $this->postSubComment($user_id)->toArray();
+            $postSubCommentLike = $this->postSubCommenLike($user_id)->toArray();
+            $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike);
+            // Desc sort
+            usort($arr, function ($time1, $time2) {
+                if (strtotime($time1['created_at']) < strtotime($time2['created_at']))
+                    return 1;
+                else if (strtotime($time1['created_at']) > strtotime($time2['created_at']))
+                    return -1;
+                else
+                    return 0;
+            });
 
-        // Get current page form url e.x. &page=1
-        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            // Get current page form url e.x. &page=1
+            $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-        // Create a new Laravel collection from the array data
-        $productCollection = collect($arr);
+            // Create a new Laravel collection from the array data
+            $productCollection = collect($arr);
 
-        // Define how many products we want to be visible in each page
-        $perPage = 1;
+            // Define how many products we want to be visible in each page
+            $perPage = 1;
 
-        // Slice the collection to get the products to display in current page
-        $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+            // Slice the collection to get the products to display in current page
+            $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
 
-        // Create our paginator and pass it to the view
-        $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), $perPage);
-
-        // set url path for generted links
-        $paginatedproducts->setPath($request->url());
-        return res_success(trans('messages.successFetchList'), array('postList' => $paginatedproducts));
+            // Create our paginator and pass it to the view
+            $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), $perPage);
+            // set url path for generted links
+            $paginatedproducts->setPath($request->url());
+            return res_success(trans('messages.successFetchList'), array('postList' => $paginatedproducts));
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
     private function postLiked($user_id)
     { // post like by user 

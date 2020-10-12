@@ -24,6 +24,7 @@
 // Route::post('login', 'API\UserController@login');
 // Route::post('social-login', 'API\UserController@social_login');
 
+use App\Http\Controllers\Api\User\GalleryController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('register', 'UserController@register');
@@ -70,5 +71,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/departmentFollow', 'DepartmentController@departmentFollow');
 		Route::post('/myActivity', 'PostController@myActivity');
 		Route::post('/chats/list', 'ChatController@user_list');
+		Route::post('/saveGalleryImage', 'GalleryController@saveGalleryImage');
+		Route::get('/getGalleryImage', 'GalleryController@getGalleryImage');
+		Route::post('/deleteGalleryImage', 'GalleryController@deleteGalleryImage');
 	});
 });

@@ -16,13 +16,13 @@ class CreateDepartmentSubCommentLikesTable extends Migration
         Schema::create('department_sub_comment_likes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('comment_id');
-            $table->foreign('comment_id')->references('id')->on('department_comments');
+            $table->foreign('comment_id')->references('id')->on('department_comments')->onDelete('cascade');
             $table->unsignedBigInteger('sub_comment_id');
-            $table->foreign('sub_comment_id')->references('id')->on('department_sub_comments');
+            $table->foreign('sub_comment_id')->references('id')->on('department_sub_comments')->onDelete('cascade');
             $table->boolean('status')->default(1);
             $table->timestamps();
         });
