@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use App\DepartmentSubComment;
 use App\DepartmentSubCommentLike;
 use App\DepartmentVote;
+use App\GalleryImages;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -339,6 +340,7 @@ class UserController extends Controller
                 $userId = $request->user_id;
                 $stayAnonymous = $request->stay_anonymous;
                 $uploadFile  = $request->upLoadFile;
+                $uploadSaveFile =  $request->uploadSaveFile;
                 $user_rating  = $request->user_rating;
                 $insertPostDepartment = [
                     'user_id' => $userId,
@@ -365,6 +367,29 @@ class UserController extends Controller
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
                         $file->move($path, $filename);
+                        $insertArray = [
+                            'post_id' => $insertPostId,
+                            'image'  => $filename,
+                            'media_type' => $request->media_type,
+                            'created_at' => CURRENT_DATE,
+                            'updated_at' => CURRENT_DATE
+                        ];
+                        $insertData = PostImage::insert($insertArray);
+                        $i++;
+                    }
+                }
+                if (isset($uploadSaveFile) && !empty($uploadSaveFile)) {
+                    $arrSave = $uploadSaveFile;
+                    if (!is_array($arrSave)) {
+                        $arrSave = json_decode($arrSave, true);
+                    }
+                    $i = 1;
+                    foreach ($arrSave as $image) {
+                        $getImage = GalleryImages::whereId($image)->first();
+                        $filename = $getImage->image;
+                        $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                        $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
+                        copy($galleryPath, $path);
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,
@@ -456,6 +481,29 @@ class UserController extends Controller
                         $file->move($path, $filename);
                         $insertArray = [
                             'post_id' => $insertPostBadgeId,
+                            'image'  => $filename,
+                            'media_type' => $request->media_type,
+                            'created_at' => CURRENT_DATE,
+                            'updated_at' => CURRENT_DATE
+                        ];
+                        $insertData = PostImage::insert($insertArray);
+                        $i++;
+                    }
+                }
+                if (isset($uploadSaveFile) && !empty($uploadSaveFile)) {
+                    $arrSave = $uploadSaveFile;
+                    if (!is_array($arrSave)) {
+                        $arrSave = json_decode($arrSave, true);
+                    }
+                    $i = 1;
+                    foreach ($arrSave as $image) {
+                        $getImage = GalleryImages::whereId($image)->first();
+                        $filename = $getImage->image;
+                        $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                        $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
+                        copy($galleryPath, $path);
+                        $insertArray = [
+                            'post_id' => $insertPostId,
                             'image'  => $filename,
                             'media_type' => $request->media_type,
                             'created_at' => CURRENT_DATE,
