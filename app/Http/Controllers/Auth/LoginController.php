@@ -33,7 +33,6 @@ class LoginController extends Controller
 
     public function index()
     {
-
         return view('auth/login');
     }
     public function logout(Request $request)

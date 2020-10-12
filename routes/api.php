@@ -74,5 +74,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/saveGalleryImage', 'GalleryController@saveGalleryImage');
 		Route::get('/getGalleryImage', 'GalleryController@getGalleryImage');
 		Route::post('/deleteGalleryImage', 'GalleryController@deleteGalleryImage');
+		Route::get('/getNotification', 'InformationManagementController@getNotification');
 	});
 });
