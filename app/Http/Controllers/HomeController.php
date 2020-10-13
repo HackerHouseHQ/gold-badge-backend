@@ -67,4 +67,44 @@ class HomeController extends Controller
             return redirect('change-password')->with('message', 'Your password has been changed succesfully.');
         }
     }
+    public function userCount(Request $request)
+    {
+        $year = date("Y");
+        $state_id = $request->state_id;
+        $country_id = $request->country_id;
+        $city_id  = $request->city_id;
+        $fromdate = $request->fromdate;
+        $todate = $request->todate;
+        $data = [];
+        for ($i = 1; $i <= 12; $i++) {
+            $query = User::whereYear('created_at', '=', $year)->whereMonth('created_at', '=', $i);
+            if (!empty($fromdate) &&  !empty($todate)) {
+                $query->Where(function ($q) use ($fromdate, $todate) {
+
+                    $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+                    $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
+                });
+            }
+            if (!empty($country_id)) {
+                $query->Where(function ($q) use ($country_id) {
+                    $q->where('country_id', $country_id);
+                });
+            }
+            if (!empty($state_id)) {
+                $query->Where(function ($q) use ($state_id) {
+                    $q->where('state_id', $state_id);
+                });
+            }
+            if (!empty($city_id)) {
+                $query->Where(function ($q) use ($city_id) {
+                    $q->where('city_id', $city_id);
+                });
+            }
+            $query = $query->count();
+            array_push($data, $query);
+        }
+
+
+        return $data;
+    }
 }

@@ -20,6 +20,7 @@ Auth::routes();
 Route::group(['middleware' => ['auth:admin']], function () {
 
   Route::get('/home', 'HomeController@index')->name('home');
+  Route::get('/userCount', 'HomeController@userCount')->name('userCount');
   Route::get('/change-password', 'HomeController@change_password')->name('change-password');
   Route::post('/changePassword', 'HomeController@change_password_save')->name('changePassword');
 

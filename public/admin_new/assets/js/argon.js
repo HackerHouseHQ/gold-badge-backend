@@ -266,8 +266,7 @@ var Charts = (function () {
                         arc: {
                             backgroundColor: colors.theme["primary"],
                             borderColor: mode == "dark" ?
-                                colors.gray[800] :
-                                colors.white,
+                                colors.gray[800] : colors.white,
                             borderWidth: 4,
                         },
                     },
@@ -824,40 +823,40 @@ if ($map.length) {
 // Bars chart
 //
 
-var BarsChart = (function () {
-    //
-    // Variables
-    //
+// var BarsChart = (function () {
+//     //
+//     // Variables
+//     //
 
-    var $chart = $("#chart-bars");
+//     var $chart = $("#chart-bars");
 
-    //
-    // Methods
-    //
+//     //
+//     // Methods
+//     //
 
-    // Init chart
-    function initChart($chart) {
-        // Create chart
-        var ordersChart = new Chart($chart, {
-            type: "bar",
-            data: {
-                labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-                datasets: [{
-                    label: "Sales",
-                    data: [25, 20, 30, 22, 17, 29],
-                }, ],
-            },
-        });
+//     // Init chart
+//     function initChart($chart) {
+//         // Create chart
+//         var ordersChart = new Chart($chart, {
+//             type: "bar",
+//             data: {
+//                 labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+//                 datasets: [{
+//                     label: "Sales",
+//                     data: [25, 20, 30, 22, 17, 29],
+//                 }, ],
+//             },
+//         });
 
-        // Save to jQuery object
-        $chart.data("chart", ordersChart);
-    }
+//         // Save to jQuery object
+//         $chart.data("chart", ordersChart);
+//     }
 
-    // Init chart
-    if ($chart.length) {
-        initChart($chart);
-    }
-})();
+//     // Init chart
+//     if ($chart.length) {
+//         initChart($chart);
+//     }
+// })();
 
 ("use strict");
 

@@ -626,7 +626,7 @@
                                 <div class="form-group">
                                     <?php $countryList = App\Country::get(); ?>
                                     <select class="form-control" name="country_id" id="country_id">
-                                        <option value="">Country</option>
+                                        <option value="0">Country</option>
                                         @foreach($countryList as $counntryList)
                                         <option value="{{$counntryList->id}}">{{$counntryList->country_name}}</option>
                                         @endforeach
@@ -1069,50 +1069,157 @@
         }
 
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+
     <script>
+        //
+        // Bars chart
+        //
+
+
+        //
+        // Variables
+        //
+
+        var $chart = $("#chart-bars");
+
+        //
+        // Methods
+        //
+
+        // Init chart
+        function initChart($chart) {
+            // Create chart
+
+            var state_id = $('#state_id').val();
+
+            var country_id = $('#country_id').val();
+
+            var fromdate = $('#fromdate').val();
+            var todate = $('#todate').val();
+            var city_id = $('#city_id').val();
+            var _token = "{{ csrf_token() }}";
+            $.ajax({
+                url: "{{ route('userCount') }}",
+                data: {
+                    state_id: state_id,
+                    '_token': "{{ csrf_token() }}",
+                    country_id: country_id,
+                    fromdate: fromdate,
+                    todate: todate,
+                    city_id: city_id
+                },
+                success: function (response) {
+                    var x = response;
+                    console.log(response);
+                    var ordersChart = new Chart($chart, {
+                        type: "bar",
+                        data: {
+                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                                "Aug", "Sep", "Oct",
+                                "Nov", "Dec"
+                            ],
+                            datasets: [{
+                                label: "No. of users",
+                                data: x,
+                            }, ],
+                        },
+                    });
+
+                    // Save to jQuery object
+                    $chart.data("chart", ordersChart);
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            });
+            $('#country_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#state_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#fromdate').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+            });
+            $('#todate').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#city_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+
+        }
+
+        // Init chart
+
+        if ($chart.length) {
+            initChart($chart);
+        }
+
+    </script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> --}}
+    {{-- <script>
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
         var port_url = "{{env('PORT_URL')}}";
-        var socket = io.connect(port_url);
-        $(".send-msg").click(function (e) {
-            var room = 8621516254; //$('#room').val();
-            var sender_id = 4; //$('#user').val();
-            var receiver_id = 2; //$('#user').val();
-            var message = "Hello user";
-            var array = {
-                "room_id": '',
-                "sender_id": 4,
-                "receiver_id": 5,
-                "message": "hello"
-            };
-            socket.emit('send_message', array);
-            socket.on('send_message', function (val) {
-                console.log(val);
-            });
-        });
-        $(".user-list").click(function (e) {
-            var array = {
-                "room_id": 1924903593,
-            };
-            socket.emit('user_list', array);
-            socket.on('user_list', function (val) {
-                console.log(val);
-            });
-        });
-        // $(".user-list").click(function(e){
-        // var array = {
-        //     "sender_id":2 ,
-        //     "receiver_id" : 5 
-        // };
-        // socket.emit('user_chat_list', array);
-        // socket.on('user_chat_list', function(val){
-        //    console.log(val);
-        // });
-        // });
+    var socket = io.connect(port_url);
+    $(".send-msg").click(function (e) {
+    var room = 8621516254; //$('#room').val();
+    var sender_id = 4; //$('#user').val();
+    var receiver_id = 2; //$('#user').val();
+    var message = "Hello user";
+    var array = {
+    "room_id": '',
+    "sender_id": 4,
+    "receiver_id": 5,
+    "message": "hello"
+    };
+    socket.emit('send_message', array);
+    socket.on('send_message', function (val) {
+    console.log(val);
+    });
+    });
+    $(".user-list").click(function (e) {
+    var array = {
+    "room_id": 1924903593,
+    };
+    socket.emit('user_list', array);
+    socket.on('user_list', function (val) {
+    console.log(val);
+    });
+    });
+    // $(".user-list").click(function(e){
+    // var array = {
+    // "sender_id":2 ,
+    // "receiver_id" : 5
+    // };
+    // socket.emit('user_chat_list', array);
+    // socket.on('user_chat_list', function(val){
+    // console.log(val);
+    // });
+    // });
 
-    </script>
+    </script> --}}
 
 </body>
 
