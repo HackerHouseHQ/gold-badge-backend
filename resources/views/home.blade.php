@@ -1075,105 +1075,108 @@
         // Bars chart
         //
 
+        var BarsChart = (function () {
+            //
+            // Variables
+            //
 
-        //
-        // Variables
-        //
+            var $chart = $("#chart-bars");
 
-        var $chart = $("#chart-bars");
+            //
+            // Methods
+            //
 
-        //
-        // Methods
-        //
+            // Init chart
+            function initChart($chart) {
+                // Create chart
 
-        // Init chart
-        function initChart($chart) {
-            // Create chart
+                var state_id = $('#state_id').val();
 
-            var state_id = $('#state_id').val();
+                var country_id = $('#country_id').val();
 
-            var country_id = $('#country_id').val();
+                var fromdate = $('#fromdate').val();
+                var todate = $('#todate').val();
+                var city_id = $('#city_id').val();
+                var _token = "{{ csrf_token() }}";
+                $.ajax({
+                    url: "{{ route('userCount') }}",
+                    data: {
+                        state_id: state_id,
+                        '_token': "{{ csrf_token() }}",
+                        country_id: country_id,
+                        fromdate: fromdate,
+                        todate: todate,
+                        city_id: city_id
+                    },
+                    success: function (response) {
+                        var x = response;
+                        console.log(response);
+                        var ordersChart = new Chart($chart, {
+                            type: "bar",
+                            data: {
+                                labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
+                                    "Aug", "Sep", "Oct",
+                                    "Nov", "Dec"
+                                ],
+                                datasets: [{
+                                    label: "No. of users",
+                                    data: x,
+                                }, ],
+                            },
+                        });
 
-            var fromdate = $('#fromdate').val();
-            var todate = $('#todate').val();
-            var city_id = $('#city_id').val();
-            var _token = "{{ csrf_token() }}";
-            $.ajax({
-                url: "{{ route('userCount') }}",
-                data: {
-                    state_id: state_id,
-                    '_token': "{{ csrf_token() }}",
-                    country_id: country_id,
-                    fromdate: fromdate,
-                    todate: todate,
-                    city_id: city_id
-                },
-                success: function (response) {
-                    var x = response;
-                    console.log(response);
-                    var ordersChart = new Chart($chart, {
-                        type: "bar",
-                        data: {
-                            labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
-                                "Aug", "Sep", "Oct",
-                                "Nov", "Dec"
-                            ],
-                            datasets: [{
-                                label: "No. of users",
-                                data: x,
-                            }, ],
-                        },
-                    });
+                        // Save to jQuery object
+                        $chart.data("chart", ordersChart);
+                    },
+                    error: function (err) {
+                        console.log(err);
+                    }
+                });
+                $('#country_id').on('change', function () {
+                    //alert( this.value );
+                    if ($chart.length) {
+                        initChart($chart);
+                    }
 
-                    // Save to jQuery object
-                    $chart.data("chart", ordersChart);
-                },
-                error: function (err) {
-                    console.log(err);
-                }
-            });
-            $('#country_id').on('change', function () {
-                //alert( this.value );
-                if ($chart.length) {
-                    initChart($chart);
-                }
+                });
+                $('#state_id').on('change', function () {
+                    //alert( this.value );
+                    if ($chart.length) {
+                        initChart($chart);
+                    }
 
-            });
-            $('#state_id').on('change', function () {
-                //alert( this.value );
-                if ($chart.length) {
-                    initChart($chart);
-                }
+                });
+                $('#fromdate').on('change', function () {
+                    //alert( this.value );
+                    if ($chart.length) {
+                        initChart($chart);
+                    }
+                });
+                $('#todate').on('change', function () {
+                    //alert( this.value );
+                    if ($chart.length) {
+                        initChart($chart);
+                    }
 
-            });
-            $('#fromdate').on('change', function () {
-                //alert( this.value );
-                if ($chart.length) {
-                    initChart($chart);
-                }
-            });
-            $('#todate').on('change', function () {
-                //alert( this.value );
-                if ($chart.length) {
-                    initChart($chart);
-                }
+                });
+                $('#city_id').on('change', function () {
+                    //alert( this.value );
+                    if ($chart.length) {
+                        initChart($chart);
+                    }
 
-            });
-            $('#city_id').on('change', function () {
-                //alert( this.value );
-                if ($chart.length) {
-                    initChart($chart);
-                }
+                });
 
-            });
+            }
 
-        }
+            // Init chart
 
-        // Init chart
+            if ($chart.length) {
+                initChart($chart);
+            }
 
-        if ($chart.length) {
-            initChart($chart);
-        }
+
+        })();
 
     </script>
     {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> --}}

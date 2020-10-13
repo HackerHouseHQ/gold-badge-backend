@@ -49,11 +49,16 @@ class GalleryController extends Controller
     {
         try {
             $siteUrl = env('APP_URL');
-            $data  = GalleryImages::select(
-                'id as image_id',
-                DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_image/', image) as image"),
-                'created_at'
-            )->where('user_id', Auth::user()->id)->get();
+            $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->get();
+
+            foreach ($data as $key => $value) {
+                $images = GalleryImages::select(
+                    'id as image_id',
+                    DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_image/', image) as image"),
+                    'created_at'
+                )->where('user_id', Auth::user()->id)->where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->get();
+                $value->images  = $images;
+            }
             return res_success(trans('messages.successFetchList'), array('galleryImages' => $data));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
