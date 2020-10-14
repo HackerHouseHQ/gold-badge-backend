@@ -9,9 +9,11 @@ module.exports = {
             socket.on("send_message", function (input, result) {
                 var genrate_room_id = Math.floor(1000000000 + Math.random() * 9000000000);
                 var check_sender_receiver = "SELECT `sender_id` , `receiver_id` , `room_id` , `message`, `created_at` FROM `chats` WHERE sender_id = " + input.sender_id + " AND receiver_id  = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
+                var users = [];
+                var socketId = users[input.receiver_id];
                 connection.query(check_sender_receiver, (error, rows, fields) => {
                     if (error) {
-                        socket.emit("receive_message", {
+                        socket.to(socketId).emit("receive_message", {
                             status: false,
                             message: error,
                             result: rows
@@ -37,7 +39,7 @@ module.exports = {
                         }];
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
-                                socket.emit("receive_message", {
+                                socket.to(socketId).emit("receive_message", {
                                     status: false,
                                     message: error,
                                     result: msgArr
@@ -47,13 +49,13 @@ module.exports = {
 
                                 connection.query(fetch_message, (error, rows, fields) => {
                                     if (error) {
-                                        socket.emit("receive_message", {
+                                        socket.to(socketId).emit("receive_message", {
                                             status: false,
                                             message: error,
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.emit("receive_message", {
+                                        socket.to(socketId).emit("receive_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr

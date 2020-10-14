@@ -447,10 +447,10 @@
                             <div class="card card-stats">
                                 <!-- Card body -->
                                 <div id="messages"></div>
-                                <button class="btn btn-danger send-msg">Send message</button>
+                                {{-- <button class="btn btn-danger send-msg">Send message</button>
                                 <button class="btn btn-danger rec-msg">Recive message</button>
 
-                                <button class="btn btn-success user-list">User List</button>
+                                <button class="btn btn-success user-list">User List</button> --}}
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
@@ -1202,11 +1202,7 @@
                 console.log(val);
             });
         });
-        $(".rec-msg").click(function (e) {
-            socket.on('receive_message', function (val) {
-                console.log(val);
-            });
-        });
+
         // $(".user-list").click(function (e) {
         //     var array = {
         //         "room_id": 1924903593,

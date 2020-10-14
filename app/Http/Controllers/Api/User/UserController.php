@@ -443,6 +443,7 @@ class UserController extends Controller
                 $uploadFile  = $request->upLoadFile;
                 $total_rating = $request->total_rating;
                 $user_rating  = $request->user_rating;
+                $uploadSaveFile =  $request->uploadSaveFile;
                 $insertPostBadge = [
                     'user_id' => $userId,
                     'department_id' => $departmentId,
@@ -509,7 +510,7 @@ class UserController extends Controller
                         $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
                         copy($galleryPath, $path);
                         $insertArray = [
-                            'post_id' => $insertPostId,
+                            'post_id' => $insertPostBadgeId,
                             'image'  => $filename,
                             'media_type' => $request->media_type,
                             'created_at' => CURRENT_DATE,
