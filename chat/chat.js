@@ -53,7 +53,7 @@ module.exports = {
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.in(input.receiver_id).emit("receive_message", {
+                                        socket.emit("receive_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr
