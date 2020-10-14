@@ -11,7 +11,7 @@ module.exports = {
                 var check_sender_receiver = "SELECT `sender_id` , `receiver_id` , `room_id` , `message`, `created_at` FROM `chats` WHERE sender_id = " + input.sender_id + " AND receiver_id  = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(check_sender_receiver, (error, rows, fields) => {
                     if (error) {
-                        socket.broadcast.emit("receive_message", {
+                        socket.emit("receive_message", {
                             status: false,
                             message: error,
                             result: rows
@@ -37,7 +37,7 @@ module.exports = {
                         }];
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
-                                socket.broadcast.emit("receive_message", {
+                                socket.emit("receive_message", {
                                     status: false,
                                     message: error,
                                     result: msgArr
@@ -47,13 +47,13 @@ module.exports = {
 
                                 connection.query(fetch_message, (error, rows, fields) => {
                                     if (error) {
-                                        socket.broadcast.emit("receive_message", {
+                                        socket.emit("receive_message", {
                                             status: false,
                                             message: error,
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.broadcast.emit("receive_message", {
+                                        socket.in(input.receiver_id).emit("receive_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr
