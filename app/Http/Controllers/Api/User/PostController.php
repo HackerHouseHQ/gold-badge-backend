@@ -191,7 +191,7 @@ class PostController extends Controller
             $productCollection = collect($arr);
 
             // Define how many products we want to be visible in each page
-            $perPage = 1;
+            $perPage = 4;
 
             // Slice the collection to get the products to display in current page
             $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
