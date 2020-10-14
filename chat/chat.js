@@ -27,7 +27,6 @@ module.exports = {
                             input.message
                         ];
                         let current = new Date();
-                        console.log(current);
 
                         var msgArr = [{
                             sender_id: input.sender_id,
@@ -54,7 +53,7 @@ module.exports = {
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.emit("send_message", {
+                                        socket.broadcast.emit("send_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr

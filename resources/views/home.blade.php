@@ -447,9 +447,9 @@
                             <div class="card card-stats">
                                 <!-- Card body -->
                                 <div id="messages"></div>
-                                {{-- <button class="btn btn-danger send-msg">Send message</button>
+                                <button class="btn btn-danger send-msg">Send message</button>
 
-                                <button class="btn btn-success user-list">User List</button> --}}
+                                <button class="btn btn-success user-list">User List</button>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">
@@ -1110,7 +1110,6 @@
                     },
                     success: function (response) {
                         var x = response;
-                        console.log(response);
                         var ordersChart = new Chart($chart, {
                             type: "bar",
                             data: {
@@ -1179,50 +1178,51 @@
         })();
 
     </script>
-    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script> --}}
-    {{-- <script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+    <script>
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
         var port_url = "{{env('PORT_URL')}}";
-    var socket = io.connect(port_url);
-    $(".send-msg").click(function (e) {
-    var room = 8621516254; //$('#room').val();
-    var sender_id = 4; //$('#user').val();
-    var receiver_id = 2; //$('#user').val();
-    var message = "Hello user";
-    var array = {
-    "room_id": '',
-    "sender_id": 4,
-    "receiver_id": 5,
-    "message": "hello"
-    };
-    socket.emit('send_message', array);
-    socket.on('send_message', function (val) {
-    console.log(val);
-    });
-    });
-    $(".user-list").click(function (e) {
-    var array = {
-    "room_id": 1924903593,
-    };
-    socket.emit('user_list', array);
-    socket.on('user_list', function (val) {
-    console.log(val);
-    });
-    });
-    // $(".user-list").click(function(e){
-    // var array = {
-    // "sender_id":2 ,
-    // "receiver_id" : 5
-    // };
-    // socket.emit('user_chat_list', array);
-    // socket.on('user_chat_list', function(val){
-    // console.log(val);
-    // });
-    // });
+        var socket = io.connect(port_url);
+        $(".send-msg").click(function (e) {
+            var room = 8621516254; //$('#room').val();
+            var sender_id = 4; //$('#user').val();
+            var receiver_id = 2; //$('#user').val();
+            var message = "Hello user";
+            var array = {
+                "room_id": '',
+                "sender_id": 4,
+                "receiver_id": 5,
+                "message": "hello"
+            };
+            socket.emit('send_message', array);
+            socket.on('send_message', function (val) {
+                console.log("hello");
+                console.log(val);
+            });
+        });
+        // $(".user-list").click(function (e) {
+        //     var array = {
+        //         "room_id": 1924903593,
+        //     };
+        //     socket.emit('user_list', array);
+        //     socket.on('user_list', function (val) {
+        //         console.log(val);
+        //     });
+        // });
+        $(".user-list").click(function (e) {
+            var array = {
+                "sender_id": 4,
+                "receiver_id": 5
+            };
+            socket.emit('user_chat_list', array);
+            socket.on('user_chat_list', function (val) {
+                console.log(val);
+            });
+        });
 
-    </script> --}}
+    </script>
 
 </body>
 
