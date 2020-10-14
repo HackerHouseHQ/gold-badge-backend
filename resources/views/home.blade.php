@@ -1197,8 +1197,7 @@
                 "message": "hello"
             };
             socket.emit('send_message', array);
-            socket.on('send_message', function (val) {
-                console.log("hello");
+            socket.on('receive_message', function (val) {
                 console.log(val);
             });
         });
