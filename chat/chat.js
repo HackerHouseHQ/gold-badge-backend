@@ -11,7 +11,7 @@ module.exports = {
                 var check_sender_receiver = "SELECT `sender_id` , `receiver_id` , `room_id` , `message`, `created_at` FROM `chats` WHERE sender_id = " + input.sender_id + " AND receiver_id  = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(check_sender_receiver, (error, rows, fields) => {
                     if (error) {
-                        socket.emit("send_message", {
+                        socket.broadcast.emit("receive_message", {
                             status: false,
                             message: error,
                             result: rows
@@ -37,7 +37,7 @@ module.exports = {
                         }];
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
-                                socket.emit("send_message", {
+                                socket.broadcast.emit("receive_message", {
                                     status: false,
                                     message: error,
                                     result: msgArr
@@ -47,13 +47,13 @@ module.exports = {
 
                                 connection.query(fetch_message, (error, rows, fields) => {
                                     if (error) {
-                                        socket.emit("send_message", {
+                                        socket.broadcast.emit("receive_message", {
                                             status: false,
                                             message: error,
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.broadcast.emit("send_message", {
+                                        socket.broadcast.emit("receive_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr
@@ -94,13 +94,13 @@ module.exports = {
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(get_chat_user_list, (error, rows, fields) => {
                     if (error) {
-                        socket.emit("user_chat_list", {
+                        socket.broadcast.emit("user_chat_list", {
                             status: false,
                             message: error,
                             result: rows
                         });
                     } else {
-                        socket.emit("user_chat_list", {
+                        socket.broadcast.emit("user_chat_list", {
                             status: true,
                             message: 'SUCCESS',
                             result: rows
