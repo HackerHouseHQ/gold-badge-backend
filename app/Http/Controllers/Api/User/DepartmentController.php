@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\User;
 use Exception;
 use Illuminate\Http\Request;
+use App\UserDepartmentFollow;
 use App\UserDepartmentRequest;
 use App\Http\Controllers\Controller;
-use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,6 +24,11 @@ class DepartmentController extends Controller
     public function saveDepartmentRequest(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $validator = Validator::make(
                 $request->all(),
                 [
@@ -61,26 +67,35 @@ class DepartmentController extends Controller
     }
     public function departmentFollow(Request $request)
     {
-        $user_id = $request->user_id;
-        $department_id = $request->department_id;
-        $followedDepartment = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->first();
-        if ($followedDepartment) {
-            if ($followedDepartment->status == 0) {
-                $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 1]);
-                return res_success('Department followed successfully');
-            } else {
-                $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 0]);
-                return res_success('Department Unfollowed successfully');
+        try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
             }
-        } else {
-            $insertFollowed = [
-                'user_id' => $user_id,
-                'department_id' => $department_id,
-                'created_at' => CURRENT_DATE,
-                'updated_at' => CURRENT_DATE,
-            ];
-            $followdata =  UserDepartmentFollow::insert($insertFollowed);
-            return res_success('Department followed successfully');
+            $user_id = $request->user_id;
+            $department_id = $request->department_id;
+            $followedDepartment = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->first();
+            if ($followedDepartment) {
+                if ($followedDepartment->status == 0) {
+                    $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 1]);
+                    return res_success('Department followed successfully');
+                } else {
+                    $update = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $department_id)->update(['status' => 0]);
+                    return res_success('Department Unfollowed successfully');
+                }
+            } else {
+                $insertFollowed = [
+                    'user_id' => $user_id,
+                    'department_id' => $department_id,
+                    'created_at' => CURRENT_DATE,
+                    'updated_at' => CURRENT_DATE,
+                ];
+                $followdata =  UserDepartmentFollow::insert($insertFollowed);
+                return res_success('Department followed successfully');
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
     }
 }

@@ -7,15 +7,16 @@ use App\User;
 use Exception;
 use App\DepartmentLike;
 use App\DepartmentBadge;
-use App\DepartmentComment;
 use App\DepartmentShare;
+use App\DepartmentComment;
 use Illuminate\Http\Request;
+use App\DepartmentSubComment;
 use App\UserDepartmentFollow;
 use App\DepartmentCommentLike;
-use App\DepartmentSubComment;
 use App\DepartmentSubCommentLike;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostController extends Controller
@@ -30,6 +31,11 @@ class PostController extends Controller
     public function saveCommentLike(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $comment_id = $request->comment_id;
@@ -65,6 +71,11 @@ class PostController extends Controller
     public function saveSubCommentLike(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $comment_id = $request->comment_id;
@@ -96,6 +107,11 @@ class PostController extends Controller
     {
 
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $user_id = $request->user_id;
             $siteUrl = env('APP_URL');
             $user_data = User::with('country_data', 'state_data', 'city_data')->where('id', $user_id)->first();
@@ -144,6 +160,11 @@ class PostController extends Controller
     public function myActivity(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $user_id = $request->user_id;
             $postLiked =  $this->postLiked($user_id)->toArray();
             $postShared = $this->postShared($user_id)->toArray();

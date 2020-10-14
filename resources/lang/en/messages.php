@@ -21,5 +21,6 @@ return [
     "discountNotExists" => "Discount does not exist.",
     "eventNotExists" => "Event does not exist.",
     "requestInProcess" => "Your request in process.",
-    "numberNotExists"  =>  "Mobile number does not exits."
+    "numberNotExists"  =>  "Mobile number does not exits.",
+    "contactAdmin" => "Contact to admin."
 ];

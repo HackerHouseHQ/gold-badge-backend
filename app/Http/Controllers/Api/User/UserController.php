@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\ReviewReasons;
 use App\UserDepartmentBadgeFollow;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Storage;
 
@@ -315,6 +316,11 @@ class UserController extends Controller
     {
 
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             if ($request->type == 1) { //department 
                 $validator = Validator::make(
                     $request->all(),
@@ -531,6 +537,11 @@ class UserController extends Controller
     {
 
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             if ($request->type == 1) { //recent post list
                 $user_id = $request->user_id;
                 // Getting department ids followed by the user
@@ -667,6 +678,11 @@ class UserController extends Controller
     public function savePostDepartmentLike(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $alreadyLiked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post_id)->first();
@@ -700,6 +716,11 @@ class UserController extends Controller
     public function savePostDepartmentShare(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $alreadyShared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post_id)->first();
@@ -732,6 +753,11 @@ class UserController extends Controller
     public function  savePostDepartmentComment(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $comment = $request->comment;
@@ -779,6 +805,11 @@ class UserController extends Controller
     public function  savePostDepartmentSubComment(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $sub_comment = $request->sub_comment;
@@ -829,6 +860,11 @@ class UserController extends Controller
     public function getPostDepartmentCommentList(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
             $siteUrl = env('APP_URL');
@@ -873,6 +909,11 @@ class UserController extends Controller
     public function savePostReport(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
             $message = $request->message;
@@ -901,6 +942,11 @@ class UserController extends Controller
     public function savePostVote(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
             $rating = $request->rating;

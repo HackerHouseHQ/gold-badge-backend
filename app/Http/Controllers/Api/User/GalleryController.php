@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\User;
 
+use App\User;
 use Exception;
 use App\GalleryImages;
 use Illuminate\Http\Request;
@@ -15,6 +16,11 @@ class GalleryController extends Controller
     public function saveGalleryImage(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $saveFile = $request->saveFile;
             if (isset($saveFile) && !empty($saveFile)) {
                 $arr = $saveFile;
@@ -48,6 +54,11 @@ class GalleryController extends Controller
     public function getGalleryImage(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $siteUrl = env('APP_URL');
             $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->get();
 
@@ -67,6 +78,11 @@ class GalleryController extends Controller
     public function deleteGalleryImage(Request $request)
     {
         try {
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'),);
+            }
             $data = GalleryImages::where('id', $request->image_id)->first();
             $filename = $data->image;
             $storage_delete = unlink(storage_path('app/public/uploads/gallery_image/' . $filename));
