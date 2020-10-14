@@ -1119,8 +1119,13 @@
                                     "Nov", "Dec"
                                 ],
                                 datasets: [{
+                                    barPercentage: 0.5,
+                                    barThickness: 8,
+                                    maxBarThickness: 8,
+                                    minBarLength: 2,
                                     label: "No. of users",
                                     data: x,
+
                                 }, ],
                             },
                         });
@@ -1132,40 +1137,7 @@
                         console.log(err);
                     }
                 });
-                $('#country_id').on('change', function () {
-                    //alert( this.value );
-                    if ($chart.length) {
-                        initChart($chart);
-                    }
 
-                });
-                $('#state_id').on('change', function () {
-                    //alert( this.value );
-                    if ($chart.length) {
-                        initChart($chart);
-                    }
-
-                });
-                $('#fromdate').on('change', function () {
-                    //alert( this.value );
-                    if ($chart.length) {
-                        initChart($chart);
-                    }
-                });
-                $('#todate').on('change', function () {
-                    //alert( this.value );
-                    if ($chart.length) {
-                        initChart($chart);
-                    }
-
-                });
-                $('#city_id').on('change', function () {
-                    //alert( this.value );
-                    if ($chart.length) {
-                        initChart($chart);
-                    }
-
-                });
 
             }
 
@@ -1174,6 +1146,40 @@
             if ($chart.length) {
                 initChart($chart);
             }
+            $('#country_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#state_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#fromdate').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+            });
+            $('#todate').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
+            $('#city_id').on('change', function () {
+                //alert( this.value );
+                if ($chart.length) {
+                    initChart($chart);
+                }
+
+            });
 
 
         })();
