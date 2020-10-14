@@ -19,7 +19,7 @@ class GalleryController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $saveFile = $request->saveFile;
             if (isset($saveFile) && !empty($saveFile)) {
@@ -57,7 +57,7 @@ class GalleryController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $siteUrl = env('APP_URL');
             $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->get();
@@ -81,7 +81,7 @@ class GalleryController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $data = GalleryImages::where('id', $request->image_id)->first();
             $filename = $data->image;

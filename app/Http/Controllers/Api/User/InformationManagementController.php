@@ -20,7 +20,7 @@ class InformationManagementController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->get();
             foreach ($data as $key => $value) {

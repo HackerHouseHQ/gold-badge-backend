@@ -20,7 +20,7 @@ class ChatController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $siteUrl = env('APP_URL');
             $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')

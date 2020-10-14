@@ -319,7 +319,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             if ($request->type == 1) { //department 
                 $validator = Validator::make(
@@ -540,7 +540,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             if ($request->type == 1) { //recent post list
                 $user_id = $request->user_id;
@@ -681,7 +681,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -719,7 +719,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -756,7 +756,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -808,7 +808,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -863,7 +863,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
@@ -912,7 +912,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
@@ -945,7 +945,7 @@ class UserController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $user_id = $request->user_id;
             $post_id = $request->post_id;

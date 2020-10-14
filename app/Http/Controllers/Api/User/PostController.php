@@ -34,7 +34,7 @@ class PostController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -74,7 +74,7 @@ class PostController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -110,7 +110,7 @@ class PostController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $user_id = $request->user_id;
             $siteUrl = env('APP_URL');
@@ -163,7 +163,7 @@ class PostController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $user_id = $request->user_id;
             $postLiked =  $this->postLiked($user_id)->toArray();

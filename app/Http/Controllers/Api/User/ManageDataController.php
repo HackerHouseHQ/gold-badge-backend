@@ -24,7 +24,7 @@ class ManageDataController extends Controller
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
-                throw new Exception(trans('messages.contactAdmin'),);
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $reasonlist = ReportReasson::select('id as reason_id', 'name')->get();
             return res_success(trans('messages.successFetchList'), array('ratingList' => $reasonlist));
