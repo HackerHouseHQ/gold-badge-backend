@@ -448,6 +448,7 @@
                                 <!-- Card body -->
                                 <div id="messages"></div>
                                 <button class="btn btn-danger send-msg">Send message</button>
+                                <button class="btn btn-danger rec-msg">Recive message</button>
 
                                 <button class="btn btn-success user-list">User List</button>
                                 <div class="card-body">
@@ -1197,6 +1198,11 @@
                 "message": "hello"
             };
             socket.emit('send_message', array);
+            socket.on('receive_message', function (val) {
+                console.log(val);
+            });
+        });
+        $(".rec-msg").click(function (e) {
             socket.on('receive_message', function (val) {
                 console.log(val);
             });
