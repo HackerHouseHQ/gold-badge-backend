@@ -53,7 +53,7 @@ module.exports = {
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.emit("send_message", {
+                                        socket.broadcast.emit("send_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr
