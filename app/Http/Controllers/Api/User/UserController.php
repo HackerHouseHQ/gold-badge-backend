@@ -566,7 +566,7 @@ class UserController extends Controller
                         $q->orwhere('posts.comment', 'like', '%' . $search . '%');
                     });
                 }
-                $posts = $query->orderBy('created_at', 'DESC')->paginate(50);
+                $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -612,7 +612,7 @@ class UserController extends Controller
                     });
                 }
                 $posts = $query->orderBy('post_like_count', 'desc')
-                    ->paginate(50);
+                    ->paginate(10);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -659,7 +659,7 @@ class UserController extends Controller
                     });
                 }
                 $posts  = $query->orderBy('post_share_count', 'desc')
-                    ->paginate(50);
+                    ->paginate(10);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
