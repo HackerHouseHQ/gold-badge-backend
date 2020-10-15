@@ -14,6 +14,7 @@ use App\DepartmentSubComment;
 use App\UserDepartmentFollow;
 use App\DepartmentCommentLike;
 use App\DepartmentSubCommentLike;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -183,28 +184,55 @@ class PostController extends Controller
                 else
                     return 0;
             });
+            $data = $this->paginateWithoutKey($request, $arr);
 
-            // Get current page form url e.x. &page=1
-            $currentPage = LengthAwarePaginator::resolveCurrentPage();
+            // // Get current page form url e.x. &page=1
+            // $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
-            // Create a new Laravel collection from the array data
-            $productCollection = collect($arr);
+            // // Create a new Laravel collection from the array data
+            // $productCollection = collect($arr);
 
-            // Define how many products we want to be visible in each page
-            $perPage = 4;
+            // // Define how many products we want to be visible in each page
+            // $perPage = 4;
 
-            // Slice the collection to get the products to display in current page
-            $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+            // // Slice the collection to get the products to display in current page
 
-            // Create our paginator and pass it to the view
-            $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), $perPage);
-            // set url path for generted links
-            $paginatedproducts->setPath($request->url());
-            return res_success(trans('messages.successFetchList'), array('postList' => $paginatedproducts));
+            // $currentPageproducts = $productCollection->slice(($currentPage * $perPage) - $perPage, $perPage)->all();
+            // // Create our paginator and pass it to the view
+            // $paginatedproducts = new LengthAwarePaginator($currentPageproducts, count($productCollection), $perPage);
+            // // set url path for generted links
+            // $paginatedproducts->setPath($request->url());
+
+            return res_success(trans('messages.successFetchList'),  $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    public function paginateWithoutKey($request, $items, $perPage = 15, $page = null, $options = [])
+    {
+
+        $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $lap->setPath($request->url());
+
+        return [
+            'current_page' => $lap->currentPage(),
+            'data' => $lap->values(),
+            'first_page_url' => $lap->url(1),
+            'from' => $lap->firstItem(),
+            'last_page' => $lap->lastPage(),
+            'last_page_url' => $lap->url($lap->lastPage()),
+            'next_page_url' => $lap->nextPageUrl(),
+            'per_page' => $lap->perPage(),
+            'prev_page_url' => $lap->previousPageUrl(),
+            'to' => $lap->lastItem(),
+            'total' => $lap->total(),
+        ];
+    }
+
     private function postLiked($user_id)
     { // post like by user 
         $postLiked = DepartmentLike::where('user_id', $user_id)->get()->toArray();
