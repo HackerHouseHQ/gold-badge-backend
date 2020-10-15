@@ -203,7 +203,7 @@ class PostController extends Controller
             // // set url path for generted links
             // $paginatedproducts->setPath($request->url());
 
-            return res_success(trans('messages.successFetchList'),  $data);
+            return res_success(trans('messages.successFetchList'), array('postList' => $data));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
