@@ -208,7 +208,7 @@ class PostController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function paginateWithoutKey($request, $items, $perPage = 4, $page = null, $options = [])
+    public function paginateWithoutKey($request, $items, $perPage = 30, $page = null, $options = [])
     {
 
         $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);

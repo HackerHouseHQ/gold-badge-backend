@@ -23,6 +23,7 @@ class CountryState extends Model
       $query->orwhere('country_name', 'like', '%' . $search . '%');
       $query->orwhere('state_name', 'like', '%' . $search . '%');
     }
+    $query->groupBy('country_states.id');
     $query->skip($offset);
     $query->take($limit_t);
     $data = $query->get(); //->toArray();
@@ -42,6 +43,7 @@ class CountryState extends Model
       $query->orwhere('country_name', 'like', '%' . $search . '%');
       $query->orwhere('state_name', 'like', '%' . $search . '%');
     }
+    $query->groupBy('country_states.id');
     $data = $query->get();
     $total = $data->count();
     return $total;

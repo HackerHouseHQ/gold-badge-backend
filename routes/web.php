@@ -166,4 +166,8 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::post('/downloadNotification', 'InformationManagementController@downloadNotification')->name('downloadNotification');
     Route::get('/viewNotificationModel/{id?}', 'InformationManagementController@getNotificationDetail')->name('viewNotificationModel');
   });
+  Route::group(['prefix' => 'reported_post'], function () {
+    Route::get('/reported', 'ReportPostController@report')->name('report-list');
+    Route::get('/post-list', 'PostController@post_list')->name('postData');
+  });
 });
