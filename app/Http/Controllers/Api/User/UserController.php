@@ -536,7 +536,6 @@ class UserController extends Controller
      */
     public function getPostDepartment(Request $request)
     {
-
         try {
             // check user is active or in active 
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
@@ -545,22 +544,29 @@ class UserController extends Controller
             }
             if ($request->type == 1) { //recent post list
                 $user_id = $request->user_id;
+                $search = $request->search;
                 // Getting department ids followed by the user
                 $departmentIds  =   UserDepartmentFollow::select('department_id')->where('user_id', $user_id)->get()->toArray();
                 // Creating deaprtment ids array from array of arrays
                 $departmentIdsArray     =   array_column($departmentIds, 'department_id');
                 $siteUrl = env('APP_URL');
 
-                $posts  =   Post::with(['post_images', 'post_vote'])
+                $query  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
                     ->withCount('post_share')
-                    ->whereIn('department_id', $departmentIdsArray)
-                    ->orderBy('created_at', 'DESC')
-                    ->paginate(50);
+                    ->whereIn('department_id', $departmentIdsArray);
+                if (!empty($search)) {
+                    $query->Where(function ($q) use ($search) {
+                        $q->orwhere('department_name', 'like', '%' . $search . '%');
+                        $q->orwhere('user_name', 'like', '%' . $search . '%');
+                        $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                    });
+                }
+                $posts = $query->orderBy('created_at', 'DESC')->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -589,15 +595,23 @@ class UserController extends Controller
             }
             if ($request->type == 2) { //most liked post list
                 $user_id = $request->user_id;
+                $search = $request->search;
                 $siteUrl = env('APP_URL');
-                $posts  =   Post::with(['post_images', 'post_vote'])
+                $query  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
-                    ->withCount('post_share')
-                    ->orderBy('post_like_count', 'desc')
+                    ->withCount('post_share');
+                if (!empty($search)) {
+                    $query->Where(function ($q) use ($search) {
+                        $q->orwhere('department_name', 'like', '%' . $search . '%');
+                        $q->orwhere('user_name', 'like', '%' . $search . '%');
+                        $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                    });
+                }
+                $posts = $query->orderBy('post_like_count', 'desc')
                     ->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
@@ -628,15 +642,23 @@ class UserController extends Controller
             if ($request->type == 3) //most shared post list
             {
                 $user_id = $request->user_id;
+                $search = $request->search;
                 $siteUrl = env('APP_URL');
-                $posts  =   Post::with(['post_images', 'post_vote'])
+                $query =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
-                    ->withCount('post_share')
-                    ->orderBy('post_share_count', 'desc')
+                    ->withCount('post_share');
+                if (!empty($search)) {
+                    $query->Where(function ($q) use ($search) {
+                        $q->orwhere('department_name', 'like', '%' . $search . '%');
+                        $q->orwhere('user_name', 'like', '%' . $search . '%');
+                        $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                    });
+                }
+                $posts  = $query->orderBy('post_share_count', 'desc')
                     ->paginate(50);
                 foreach ($posts as $post) {
                     if ($post->flag == 1) {
