@@ -63,6 +63,7 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/UserRequestData', 'UserController@UserRequestData')->name('UserRequestData');
     Route::get('/viewUserDetailModel/{id?}', 'UserController@viewUserDetailModel')->name('viewUserDetailModel');
     Route::get('/viewUserDetailLikeModel/{id?}', 'UserController@viewUserDetailLikeModel')->name('viewUserDetailLikeModel');
+    Route::get('/viewUserDetailReportModel/{id?}', 'UserController@viewUserDetailReportModel')->name('viewUserDetailReportModel');
     Route::get('/viewUserDetailShareModel/{id?}', 'UserController@viewUserDetailShareModel')->name('viewUserDetailShareModel');
     Route::get('/viewUserDetailCommentModel/{id?}', 'UserController@viewUserDetailCommentModel')->name('viewUserDetailCommentModel');
     Route::get('/viewUserDetailBadgeRating/{id?}', 'UserController@viewUserDetailBadgeRating')->name('viewUserDetailBadgeRating');
@@ -168,6 +169,6 @@ Route::group(['middleware' => ['auth:admin']], function () {
   });
   Route::group(['prefix' => 'reported_post'], function () {
     Route::get('/reported', 'ReportPostController@report')->name('report-list');
-    Route::get('/post-list', 'PostController@post_list')->name('postData');
+    Route::get('/report-list', 'ReportPostController@report_post_list')->name('reportData');
   });
 });

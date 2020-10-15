@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DepartmentReport;
 use App\ReportPost;
 use Illuminate\Http\Request;
 
@@ -9,7 +10,7 @@ class ReportPostController extends Controller
 {
     function __construct()
     {
-        $this->postTable = new ReportPost;
+        $this->postTable = new DepartmentReport;
     }
     public function report(Request $request)
     {
@@ -29,7 +30,6 @@ class ReportPostController extends Controller
         $department_id = $_GET['department_id'];
         $badge_id = $_GET['badge_id'];
         $city_id = $_GET['city_id'];
-
         $state_id = $_GET['state_id'];
         $country_id = $_GET['country_id'];
         $fromdate = $_GET['fromdate'];
@@ -52,16 +52,16 @@ class ReportPostController extends Controller
         $arr = array();
         $i = 0;
         foreach ($data as $key => $data) {
-            $view = "<a href='" . route('postViewDetail', ['user_id' => $data->user_id]) . "'><button type='button' class='btn btn-primary btn-sm'>VIEWDETAIL</button></a>";
-            $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->user_id . "," . $data->flag . ")'><button type='button' class='btn btn-danger btn-sm'>DELETE</button></a>";
+            $view = "<a href='javascript:void(0)' onclick ='viewUserDetailModel(" . $data->id . ")'><button type='button' class='btn btn-success btn-sm'>VIEW POST</button></a>";
+            $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
             // $inactive = "<a href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
-
             $flag = ($data->flag == 1) ? 'department' : 'badges';
-            $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data->users->user_name . "</span></td>";
-            $arr[$key]['fullName'] = "<td><span class='tbl_row_new'>" . $data->users->first_name . " " . $data->users->last_name . "</span></td>";
+            $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data->user_name . "</span></td>";
+            $arr[$key]['fullName'] = "<td><span class='tbl_row_new'>" . $data->first_name . " " . $data->last_name . "</span></td>";
             $arr[$key]['postedAbout'] = "<td><span class='tbl_row_new'>" . $flag . "</span></td>";
             $arr[$key]['postedOn'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
             $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" .  number_format((float)$data->rating, 1, '.', '') . "</span></td>";
+            $arr[$key]['report'] = "<td><span class='tbl_row_new'>" . $data->report_count . "</span></td>";
 
             $view1 = $view . $active;
 

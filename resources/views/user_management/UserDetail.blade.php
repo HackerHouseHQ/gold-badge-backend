@@ -397,6 +397,7 @@
         margin-top: -2px;
         margin-left: 2px;
     }
+
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -1208,35 +1209,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
 
                         i++;
                     });
@@ -1250,7 +1251,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>`;
+    </div>`;
                 $('#userImage2').append(rowImage);
                 $('#viewDepartmentShare').html('');
 
@@ -1298,35 +1299,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
                         i++;
                     });
                 });
@@ -1421,7 +1422,7 @@
     <span class="carousel-control-next-icon" aria-hidden="true"></span>
     <span class="sr-only">Next</span>
   </a>
-</div>`;
+    </div>`;
                 $('#userImage').append(rowImage);
                 if (response.post_image.length == 0) {
                     $('#userImage').html(` <img

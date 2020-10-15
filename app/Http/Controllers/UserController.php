@@ -114,6 +114,15 @@ class UserController extends Controller
       })->get();
     return $data;
   }
+  public function viewUserDetailReportModel(Request  $request)
+  {
+    $data = DepartmentReport::with('post_images')->where('post_id', $request->id)
+      ->leftjoin("users", function ($join) {
+        $join->on('department_reports.user_id', '=', 'users.id');
+      })->get();
+    return $data;
+  }
+
 
   public function viewUserDetailShareModel(Request  $request)
   {
