@@ -1199,9 +1199,9 @@
             var receiver_id = 2; //$('#user').val();
             var message = "Hello user";
             var array = {
-                "room_id": '',
-                "sender_id": 4,
-                "receiver_id": 5,
+                "room_id": '6136404595',
+                "sender_id": 2,
+                "receiver_id": 8,
                 "message": "hello"
             };
             socket.emit('send_message', array);
