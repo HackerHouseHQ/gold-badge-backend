@@ -26,7 +26,7 @@ module.exports = {
 
                 connection.query(insert, values, (error, rows, fields) => {
                     if (error) {
-                        io.emit("receive_message", {
+                        io.to(room_id).emit("receive_message", {
                             status: false,
                             message: error,
                             result: msgArr
@@ -34,7 +34,7 @@ module.exports = {
                     } else {
                         console.log(msgArr, 'message---------------------**********');
                         console.log(room_id);
-                        io.emit("received", {
+                        io.to(room_id.toString()).emit("received", {
                             status: true,
                             message: 'SUCCESS',
                             result: msgArr
