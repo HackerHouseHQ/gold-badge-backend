@@ -7,7 +7,7 @@ module.exports = {
             socket.on("send_message", function (input, result) {
 
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
-                var room_id = 6136404595;
+                var room_id = '6136404595';
                 var values = [
                     input.sender_id,
                     input.receiver_id,
@@ -33,6 +33,7 @@ module.exports = {
                         });
                     } else {
                         console.log(msgArr, 'message---------------------**********');
+                        room_id = room_id.toString();
                         console.log(room_id);
                         io.to(room_id).emit("received", {
                             status: true,
