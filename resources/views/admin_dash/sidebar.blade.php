@@ -89,7 +89,7 @@
                     <li class="nav-item">
                         <a href="{{ route('report-list') }}" class="nav-link  @if(request()->route()->getName()=='report-list') active
             @endif">
-                            <i class="far fa-envelope text-primary"></i>
+                            <i class="far fa-eye text-primary"></i>
                             <span class="nav-link-text">Reported Posts </span>
                         </a>
                     </li>

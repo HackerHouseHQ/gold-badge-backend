@@ -206,6 +206,7 @@
         margin-top: -2px;
         margin-left: 2px;
     }
+
 </style>
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -516,7 +517,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-primary"
-                                                                style="width: {{$fiveRating}}%">
+                                                                style="width: {{$fiveRating/$totalRating*100}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -525,7 +526,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-danger"
-                                                                style="width: {{$fourRating}}%">
+                                                                style="width: {{$fourRating/$totalRating*100}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -534,7 +535,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-success"
-                                                                style="width: {{$threeRating}}%">
+                                                                style="width: {{$threeRating/$totalRating*100}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -543,7 +544,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-warning"
-                                                                style="width: {{$twoRating}}%">
+                                                                style="width: {{$twoRating/$totalRating*100}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -551,7 +552,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-bar-cus">
                                                             <div class="progress-bar bg-warning"
-                                                                style="width: {{$oneRating}}%">
+                                                                style="width: {{$oneRating/$totalRating*100}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -959,7 +960,7 @@
 @endsection
 @section('script')
 <script type="text/javascript">
-    $(document).ready(function() {
+    $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
             language: {
                 searchPlaceholder: "Department Name",
@@ -984,7 +985,7 @@
             "bAutoWidth": true,
             'ajax': {
                 'url': "{{route('department_profile_list')}}",
-                'data': function(data) {
+                'data': function (data) {
                     var department_id = $('#department_id').val();
                     data.department_id = department_id;
                     //          var state_id = $('#state_id').val();
@@ -1018,7 +1019,7 @@
         //     dataTable.draw();
         //  });
 
-        $('#rating').on('change', function() {
+        $('#rating').on('change', function () {
             //alert( this.value );
             dataTable.draw();
         });
@@ -1026,18 +1027,19 @@
         //     dataTable.draw();
         //  });
     });
+
 </script>
 <script type="text/javascript">
     function viewDepartmentBadgeModel1(id) {
         $.ajax({
             url: "{{ route('viewDepartmentBadgeModel') }}/" + id,
             type: 'get',
-            success: function(response) {
+            success: function (response) {
                 // console.log(response);
                 if (response[0]) {
                     $('#businessDetails').html('');
                     var i = 0;
-                    $.each(response, function(key, value) {
+                    $.each(response, function (key, value) {
 
                         var url = '{{ route("BadgeDetail", ":id") }}';
                         url = url.replace(':id', 'id=' + value.id);
@@ -1063,11 +1065,12 @@
                 }
                 $('#exampleModalCenter').modal('show');
             },
-            error: function(err) {
+            error: function (err) {
                 console.log(err);
             }
         });
     }
+
 </script>
 <script>
     function myFunction() {
@@ -1075,6 +1078,7 @@
         location.reload();
 
     }
+
 </script>
 <script>
     var ratingImage = {
@@ -1335,35 +1339,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
 
                         i++;
                     });
@@ -1425,35 +1429,35 @@
                 response.forEach(value => {
                     value.post_images.forEach(image => {
                         if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls autoplay id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
                         i++;
                     });
                 });
@@ -1625,8 +1629,10 @@
         });
 
     }
+
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
+
 </script>
 @endsection
