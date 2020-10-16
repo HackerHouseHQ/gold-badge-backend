@@ -1210,6 +1210,12 @@
                     console.log(val);
                 });
         });
+        $(document).ready(function () {
+            socket.on('receive_message',
+                function (val) {
+                    console.log(val);
+                });
+        });
 
         // $(".user-list").click(function (e) {
         //     var array = {
