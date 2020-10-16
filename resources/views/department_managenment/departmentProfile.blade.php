@@ -517,7 +517,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-primary"
-                                                                style="width: {{$fiveRating/$totalRating*100}}%">
+                                                                style="width: {{($totalRating)? $fiveRating/$totalRating*100 : 0}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -526,7 +526,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-danger"
-                                                                style="width: {{$fourRating/$totalRating*100}}%">
+                                                                style="width: {{($totalRating)? $fourRating/$totalRating*100 : 0}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -535,7 +535,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-success"
-                                                                style="width: {{$threeRating/$totalRating*100}}%">
+                                                                style="width: {{($totalRating)? $threeRating/$totalRating*100 : 0}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -544,7 +544,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-sm progress-bar-cus">
                                                             <div class="progress-bar bg-warning"
-                                                                style="width: {{$twoRating/$totalRating*100}}%">
+                                                                style="width: {{($totalRating)? $twoRating/$totalRating*100 : 0}}%">
                                                             </div>
                                                         </div>
                                                     </div>
@@ -552,7 +552,7 @@
                                                     <div class="progress-group">
                                                         <div class="progress progress-bar-cus">
                                                             <div class="progress-bar bg-warning"
-                                                                style="width: {{$oneRating/$totalRating*100}}%">
+                                                                style="width: {{($totalRating) ? $oneRating/$totalRating*100 : 0}}%">
                                                             </div>
                                                         </div>
                                                     </div>
