@@ -55,7 +55,7 @@ module.exports = {
                             var room = [{
                                 sender_id: input.sender_id,
                                 receiver_id: input.receiver_id,
-                                room_id: room_id,
+                                room_id: room_id.toString(),
                                 message: "",
                                 created_at: ""
                             }];
