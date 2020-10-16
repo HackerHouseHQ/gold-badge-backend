@@ -447,10 +447,10 @@
                             <div class="card card-stats">
                                 <!-- Card body -->
                                 <div id="messages"></div>
-                                {{-- <button class="btn btn-danger send-msg">Send message</button>
+                                <button class="btn btn-danger send-msg">Send message</button>
                                 <button class="btn btn-danger rec-msg">Recive message</button>
 
-                                <button class="btn btn-success user-list">User List</button> --}}
+                                <button class="btn btn-success user-list">User List</button>
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col">

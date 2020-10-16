@@ -96,13 +96,13 @@ module.exports = {
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(get_chat_user_list, (error, rows, fields) => {
                     if (error) {
-                        socket.broadcast.emit("user_chat_list", {
+                        socket.emit("user_chat_list", {
                             status: false,
                             message: error,
                             result: rows
                         });
                     } else {
-                        socket.broadcast.emit("user_chat_list", {
+                        socket.emit("user_chat_list", {
                             status: true,
                             message: 'SUCCESS',
                             result: rows
