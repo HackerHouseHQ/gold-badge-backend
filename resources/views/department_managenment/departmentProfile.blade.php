@@ -410,7 +410,7 @@
                                                 <div class="col-md-2">
                                                     <div class="number_star" style="margin-top:17px;">
                                                         <p class="number_ratings_black">
-                                                            {{($avgRating) ? number_format($avgRating ,1) : 0}}</p>
+                                                            {{($avgRating) ? number_format($avgRating ,1) : ""}}</p>
                                                         <span class="star_icon1">
                                                             @if ($avgRating >= 1 && $avgRating <2)<img
                                                                 src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
@@ -443,7 +443,7 @@
                                                         </span> --}}
                                                     </div>
                                                     <p class="number_ratings_grey" style="margin-top:-20px;">
-                                                        {{$totalRating}}</p>
+                                                        {{($totalRating) ? $totalRating : "" }}</p>
                                                 </div>
                                                 <div class="col-md-3">
                                                     <div class="main_div_five_rows">

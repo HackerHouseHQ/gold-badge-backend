@@ -1,226 +1,227 @@
 @extends('admin_dash.main')
 @section('content')
 <style>
-  p.number_ratings_grey {
-    color: grey;
-  }
+    p.number_ratings_grey {
+        color: grey;
+    }
 
-  .number_star {
-    display: flex;
-  }
+    .number_star {
+        display: flex;
+    }
 
-  .fas.fa-star.custom_star_iconn {
-    color: orangered;
-  }
+    .fas.fa-star.custom_star_iconn {
+        color: orangered;
+    }
 
-  span.star_icon1 {
-    margin-top: 7px;
-  }
+    span.star_icon1 {
+        margin-top: 7px;
+    }
 
-  /* .number_star.new_div {
+    /* .number_star.new_div {
     display: flex;
     justify-content: space-evenly;
     width: 56px;
   } */
 
 
-  .row_one {
-    margin-bottom: 5px;
-  }
+    .row_one {
+        margin-bottom: 5px;
+    }
 
-  p.number_ratings_black_new {
-    font-size: 12px;
-    line-height: 0;
-    width: 25%;
-  }
+    p.number_ratings_black_new {
+        font-size: 12px;
+        line-height: 0;
+        width: 25%;
+    }
 
-  .vertical_baar {
-    margin: 0 5px;
-    margin-top: -3px;
-    color: grey;
-    line-height: 0;
-  }
+    .vertical_baar {
+        margin: 0 5px;
+        margin-top: -3px;
+        color: grey;
+        line-height: 0;
+    }
 
-  .main_div_five_rows {
-    line-height: 3px;
-    width: 100%;
-    margin-bottom: -17px;
-  }
+    .main_div_five_rows {
+        line-height: 3px;
+        width: 100%;
+        margin-bottom: -17px;
+    }
 
-  .wrapper_ratings_review {
-    border: 1px solid #eee;
-    padding: 16px 16px;
-  }
+    .wrapper_ratings_review {
+        border: 1px solid #eee;
+        padding: 16px 16px;
+    }
 
-  .main_div_five_rows {
-    line-height: 3px;
-  }
+    .main_div_five_rows {
+        line-height: 3px;
+    }
 
-  span.star_icon {
-    margin-top: -7px;
-  }
+    span.star_icon {
+        margin-top: -7px;
+    }
 
-  .fas.fa-star.custom_star_iconn {
-    color: orangered;
-    /* width: 10px; */
-    font-size: 10px;
-    margin-top: -6px;
-  }
+    .fas.fa-star.custom_star_iconn {
+        color: orangered;
+        /* width: 10px; */
+        font-size: 10px;
+        margin-top: -6px;
+    }
 
-  /* #data1_paginate {
+    /* #data1_paginate {
     display: none;
   } */
 
-  .progress-bar-cus {
-    height: 10px;
-    line-height: 3px;
-  }
+    .progress-bar-cus {
+        height: 10px;
+        line-height: 3px;
+    }
 
-  .avatar1 {
-    vertical-align: middle;
-    width: 75px;
-    height: 75px;
-    border-radius: 50%;
-    margin-bottom: 10px;
-  }
+    .avatar1 {
+        vertical-align: middle;
+        width: 75px;
+        height: 75px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+    }
 
-  .sorting_asc:before {
-    content: '';
-    display: none;
-  }
+    .sorting_asc:before {
+        content: '';
+        display: none;
+    }
 
-  .sorting_asc:after {
-    content: '';
-    display: none;
-  }
+    .sorting_asc:after {
+        content: '';
+        display: none;
+    }
 
-  .rating_icon {
-    width: 11px;
-    margin: 0 5px;
-  }
+    .rating_icon {
+        width: 11px;
+        margin: 0 5px;
+    }
 
-  .leftpane {
-    width: 20%;
-    height: 100%;
-    float: left;
-    border-collapse: collapse;
-  }
+    .leftpane {
+        width: 20%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+    }
 
-  .modal-content {
-    padding: 20px;
-  }
+    .modal-content {
+        padding: 20px;
+    }
 
-  .font1 {
-    font-size: 15px;
-    color: #000;
-    font-weight: 600;
-  }
+    .font1 {
+        font-size: 15px;
+        color: #000;
+        font-weight: 600;
+    }
 
-  .font2 {
-    color: #000;
-    font-size: 10px;
-  }
+    .font2 {
+        color: #000;
+        font-size: 10px;
+    }
 
-  .font3 {
-    font-size: 14px;
-    color: #000;
-  }
+    .font3 {
+        font-size: 14px;
+        color: #000;
+    }
 
-  .form_div {
-    display: flex;
-    justify-content: space-between;
-  }
+    .form_div {
+        display: flex;
+        justify-content: space-between;
+    }
 
-  .modal-header {
-    padding: 0;
-  }
+    .modal-header {
+        padding: 0;
+    }
 
-  .sub_comment_div {
-    margin-bottom: 20px;
-    /* position: absolute; */
-    margin-left: 56px;
-  }
+    .sub_comment_div {
+        margin-bottom: 20px;
+        /* position: absolute; */
+        margin-left: 56px;
+    }
 
-  .comment_div {
-    margin-bottom: 20px;
-  }
+    .comment_div {
+        margin-bottom: 20px;
+    }
 
-  .comment_partion_div1 {
-    display: flex;
-    flex-direction: column;
-    padding-left: 70px;
-    margin-top: -10px
-  }
+    .comment_partion_div1 {
+        display: flex;
+        flex-direction: column;
+        padding-left: 70px;
+        margin-top: -10px
+    }
 
 
 
-  p.form_fields {
-    margin: 0;
-    padding-left: 4px;
-    color: #000;
-    font-size: 15px;
-    font-weight: 400;
-    overflow-wrap: break-word;
-    width: 50%;
-    text-align: left;
-  }
+    p.form_fields {
+        margin: 0;
+        padding-left: 4px;
+        color: #000;
+        font-size: 15px;
+        font-weight: 400;
+        overflow-wrap: break-word;
+        width: 50%;
+        text-align: left;
+    }
 
-  .custom_col_class {
-    width: 85%;
-    text-align: center;
-    margin: 0 auto;
-  }
+    .custom_col_class {
+        width: 85%;
+        text-align: center;
+        margin: 0 auto;
+    }
 
-  .middlepane {
-    width: 40%;
-    height: 100%;
-    float: left;
-    border-collapse: collapse;
-  }
+    .middlepane {
+        width: 40%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+    }
 
-  .rightpane {
-    width: 40%;
-    height: 100%;
-    position: relative;
-    float: right;
-    border-collapse: collapse;
-  }
+    .rightpane {
+        width: 40%;
+        height: 100%;
+        position: relative;
+        float: right;
+        border-collapse: collapse;
+    }
 
-  .img-r {
-    /*height: 200px; */
-    /*width: 200px; */
-    /*margin:0 auto;*/
-    height: 118px;
-    width: 119px;
-    margin-top: 0px;
-    margin-bottom: 38px;
-    margin-left: -14px;
-    border-radius: 100px;
-    overflow: hidden;
-    border: 7px solid #f6f6f6;
-  }
+    .img-r {
+        /*height: 200px; */
+        /*width: 200px; */
+        /*margin:0 auto;*/
+        height: 118px;
+        width: 119px;
+        margin-top: 0px;
+        margin-bottom: 38px;
+        margin-left: -14px;
+        border-radius: 100px;
+        overflow: hidden;
+        border: 7px solid #f6f6f6;
+    }
 
-  .modal_rating_icon {
-    width: 10px;
-    margin-top: -2px;
-    margin-left: 2px;
-  }
+    .modal_rating_icon {
+        width: 10px;
+        margin-top: -2px;
+        margin-left: 2px;
+    }
+
 </style>
 <div class="header bg-primary pb-6">
-  <div class="container-fluid">
-    <div class="header-body">
-      <div class="row align-items-center py-4">
-        <div class="col-lg-6 col-7">
-          <h6 class="h2 text-white d-inline-block mb-0">Department</h6>
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-              <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-              <li class="breadcrumb-item"><a href="{{route('badge')}}">Badge</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Badge Detail</li>
-            </ol>
-          </nav>
-        </div>
-        <!--                <div class="col-lg-6 col-5 text-right">
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">Department</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{route('badge')}}">Badge</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Badge Detail</li>
+                        </ol>
+                    </nav>
+                </div>
+                <!--                <div class="col-lg-6 col-5 text-right">
                     <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
                     <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}">
                         Followings</a>
@@ -229,139 +230,152 @@
                     <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">
                         Badge</a>
                 </div>-->
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="container-fluid mt--6">
-  <!-- Table -->
-  <div class="row">
-    <div class="col">
-      <div class="card">
+    <!-- Table -->
+    <div class="row">
+        <div class="col">
+            <div class="card">
 
-        <!-- Card header -->
-        <div class="card-body">
-          <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="card card-primary card-outline">
-                  <div class="card-body box-profile">
-                    <div class="text-center">
-                      @if(!empty($data->department_data->image))
-                      <img src="{{'../storage/departname/' .$data->department_data->image}}" alt="Avatar"
-                        class="avatar1">
-                      @else
-                      <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar" class="avatar1">
-
-                      @endif
-
-                    </div>
-
-                    <input type="hidden" name="" id="badge_id" value="{{$data->id}}">
-
-                    <ul class="list-group list-group-unbordered mb-3">
-                      <li class="list-group-item">
-                        Badge Number <a class="float-right">{{$data->badge_number}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        Department <a class="float-right">{{$data->department_data->department_name}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        Country <a class="float-right">{{$data->department_data->country_data->country_name}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        State <a class="float-right">{{$data->department_data->state_data->state_name}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        City <a class="float-right">{{$data->department_data->city_data->city_name}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        Department Rating <a class="float-right">
-                          {{($departmentRating) ? number_format($departmentRating ,1) : 0}}
-                        </a>
-
-                      </li>
-                      <li class="list-group-item">
-                        Badge Rating <a class="float-right">
-                          {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
-                        </a>
-                      </li>
-                      <li class="list-group-item">
-                        No. of followers <a class="float-right">{{$noOfFollowers}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        Registered On <a class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
-                      </li>
-                      <li class="list-group-item">
-                        Total Reviews <a class="float-right">{{$totalPost}}</a>
-                      </li>
-                    </ul>
-
-                    {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
-                    {{-- <div class="text-center">
-                      <a href='javascript:void(0)' onclick='viewDepartmentBadgeModel1({{$data->id}})'><span
-                      class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
-                    </a>
-                  </div> --}}
-
-                </div>
-              </div>
-            </div>
-            <div class="col-md-8">
-              <div class="card">
+                <!-- Card header -->
                 <div class="card-body">
+                    <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="card card-primary card-outline">
+                                    <div class="card-body box-profile">
+                                        <div class="text-center">
+                                            @if(!empty($data->department_data->image))
+                                            <img src="{{'../storage/departname/' .$data->department_data->image}}"
+                                                alt="Avatar" class="avatar1">
+                                            @else
+                                            <img src="{{url('admin_css/images/follow_logo.png')}}" alt="Avatar"
+                                                class="avatar1">
 
-                  <form action="" id="search_data" class="search_data_row_class">
-                    <div class='row'>
-                      <div class='col-12'>
-                        <div class="form-group">
-                          <input class="form-control form-control-sm" type="text" placeholder="Search By User Name">
+                                            @endif
 
-                        </div>
-                      </div>
-                      <div class='col-5'>
-                        <div class="form-group">
-                          <select class="form-control" name="status_id" id="status_id">
-                            <option value="">status</option>
-                            <option value="1">Active</option>
-                            <option value="2">Inactive</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div class='col-6'>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
+                                        </div>
+
+                                        <input type="hidden" name="" id="badge_id" value="{{$data->id}}">
+
+                                        <ul class="list-group list-group-unbordered mb-3">
+                                            <li class="list-group-item">
+                                                Badge Number <a class="float-right">{{$data->badge_number}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Department <a
+                                                    class="float-right">{{$data->department_data->department_name}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Country <a
+                                                    class="float-right">{{$data->department_data->country_data->country_name}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                State <a
+                                                    class="float-right">{{$data->department_data->state_data->state_name}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                City <a
+                                                    class="float-right">{{$data->department_data->city_data->city_name}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Department Rating <a class="float-right">
+                                                    {{($departmentRating) ? number_format($departmentRating ,1) : 0}}
+                                                </a>
+
+                                            </li>
+                                            <li class="list-group-item">
+                                                Badge Rating <a class="float-right">
+                                                    {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
+                                                </a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                No. of followers <a class="float-right">{{$noOfFollowers}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Registered On <a
+                                                    class="float-right">{{date("Y-m-d", strtotime($data->created_at))}}</a>
+                                            </li>
+                                            <li class="list-group-item">
+                                                Total Reviews <a class="float-right">{{$totalPost}}</a>
+                                            </li>
+                                        </ul>
+
+                                        {{-- <a href="#" class=""><b>View Badge List</b></a> --}}
+                                        {{-- <div class="text-center">
+                      <a href='javascript:void(0)' onclick='viewDepartmentBadgeModel1({{$data->id}})'><span
+                                            class='tbl_row_new1 view_modd_dec'><b>View Badge List</b></span>
+                                        </a>
+                                    </div> --}}
+
+                                </div>
                             </div>
-                            <input class="form-control datepicker" placeholder="Select from date" type="text" value=""
-                              name="fromdate" id="fromdate">
-                          </div>
                         </div>
-                      </div>
-                      <div class='col-6'>
-                        <div class="form-group">
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-calendar-grid-58"></i></span>
-                            </div>
-                            <input class="form-control datepicker" placeholder="Select to date" type="text" value=""
-                              name="todate" id="todate">
-                          </div>
-                        </div>
-                      </div>
-                      <input type="hidden" placeholder="Look for user" name="search2" id="search2" class="search_input">
-                      <div class='col-2'>
-                        <div class="d-flex">
-                          <button type="button" id="search_data1" class="btn btn-primary apply_btnn">Apply</button>
-                          <button type="button" value="Reset form" onclick="myFunction()"
-                            class="btn btn-info apply_btnn">Reset</button>
-                        </div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-body">
 
-                      </div>
-                    </div>
+                                    <form action="" id="search_data" class="search_data_row_class">
+                                        <div class='row'>
+                                            <div class='col-12'>
+                                                <div class="form-group">
+                                                    <input class="form-control form-control-sm" type="text"
+                                                        placeholder="Search By User Name">
 
-                    <!--                                            <table class="table table-striped">
+                                                </div>
+                                            </div>
+                                            <div class='col-5'>
+                                                <div class="form-group">
+                                                    <select class="form-control" name="status_id" id="status_id">
+                                                        <option value="">status</option>
+                                                        <option value="1">Active</option>
+                                                        <option value="2">Inactive</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class='col-6'>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="ni ni-calendar-grid-58"></i></span>
+                                                        </div>
+                                                        <input class="form-control datepicker"
+                                                            placeholder="Select from date" type="text" value=""
+                                                            name="fromdate" id="fromdate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class='col-6'>
+                                                <div class="form-group">
+                                                    <div class="input-group">
+                                                        <div class="input-group-prepend">
+                                                            <span class="input-group-text"><i
+                                                                    class="ni ni-calendar-grid-58"></i></span>
+                                                        </div>
+                                                        <input class="form-control datepicker"
+                                                            placeholder="Select to date" type="text" value=""
+                                                            name="todate" id="todate">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <input type="hidden" placeholder="Look for user" name="search2" id="search2"
+                                                class="search_input">
+                                            <div class='col-2'>
+                                                <div class="d-flex">
+                                                    <button type="button" id="search_data1"
+                                                        class="btn btn-primary apply_btnn">Apply</button>
+                                                    <button type="button" value="Reset form" onclick="myFunction()"
+                                                        class="btn btn-info apply_btnn">Reset</button>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <!--                                            <table class="table table-striped">
                                                 <thead>
                                                     <tr>
                                                         <span class="div_cover_sell">
@@ -392,137 +406,140 @@
                                                     </tr>
                                                 </thead>
                                             </table>-->
-                  </form>
-                  <div class="wrapper_ratings_review">
-                    <div class="row">
-                      <div class="col-md-2">
-                        <div class="number_star" style="margin-top:17px;">
-                          <p class="number_ratings_black">
-                            {{($badgeRating) ? number_format($badgeRating ,1) : 0}}
-                          </p>
+                                    </form>
+                                    <div class="wrapper_ratings_review">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="number_star" style="margin-top:17px;">
+                                                    <p class="number_ratings_black">
+                                                        {{($badgeRating) ? number_format($badgeRating ,1) : ""}}
+                                                    </p>
 
-                          <span class="star_icon1">
-                            @if ($badgeRating >= 1 && $badgeRating <2)<img
-                              src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="rating_icon">
-                              @endif
-                              @if ( $badgeRating
-                              >=2&& $badgeRating <3)<img <img
-                                src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="rating_icon">
-                                @endif
-                                @if ($badgeRating >=3 && $badgeRating <4) <img
-                                  src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                                  @endif
-                                  @if ($badgeRating
-                                  >=4 && $badgeRating <5) <img
-                                    src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt=""
-                                    class="rating_icon">
-                                    @endif
-                                    @if ( $badgeRating==5 ) <img
-                                      src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt=""
-                                      class="rating_icon">
+                                                    <span class="star_icon1">
+                                                        @if ($badgeRating >= 1 && $badgeRating <2)<img
+                                                            src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
+                                                            alt="" class="rating_icon">
+                                                            @endif
+                                                            @if ( $badgeRating
+                                                            >=2&& $badgeRating <3)<img <img
+                                                                src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
+                                                                alt="" class="rating_icon">
+                                                                @endif
+                                                                @if ($badgeRating >=3 && $badgeRating <4) <img
+                                                                    src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                                    @endif
+                                                                    @if ($badgeRating
+                                                                    >=4 && $badgeRating <5) <img
+                                                                        src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
+                                                                        alt="" class="rating_icon">
+                                                                        @endif
+                                                                        @if ( $badgeRating==5 ) <img
+                                                                            src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
+                                                                            alt="" class="rating_icon">
 
-                                    @endif
-                          </span>
-                          {{-- <span class="star_icon">
+                                                                        @endif
+                                                    </span>
+                                                    {{-- <span class="star_icon">
                             <i class="fas fa-star custom_star_iconn" style="margin:3px;"></i>
                             <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
                           </span> --}}
-                        </div>
-                        <p class="number_ratings_grey" style="margin-top:-20px;">{{$totalPost}}
-                        </p>
-                      </div>
-                      <div class="col-md-10">
-                        <div class="main_div_five_rows">
-                          <div class="row_one">
-                            <div class="number_star new_div">
+                                                </div>
+                                                <p class="number_ratings_grey" style="margin-top:-20px;">
+                                                    {{$totalPost ? $totalPost : "" }}
+                                                </p>
+                                            </div>
+                                            <div class="col-md-10">
+                                                <div class="main_div_five_rows">
+                                                    <div class="row_one">
+                                                        <div class="number_star new_div">
 
-                              <p class="number_ratings_black_new">Honesty</p>
+                                                            <p class="number_ratings_black_new">Honesty</p>
 
-                              <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                              </span>
-                              <span class="vertical_baar">|</span>
-                              <p class="number_ratings_black_new">{{$fiveRating}}</p>
+                                                            <span class="star_icon">
+                                                                <img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                            </span>
+                                                            <span class="vertical_baar">|</span>
+                                                            <p class="number_ratings_black_new">{{$fiveRating}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row_one">
+                                                        <div class="number_star new_div">
+                                                            <p class="number_ratings_black_new">Communication</p>
+
+                                                            <span class="star_icon">
+                                                                <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                            </span>
+                                                            <span class="vertical_baar">|</span>
+                                                            <p class="number_ratings_black_new">{{$fourRating}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row_one">
+                                                        <div class="number_star new_div">
+                                                            <p class="number_ratings_black_new">Respect</p>
+
+                                                            <span class="star_icon">
+                                                                <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                            </span>
+                                                            <span class="vertical_baar">|</span>
+                                                            <p class="number_ratings_black_new">{{$threeRating}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row_one">
+                                                        <div class="number_star new_div">
+                                                            <p class="number_ratings_black_new">Better</p>
+
+                                                            <span class="star_icon">
+                                                                <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                            </span>
+                                                            <span class="vertical_baar">|</span>
+                                                            <p class="number_ratings_black_new">{{$twoRating}}</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row_one">
+                                                        <div class="number_star new_div">
+                                                            <p class="number_ratings_black_new">Good</p>
+
+                                                            <span class="star_icon">
+                                                                <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}"
+                                                                    alt="" class="rating_icon">
+                                                            </span>
+                                                            <span class="vertical_baar">|</span>
+                                                            <p class="number_ratings_black_new">{{$oneRating}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                          </div>
-                          <div class="row_one">
-                            <div class="number_star new_div">
-                              <p class="number_ratings_black_new">Communication</p>
+                            <div class="col-xl-12 col-md-6">
+                                <div class="card bg-gradient-info border-0">
+                                    <!-- Card body -->
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col">
 
-                              <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                              </span>
-                              <span class="vertical_baar">|</span>
-                              <p class="number_ratings_black_new">{{$fourRating}}</p>
-                            </div>
-                          </div>
-                          <div class="row_one">
-                            <div class="number_star new_div">
-                              <p class="number_ratings_black_new">Respect</p>
+                                                <?php $post = App\Post::with("users")->where("badge_id", $data->id )->where("flag", 2)->count(); ?>
 
-                              <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                              </span>
-                              <span class="vertical_baar">|</span>
-                              <p class="number_ratings_black_new">{{$threeRating}}</p>
-                            </div>
-                          </div>
-                          <div class="row_one">
-                            <div class="number_star new_div">
-                              <p class="number_ratings_black_new">Better</p>
-
-                              <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                              </span>
-                              <span class="vertical_baar">|</span>
-                              <p class="number_ratings_black_new">{{$twoRating}}</p>
-                            </div>
-                          </div>
-                          <div class="row_one">
-                            <div class="number_star new_div">
-                              <p class="number_ratings_black_new">Good</p>
-
-                              <span class="star_icon">
-                                <img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt=""
-                                  class="rating_icon">
-                              </span>
-                              <span class="vertical_baar">|</span>
-                              <p class="number_ratings_black_new">{{$oneRating}}</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="col-md-6">
-
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-xl-12 col-md-6">
-                <div class="card bg-gradient-info border-0">
-                  <!-- Card body -->
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col">
-
-                        <?php $post = App\Post::with("users")->where("badge_id", $data->id )->where("flag", 2)->count(); ?>
-
-                        <h5 class="card-title text-uppercase text-muted mb-0 text-white">
-                          Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
+                                                <h5 class="card-title text-uppercase text-muted mb-0 text-white">
+                                                    Users Reviews({{$post}})</h5> {{-- <span class="h2 font-weight-bold mb-0 text-white">123/267</span>
                                 <div class="progress progress-xs mt-3 mb-0">
                                     <div class="progress-bar bg-success" role="progressbar"
                                         aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"
                                         style="width: 50%;"></div>
                                 </div> --}} </div>
-                      <div class="col-auto">
-                        {{-- <button type="button" class="btn btn-sm btn-neutral mr-0"
+                                            <div class="col-auto">
+                                                {{-- <button type="button" class="btn btn-sm btn-neutral mr-0"
                                     data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
                                     <i class="fas fa-ellipsis-h"></i>
@@ -531,73 +548,72 @@
 
 
                                 </div> --}}
-                        <div class="form-group" style="margin-bottom: 0;">
-                          <select class="form-control" name="rating" id="rating">
-                            <option value="">Rating</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="">All</option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-                    {{-- <p class="mt-3 mb-0 text-sm">
+                                                <div class="form-group" style="margin-bottom: 0;">
+                                                    <select class="form-control" name="rating" id="rating">
+                                                        <option value="">Rating</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                        <option value="">All</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {{-- <p class="mt-3 mb-0 text-sm">
                             <a href="#!" class="text-nowrap text-white font-weight-600">See
                                 details</a>
                         </p> --}}
-                  </div>
-                </div>
-              </div>
-              <div class="tab-content">
-                <div class="active tab-pane" id="activity">
-                  <div class="post">
-                    <div class="row">
-                      <div class="col-12">
-                        <div class="card class_scroll ">
-                          <div class="card-body p-0">
-                            <table id="data1" class="table table-hover">
-                            </table>
-                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-content">
+                                <div class="active tab-pane" id="activity">
+                                    <div class="post">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="card class_scroll ">
+                                                    <div class="card-body p-0">
+                                                        <table id="data1" class="table table-hover">
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 </div>
 <div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="businessName">Post Detail </h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-4" id="userImage">
-            <img
-              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 240px; height:240px;">
-          </div>
-          <div class="col-8" id="viewDepartment">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="businessName">Post Detail </h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4" id="userImage">
+                        <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                            alt="" style="width: 240px; height:240px;">
+                    </div>
+                    <div class="col-8" id="viewDepartment">
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -625,35 +641,34 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {{-- end model view department --}}
 {{-- model view department --}}
 <div class="modal fade" id="viewUserDetailLikeModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="businessName1"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6" id="userImage1">
-            <img
-              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 300px; height:300px;">
-          </div>
-          <div class="col-6" id="viewDepartmentLike">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="businessName1"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6" id="userImage1">
+                        <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                            alt="" style="width: 300px; height:300px;">
+                    </div>
+                    <div class="col-6" id="viewDepartmentLike">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -681,34 +696,33 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {{-- end model view department --}}
 <div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="share"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="share">
-        <div class="row">
-          <div class="col-6" id="userImage2">
-            <img
-              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 300px; height:300px;">
-          </div>
-          <div class="col-6" id="viewDepartmentShare">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="share"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="share">
+                <div class="row">
+                    <div class="col-6" id="userImage2">
+                        <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                            alt="" style="width: 300px; height:300px;">
+                    </div>
+                    <div class="col-6" id="viewDepartmentShare">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -736,31 +750,31 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="comment"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="">
-        <div class="row">
-          {{-- <div class="col-6" id="userImage2">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="comment"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="">
+                <div class="row">
+                    {{-- <div class="col-6" id="userImage2">
 
           </div> --}}
-          <div class="col-12" id="viewDepartmentComment">
+                    <div class="col-12" id="viewDepartmentComment">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -788,26 +802,26 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 {{-- model view city --}}
 <div class="modal fade" id="viewUserDetailBadgeRating" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header custom_modal_header">
-        <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12" id="reason_list">
-            {{-- <div class="table-responsive">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="reason_list">
+                        {{-- <div class="table-responsive">
                 <div>
                   <table class="table table-bordered table-hover">
                     <thead>
@@ -822,26 +836,26 @@
                   </table>
                 </div>
               </div> --}}
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailVoteRating" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header custom_modal_header">
-        <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12" id="vote_list">
-            {{-- <div class="table-responsive">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="vote_list">
+                        {{-- <div class="table-responsive">
                 <div>
                   <table class="table table-bordered table-hover">
                     <thead>
@@ -856,16 +870,16 @@
                   </table>
                 </div>
               </div> --}}
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function () {
+    $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
             language: {
                 searchPlaceholder: "Department Name",
@@ -936,7 +950,7 @@
 
 </script>
 <script>
-  function myFunction() {
+    function myFunction() {
         document.getElementById("search_data").reset();
         location.reload();
 
@@ -944,7 +958,7 @@
 
 </script>
 <script>
-  var ratingImage = {
+    var ratingImage = {
         ratings: function (rating) {
             var ratingIcon = "";
             if (rating >= 1 && rating < 2) {
