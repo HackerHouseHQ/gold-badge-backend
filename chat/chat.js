@@ -13,7 +13,7 @@ module.exports = {
                 var socketId = users[input.receiver_id];
                 connection.query(check_sender_receiver, (error, rows, fields) => {
                     if (error) {
-                        socket.to(socketId).emit("receive_message", {
+                        socket.emit("receive_message", {
                             status: false,
                             message: error,
                             result: rows
@@ -39,7 +39,7 @@ module.exports = {
                         }];
                         connection.query(insert, values, (error, rows, fields) => {
                             if (error) {
-                                socket.to(socketId).emit("receive_message", {
+                                socket.emit("receive_message", {
                                     status: false,
                                     message: error,
                                     result: msgArr
@@ -49,13 +49,13 @@ module.exports = {
 
                                 connection.query(fetch_message, (error, rows, fields) => {
                                     if (error) {
-                                        socket.to(socketId).emit("receive_message", {
+                                        socket.emit("receive_message", {
                                             status: false,
                                             message: error,
                                             result: msgArr
                                         });
                                     } else {
-                                        socket.to(socketId).emit("receive_message", {
+                                        socket.emit("receive_message", {
                                             status: true,
                                             message: 'SUCCESS',
                                             result: msgArr
