@@ -89,7 +89,6 @@ class InformationManagementController extends Controller
       $date1 = $_GET['date1'];
       $fromdate = $_GET['fromdate'];
       $todate = $_GET['todate'];
-
       $data = $this->user->getdata_table($order_by, $offset, $limit_t, $date1, $todate, $fromdate);
       $count = $this->user->getdata_count($order_by, $date1, $todate, $fromdate);
       $getuser = $this->manage_data($data);

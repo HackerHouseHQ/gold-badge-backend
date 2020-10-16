@@ -60,8 +60,8 @@ class Post extends Model
       }
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       if (!empty($search)) {
@@ -126,8 +126,8 @@ class Post extends Model
       }
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       if (!empty($search)) {
@@ -240,30 +240,15 @@ class Post extends Model
       }
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('posts.created_at', '>=', $fromdate);
-            $q->wheredate('posts.created_at', '<=', $todate);
+            $q->wheredate('posts.created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('posts.created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       $query->with('post_imagess');
       $query->skip($offset);
       $query->take($limit_t);
       $query = $query->latest('posts.created_at')->get();
-      $arr = [];
-      $post_data = [];
-      // foreach ($query as $key => $value) {
-      //    if ($value->badge_id == null) {
-      //       array_push($arr, $value->badge_id);
-      //       array_push($post_data, $value);
-      //    } else {
-      //       if (!in_array($value->badge_id, $arr)) {
-      //          array_push($arr, $value->badge_id);
-      //          array_push($post_data, $value);
 
-      //          $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-      //             ->avg('rating');
-      //       }
-      //    }
-      // }
       return $query;
    }
    public static function getPostCount($search,  $department_id, $badge_id, $fromdate, $todate, $user_id)
@@ -296,27 +281,11 @@ class Post extends Model
       }
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('posts.created_at', '>=', $fromdate);
-            $q->wheredate('posts.created_at', '<=', $todate);
+            $q->wheredate('posts.created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('posts.created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       $query = $query->latest('posts.created_at')->get();
-      $arr = [];
-      $post_data = [];
-      // foreach ($query as $key => $value) {
-      //    if ($value->badge_id == null) {
-      //       array_push($arr, $value->badge_id);
-      //       array_push($post_data, $value);
-      //    } else {
-      //       if (!in_array($value->badge_id, $arr)) {
-      //          array_push($arr, $value->badge_id);
-      //          array_push($post_data, $value);
-
-      //          $rating = Post::where('department_id', $value->department_id)->where('user_id', $value->user_id)->where('flag', 2)->where('badge_id', $value->badge_id)
-      //             ->avg('rating');
-      //       }
-      //    }
-      // }
       return count($query);
    }
 

@@ -38,8 +38,8 @@ class SendNotification extends Model
             } else {
                   if (!empty($fromdate) &&  !empty($todate)) {
                         $query->Where(function ($q) use ($fromdate, $todate) {
-                              $q->wheredate('created_at', '>=', $fromdate);
-                              $q->wheredate('created_at', '<=', $todate);
+                              $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+                              $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
                         });
                   }
             }
@@ -55,8 +55,8 @@ class SendNotification extends Model
             $query = self::query()->orderBy('created_at', 'asc');
             if (!empty($fromdate) &&  !empty($todate)) {
                   $query->Where(function ($q) use ($fromdate, $todate) {
-                        $q->wheredate('created_at', '>=', $fromdate);
-                        $q->wheredate('created_at', '<=', $todate);
+                        $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+                        $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
                   });
             }
 

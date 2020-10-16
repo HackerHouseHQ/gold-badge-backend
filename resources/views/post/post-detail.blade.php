@@ -199,6 +199,7 @@
         margin-top: -2px;
         margin-left: 2px;
     }
+
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -700,6 +701,34 @@ console.log(err);
         $('#search').keyup(function () {
             dataTable.draw();
         });
+        $('#country_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#state_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#fromdate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#todate').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#city_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#department_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        });
+        $('#badge_id').on('change', function () {
+            //alert( this.value );
+            dataTable.draw();
+        })
     });
 
 </script>
@@ -897,6 +926,7 @@ console.log(err);
         });
 
     }
+
     function viewUserDetailCommentModel(id) {
         $.ajax({
             url: "{{ route('viewUserDetailCommentModel') }}/" + id,

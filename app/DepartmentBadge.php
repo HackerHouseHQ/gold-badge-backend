@@ -27,8 +27,8 @@ class DepartmentBadge extends Model
       $query = self::query()->with('department_data.country_data')->with('department_data.state_data')->with('department_data.city_data')->orderBy('created_at', 'asc');
       if (!empty($fromdate) &&  !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
       if (!empty($status_id)) {

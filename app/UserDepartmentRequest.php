@@ -16,12 +16,6 @@ class UserDepartmentRequest extends Model
    public function getdata_table($order_by, $offset, $limit_t, $type, $search, $fromdate, $todate)
    {
       $query = self::query()->where('status', $type)->orderBy('created_at', 'asc');
-      // if(!empty($fromdate) && !empty($todate)){
-      // $query->Where(function($q) use($fromdate,$todate){
-      // $q->wheredate('created_at','>=',$fromdate);
-      // $q->wheredate('created_at','<=',$todate);
-      // });
-      // }
       if (!empty($search)) {
          $query->whereHas('country_data', function ($q) use ($search) {
             $q->orwhere('country_name', 'like', '%' . $search . '%');
@@ -38,32 +32,41 @@ class UserDepartmentRequest extends Model
       }
       if (!empty($fromdate) && !empty($todate)) {
          $query->Where(function ($q) use ($fromdate, $todate) {
-            // $q->whereBetween('created_at', array($fromdate, $todate));
-            $q->wheredate('created_at', '>=', $fromdate);
-            $q->wheredate('created_at', '<=', $todate);
-            // $q->wheredate('created_at','>=',Carbon::parse($fromdate.' 00:00:00'));
-            // $q->wheredate('created_at','<=',Carbon::parse($todate,' 00:00:00'));
 
-            // if ($fromdate) {
-            // $q->whereDate('created_at', '>=', Carbon::parse($fromdate));
-            // }
-            // if ($todate) {
-            // $q->whereDate('created_at', '<=', Carbon::parse($todate));
-            // }
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
          });
       }
-
-
-
       $query->skip($offset);
       $query->take($limit_t);
       $data = $query->get(); //->toArray();
       // print_r($data); die;
       return $data;
    }
-   public function getdata_count($order_by, $type, $search)
+   public function getdata_count($order_by, $type, $search, $fromdate, $todate)
    {
       $query = self::query()->where('status', $type)->orderBy('created_at', 'asc');
+      if (!empty($search)) {
+         $query->whereHas('country_data', function ($q) use ($search) {
+            $q->orwhere('country_name', 'like', '%' . $search . '%');
+         });
+         $query->whereHas('state_data', function ($q) use ($search) {
+            $q->orwhere('state_name', 'like', '%' . $search . '%');
+         });
+         $query->whereHas('city_data', function ($q) use ($search) {
+            $q->orwhere('city_name', 'like', '%' . $search . '%');
+         });
+         $query->Where(function ($q) use ($search) {
+            $q->orwhere('department_name', 'like', '%' . $search . '%');
+         });
+      }
+      if (!empty($fromdate) && !empty($todate)) {
+         $query->Where(function ($q) use ($fromdate, $todate) {
+
+            $q->wheredate('created_at', '>=', date("Y-m-d", strtotime($fromdate)));
+            $q->wheredate('created_at', '<=', date("Y-m-d", strtotime($todate)));
+         });
+      }
       $data = $query->get();
       $total = $data->count();
       return $total;

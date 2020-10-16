@@ -470,14 +470,14 @@ class UserController extends Controller
     $type = $_GET['type'];
     $search_arr = $request->get('search');
     $search = $search_arr['value'];
-    $fromdate = (@$_GET['fromdate']) ? date('Y-m-d H:i:s', strtotime($_GET['fromdate'] . ' 00:00:00')) : '';
-    $todate = (@$_GET['todate']) ? date('Y-m-d H:i:s', strtotime($_GET['todate'] . ' 00:00:00')) : '';
+    $fromdate = $_GET['fromdate'];
+    $todate = $_GET['todate'];
     /// $from = date('Y-m-d H:i:s' , strtotime($fromdate));
     //$to = date('Y-m-d H:i:s', strtotime($todate));
     // echo $to; die;
     $data = $this->UserRequest->getdata_table($order_by, $offset, $limit_t, $type, $search, $fromdate, $todate);
     // print_r($data); die;
-    $count = $this->UserRequest->getdata_count($order_by, $type, $search);
+    $count = $this->UserRequest->getdata_count($order_by, $type, $search, $fromdate, $todate);
     $getuser = $this->manage_request_data($data, $type);
 
     $results = [
@@ -508,7 +508,7 @@ class UserController extends Controller
       $arr[$key]['state'] = "<td><span class='tbl_row_new'>" . $data->state->state_name . "</span></td>";
       $arr[$key]['city'] = "<td><span class='tbl_row_new'>" . @$data->city->city_name . "</span></td>";
       $arr[$key]['username'] = "<td><span class='tbl_row_new'>" . $data->userInfo->user_name . "</span></td>";
-      $arr[$key]['reg_date'] = "<td><span class='tbl_row_new'>" . date("Y-m-d", strtotime($data->userInfo->created_at)) . "</span></td>";
+      $arr[$key]['reg_date'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
       $arr[$key]['u_name'] = "<td><span class='tbl_row_new'>" . $data->userInfo->first_name . ' ' . $data->userInfo->last_name . "</span></td>";
       $arr[$key]['email'] = "<td><span class='tbl_row_new'>" . $data->userInfo->email . "</span></td>";
       $arr[$key]['contact'] = "<td><span class='tbl_row_new'>" . $data->userInfo->mobil_no . "</span></td>";
