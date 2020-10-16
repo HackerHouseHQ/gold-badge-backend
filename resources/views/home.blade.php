@@ -1205,15 +1205,12 @@
                 "message": "testing......"
             };
             socket.emit('send_message', array);
-            socket.on('receive_message',
-                function (val) {
-                    console.log(val);
-                });
         });
         $(document).ready(function () {
+            console.log('hello');
             socket.on('receive_message',
                 function (val) {
-                    console.log(val);
+                    console.log(val, 'i am here');
                 });
         });
 
