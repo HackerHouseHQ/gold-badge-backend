@@ -34,7 +34,7 @@ module.exports = {
                     } else {
                         console.log(msgArr, 'message---------------------**********');
                         console.log(room_id);
-                        io.to(room_id).emit("receive_message", {
+                        io.to(room_id).emit("received", {
                             status: true,
                             message: 'SUCCESS',
                             result: msgArr
