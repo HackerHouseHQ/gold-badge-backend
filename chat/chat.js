@@ -24,13 +24,13 @@ module.exports = {
                 }];
                 connection.query(insert, values, (error, rows, fields) => {
                     if (error) {
-                        socket.to(room_id).emit("receive_message", {
+                        socket.emit("receive_message", {
                             status: false,
                             message: error,
                             result: msgArr
                         });
                     } else {
-                        socket.to(room_id).emit("receive_message", {
+                        socket.emit("receive_message", {
                             status: true,
                             message: 'SUCCESS',
                             result: msgArr
