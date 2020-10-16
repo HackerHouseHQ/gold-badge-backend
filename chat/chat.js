@@ -23,11 +23,7 @@ module.exports = {
                     message: input.message,
                     created_at: current
                 }];
-                io.to(room_id).emit("receive_message", {
-                    status: true,
-                    message: 'SUCCESS',
-                    result: msgArr
-                });
+
                 connection.query(insert, values, (error, rows, fields) => {
                     if (error) {
                         io.to(room_id).emit("receive_message", {
@@ -36,12 +32,17 @@ module.exports = {
                             result: msgArr
                         });
                     } else {
-                        console.log(msgArr);
+                        console.log(msgArr, 'message---------------------**********');
                         console.log(room_id);
-
+                        io.to(room_id).emit("receive_message", {
+                            status: true,
+                            message: 'SUCCESS',
+                            result: msgArr
+                        });
                     }
 
                 });
+
             });
             socket.on("user_chat_list", function (input, result) {
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;

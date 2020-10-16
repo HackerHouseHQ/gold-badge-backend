@@ -1200,14 +1200,15 @@
             var message = "Hello user";
             var array = {
                 "room_id": '6136404595',
-                "sender_id": 2,
-                "receiver_id": 8,
-                "message": "helloxxx"
+                "sender_id": 8,
+                "receiver_id": 2,
+                "message": "testing......"
             };
             socket.emit('send_message', array);
-            socket.on('receive_message', function (val) {
-                console.log(val);
-            });
+            socket.on('receive_message',
+                function (val) {
+                    console.log(val);
+                });
         });
 
         // $(".user-list").click(function (e) {
