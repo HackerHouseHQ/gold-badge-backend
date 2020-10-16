@@ -1200,8 +1200,8 @@
             var message = "Hello user";
             var array = {
                 "room_id": '6136404595',
-                "sender_id": 2,
-                "receiver_id": 8,
+                "sender_id": 4,
+                "receiver_id": 5,
                 "message": "hello"
             };
             socket.emit('send_message', array);

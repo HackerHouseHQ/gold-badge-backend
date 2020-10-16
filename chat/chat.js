@@ -5,6 +5,7 @@ module.exports = {
     val: io => {
         io.on("connection", socket => {
             socket.on("send_message", function (input, result) {
+
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
                 var values = [
@@ -22,19 +23,22 @@ module.exports = {
                     message: input.message,
                     created_at: current
                 }];
+                io.to(room_id).emit("receive_message", {
+                    status: true,
+                    message: 'SUCCESS',
+                    result: msgArr
+                });
                 connection.query(insert, values, (error, rows, fields) => {
                     if (error) {
-                        socket.emit("receive_message", {
+                        io.to(room_id).emit("receive_message", {
                             status: false,
                             message: error,
                             result: msgArr
                         });
                     } else {
-                        socket.emit("receive_message", {
-                            status: true,
-                            message: 'SUCCESS',
-                            result: msgArr
-                        });
+                        console.log(msgArr);
+                        console.log(room_id);
+
                     }
 
                 });
