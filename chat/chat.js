@@ -82,7 +82,7 @@ module.exports = {
                                 created_at: ""
                             }];
                             var user = {
-                                id = socket.id,
+                                id: socket.id,
                                 sender_id: input.sender_id,
                                 room_id: room_id.toString()
                             };
