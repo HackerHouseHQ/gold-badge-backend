@@ -1,9 +1,9 @@
 const connection = require("./database");
 require('dotenv').config();
-let User = require("./user");
+let Users = require("./user");
 let {
-    Users
-} = new User();
+    users
+} = new Users();
 //var users = new Users();
 module.exports = {
     val: io => {
@@ -86,7 +86,7 @@ module.exports = {
                                 sender_id: input.sender_id,
                                 room_id: room_id.toString()
                             };
-                            Users.addUser(user);
+                            users.addUser(user);
                             io.to(room_id).emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
