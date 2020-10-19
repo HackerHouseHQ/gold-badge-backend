@@ -19,7 +19,8 @@ module.exports = {
                     result: input
                 }
                 console.log(room_id);
-                io.to(room_id).emit("receive_message", output);
+                console.log(socket.id);
+                io.to(socket.id).emit("receive_message", output);
                 // var values = [
                 //     input.sender_id,
                 //     input.receiver_id,

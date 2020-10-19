@@ -1207,7 +1207,8 @@
             socket.emit('send_message', array);
 
         });
-        socket.on('send_message',
+        //hello
+        socket.on('receive_message',
             function (val) {
                 console.log(val);
             });
