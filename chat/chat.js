@@ -90,14 +90,14 @@ module.exports = {
                                 room_id: room_id.toString()
                             };
                             users.addUser(user);
-                            io.to(room_id).emit("user_chat_list", {
+                            io.emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: room
                             });
 
                         } else {
-                            io.to(room_id).emit("user_chat_list", {
+                            io.emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: rows
