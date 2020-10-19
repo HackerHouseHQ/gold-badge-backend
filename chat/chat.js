@@ -14,8 +14,8 @@ module.exports = {
                 var room_id = input.room_id;
 
                 io.to(room_id).emit("receive_message", {
-                    status: false,
-                    message: error,
+                    status: true,
+                    message: 'SUCCESS',
                     result: input
                 });
                 // var values = [
