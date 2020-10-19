@@ -9,7 +9,7 @@ module.exports = {
     val: io => {
         io.on("connection", socket => {
             socket.on("send_message", function (input, result) {
-
+                console.log(input);
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
 
@@ -63,11 +63,12 @@ module.exports = {
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(get_chat_user_list, (error, rows, fields) => {
                     if (error) {
-                        socket.emit("user_chat_list", {
-                            status: false,
-                            message: error,
-                            result: rows
-                        });
+                        console.log(error);
+                        // socket.emit("user_chat_list", {
+                        //     status: false,
+                        //     message: error,
+                        //     result: rows
+                        // });
                     } else {
 
                         if (rows.length <= 0) {
