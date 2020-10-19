@@ -1109,7 +1109,7 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function userDeviceToken(Request $request)
+    public function updateDeviceToken(Request $request)
     {
         $user = User::whereId($request->user_id)->first();
         $user->device_token = request('device_token');
