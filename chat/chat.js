@@ -1,9 +1,9 @@
 const connection = require("./database");
 require('dotenv').config();
-let Users = require("./user");
 let {
-    users
-} = new Users();
+    Users
+} = require("./user");
+let users = new Users();
 //var users = new Users();
 module.exports = {
     val: io => {
