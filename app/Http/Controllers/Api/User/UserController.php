@@ -1111,9 +1111,13 @@ class UserController extends Controller
     }
     public function updateDeviceToken(Request $request)
     {
-        $user = User::whereId($request->user_id)->first();
-        $user->device_token = request('device_token');
-        $user->save();
-        return res_success('device token update');
+        try {
+            $user = User::whereId($request->user_id)->first();
+            $user->device_token = request('device_token');
+            $user->save();
+            return res_success('device token update');
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
 }
