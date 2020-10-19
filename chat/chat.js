@@ -7,12 +7,12 @@ module.exports = {
             socket.on("send_message", function (input, result) {
 
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
-                var room_id = '6136404595AAA';
+                var room_id = input.room_id;
                 var values = [
                     input.sender_id,
                     input.receiver_id,
                     socket.id,
-                    input.room_id,
+                    room_id,
                     input.message
                 ];
                 let current = new Date();
@@ -26,16 +26,21 @@ module.exports = {
 
                 connection.query(insert, values, (error, rows, fields) => {
                     if (error) {
-                        io.to(room_id).emit("receive_message", {
+                        io.emit("receive_message", {
                             status: false,
                             message: error,
                             result: msgArr
                         });
                     } else {
-                        console.log(msgArr, 'message---------------------**********');
-                        room_id = room_id.toString();
-                        console.log(room_id);
-                        io.to(room_id).emit("received", {
+                        // console.log(msgArr, 'message---------------------**********');
+                        room_id = room_id;
+                        console.log(room_id, 'yyyyyy');
+                        socket.emit("receive_message", {
+                            status: true,
+                            message: 'SUCCESS',
+                            result: msgArr
+                        });
+                        socket.broadcast.emit("receive_message", {
                             status: true,
                             message: 'SUCCESS',
                             result: msgArr
@@ -65,6 +70,7 @@ module.exports = {
                                 message: "",
                                 created_at: ""
                             }];
+
                             socket.emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
