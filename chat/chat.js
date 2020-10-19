@@ -32,7 +32,6 @@ module.exports = {
                             result: msgArr
                         });
                     } else {
-                        // console.log(msgArr, 'message---------------------**********');
                         room_id = room_id;
                         console.log(room_id, 'yyyyyy');
                         socket.emit("receive_message", {
