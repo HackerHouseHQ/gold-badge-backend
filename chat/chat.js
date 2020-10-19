@@ -96,7 +96,7 @@ module.exports = {
                             });
 
                         } else {
-                            socket.emit("user_chat_list", {
+                            io.to(room_id).emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: rows
