@@ -27,11 +27,11 @@ module.exports = {
                     message: 'SUCCESS',
                     result: output
                 });
-                // socket.broadcast.emit("receive_message", {
-                //     status: true,
-                //     message: 'SUCCESS',
-                //     result: output
-                // });
+                socket.broadcast.emit("receive_message", {
+                    status: true,
+                    message: 'SUCCESS',
+                    result: output
+                });
                 var values = [
                     input.sender_id,
                     input.receiver_id,
