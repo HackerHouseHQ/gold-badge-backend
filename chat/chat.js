@@ -27,11 +27,11 @@ module.exports = {
                     message: 'SUCCESS',
                     result: output
                 });
-                socket.broadcast.emit("receive_message", {
-                    status: true,
-                    message: 'SUCCESS',
-                    result: output
-                });
+                // socket.broadcast.emit("receive_message", {
+                //     status: true,
+                //     message: 'SUCCESS',
+                //     result: output
+                // });
                 var values = [
                     input.sender_id,
                     input.receiver_id,
@@ -75,17 +75,17 @@ module.exports = {
                             var user = {
                                 id: socket.id,
                                 sender_id: input.sender_id,
-                                room_id: room_id.toString()
+                                room_id: 'ratnesh'
                             };
                             users.addUser(user);
-                            io.emit("user_chat_list", {
+                            socket.emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: room
                             });
 
                         } else {
-                            io.emit("user_chat_list", {
+                            socket.emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: rows
