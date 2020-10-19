@@ -13,11 +13,13 @@ module.exports = {
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
                 // console.log(socket);
-                io.to(room_id).emit("receive_message", {
+                let output = {
                     status: true,
                     message: 'SUCCESS',
                     result: input
-                });
+                }
+                console.log(room_id);
+                io.to(room_id).emit("receive_message", output);
                 // var values = [
                 //     input.sender_id,
                 //     input.receiver_id,
