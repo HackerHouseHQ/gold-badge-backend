@@ -10,7 +10,7 @@ app.use(
     })
 );
 
-var server = require("http").createServer(app);
+var server = require("http").createServer();
 var io = socket(server);
 const sckt = require("./chat/chat");
 sckt.val(io);
