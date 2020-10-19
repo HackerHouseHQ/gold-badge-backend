@@ -12,54 +12,36 @@ module.exports = {
                 console.log(input);
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
-                // console.log(socket);
-                let output = {
-                    status: true,
-                    message: 'SUCCESS',
-                    result: input
-                }
+                let current = new Date();
+                let output = [{
+                    sender_id: input.sender_id,
+                    receiver_id: input.receiver_id,
+                    room_id: input.room_id,
+                    message: input.message,
+                    created_at: current
+                }];
                 console.log(room_id);
                 console.log(socket.id);
-                io.to(socket.id).emit("receive_message", output);
-                // var values = [
-                //     input.sender_id,
-                //     input.receiver_id,
-                //     socket.id,
-                //     room_id,
-                //     input.message
-                // ];
-                // let current = new Date();
-                // var msgArr = [{
-                //     sender_id: input.sender_id,
-                //     receiver_id: input.receiver_id,
-                //     room_id: input.room_id,
-                //     message: input.message,
-                //     created_at: current
-                // }];
+                io.to(socket.id).emit("receive_message", {
+                    status: true,
+                    message: 'SUCCESS',
+                    result: output
+                });
+                var values = [
+                    input.sender_id,
+                    input.receiver_id,
+                    socket.id,
+                    room_id,
+                    input.message
+                ];
+                connection.query(insert, values, (error, rows, fields) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        console.log(rows);
+                    }
 
-                // connection.query(insert, values, (error, rows, fields) => {
-                //     if (error) {
-                //         io.emit("receive_message", {
-                //             status: false,
-                //             message: error,
-                //             result: msgArr
-                //         });
-                //     } else {
-                //         room_id = room_id;
-                //         console.log(room_id, 'yyyyyy');
-                //         socket.emit("receive_message", {
-                //             status: true,
-                //             message: 'SUCCESS',
-                //             result: msgArr
-                //         });
-                //         socket.broadcast.emit("receive_message", {
-                //             status: true,
-                //             message: 'SUCCESS',
-                //             result: msgArr
-                //         });
-                //     }
-
-                // });
+                });
 
             });
             socket.on("user_chat_list", function (input, result) {
