@@ -22,7 +22,12 @@ module.exports = {
                 }];
                 console.log(room_id);
                 console.log(socket.id);
-                io.to(socket.id).emit("receive_message", {
+                io.emit("receive_message", {
+                    status: true,
+                    message: 'SUCCESS',
+                    result: output
+                });
+                socket.broadcast.emit("receive_message", {
                     status: true,
                     message: 'SUCCESS',
                     result: output
