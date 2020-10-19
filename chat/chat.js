@@ -12,7 +12,7 @@ module.exports = {
                 console.log(input);
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
-
+                console.log(io);
                 io.to(room_id).emit("receive_message", {
                     status: true,
                     message: 'SUCCESS',
