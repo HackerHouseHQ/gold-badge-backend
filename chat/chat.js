@@ -1,5 +1,9 @@
 const connection = require("./database");
 require('dotenv').config();
+let Users = require("./user");
+let {
+    users
+} = new new Users();
 //var users = new Users();
 module.exports = {
     val: io => {
@@ -8,45 +12,51 @@ module.exports = {
 
                 var insert = "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
-                var values = [
-                    input.sender_id,
-                    input.receiver_id,
-                    socket.id,
-                    room_id,
-                    input.message
-                ];
-                let current = new Date();
-                var msgArr = [{
-                    sender_id: input.sender_id,
-                    receiver_id: input.receiver_id,
-                    room_id: input.room_id,
-                    message: input.message,
-                    created_at: current
-                }];
 
-                connection.query(insert, values, (error, rows, fields) => {
-                    if (error) {
-                        io.emit("receive_message", {
-                            status: false,
-                            message: error,
-                            result: msgArr
-                        });
-                    } else {
-                        room_id = room_id;
-                        console.log(room_id, 'yyyyyy');
-                        socket.emit("receive_message", {
-                            status: true,
-                            message: 'SUCCESS',
-                            result: msgArr
-                        });
-                        socket.broadcast.emit("receive_message", {
-                            status: true,
-                            message: 'SUCCESS',
-                            result: msgArr
-                        });
-                    }
-
+                io.to(room_id).emit("receive_message", {
+                    status: false,
+                    message: error,
+                    result: input
                 });
+                // var values = [
+                //     input.sender_id,
+                //     input.receiver_id,
+                //     socket.id,
+                //     room_id,
+                //     input.message
+                // ];
+                // let current = new Date();
+                // var msgArr = [{
+                //     sender_id: input.sender_id,
+                //     receiver_id: input.receiver_id,
+                //     room_id: input.room_id,
+                //     message: input.message,
+                //     created_at: current
+                // }];
+
+                // connection.query(insert, values, (error, rows, fields) => {
+                //     if (error) {
+                //         io.emit("receive_message", {
+                //             status: false,
+                //             message: error,
+                //             result: msgArr
+                //         });
+                //     } else {
+                //         room_id = room_id;
+                //         console.log(room_id, 'yyyyyy');
+                //         socket.emit("receive_message", {
+                //             status: true,
+                //             message: 'SUCCESS',
+                //             result: msgArr
+                //         });
+                //         socket.broadcast.emit("receive_message", {
+                //             status: true,
+                //             message: 'SUCCESS',
+                //             result: msgArr
+                //         });
+                //     }
+
+                // });
 
             });
             socket.on("user_chat_list", function (input, result) {
@@ -59,6 +69,7 @@ module.exports = {
                             result: rows
                         });
                     } else {
+
                         if (rows.length <= 0) {
                             var genrate_room_id = Math.floor(1000000000 + Math.random() * 9000000000);
                             var room_id = genrate_room_id;
@@ -69,8 +80,13 @@ module.exports = {
                                 message: "",
                                 created_at: ""
                             }];
-
-                            socket.emit("user_chat_list", {
+                            var user = {
+                                id = socket.id,
+                                sender_id: input.sender_id,
+                                room_id: room_id.toString()
+                            };
+                            users.addUser(user);
+                            io.to(room_id).emit("user_chat_list", {
                                 status: true,
                                 message: 'SUCCESS',
                                 result: room
