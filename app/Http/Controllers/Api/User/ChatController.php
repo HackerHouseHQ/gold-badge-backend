@@ -25,12 +25,12 @@ class ChatController extends Controller
             $siteUrl = env('APP_URL');
             $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
                 ->leftJoin('users', 'users.id', '=', 'chats.sender_id')
-                ->where('receiver_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
+                ->where('receiver_id', $request->user_id);
             $chat_list2 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
                 ->leftJoin('users', 'users.id', '=', 'chats.receiver_id')
-                ->where('sender_id', $request->user_id)->groupBy('room_id')->orderBy('chats.created_at', 'DESC')->get()->toArray();
+                ->where('sender_id', $request->user_id);
 
-            $data = array_merge($chat_list1, $chat_list2);
+            $data = $chat_list1->union($chat_list2)->latest()->get();;
             $arr = [];
             $room_id_array = [];
             foreach ($data as $key => $value) {
