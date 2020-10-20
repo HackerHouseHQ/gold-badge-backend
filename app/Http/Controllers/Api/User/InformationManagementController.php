@@ -22,9 +22,9 @@ class InformationManagementController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
-            $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->get();
+            $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
             foreach ($data as $key => $value) {
-                $notifications = SendNotification::where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->get();
+                $notifications = SendNotification::whereDate('created_at', date('Y-m-d', strtotime($value->date)))->get();
                 $value->notifications  = $notifications;
             }
             return res_success(trans('messages.successFetchList'), array('notificationList' => $data));
