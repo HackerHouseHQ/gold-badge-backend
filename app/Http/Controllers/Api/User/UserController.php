@@ -577,6 +577,7 @@ class UserController extends Controller
                         $post->badge_name       =   null;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
+                        $post->user_status       = 1;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -586,6 +587,7 @@ class UserController extends Controller
                         $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
+                        $post->user_status       = 1;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
