@@ -9,6 +9,7 @@ use App\SendNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\InformationData;
 use Illuminate\Support\Facades\Auth;
 
 class InformationManagementController extends Controller
@@ -31,5 +32,9 @@ class InformationManagementController extends Controller
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
+    }
+    public function policies()
+    {
+        $data = InformationData::first();
     }
 }

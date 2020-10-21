@@ -1225,7 +1225,7 @@
         $(".user-list").click(function (e) {
             var array = {
                 "sender_id": 2,
-                "receiver_id": 3
+                "receiver_id": 5
             };
             socket.emit('user_chat_list', array);
             socket.on('user_chat_list', function (val) {
