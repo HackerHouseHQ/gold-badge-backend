@@ -33,8 +33,13 @@ class InformationManagementController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function policies()
+    public function information()
     {
-        $data = InformationData::first();
+        try {
+            $data = InformationData::first();
+            return res_success(trans('messages.successFetchList'), $data);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
 }

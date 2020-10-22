@@ -8,6 +8,6 @@ class InformationData extends Model
 {
     //
     protected $table = 'information_data';
-    
-    protected $fillable = ['about_us','privacy','terms'];
+    protected $fillable = ['about_us', 'privacy', 'terms'];
+    protected $hidden = ['id', 'created_at', 'updated_at'];
 }
