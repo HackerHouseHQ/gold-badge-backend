@@ -53,6 +53,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/login', 'UserController@login');
 	Route::post('/checkUserNameEmail', 'UserController@checkUserNameEmail');
 	Route::post('/updateDeviceToken', 'UserController@updateDeviceToken');
+	Route::get('/information', 'InformationManagementController@information');
 	Route::group(['middleware' => ['auth:api']], function () {
 		Route::post('/savePostReview', 'UserController@savePostReview');
 		Route::post('/getPostDepartment', 'UserController@getPostDepartment');
@@ -76,6 +77,5 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::get('/getGalleryImage', 'GalleryController@getGalleryImage');
 		Route::post('/deleteGalleryImage', 'GalleryController@deleteGalleryImage');
 		Route::get('/getNotification', 'InformationManagementController@getNotification');
-		Route::get('/information', 'InformationManagementController@information');
 	});
 });
