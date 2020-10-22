@@ -14,6 +14,7 @@ use App\DepartmentSubComment;
 use App\UserDepartmentFollow;
 use App\DepartmentCommentLike;
 use App\DepartmentSubCommentLike;
+use App\DepartmentVote;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -178,7 +179,8 @@ class PostController extends Controller
             $postCommentedLike  = $this->postCommentLike($user_id)->toArray();
             $postSubComment = $this->postSubComment($user_id)->toArray();
             $postSubCommentLike = $this->postSubCommenLike($user_id)->toArray();
-            $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike);
+            $postVoted = $this->postVoted($user_id)->toArray();
+            $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike, $postVoted);
             // Desc sort
             usort($arr, function ($time1, $time2) {
                 if (strtotime($time1['created_at']) < strtotime($time2['created_at']))
@@ -563,6 +565,55 @@ class PostController extends Controller
                 if ($post->id == $commented['post_id']) {
                     unset($post->created_at);
                     $post->created_at = $commented['created_at'];
+                }
+            }
+            unset($post->rating);
+            unset($post->reason_id);
+            unset($post->updated_at);
+        }
+        return $posts;
+    }
+    private function postVoted($user_id)
+    {
+        // post voted by user 
+        $postVoted = DepartmentVote::where('user_id', $user_id)->get()->toArray();
+        $postIdsArray     =   array_column($postVoted, 'post_id');
+        $siteUrl = env('APP_URL');
+        $posts  = Post::with(['post_images', 'post_vote'])
+            ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+            ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+            ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+            ->withCount('post_comment')
+            ->withCount('post_like')
+            ->withCount('post_share')
+            ->whereIn('posts.id', $postIdsArray)
+            ->get();
+        foreach ($posts as $post) {
+            if ($post->flag == 1) {
+                $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                $post->total_reviews    =   $departmentPostData->count();
+                $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                $post->badge_name       =   null;
+                $post->is_liked          = ($post_liked) ? 1 : 0;
+                $post->is_shared          = ($post_shared) ? 1 : 0;
+                $post->user_status       = 6;
+            } else if ($post->flag == 2) {
+                $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                $post->total_reviews    =   $badgePostData->count();
+                $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                $post->is_liked          = ($post_liked) ? 1 : 0;
+                $post->is_shared          = ($post_shared) ? 1 : 0;
+                $post->user_status       = 6;
+            }
+            foreach ($postVoted as $vote) {
+                if ($post->id == $vote['post_id']) {
+                    unset($post->created_at);
+                    $post->created_at = $vote['created_at'];
                 }
             }
             unset($post->rating);
