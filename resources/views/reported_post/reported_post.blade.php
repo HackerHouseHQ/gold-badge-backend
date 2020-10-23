@@ -1780,9 +1780,9 @@
 
                 $('#userImage2').append(rowImage);
                 $('#viewDepartmentReport').html('');
-
+                            let row =`<div class="scroll_bar_div">`;
                 response.forEach(value => {
-                    let row = ` <div class="col">
+                     row += ` <div class="col">
                     <div class="username_div"><p><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></p>
                                     <p style="padding-left: 0px; margin: 10px;">${value.user_name}</p></div>
                                 <div class="message_div">
@@ -1792,9 +1792,10 @@
 
                                     <br>
                                      </div>`;
-                    $('#viewDepartmentReport').append(row)
+                    
                 });
-
+row += `</div>`;
+$('#viewDepartmentReport').append(row)
                 console.log(response);
 
                 $('#viewUserDetailReportModel').modal('show');
