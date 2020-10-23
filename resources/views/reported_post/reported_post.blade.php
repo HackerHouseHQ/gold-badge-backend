@@ -441,6 +441,14 @@
         margin: 0;
     }
 
+    .scroll_bar_div {
+        height: 245px;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        /* border: 1px solid; */
+        margin-top: 29px;
+    }
+
     /*}*/
 </style>
 @section('content')
