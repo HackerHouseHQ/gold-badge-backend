@@ -429,8 +429,7 @@
 
     .username_div {
         display: flex;
-        justify-content: space-between;
-        width: 10%;
+        width: 100%;
     }
 
     .message_div {
