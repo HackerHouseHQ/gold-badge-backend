@@ -554,20 +554,23 @@ class UserController extends Controller
                 $query  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
                     ->withCount('post_share')
-                    ->whereIn('department_id', $departmentIdsArray);
+                    ->whereIn('posts.department_id', $departmentIdsArray);
                 if (!empty($search)) {
                     $query->Where(function ($q) use ($search) {
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
                         $q->orwhere('user_name', 'like', '%' . $search . '%');
                         $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                        $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                     });
                 }
                 $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
                 foreach ($posts as $post) {
+                    //flag =1 , 1 => department , 2 => badge 
                     if ($post->flag == 1) {
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -602,6 +605,7 @@ class UserController extends Controller
                 $query  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
@@ -611,6 +615,7 @@ class UserController extends Controller
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
                         $q->orwhere('user_name', 'like', '%' . $search . '%');
                         $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                        $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                     });
                 }
                 $posts = $query->orderBy('post_like_count', 'desc')
@@ -649,6 +654,7 @@ class UserController extends Controller
                 $query =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                    ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
@@ -658,6 +664,7 @@ class UserController extends Controller
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
                         $q->orwhere('user_name', 'like', '%' . $search . '%');
                         $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                        $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                     });
                 }
                 $posts  = $query->orderBy('post_share_count', 'desc')
