@@ -433,8 +433,12 @@
     }
 
     .message_div {
-        justify-content: space-between;
+        justify-content: flex-start;
         display: flex;
+    }
+
+    .message_div p {
+        text-align: right;
     }
 
 
@@ -1792,8 +1796,8 @@
                     <div class="username_div"><p><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></p>
                                     <p style="padding-left: 0px; margin: 10px; font-weight: 900;">${value.user_name}</p></div>
                                 <div class="message_div">
-                                <p><strong><i>message...</i></strong></p>
-                                    <p>${value.message}</p>
+                                <p><strong><i>message:-</i></strong></p>
+                                    <p style="padding-left: 5px;  word-break: break-all;">${value.message}</p>
                                 </div>
                                    
 
