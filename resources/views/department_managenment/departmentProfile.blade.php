@@ -206,7 +206,6 @@
         margin-top: -2px;
         margin-left: 2px;
     }
-
 </style>
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -636,10 +635,10 @@
     {{-- model view badge --}}
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title text-capitalize" id="businessName"></h4>
+                    <h4 class="modal-title text-capitalize" id="businessName">Badge List</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -1050,7 +1049,7 @@
                     <td class="text-capitalize">${value.badge_number}</td>
                     <td class="text-capitalize">${value.rating}</td>
                     <td class="text-capitalize">${value.total_reviews}</td>
-                    <td class="text-capitalize"><a href="${url}">View Profile</a></td>
+                    <td class="text-capitalize"><a href="${url}"><button type="button" class="btn btn-primary btn-sm">View Profile</button></a></td>
                    </tr>
                   `;
                         $('#businessDetails').append(row)
