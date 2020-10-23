@@ -427,8 +427,17 @@
         margin-left: 637px;
     }
 
-    /*}*/
+    .username_div {
+        display: flex;
+        justify-content: space-between;
+        width: 10%;
+    }
 
+    .message_div {
+        text-align: right;
+    }
+
+    /*}*/
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -1770,9 +1779,12 @@
 
                 response.forEach(value => {
                     let row = ` <div class="col">
-                                <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></span>
-                                    <span>${value.user_name}</span>
-                                    <span>${value.message}</span>
+                    <div class="username_div"><p><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></p>
+                                    <p style="padding-left: 0px; margin: 10px;">${value.user_name}</p></div>
+                                <div class="message_div">
+                                    <p>${value.message}</p>
+                                </div>
+                                   
 
                                     <br>
                                      </div>`;
