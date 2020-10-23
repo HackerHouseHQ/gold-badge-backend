@@ -433,13 +433,11 @@
     }
 
     .message_div {
-        text-align: right;
-        margin: 0;
+        justify-content: space-between;
+        display: flex;
     }
 
-    .message_div p {
-        margin: 0;
-    }
+
 
     .scroll_bar_div {
         height: 245px;
@@ -1792,8 +1790,9 @@
                 response.forEach(value => {
                      row += ` <div class="col">
                     <div class="username_div"><p><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></p>
-                                    <p style="padding-left: 0px; margin: 10px;">${value.user_name}</p></div>
+                                    <p style="padding-left: 0px; margin: 10px; font-weight: 900;">${value.user_name}</p></div>
                                 <div class="message_div">
+                                <p><strong><i>message</i></strong></p>
                                     <p>${value.message}</p>
                                 </div>
                                    
