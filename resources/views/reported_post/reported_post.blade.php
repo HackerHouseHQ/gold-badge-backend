@@ -434,6 +434,7 @@
 
     .message_div {
         text-align: right;
+        margin: 0;
     }
 
     /*}*/
