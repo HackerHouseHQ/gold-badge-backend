@@ -60,8 +60,7 @@ class GalleryController extends Controller
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $siteUrl = env('APP_URL');
-            $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->get();
-
+            $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->latest('date', 'DESC')->get();
             foreach ($data as $key => $value) {
                 $images = GalleryImages::select(
                     'id as image_id',

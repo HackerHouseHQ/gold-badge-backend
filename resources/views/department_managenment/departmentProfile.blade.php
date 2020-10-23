@@ -206,6 +206,17 @@
         margin-top: -2px;
         margin-left: 2px;
     }
+
+    .table td,
+    .table th {
+        font-size: .8125rem;
+        white-space: normal;
+    }
+
+    /* table.dataTable tbody td {
+        word-break: break-all;
+        vertical-align: top;
+    } */
 </style>
 <div class="header bg-primary pb-6">
     <div class="container-fluid">

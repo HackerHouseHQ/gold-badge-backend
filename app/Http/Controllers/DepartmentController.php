@@ -280,7 +280,6 @@ class DepartmentController extends Controller
    {
       $arr = array();
       $i = 0;
-
       foreach ($data as $key => $data) {
          $icon = "";
          if ($data->rating >= 1 && $data->rating < 2) {
@@ -303,8 +302,9 @@ class DepartmentController extends Controller
              alt='' class='rating_icon' style='margin-top:9px;'>
      </span></span></span></td>";
          $comment = ($data->comment) ? $data->comment : " ";
-         $arr[$key]['reviews'] = "<td><span class='tbl_row_new' style='line-height:50px;display: block;'>" . $comment  . "</span> <span style='    display: flex;
-    justify-content: space-between;'><span><a href='javascript:void(0)' onclick='viewUserDetailModel($data->id)'>VIEW POST</a></span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
+         $arr[$key]['reviews'] = "<td style='white-space:break-spaces;'><div><p class='tbl_row_new' style='line-height:50px;display: block; word-break: break-all;'>" . $comment  . "</p></div> <span style='    display: flex;
+    justify-content: space-between;'><span><a href='javascript:void(0)' onclick='viewUserDetailModel($data->id)'>      <button type='button' class='btn btn-primary btn-sm'>View Post</button>
+    </a></span> <span>  " . $data->users->first_name . "   | " . $data->created_at->format('d M Y') . "</span></span></td>";
       }
 
       return $arr;
