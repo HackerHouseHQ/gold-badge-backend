@@ -437,6 +437,10 @@
         margin: 0;
     }
 
+    .message_div p {
+        margin: 0;
+    }
+
     /*}*/
 </style>
 @section('content')
