@@ -607,6 +607,10 @@ class UserController extends Controller
                 $user_id = $request->user_id;
                 $search = $request->search;
                 $siteUrl = env('APP_URL');
+                //get all reported posts reported by user
+                $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
+                // create array of post_id from reported posts array
+                $reportArray = array_column($reportId, 'post_id');
                 $query  =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
@@ -614,7 +618,9 @@ class UserController extends Controller
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
-                    ->withCount('post_share');
+                    ->withCount('post_share')
+                    ->whereNotIn('posts.id', $reportArray);
+
                 if (!empty($search)) {
                     $query->Where(function ($q) use ($search) {
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
@@ -656,6 +662,10 @@ class UserController extends Controller
                 $user_id = $request->user_id;
                 $search = $request->search;
                 $siteUrl = env('APP_URL');
+                //get all reported posts reported by user
+                $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
+                // create array of post_id from reported posts array
+                $reportArray = array_column($reportId, 'post_id');
                 $query =   Post::with(['post_images', 'post_vote'])
                     ->leftJoin('users', 'users.id', '=', 'posts.user_id')
                     ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
@@ -663,7 +673,9 @@ class UserController extends Controller
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount('post_like')
-                    ->withCount('post_share');
+                    ->withCount('post_share')
+                    ->whereNotIn('posts.id', $reportArray);
+
                 if (!empty($search)) {
                     $query->Where(function ($q) use ($search) {
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
