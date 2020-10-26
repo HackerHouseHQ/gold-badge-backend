@@ -6,15 +6,16 @@ use App\Post;
 use App\User;
 use Exception;
 use App\DepartmentLike;
+use App\DepartmentVote;
 use App\DepartmentBadge;
 use App\DepartmentShare;
+use App\DepartmentReport;
 use App\DepartmentComment;
 use Illuminate\Http\Request;
 use App\DepartmentSubComment;
 use App\UserDepartmentFollow;
 use App\DepartmentCommentLike;
 use App\DepartmentSubCommentLike;
-use App\DepartmentVote;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -243,6 +244,10 @@ class PostController extends Controller
     { // post like by user 
         $postLiked = DepartmentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postLiked, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -252,6 +257,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -292,6 +298,10 @@ class PostController extends Controller
         // post shared by user
         $postShared = DepartmentShare::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postShared, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -301,6 +311,8 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
+
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -382,6 +394,10 @@ class PostController extends Controller
         // post comment by user 
         $postCommented = DepartmentComment::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postCommented, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -391,6 +407,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -431,6 +448,10 @@ class PostController extends Controller
         //post sub commeted by user
         $postSubComment = DepartmentSubComment::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postSubComment, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -440,6 +461,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -480,6 +502,10 @@ class PostController extends Controller
         // post sub comment like by user
         $postSubCommentLike = DepartmentSubCommentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postSubCommentLike, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -489,6 +515,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -529,6 +556,10 @@ class PostController extends Controller
         // post comment Like by user 
         $postCommented = DepartmentCommentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postCommented, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -538,6 +569,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {
@@ -578,6 +610,10 @@ class PostController extends Controller
         // post voted by user 
         $postVoted = DepartmentVote::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postVoted, 'post_id');
+        //get all reported posts reported 
+        $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
+        // create array of post_id from reported posts array
+        $reportArray = array_column($reportId, 'post_id');
         $siteUrl = env('APP_URL');
         $posts  = Post::with(['post_images', 'post_vote'])
             ->leftJoin('users', 'users.id', '=', 'posts.user_id')
@@ -587,6 +623,7 @@ class PostController extends Controller
             ->withCount('post_like')
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
+            ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
             if ($post->flag == 1) {

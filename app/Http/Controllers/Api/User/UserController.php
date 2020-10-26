@@ -549,6 +549,10 @@ class UserController extends Controller
                 $departmentIds  =   UserDepartmentFollow::select('department_id')->where('user_id', $user_id)->get()->toArray();
                 // Creating deaprtment ids array from array of arrays
                 $departmentIdsArray     =   array_column($departmentIds, 'department_id');
+                //get all reported posts reported by user
+                $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
+                // create array of post_id from reported posts array
+                $reportArray = array_column($reportId, 'post_id');
                 $siteUrl = env('APP_URL');
 
                 $query  =   Post::with(['post_images', 'post_vote'])
@@ -559,7 +563,8 @@ class UserController extends Controller
                     ->withCount('post_comment')
                     ->withCount('post_like')
                     ->withCount('post_share')
-                    ->whereIn('posts.department_id', $departmentIdsArray);
+                    ->whereIn('posts.department_id', $departmentIdsArray)
+                    ->whereNotIn('posts.id', $reportArray);
                 if (!empty($search)) {
                     $query->Where(function ($q) use ($search) {
                         $q->orwhere('department_name', 'like', '%' . $search . '%');
