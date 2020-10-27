@@ -8,12 +8,8 @@ use App\GalleryImages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use FFMpeg\Driver\FFMpegDriver;
-use FFMpeg\FFMpeg;
-use FFMpeg\FFProbe;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Pawlox\VideoThumbnail\Facade\VideoThumbnail;
 
 class GalleryController extends Controller
 {
