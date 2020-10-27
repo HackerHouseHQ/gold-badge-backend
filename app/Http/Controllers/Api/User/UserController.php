@@ -392,10 +392,18 @@ class UserController extends Controller
                     $i = 1;
                     foreach ($arrSave as $image) {
                         $getImage = GalleryImages::whereId($image)->first();
-                        $filename = $getImage->image;
-                        $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
-                        $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
-                        copy($galleryPath, $path);
+                        if ($getImage->media_type == 1) {
+                            $filename = $getImage->image;
+                            $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                            $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
+                            copy($galleryPath, $path);
+                        }
+                        if ($getImage->media_type == 0) {
+                            $filename = $getImage->video;
+                            $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                            $galleryPath = storage_path() . '/app/public/uploads/gallery_video/' . $filename;
+                            copy($galleryPath, $path);
+                        }
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,
@@ -505,10 +513,18 @@ class UserController extends Controller
                     $i = 1;
                     foreach ($arrSave as $image) {
                         $getImage = GalleryImages::whereId($image)->first();
-                        $filename = $getImage->image;
-                        $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
-                        $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
-                        copy($galleryPath, $path);
+                        if ($getImage->media_type == 1) {
+                            $filename = $getImage->image;
+                            $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                            $galleryPath = storage_path() . '/app/public/uploads/gallery_image/' . $filename;
+                            copy($galleryPath, $path);
+                        }
+                        if ($getImage->media_type == 0) {
+                            $filename = $getImage->video;
+                            $path = storage_path() . '/app/public/uploads/post_department_image/' . $filename;
+                            $galleryPath = storage_path() . '/app/public/uploads/gallery_video/' . $filename;
+                            copy($galleryPath, $path);
+                        }
                         $insertArray = [
                             'post_id' => $insertPostBadgeId,
                             'image'  => $filename,
