@@ -1176,7 +1176,7 @@ class UserController extends Controller
                 foreach ($department as $k => $v) {
                     if ($v->department_id  == $value->department_id) {
                         $value['total_reviews'] = $v->total_reviews;
-                        $value['rating'] = number_format($v->rating, 1);
+                        $value['rating'] = ($v->rating) ? $v->rating : 0;
                         $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
                         $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
                     }
@@ -1188,7 +1188,7 @@ class UserController extends Controller
                 $badge['rating'] = 0;
                 $badge['total_reviews'] = $total_reviews;
                 $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->avg('rating');
-                $badge['rating'] = ($rating) ? number_format($rating, 1) : 0;
+                $badge['rating'] = ($rating) ? $rating : 0;
                 $is_follow = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->first();
                 $badge['is_follow'] = ($is_follow) ? $is_follow->status : 0;
                 # code...
@@ -1204,9 +1204,28 @@ class UserController extends Controller
     {
         $department_id = $request->department_id;
         $siteUrl = env('APP_URL');
-        $department = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name')
-            ->whereId($department_id)->get();
-
-        return $department;
+        $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
+            ->whereId($department_id)->first();
+        $avgrating = Post::where('department_id', $department_id)->where('flag', 1)->avg('rating');
+        $totalrating = Post::where('department_id', $department_id)->where('flag', 1)->count();
+        $onerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 1)->count();
+        $tworating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 2)->count();
+        $threerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 3)->count();
+        $fourrating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 4)->count();
+        $fiverating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 5)->count();
+        $data['country_name'] = $data->country_data->country_name;
+        $data['state_name'] = $data->state_data->state_name;
+        $data['city_name'] = $data->city_data->city_name;
+        unset($data->country_data);
+        unset($data->state_data);
+        unset($data->city_data);
+        $data['avgRating'] =  ($avgrating) ? number_format($avgrating, 1) : 0;
+        $data['totalRating'] = $totalrating;
+        $data['oneRating'] = $onerating;
+        $data['twoRating'] = $tworating;
+        $data['threeRating'] = $threerating;
+        $data['fourRating'] = $fourrating;
+        $data['fiveRating'] = $fiverating;
+        return $data;
     }
 }
