@@ -1101,7 +1101,7 @@ class UserController extends Controller
      * @author Ratnesh Kumar 
      * 
      */
-    public function deparmentBadgeList(Request $request)
+    public function departmentBadgeList(Request $request)
     {
         try {
             $callback = function ($query) {
@@ -1111,7 +1111,6 @@ class UserController extends Controller
 
             $departmentBadge = UserDepartmentBadgeFollow::whereHas('badge.department_data', $callback)->whereHas('badge', $callback)->with(['badge.department_data' => $callback, 'badge' => $callback])
                 ->where('user_id', $request->user_id)->get();
-
             $department = UserDepartmentFollow::whereHas('departments', $callback)->with(['departments.badges' => $callback])->where('user_id', $request->user_id)->get();
             $arrDepartment = [];
             foreach ($department as $key => $value) {
@@ -1161,5 +1160,53 @@ class UserController extends Controller
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
+    }
+    public function getFollowerList(Request $request)
+    {
+        try {
+            $countryId = $request->country_id;
+            $stateId = $request->state_id;
+            $cityId = $request->city_id;
+            $departmentAll = Department::getDepartmentListAll($countryId, $stateId, $cityId);
+            $department = Department::getDepartmentList($countryId, $stateId, $cityId);
+            foreach ($departmentAll as $value) {
+                $value['total_reviews'] = 0;
+                $value['rating'] = 0;
+                $value['is_follow'] = 0;
+                foreach ($department as $k => $v) {
+                    if ($v->department_id  == $value->department_id) {
+                        $value['total_reviews'] = $v->total_reviews;
+                        $value['rating'] = number_format($v->rating, 1);
+                        $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
+                        $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
+                    }
+                }
+            }
+            $badges = DepartmentBadge::getDepartmentBadge($countryId, $stateId, $cityId);
+            foreach ($badges as $badge) {
+                $total_reviews = Post::where('badge_id', $badge->badge_id)->count();
+                $badge['rating'] = 0;
+                $badge['total_reviews'] = $total_reviews;
+                $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->avg('rating');
+                $badge['rating'] = ($rating) ? number_format($rating, 1) : 0;
+                $is_follow = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->first();
+                $badge['is_follow'] = ($is_follow) ? $is_follow->status : 0;
+                # code...
+            }
+
+            return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $departmentAll, 'departmentBadges' => $badges));
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function getDepartmentData(Request $request)
+    {
+        $department_id = $request->department_id;
+        $siteUrl = env('APP_URL');
+        $department = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name')
+            ->whereId($department_id)->get();
+
+        return $department;
     }
 }

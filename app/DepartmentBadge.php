@@ -141,4 +141,8 @@ class DepartmentBadge extends Model
       $data = $query->get();
       return $data;
    }
+   public function total_reviews()
+   {
+      return $this->hasMany('App\Post', 'badge_id');
+   }
 }
