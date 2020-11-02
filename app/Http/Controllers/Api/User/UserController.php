@@ -26,6 +26,7 @@ use App\GalleryImages;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\ReportReasson;
 use App\ReviewReasons;
 use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\Auth;
@@ -1202,30 +1203,129 @@ class UserController extends Controller
 
     public function getDepartmentData(Request $request)
     {
-        $department_id = $request->department_id;
-        $siteUrl = env('APP_URL');
-        $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
-            ->whereId($department_id)->first();
-        $avgrating = Post::where('department_id', $department_id)->where('flag', 1)->avg('rating');
-        $totalrating = Post::where('department_id', $department_id)->where('flag', 1)->count();
-        $onerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 1)->count();
-        $tworating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 2)->count();
-        $threerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 3)->count();
-        $fourrating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 4)->count();
-        $fiverating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 5)->count();
-        $data['country_name'] = $data->country_data->country_name;
-        $data['state_name'] = $data->state_data->state_name;
-        $data['city_name'] = $data->city_data->city_name;
-        unset($data->country_data);
-        unset($data->state_data);
-        unset($data->city_data);
-        $data['avgRating'] =  ($avgrating) ? number_format($avgrating, 1) : 0;
-        $data['totalRating'] = $totalrating;
-        $data['oneRating'] = $onerating;
-        $data['twoRating'] = $tworating;
-        $data['threeRating'] = $threerating;
-        $data['fourRating'] = $fourrating;
-        $data['fiveRating'] = $fiverating;
-        return $data;
+        try {
+            $department_id = $request->department_id;
+            $siteUrl = env('APP_URL');
+            $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
+                ->whereId($department_id)->first();
+            $avgrating = Post::where('department_id', $department_id)->where('flag', 1)->avg('rating');
+            $totalReviews = Post::where('department_id', $department_id)->where('flag', 1)->count();
+            $onerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 1)->count();
+            $tworating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 2)->count();
+            $threerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 3)->count();
+            $fourrating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 4)->count();
+            $fiverating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 5)->count();
+            $data['country_name'] = $data->country_data->country_name;
+            $data['state_name'] = $data->state_data->state_name;
+            $data['city_name'] = $data->city_data->city_name;
+            unset($data->country_data);
+            unset($data->state_data);
+            unset($data->city_data);
+            $data['avgRating'] =  ($avgrating) ? number_format($avgrating, 1) : 0;
+            $data['totalReviews'] = $totalReviews;
+            $data['oneRating'] = $onerating;
+            $data['twoRating'] = $tworating;
+            $data['threeRating'] = $threerating;
+            $data['fourRating'] = $fourrating;
+            $data['fiveRating'] = $fiverating;
+            return res_success('Department Data', $data);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function getBadgeData(Request $request)
+    {
+        try {
+            $badge_id = $request->badge_id;
+            $siteUrl = env('APP_URL');
+            $badge = DepartmentBadge::with('department_data')->whereId($badge_id)->first();
+            $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->get()->toArray();
+            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->count();
+            $badgerating = Post::where('badge_id', $badge_id)->where('flag', 2)->avg('rating');
+            $reasons =  ReportReasson::get();
+            $postIdsArray     =   array_column($posts, 'id');
+            $data = array();
+            $data['badge_number'] = $badge->badge_number;
+            $data['department_id'] = $badge->department_id;
+            $data['department_name'] = $badge->department_data->department_name;
+            $data['avgRating'] = $badgerating;
+            $data['total_reviews'] = $totalpost;
+            foreach ($reasons as $key => $reason) {
+                $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->count();
+                $data['reasons_percentage'][$reason->name] = $total / $totalpost * 100;
+                # code...
+            }
+            return res_success('Badge Data ', $data);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    public function editProfile(Request $request)
+    {
+        try {
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'name' => 'required|string',
+                    'user_name' => 'required|string',
+                    'email' => 'required|email',
+                    'mobile_no' => 'required|numeric|digits:10',
+                    'mobile_country_code' => 'required|max:4',
+                    'country_id' => 'required|numeric',
+                    'state_id' => 'required|numeric',
+                    'city_id' => 'required|numeric',
+                    'image'   => 'required|image|mimes:jpeg,png,jpg|max:10240',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+
+
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
+            //check email is already exist or not except login user && check username is not already taken by other user except login user
+            $checkuseremail = User::whereNotIn('id', [Auth::user()->id])->where('email', $request->email)->first();
+            $checkuserusername = User::whereNotIn('id', [Auth::user()->id])->where('user_name', $request->user_name)->first();
+            if ($checkuseremail) {
+                throw new Exception('User already exists by this email.', DATA_EXISTS);
+            }
+            if ($checkuserusername) {
+                throw new Exception('The user name has already been taken.', DATA_EXISTS);
+            }
+
+            $user = User::whereId(Auth::user()->id)->first();
+
+            $file = $request->image;
+            if (!empty($file) && file_exists($file)) {
+                $unsetPath = storage_path() . '/app/public/uploads/user_image/' . $user->image;
+                unlink($unsetPath);
+            }
+            $extension = $file->getClientOriginalExtension();
+            $filename = time()  . "." . $extension;
+            $path = storage_path() . '/app/public/uploads/user_image';
+            $file->move($path, $filename);
+            $insertData = [
+                'first_name' => $request->name,
+                'user_name' => $request->user_name,
+                'email' => $request->email,
+                'mobil_no' => $request->mobile_no,
+                'mobile_country_code' => $request->mobile_country_code,
+                'country_id' => $request->country_id,
+                'state_id' => $request->state_id,
+                'city_id' => $request->city_id,
+                'image'  => $filename
+            ];
+            $update = User::whereId(Auth::user()->id)->update($insertData);
+            if ($update) {
+                return res_success('Profile updated successfully.');
+            } else {
+                return res_failed('Something went wrong.');
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
 }

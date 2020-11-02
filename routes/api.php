@@ -69,6 +69,8 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/departmentBadgeList', 'UserController@departmentBadgeList');
 		Route::post('/getFollowerList', 'UserController@getFollowerList');
 		Route::post('/getDepartmentData', 'UserController@getDepartmentData');
+		Route::post('/getBadgeData', 'UserController@getBadgeData');
+
 		Route::post('/saveDepartmentRequest', 'DepartmentController@saveDepartmentRequest');
 		Route::get('/reasonList', 'ManageDataController@reasonQuestionList');
 		Route::post('/postProfile', 'PostController@postProfile');
@@ -79,5 +81,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::get('/getGalleryImage', 'GalleryController@getGalleryImage');
 		Route::post('/deleteGalleryImage', 'GalleryController@deleteGalleryImage');
 		Route::get('/getNotification', 'InformationManagementController@getNotification');
+		Route::post('/editProfile', 'UserController@editProfile');
 	});
 });
