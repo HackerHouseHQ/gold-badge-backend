@@ -1250,9 +1250,13 @@ class UserController extends Controller
             $data['department_name'] = $badge->department_data->department_name;
             $data['avgRating'] = $badgerating;
             $data['total_reviews'] = $totalpost;
+            $data['reasons_percentage'] = [];
             foreach ($reasons as $key => $reason) {
                 $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->count();
-                $data['reasons_percentage'][$reason->name] = $total / $totalpost * 100;
+                $data['reasons_percentage'][] = [
+                    'reason_name' => $reason->name,
+                    'percentage' => $total / $totalpost * 100
+                ];
                 # code...
             }
             return res_success('Badge Data ', $data);
