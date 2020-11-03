@@ -1206,6 +1206,69 @@ class UserController extends Controller
         try {
             $department_id = $request->department_id;
             $siteUrl = env('APP_URL');
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+
+            $user_id = $request->user_id;
+            $search = $request->search;
+
+            //get all reported posts reported by user
+            $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
+            // create array of post_id from reported posts array
+            $reportArray = array_column($reportId, 'post_id');
+            $siteUrl = env('APP_URL');
+
+            $query  =   Post::with(['post_images', 'post_vote'])
+                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
+                ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                ->withCount('post_comment')
+                ->withCount('post_like')
+                ->withCount('post_share')
+                ->where('posts.department_id', $department_id)
+                ->whereNotIn('posts.id', $reportArray);
+            if (!empty($search)) {
+                $query->Where(function ($q) use ($search) {
+                    $q->orwhere('department_name', 'like', '%' . $search . '%');
+                    $q->orwhere('user_name', 'like', '%' . $search . '%');
+                    $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                    $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+                });
+            }
+            $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
+            foreach ($posts as $post) {
+                //flag =1 , 1 => department , 2 => badge 
+                if ($post->flag == 1) {
+                    $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post->total_reviews    =   $departmentPostData->count();
+                    $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   null;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                    $post->user_status       = 1;
+                } else if ($post->flag == 2) {
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                    $post->total_reviews    =   $badgePostData->count();
+                    $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                    $post->user_status       = 1;
+                }
+                unset($post->rating);
+                unset($post->reason_id);
+                unset($post->updated_at);
+            }
+
+
             $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
                 ->whereId($department_id)->first();
             $avgrating = Post::where('department_id', $department_id)->where('flag', 1)->avg('rating');
@@ -1228,6 +1291,7 @@ class UserController extends Controller
             $data['threeRating'] = $threerating;
             $data['fourRating'] = $fourrating;
             $data['fiveRating'] = $fiverating;
+            $data['postList'] = $posts;
             return res_success('Department Data', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1259,6 +1323,69 @@ class UserController extends Controller
                 ];
                 # code...
             }
+            // check user is active or in active 
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+
+            $user_id = $request->user_id;
+            $search = $request->search;
+
+            //get all reported posts reported by user
+            $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
+            // create array of post_id from reported posts array
+            $reportArray = array_column($reportId, 'post_id');
+            $siteUrl = env('APP_URL');
+
+            $query  =   Post::with(['post_images', 'post_vote'])
+                ->leftJoin('users', 'users.id', '=', 'posts.user_id')
+                ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
+                ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
+                ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
+                ->withCount('post_comment')
+                ->withCount('post_like')
+                ->withCount('post_share')
+                ->where('posts.badge_id', $badge_id)
+                ->whereNotIn('posts.id', $reportArray);
+            if (!empty($search)) {
+                $query->Where(function ($q) use ($search) {
+                    $q->orwhere('department_name', 'like', '%' . $search . '%');
+                    $q->orwhere('user_name', 'like', '%' . $search . '%');
+                    $q->orwhere('posts.comment', 'like', '%' . $search . '%');
+                    $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+                });
+            }
+            $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
+            foreach ($posts as $post) {
+                //flag =1 , 1 => department , 2 => badge 
+                if ($post->flag == 1) {
+                    $departmentPostData = Post::where('department_id', $post->department_id)->get();
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post->total_reviews    =   $departmentPostData->count();
+                    $post->avg_rating       =  ($departmentPostData->avg('rating')) ? number_format($departmentPostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   null;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                    $post->user_status       = 1;
+                } else if ($post->flag == 2) {
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $badgePostData = Post::where('badge_id', $post->badge_id)->get();
+                    $post->total_reviews    =   $badgePostData->count();
+                    $post->avg_rating       =   ($badgePostData->avg('rating')) ? number_format($badgePostData->avg('rating'), 1) : 0;
+                    $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
+                    $post->is_liked          = ($post_liked) ? 1 : 0;
+                    $post->is_shared          = ($post_shared) ? 1 : 0;
+                    $post->user_status       = 1;
+                }
+                unset($post->rating);
+                unset($post->reason_id);
+                unset($post->updated_at);
+            }
+            $data['postList'] = $posts;
+
             return res_success('Badge Data ', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
