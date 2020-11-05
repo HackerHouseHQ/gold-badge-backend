@@ -268,6 +268,42 @@ class UserController extends Controller
 
 
             $user = User::where('id', $userInsetId)->first();
+            // calculate profile percentage 
+            $total_field_filled = 0;
+            if ($user->first_name) {
+                $total_field_filled += 1;
+            }
+            if ($user->gender) {
+                $total_field_filled += 1;
+            }
+            if ($user->mobil_no) {
+                $total_field_filled += 1;
+            }
+            if ($user->email) {
+                $total_field_filled += 1;
+            }
+            if ($user->user_name) {
+                $total_field_filled += 1;
+            }
+            if ($user->country_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->state_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->city_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->image) {
+                $total_field_filled += 1;
+            }
+            if ($user->dob) {
+                $total_field_filled += 1;
+            }
+            if ($user->ethnicity) {
+                $total_field_filled += 1;
+            }
+            // end of calculate profile percentage 
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
             $token->save();
@@ -275,6 +311,7 @@ class UserController extends Controller
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
+            $user->percentage =  $total_field_filled / 11 * 100;
             return res_success('User  Signup Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1100,7 +1137,42 @@ class UserController extends Controller
                     throw new Exception(trans('Email does not exists.'), NOT_EXISTS);
                 }
             }
-
+            // calculate profile percentage 
+            $total_field_filled = 0;
+            if ($user->first_name) {
+                $total_field_filled += 1;
+            }
+            if ($user->gender) {
+                $total_field_filled += 1;
+            }
+            if ($user->mobil_no) {
+                $total_field_filled += 1;
+            }
+            if ($user->email) {
+                $total_field_filled += 1;
+            }
+            if ($user->user_name) {
+                $total_field_filled += 1;
+            }
+            if ($user->country_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->state_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->city_id) {
+                $total_field_filled += 1;
+            }
+            if ($user->image) {
+                $total_field_filled += 1;
+            }
+            if ($user->dob) {
+                $total_field_filled += 1;
+            }
+            if ($user->ethnicity) {
+                $total_field_filled += 1;
+            }
+            // end of calculate profile percentage 
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
             $token->save();
@@ -1108,6 +1180,7 @@ class UserController extends Controller
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
+            $user->percentage = $total_field_filled / 11 * 100;
             return res_success('User  login  Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
