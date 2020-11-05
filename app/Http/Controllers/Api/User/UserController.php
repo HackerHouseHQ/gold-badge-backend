@@ -1164,41 +1164,61 @@ class UserController extends Controller
     }
     public function getFollowerList(Request $request)
     {
-        try {
-            $countryId = $request->country_id;
-            $stateId = $request->state_id;
-            $cityId = $request->city_id;
-            $departmentAll = Department::getDepartmentListAll($countryId, $stateId, $cityId);
-            $department = Department::getDepartmentList($countryId, $stateId, $cityId);
-            foreach ($departmentAll as $value) {
-                $value['total_reviews'] = 0;
-                $value['rating'] = 0;
-                $value['is_follow'] = 0;
-                foreach ($department as $k => $v) {
-                    if ($v->department_id  == $value->department_id) {
-                        $value['total_reviews'] = $v->total_reviews;
-                        $value['rating'] = ($v->rating) ? $v->rating : 0;
-                        $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
-                        $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
-                    }
+        // try {
+        $countryId = $request->country_id;
+        $stateId = $request->state_id;
+        $cityId = $request->city_id;
+        $departmentAll = Department::getDepartmentListAll($countryId, $stateId, $cityId);
+        $department = Department::getDepartmentList($countryId, $stateId, $cityId);
+        foreach ($departmentAll as $value) {
+            $value['total_reviews'] = 0;
+            $value['rating'] = 0;
+            $value['is_follow'] = 0;
+            foreach ($department as $k => $v) {
+                if ($v->department_id  == $value->department_id) {
+                    $value['total_reviews'] = $v->total_reviews;
+                    $value['rating'] = ($v->rating) ? $v->rating : 0;
+                    $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
+                    $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
                 }
             }
-            $badges = DepartmentBadge::getDepartmentBadge($countryId, $stateId, $cityId);
-            foreach ($badges as $badge) {
-                $total_reviews = Post::where('badge_id', $badge->badge_id)->count();
-                $badge['rating'] = 0;
-                $badge['total_reviews'] = $total_reviews;
-                $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->avg('rating');
-                $badge['rating'] = ($rating) ? $rating : 0;
-                $is_follow = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->first();
-                $badge['is_follow'] = ($is_follow) ? $is_follow->status : 0;
-                # code...
-            }
-
-            return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $departmentAll, 'departmentBadges' => $badges));
-        } catch (Exception $e) {
-            return res_failed($e->getMessage(), $e->getCode());
         }
+        $departmentAll = $departmentAll->toArray();
+
+        usort($departmentAll, function ($is_follow1, $is_follow2) {
+            if ($is_follow1['is_follow'] < $is_follow2['is_follow'])
+                return 1;
+            else if ($is_follow1['is_follow'] > $is_follow2['is_follow'])
+                return -1;
+            else
+                return 0;
+        });
+        $badges = DepartmentBadge::getDepartmentBadge($countryId, $stateId, $cityId);
+        foreach ($badges as $badge) {
+            $total_reviews = Post::where('badge_id', $badge->badge_id)->count();
+            $badge['rating'] = 0;
+            $badge['total_reviews'] = $total_reviews;
+            $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->avg('rating');
+            $badge['rating'] = ($rating) ? $rating : 0;
+            $is_follow = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->first();
+            $badge['is_follow'] = ($is_follow) ? $is_follow->status : 0;
+            # code...
+        }
+        $badges = $badges->toArray();
+
+        usort($badges, function ($is_follow1, $is_follow2) {
+            if ($is_follow1['is_follow'] < $is_follow2['is_follow'])
+                return 1;
+            else if ($is_follow1['is_follow'] > $is_follow2['is_follow'])
+                return -1;
+            else
+                return 0;
+        });
+
+        return res_success(trans('messages.successFetchList'), (object) array('departmentFollowList' => $departmentAll, 'departmentBadges' => $badges));
+        // } catch (Exception $e) {
+        //     return res_failed($e->getMessage(), $e->getCode());
+        // }
     }
 
     public function getDepartmentData(Request $request)
