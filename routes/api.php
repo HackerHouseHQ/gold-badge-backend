@@ -76,6 +76,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/postProfile', 'PostController@postProfile');
 		Route::post('/departmentFollow', 'DepartmentController@departmentFollow');
 		Route::post('/myActivity', 'PostController@myActivity');
+		Route::post('/delete_post', 'PostController@delete_post');
 		Route::post('/chats/list', 'ChatController@user_list');
 		Route::post('/saveGalleryImage', 'GalleryController@saveGalleryImage');
 		Route::get('/getGalleryImage', 'GalleryController@getGalleryImage');

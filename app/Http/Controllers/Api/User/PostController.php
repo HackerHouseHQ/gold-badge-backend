@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\User;
 use App\Post;
 use App\User;
 use Exception;
+use App\PostImage;
 use App\DepartmentLike;
 use App\DepartmentVote;
 use App\DepartmentBadge;
@@ -20,6 +21,7 @@ use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class PostController extends Controller
@@ -658,5 +660,55 @@ class PostController extends Controller
             unset($post->updated_at);
         }
         return $posts;
+    }
+    public function delete_post(Request $request)
+    {
+        try {
+
+            $validator = Validator::make(
+                $request->all(),
+                [
+
+                    'post_id' => 'required'
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
+
+            $post = Post::where('id', $request->post_id)->first();
+            if (!$post) {
+                throw new Exception('post does not exists.', NOT_EXISTS);
+            }
+
+            $postImage = PostImage::where('post_id', $request->post_id)->get();
+            // unlink all post images
+            foreach ($postImage as $key => $value) {
+                # code... 
+                $siteUrl = env('APP_URL');
+                $path = $siteUrl . 'storage/uploads/post_department_image/' . $value->image;
+                unlink($path);
+            }
+
+            DepartmentLike::where('post_id', $request->post_id)->delete();
+            DepartmentShare::where('post_id', $request->post_id)->delete();
+            DepartmentCommentLike::where('post_id', $request->post_id)->delete();
+            DepartmentReport::where('post_id', $request->post_id)->delete();
+            DepartmentSubCommentLike::where('post_id', $request->post_id)->delete();
+            PostImage::where('post_id', $request->post_id)->delete();
+            DepartmentVote::where('post_id', $request->post_id)->delete();
+            DepartmentSubComment::where('post_id', $request->post_id)->delete();
+            DepartmentComment::where('post_id', $request->post_id)->delete();
+
+            $deletePost = Post::where('id', $request->post_id)->delete();
+            return res_success('Your post is deleted successfully.');
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
 }
