@@ -1173,13 +1173,12 @@ class UserController extends Controller
         foreach ($departmentAll as $value) {
             $value['total_reviews'] = 0;
             $value['rating'] = 0;
-            $value['is_follow'] = 0;
+            $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
+            $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
             foreach ($department as $k => $v) {
                 if ($v->department_id  == $value->department_id) {
                     $value['total_reviews'] = $v->total_reviews;
                     $value['rating'] = ($v->rating) ? $v->rating : 0;
-                    $is_follow = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->first();
-                    $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
                 }
             }
         }
