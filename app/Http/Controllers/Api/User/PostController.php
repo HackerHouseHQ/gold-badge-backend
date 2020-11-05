@@ -23,6 +23,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -689,10 +690,8 @@ class PostController extends Controller
             $postImage = PostImage::where('post_id', $request->post_id)->get();
             // unlink all post images
             foreach ($postImage as $key => $value) {
-                # code... 
-                $siteUrl = env('APP_URL');
-                $path = $siteUrl . 'storage/uploads/post_department_image/' . $value->image;
-                unlink($path);
+
+                Storage::disk('public')->delete('uploads/post_department_image/' . $value->image);
             }
 
             DepartmentLike::where('post_id', $request->post_id)->delete();
