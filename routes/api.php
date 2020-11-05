@@ -45,6 +45,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/send-otp', 'LoginController@sendOtpToMail');
 	Route::post('/verifyOtp', 'LoginController@verifyOtp');
 	Route::get('/countryList', 'UserController@getCountryList');
+	Route::get('/getEthnicityList', 'UserController@getEthnicity');
 	Route::post('/stateList', 'UserController@getStateList');
 	Route::post('/cityList', 'UserController@getCityList');
 	Route::post('/checkMobileNo', 'UserController@checkMobileNoExistence');

@@ -22,6 +22,7 @@ use Illuminate\Http\Request;
 use App\DepartmentSubComment;
 use App\DepartmentSubCommentLike;
 use App\DepartmentVote;
+use App\Ethnicity;
 use App\GalleryImages;
 use App\UserDepartmentFollow;
 use Illuminate\Support\Facades\DB;
@@ -51,6 +52,23 @@ class UserController extends Controller
             } else {
                 return res_success('No record found', (object) array('countryList' => $country));
             }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+    /**
+     * Show ethnicity List.
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
+
+    public function getEthnicity()
+    {
+        try {
+            $ethnicity = Ethnicity::all();
+            return res_success(trans('messages.successFetchList'), (object) array('ethnicityList' => $ethnicity));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
