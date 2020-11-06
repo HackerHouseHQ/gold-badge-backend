@@ -143,6 +143,7 @@ if (!function_exists('sendFCM')) {
 
     function sendFCM($title, $message, $user)
     {
+
         try {
             DB::table('notifications')->insert([
                 'user_id' => $user->id,

@@ -827,7 +827,7 @@ class UserController extends Controller
             }
             if ($insertData) {
                 $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
+                $notification = sendFCM('Gold Badge', 'Some one liked your post.', $userNotify);
                 return res_success('Your like has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -1322,7 +1322,7 @@ class UserController extends Controller
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                 });
             }
-            if (!empty($filter_by_date)) {
+            if (!empty($filter_by_date) && $filter_by_date != 0) {
                 $todaydate = date("Y-m-d"); // current date
                 $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
                 $after_two_week_date = date("Y-m-d", strtotime("-2 week"));
@@ -1460,7 +1460,7 @@ class UserController extends Controller
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                 });
             }
-            if (!empty($filter_by_date)) {
+            if (!empty($filter_by_date) && $filter_by_date != 0) {
                 $todaydate = date("Y-m-d"); // current date
                 $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
                 $after_two_week_date = date("Y-m-d", strtotime("-2 week"));
