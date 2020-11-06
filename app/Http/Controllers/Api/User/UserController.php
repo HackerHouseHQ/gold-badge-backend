@@ -826,7 +826,8 @@ class UserController extends Controller
                 $insertData = DepartmentLike::insert($insertArray);
             }
             if ($insertData) {
-                $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+                $post = Post::whereId($post_id)->first();
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $notification = sendFCM('Gold Badge', 'Some one liked your post.', $userNotify);
                 return res_success('Your like has been saved successfully.');
             }
@@ -863,8 +864,9 @@ class UserController extends Controller
             ];
             $insertData = DepartmentShare::insert($insertArray);
             if ($insertData) {
-                $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
+                $post = Post::whereId($post_id)->first();
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                $notification = sendFCM('Gold Badge', 'Someone shared your post.', $userNotify);
                 return res_success('Your share has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -919,7 +921,8 @@ class UserController extends Controller
                 "comment_reply_count" => $comment_reply_count,
                 "is_commment_like" => ($is_comment_like) ? 1 : 0
             ];
-            $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            $post = Post::whereId($post_id)->first();
+            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
             $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
             return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
@@ -976,7 +979,8 @@ class UserController extends Controller
                 "sub_comment_like_count" => $sub_comment_like_count,
                 "is_sub_commment_like" => ($is_sub_commment_like) ? 1 : 0
             ];
-            $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            $post = Post::whereId($post_id)->first();
+            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
             $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
             return res_success('Your sub comment has been saved successfully.', $data);
         } catch (Exception $e) {

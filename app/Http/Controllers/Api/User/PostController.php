@@ -61,7 +61,8 @@ class PostController extends Controller
                 $insertData = DepartmentCommentLike::insert($insertArray);
             }
             if ($insertData) {
-                $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+                $post = Post::whereId($post_id)->first();
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $notification = sendFCM('Gold Badge', 'Commented liked.', $userNotify);
                 return res_success('Your like has been saved successfully.');
             }
@@ -105,7 +106,8 @@ class PostController extends Controller
                 $insertData = DepartmentSubCommentLike::insert($insertArray);
             }
             if ($insertData) {
-                $userNotify = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+                $post = Post::whereId($post_id)->first();
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $notification = sendFCM('Gold Badge', 'Commented liked.', $userNotify);
                 return res_success('Your like has been saved successfully.');
             }
