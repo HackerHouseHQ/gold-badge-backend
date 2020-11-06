@@ -1572,4 +1572,16 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    public function   getEditprofileData(Request $request)
+    {
+        try {
+            $user = User::whereId(Auth::user()->id)->first();
+            if ($user->image != null) {
+                $user->image =  env('APP_URL') .  'storage/uploads/user_image/' . $user->image;
+            }
+            return res_success('Successfully List.', $user);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
 }

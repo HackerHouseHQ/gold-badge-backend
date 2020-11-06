@@ -84,5 +84,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/deleteGalleryImage', 'GalleryController@deleteGalleryImage');
 		Route::get('/getNotification', 'InformationManagementController@getNotification');
 		Route::post('/editProfile', 'UserController@editProfile');
+		Route::get('/getEditprofileData', 'UserController@getEditprofileData');
 	});
 });
