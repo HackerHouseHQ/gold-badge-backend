@@ -22,5 +22,6 @@ return [
     "eventNotExists" => "Event does not exist.",
     "requestInProcess" => "Your request in process.",
     "numberNotExists"  =>  "Mobile number does not exits.",
-    "contactAdmin" => "Contact to admin."
+    "contactAdmin" => "Contact to admin.",
+    "notificationStatus" => "Notification status changed successfully,"
 ];

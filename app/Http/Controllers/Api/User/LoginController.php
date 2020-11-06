@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use App\UserOtpLogin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -108,5 +110,27 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
+    }
+
+    /**
+     * change notification status .
+     *
+     * @return Json
+     * @author Ratnesh Kumar 
+     * 
+     */
+    public function change_notification_status()
+    {
+        //get user notification status
+        $user = User::whereId(Auth::user()->id)->first();
+        $user_notification_status = $user->notification_status;
+
+        //update user notification status
+        if ($user_notification_status == ACTIVE) {
+            $update = User::whereId(Auth::user()->id)->update(['notification_status' => INACTIVE]);
+        } else {
+            $update = User::whereId(Auth::user()->id)->update(['notification_status' => ACTIVE]);
+        }
+        return res_success(trans('messages.notificationStatus'));
     }
 }

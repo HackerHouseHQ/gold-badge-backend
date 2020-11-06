@@ -178,6 +178,45 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    private function calculatProfilePercentage($user)
+    {
+        $total_field_filled = 0;
+        if ($user->first_name) {
+            $total_field_filled += 1;
+        }
+        if ($user->gender) {
+            $total_field_filled += 1;
+        }
+        if ($user->mobil_no) {
+            $total_field_filled += 1;
+        }
+        if ($user->email) {
+            $total_field_filled += 1;
+        }
+        if ($user->user_name) {
+            $total_field_filled += 1;
+        }
+        if ($user->country_id) {
+            $total_field_filled += 1;
+        }
+        if ($user->state_id) {
+            $total_field_filled += 1;
+        }
+        if ($user->city_id) {
+            $total_field_filled += 1;
+        }
+        if ($user->image) {
+            $total_field_filled += 1;
+        }
+        if ($user->dob) {
+            $total_field_filled += 1;
+        }
+        if ($user->ethnicity) {
+            $total_field_filled += 1;
+        }
+        return $total_field_filled / 11 * 100;
+        // end of calculate profile percentage 
+    }
     /**
      * sign up user.
      *
@@ -269,41 +308,7 @@ class UserController extends Controller
 
             $user = User::where('id', $userInsetId)->first();
             // calculate profile percentage 
-            $total_field_filled = 0;
-            if ($user->first_name) {
-                $total_field_filled += 1;
-            }
-            if ($user->gender) {
-                $total_field_filled += 1;
-            }
-            if ($user->mobil_no) {
-                $total_field_filled += 1;
-            }
-            if ($user->email) {
-                $total_field_filled += 1;
-            }
-            if ($user->user_name) {
-                $total_field_filled += 1;
-            }
-            if ($user->country_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->state_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->city_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->image) {
-                $total_field_filled += 1;
-            }
-            if ($user->dob) {
-                $total_field_filled += 1;
-            }
-            if ($user->ethnicity) {
-                $total_field_filled += 1;
-            }
-            // end of calculate profile percentage 
+            $percentage = $this->calculatProfilePercentage($user);
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
             $token->save();
@@ -311,7 +316,7 @@ class UserController extends Controller
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
-            $user->percentage =  $total_field_filled / 11 * 100;
+            $user->percentage =  $percentage;
             return res_success('User  Signup Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1138,41 +1143,8 @@ class UserController extends Controller
                 }
             }
             // calculate profile percentage 
-            $total_field_filled = 0;
-            if ($user->first_name) {
-                $total_field_filled += 1;
-            }
-            if ($user->gender) {
-                $total_field_filled += 1;
-            }
-            if ($user->mobil_no) {
-                $total_field_filled += 1;
-            }
-            if ($user->email) {
-                $total_field_filled += 1;
-            }
-            if ($user->user_name) {
-                $total_field_filled += 1;
-            }
-            if ($user->country_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->state_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->city_id) {
-                $total_field_filled += 1;
-            }
-            if ($user->image) {
-                $total_field_filled += 1;
-            }
-            if ($user->dob) {
-                $total_field_filled += 1;
-            }
-            if ($user->ethnicity) {
-                $total_field_filled += 1;
-            }
-            // end of calculate profile percentage 
+            // calculate profile percentage 
+            $percentage = $this->calculatProfilePercentage($user);
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
             $token->save();
@@ -1180,7 +1152,7 @@ class UserController extends Controller
             $user->token_type = 'Bearer';
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
-            $user->percentage = $total_field_filled / 11 * 100;
+            $user->percentage = $percentage;
             return res_success('User  login  Successfully', $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1324,6 +1296,7 @@ class UserController extends Controller
 
             $user_id = $request->user_id;
             $search = $request->search;
+            $filter_by_date = $request->filter_date;
 
             //get all reported posts reported by user
             $reportId = DepartmentReport::select('post_id')->where('user_id', $user_id)->get()->toArray();
@@ -1347,6 +1320,26 @@ class UserController extends Controller
                     $q->orwhere('user_name', 'like', '%' . $search . '%');
                     $q->orwhere('posts.comment', 'like', '%' . $search . '%');
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+                });
+            }
+            if (!empty($filter_by_date)) {
+                $todaydate = date("Y-m-d"); // current date
+                $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
+                $after_two_week_date = date("Y-m-d", strtotime("-2 week"));
+                $month_date = date("Y-m-d", strtotime("-1 month"));
+                if ($filter_by_date == 1) {
+                    $fromdate1 =   $after_one_week_date;
+                    $todate1 =   $todaydate;
+                } elseif ($filter_by_date == 2) {
+                    $fromdate1 =   $after_two_week_date;
+                    $todate1 =   $todaydate;
+                } elseif ($filter_by_date == 3) {
+                    $fromdate1 =   $month_date;
+                    $todate1 =   $todaydate;
+                }
+                $query->Where(function ($q) use ($fromdate1, $todate1) {
+                    $q->wheredate('posts.created_at', '>=', $fromdate1);
+                    $q->wheredate('posts.created_at', '<=', $todate1);
                 });
             }
             $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
@@ -1411,6 +1404,7 @@ class UserController extends Controller
     {
         try {
             $badge_id = $request->badge_id;
+            $filter_by_date = $request->filter_date;
             $siteUrl = env('APP_URL');
             $badge = DepartmentBadge::with('department_data')->whereId($badge_id)->first();
             $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->get()->toArray();
@@ -1464,6 +1458,26 @@ class UserController extends Controller
                     $q->orwhere('user_name', 'like', '%' . $search . '%');
                     $q->orwhere('posts.comment', 'like', '%' . $search . '%');
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
+                });
+            }
+            if (!empty($filter_by_date)) {
+                $todaydate = date("Y-m-d"); // current date
+                $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
+                $after_two_week_date = date("Y-m-d", strtotime("-2 week"));
+                $month_date = date("Y-m-d", strtotime("-1 month"));
+                if ($filter_by_date == 1) {
+                    $fromdate1 =   $after_one_week_date;
+                    $todate1 =   $todaydate;
+                } elseif ($filter_by_date == 2) {
+                    $fromdate1 =   $after_two_week_date;
+                    $todate1 =   $todaydate;
+                } elseif ($filter_by_date == 3) {
+                    $fromdate1 =   $month_date;
+                    $todate1 =   $todaydate;
+                }
+                $query->Where(function ($q) use ($fromdate1, $todate1) {
+                    $q->wheredate('posts.created_at', '>=', $fromdate1);
+                    $q->wheredate('posts.created_at', '<=', $todate1);
                 });
             }
             $posts = $query->orderBy('created_at', 'DESC')->paginate(10);

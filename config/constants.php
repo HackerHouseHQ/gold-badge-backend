@@ -11,7 +11,7 @@ define('NO', 0);
 
 
 defined("ACTIVE") or define("ACTIVE", 1);
-
+defined("INACTIVE") or define("INACTIVE", 0);
 defined("BLOCKED") or define("BLOCKED", 2);
 define("PUBLIC", 1);
 define("PRIVATE", 0);

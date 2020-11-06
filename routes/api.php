@@ -85,5 +85,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::get('/getNotification', 'InformationManagementController@getNotification');
 		Route::post('/editProfile', 'UserController@editProfile');
 		Route::get('/getEditprofileData', 'UserController@getEditprofileData');
+		Route::get('/notificationStatus', 'LoginController@change_notification_status');
 	});
 });
