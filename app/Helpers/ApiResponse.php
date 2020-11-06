@@ -133,6 +133,7 @@ if (!function_exists('sendFCM_notification')) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
         $result = curl_exec($ch);
+        dd($result);
         curl_close($ch);
 
         return $result;
