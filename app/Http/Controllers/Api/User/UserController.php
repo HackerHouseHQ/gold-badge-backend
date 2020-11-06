@@ -1559,7 +1559,8 @@ class UserController extends Controller
                 'city_id' => $request->city_id,
                 'image'  => $filename,
                 'ethnicity' => $request->ethnicity,
-                'dob' => date('Y-m-d', strtotime($request->dob))
+                'dob' => date('Y-m-d', strtotime($request->dob)),
+                'gender' => $request->gender
             ];
             $update = User::whereId(Auth::user()->id)->update($insertData);
             if ($update) {
