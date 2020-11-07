@@ -52,10 +52,13 @@
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
           <div class="row-lg-6 row-5">
-            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral" style="background-color:#fb6340;color:#fff;">Manage Countries</a>
+            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral"
+              style="background-color:#fb6340;color:#fff;">Manage Countries</a>
             <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
             <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
             <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
+            <a href="{{route('report-message')}}" class="btn btn-sm btn-neutral">Report</a>
+
 
           </div>
           <!--          <div class="row-lg-6  row-5" style="float: right;">
@@ -90,21 +93,37 @@
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <div class="row">
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a style="background-color: #fb6340; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">Add Country +</a></button>
+                <button type="button" class="btn btn-default"> <a
+                    style="background-color: #fb6340; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}"
+                    class="btn btn-sm btn-neutral">Add Country +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">Add State +</a></button>
+                <button type="button" class="btn btn-default"> <a
+                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}"
+                    class="btn btn-sm btn-neutral">Add State +</a></button>
               </div>
 
               <div class="col-3">
-                <button type="button" class="btn btn-default"> <a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">Add City +</a></button>
+                <button type="button" class="btn btn-default"> <a
+                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}"
+                    class="btn btn-sm btn-neutral">Add City +</a></button>
               </div>
               <div class="col-3">
-                <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
+                <button type="button" class="btn btn-default"><a
+                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
+                    href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
               </div>
               <div class="col-3 py-2">
-                <button type="button" class="btn btn-default"><a style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
+                <button type="button" class="btn btn-default"><a
+                    style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
+                    href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
                     +</a></button>
+              </div>
+              <div class="col-3 py-2">
+                <button type="button" class="btn btn-default"><a
+                    style="background-color: #e4bd46;;  color:#fff;font-size: 15px;"
+                    href="{{route('add_report_message_page')}}" class="btn btn-sm btn-neutral">Add
+                    Report +</a></button>
               </div>
             </div>
 
@@ -134,7 +153,8 @@
 </div>
 
 {{-- model view city --}}
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header custom_modal_header">
@@ -169,7 +189,8 @@
 </div>
 {{-- end model view city --}}
 {{-- model Edit city --}}
-<div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="EditCitymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:100%">
       <div class="modal-header custom_modal_header">
@@ -206,7 +227,8 @@
 </div>
 {{-- end model Edit city --}}
 {{-- model view department --}}
-<div class="modal fade" id="viewDepartmentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="viewDepartmentModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:150%">
       <div class="modal-header custom_modal_header">
@@ -227,7 +249,8 @@
 </div>
 {{-- end model view department --}}
 {{-- model Edit country --}}
-<div class="modal fade" id="EditCountrymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="EditCountrymodel1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content" style="width:100%">
       <div class="modal-header custom_modal_header">

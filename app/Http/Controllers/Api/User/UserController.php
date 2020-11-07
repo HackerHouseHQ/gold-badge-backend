@@ -56,23 +56,7 @@ class UserController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    /**
-     * Show ethnicity List.
-     *
-     * @return Json
-     * @author Ratnesh Kumar 
-     * 
-     */
 
-    public function getEthnicity()
-    {
-        try {
-            $ethnicity = Ethnicity::all();
-            return res_success(trans('messages.successFetchList'), (object) array('ethnicityList' => $ethnicity));
-        } catch (Exception $e) {
-            return res_failed($e->getMessage(), $e->getCode());
-        }
-    }
     /**
      * Show state List.
      *

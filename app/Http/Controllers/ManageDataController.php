@@ -15,9 +15,10 @@ use App\Country;
 
 // use Excel;
 use App\Ethnicity;
-use App\CountryState;
 use App\Department;
+use App\CountryState;
 use App\GenderOption;
+use App\ReportMessage;
 use App\ReportReasson;
 use App\Exports\CityExport;
 use App\Exports\StateExport;
@@ -322,6 +323,64 @@ class ManageDataController extends Controller
         return redirect('/manage_data/ethnicity');
     }
 
+    // show enthcity
+    public function reportMessage()
+    {
+        $reportMessageData = ReportMessage::simplePaginate(20);
+        $data['data'] = $reportMessageData;
+        return view('manage_data.report-message', $data);
+    }
+    // add ReportMessage
+    public function add_report_message_page()
+    {
+        return view('manage_data.add_report_message');
+    }
+    public function add_report_message(Request $request)
+    {
+        if (!empty($request->report_message_file)) {
+            $request->validate([
+                'report_message_file' => 'required|mimes:csv,txt'
+            ], [
+                'mimes' => 'The file type must be in a csv format'
+            ]);
+            $path = $request->file('report_message_file')->getRealPath();
+            //  echo "<pre>"; print_r($request->state_file); die;
+
+            $data1 =  Importer::make('Csv')->load($path)->getCollection();
+            $datacount = count($data1);
+            for ($i = 1; $i < $datacount; $i++) {
+                // echo"<pre>"; print_r($data[$i][0]); 
+                $data['message'] = $data1[$i][0];
+                $insertCountry = ReportMessage::create($data);
+            }
+            return redirect('/manage_data/report-message');
+            // die;
+        } else {
+            $request->validate([
+                'message' => 'required'
+            ]);
+
+            $data['message'] =   ucfirst($request->message);
+            $InsertReportMessage = ReportMessage::Create($data);
+            return redirect('/manage_data/report-message');
+        }
+    }
+    public function DeleteReportMessage($id)
+    {
+        $DeleteReportMessage = ReportMessage::where('id', $id)->delete();
+        return redirect('/manage_data/report-message');
+    }
+    public function Show_edit_report_message($id)
+    {
+        $ReportMessageData = ReportMessage::where('id', $id)->first();
+        return response()->json($ReportMessageData, 200);
+    }
+    public function updatReportMessage(Request $request)
+    {
+        $data['message'] = ucfirst($request->message);
+        $ReportMessageData = ReportMessage::where('id', $request->id)->update($data);
+        return redirect('/manage_data/report-message');
+    }
 
 
     // show option to give user gender

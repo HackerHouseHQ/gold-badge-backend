@@ -135,6 +135,13 @@ Route::group(['middleware' => ['auth:admin']], function () {
     Route::get('/Show_edit_ethnicity/{id?}', 'ManageDataController@Show_edit_ethnicity')->name('Show_edit_ethnicity');
     Route::get('/updatEthnicity', 'ManageDataController@updatEthnicity')->name('updatEthnicity');
 
+    Route::get('/add_report_message', 'ManageDataController@add_report_message_page')->name('add_report_message_page');
+    Route::post('/insert_report_message', 'ManageDataController@add_report_message')->name('add_report_message');
+    Route::get('/report-message', 'ManageDataController@reportMessage')->name('report-message');
+    Route::get('/DeleteReportMessage/{id}', 'ManageDataController@DeleteReportMessage')->name('DeleteReportMessage');
+    Route::get('/Show_edit_report_message/{id?}', 'ManageDataController@Show_edit_report_message')->name('Show_edit_report_message');
+    Route::get('/updatReportMessage', 'ManageDataController@updatReportMessage')->name('updatReportMessage');
+
     Route::get('/gender', 'ManageDataController@gender')->name('gender');
     Route::get('/Show_edit_gender/{id?}', 'ManageDataController@Show_edit_gender')->name('Show_edit_gender');
     Route::get('/AddGender', 'ManageDataController@AddGender')->name('AddGender');
