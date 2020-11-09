@@ -843,7 +843,7 @@ class UserController extends Controller
             }
             if ($insertData) {
                 $post = Post::whereId($post_id)->first();
-                $user = User::where('user_id', $user_id)->first();
+                $user = User::whereId($user_id)->first();
                 $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $notification = sendFCM('Gold Badge', $user->first_name . ' liked your post.', $userNotify);
                 return res_success('Your like has been saved successfully.');
