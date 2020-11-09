@@ -133,7 +133,7 @@ if (!function_exists('sendFCM_notification')) {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
 
         $result = curl_exec($ch);
-        // dd($result);
+        dd($result);
         curl_close($ch);
 
         return $result;
@@ -152,7 +152,7 @@ if (!function_exists('sendFCM')) {
                 'created_at' => Carbon::now()->toDateTimeString()
             ]);
             if ($user->device_token) {
-                return sendFCM_notification($title, $message, ['dCz_kuLOTfyZ5Ve-zyujne:APA91bGMLqn6hPwnr8FoGtrOp_vc5V-OY45LKJolO8uU8FIw73CN-kmdn0GBxmGEfcgsMoqGlEs-WCNEQD86eLw0qX4V_YeIfts9g6iElnudt7JvcZwvOuHvQ61ZRqbDbjx_SfjaKq9c']);
+                return sendFCM_notification($title, $message, [$user->device_token]);
             }
             return null;
         } catch (Exception $e) {
