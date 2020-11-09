@@ -843,8 +843,9 @@ class UserController extends Controller
             }
             if ($insertData) {
                 $post = Post::whereId($post_id)->first();
+                $user = User::where('user_id', $user_id)->first();
                 $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', 'Some one liked your post.', $userNotify);
+                $notification = sendFCM('Gold Badge', $user->first_name . ' liked your post.', $userNotify);
                 return res_success('Your like has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -880,9 +881,9 @@ class UserController extends Controller
             ];
             $insertData = DepartmentShare::insert($insertArray);
             if ($insertData) {
-                $post = Post::whereId($post_id)->first();
-                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', 'Someone shared your post.', $userNotify);
+                // $post = Post::whereId($post_id)->first();
+                // $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                // $notification = sendFCM('Gold Badge', 'Someone shared your post.', $userNotify);
                 return res_success('Your share has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -939,7 +940,7 @@ class UserController extends Controller
             ];
             $post = Post::whereId($post_id)->first();
             $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-            $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
+            $notification = sendFCM('Gold Badge', $user->first_name . 'commented on your post.', $userNotify);
             return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -997,7 +998,7 @@ class UserController extends Controller
             ];
             $post = Post::whereId($post_id)->first();
             $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-            $notification = sendFCM('Gold Badge', 'Commented on your post.', $userNotify);
+            $notification = sendFCM('Gold Badge', $user->first_name . 'commented on your post.', $userNotify);
             return res_success('Your sub comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
