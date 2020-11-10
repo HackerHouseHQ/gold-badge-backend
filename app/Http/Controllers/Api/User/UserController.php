@@ -1614,6 +1614,7 @@ class UserController extends Controller
             if ($update) {
                 $user = User::whereId(Auth::user()->id)->first();
                 $user->percentage = $this->calculatProfilePercentage($user);
+                $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
                 return res_success('Profile updated successfully.', $user);
             } else {
                 return res_failed('Something went wrong.');
