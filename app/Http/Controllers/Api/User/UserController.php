@@ -1585,7 +1585,7 @@ class UserController extends Controller
                 throw new Exception('The user name has already been taken.', DATA_EXISTS);
             }
 
-            $user = User::whereId(Auth::user()->id)->first();
+
 
             $file = $request->image;
             // if (!empty($file) && file_exists($file)) {
@@ -1612,7 +1612,8 @@ class UserController extends Controller
             ];
             $update = User::whereId(Auth::user()->id)->update($insertData);
             if ($update) {
-                return res_success('Profile updated successfully.');
+                $user = User::whereId(Auth::user()->id)->first();
+                return res_success('Profile updated successfully.', $user);
             } else {
                 return res_failed('Something went wrong.');
             }
