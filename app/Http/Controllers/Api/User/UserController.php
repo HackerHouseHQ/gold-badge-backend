@@ -1588,10 +1588,11 @@ class UserController extends Controller
 
 
             $file = $request->image;
-            // if (!empty($file) && file_exists($file)) {
-            //     $unsetPath = storage_path() . '/app/public/uploads/user_image/' . $user->image;
-            //     unlink($unsetPath);
-            // }
+            $user = User::whereId(Auth::user()->id)->first();
+            if (!empty($file) && file_exists($file)) {
+                $unsetPath = storage_path() . '/app/public/uploads/user_image/' . $user->image;
+                unlink($unsetPath);
+            }
             $extension = $file->getClientOriginalExtension();
             $filename = time()  . "." . $extension;
             $path = storage_path() . '/app/public/uploads/user_image';
@@ -1614,7 +1615,7 @@ class UserController extends Controller
             if ($update) {
                 $user = User::whereId(Auth::user()->id)->first();
                 $user->percentage = $this->calculatProfilePercentage($user);
-                $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
+                $user->image = ($user->image) ? env('APP_URL')  . 'storage/uploads/user_image/' . $user->image : "";
                 return res_success('Profile updated successfully.', $user);
             } else {
                 return res_failed('Something went wrong.');
