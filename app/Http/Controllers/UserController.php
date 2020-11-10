@@ -119,7 +119,11 @@ class UserController extends Controller
     $data = DepartmentReport::with('post_images')->where('post_id', $request->id)
       ->leftjoin("users", function ($join) {
         $join->on('department_reports.user_id', '=', 'users.id');
-      })->get();
+      })
+      ->leftjoin("report_messages", function ($join) {
+        $join->on('department_reports.report_message_id', '=', 'report_messages.id');
+      })
+      ->get();
     return $data;
   }
 

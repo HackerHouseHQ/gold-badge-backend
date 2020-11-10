@@ -1070,15 +1070,14 @@ class UserController extends Controller
             }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
-            $message = $request->message;
+            $report_message_id = $request->report_message_id;
             $insertArray = [
                 'post_id' => $post_id,
                 'user_id' => $user_id,
-                'message' => $message,
+                'report_message_id' => $report_message_id,
                 'created_at' => CURRENT_DATE,
                 'updated_at' => CURRENT_DATE
             ];
-
             $insertReport = DepartmentReport::insert($insertArray);
             if ($insertArray)
                 return res_success('Report saved successfully.');
