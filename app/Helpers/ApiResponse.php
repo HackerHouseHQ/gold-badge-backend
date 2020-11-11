@@ -151,7 +151,7 @@ if (!function_exists('sendFCM')) {
                 'created_at' => Carbon::now()->toDateTimeString()
             ]);
             if ($user->device_token) {
-                return sendFCM_notification($title, $message, ['c3-zJTkASX-0ihGmos5CMP:APA91bGXvIf9Z84UZgGdBr0WLodXOIFYkGcRKqiorTsxrK7m2luuhWJCBDsy6ApK2dECm8EaY7dvw8ZhpHOuHM3rjI246bvjipHz5EOmZ8IyYAaUbLulcf1N9iNfwfs5qU5uQI-RriCD']);
+                return sendFCM_notification($title, $message, [$user->device_token]);
             }
             return null;
         } catch (Exception $e) {
