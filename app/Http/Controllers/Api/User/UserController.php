@@ -1251,6 +1251,7 @@ class UserController extends Controller
         $countryId = $request->country_id;
         $stateId = $request->state_id;
         $cityId = $request->city_id;
+        $is_followed_by_user = $request->is_followed_by_user;
         $departmentAll = Department::getDepartmentListAll($countryId, $stateId, $cityId);
         $department = Department::getDepartmentList($countryId, $stateId, $cityId);
         foreach ($departmentAll as $value) {
@@ -1264,8 +1265,20 @@ class UserController extends Controller
                     $value['rating'] = ($v->rating) ? $v->rating : 0;
                 }
             }
+            if ($is_followed_by_user == 1) {
+                $departmentfollowedbyuser = [];
+                $followedDepartment = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->get()->toArray();
+                $followedDepartmentIdsArray     =   array_column($followedDepartment, 'department_id');
+                if (in_array($value->department_id, $followedDepartmentIdsArray)) {
+                    $departmentfollowedbyuser[] = [$value];
+                }
+            }
         }
-        $departmentAll = $departmentAll->toArray();
+        if ($is_followed_by_user == 1) {
+            $departmentAll = $departmentfollowedbyuser;
+        } else {
+            $departmentAll = $departmentAll->toArray();
+        }
 
         usort($departmentAll, function ($is_follow1, $is_follow2) {
             if ($is_follow1['is_follow'] < $is_follow2['is_follow'])
@@ -1285,8 +1298,21 @@ class UserController extends Controller
             $is_follow = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->first();
             $badge['is_follow'] = ($is_follow) ? $is_follow->status : 0;
             # code...
+            if ($is_followed_by_user == 1) {
+                $badgefollowedbyuser = [];
+                $followedBadge = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->get()->toArray();
+                $followedBadgeIdsArray     =   array_column($followedBadge, 'badge_id');
+                if (in_array($value->badge_id, $followedBadgeIdsArray)) {
+                    $badgefollowedbyuser[] = [$value];
+                }
+            }
         }
-        $badges = $badges->toArray();
+        if ($is_followed_by_user == 1) {
+            $badges = $badgefollowedbyuser;
+        } else {
+            $badges = $badges->toArray();
+        }
+
 
         usort($badges, function ($is_follow1, $is_follow2) {
             if ($is_follow1['is_follow'] < $is_follow2['is_follow'])
