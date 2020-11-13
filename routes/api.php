@@ -90,5 +90,6 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::get('/notificationStatus', 'LoginController@change_notification_status');
 		Route::post('/getBadgesOfDepartment', 'DepartmentController@getBadgesOfDepartment');
 		Route::post('/getDepartmentOfBadge', 'DepartmentController@getDepartmentOfBadge');
+		Route::get('/read_notification', 'LoginController@read_notification');
 	});
 });

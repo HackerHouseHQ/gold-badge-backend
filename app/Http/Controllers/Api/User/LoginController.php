@@ -133,4 +133,9 @@ class LoginController extends Controller
         }
         return res_success(trans('messages.notificationStatus'));
     }
+    public function read_notification()
+    { // update status of read notification
+        $update = User::whereId(Auth::user()->id)->update(['read_notification' => 1]);
+        return res_success('Read the notification.');
+    }
 }

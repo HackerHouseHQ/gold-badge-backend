@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Auth;
+use Session;
+use Storage;
+
+use App\User;
+use Validator;
 use App\InformationData;
 use App\SendNotification;
-
-use DB;
-use Auth;
-use Storage;
-use Session;
-use Validator;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class InformationManagementController extends Controller
 {
@@ -73,6 +74,7 @@ class InformationManagementController extends Controller
       // echo"<pre>"; print_r($req->all()); die;  
       $data['title'] = $req->title;
       $data['message'] = $req->desscription;
+      $user = DB::table('users')->update(['read_notification' => 0]);
       $insertNotification = SendNotification::create($data);
       return redirect('cms/notification');
    }
