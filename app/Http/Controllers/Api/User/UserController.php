@@ -1267,7 +1267,7 @@ class UserController extends Controller
                 }
                 if ($is_followed_by_user == 1) {
                     $departmentfollowedbyuser = [];
-                    $followedDepartment = UserDepartmentFollow::where('department_id', $value->department_id)->where('user_id', Auth::user()->id)->get()->toArray();
+                    $followedDepartment = UserDepartmentFollow::where('user_id', Auth::user()->id)->get()->toArray();
                     $followedDepartmentIdsArray     =   array_column($followedDepartment, 'department_id');
                     if (in_array($value->department_id, $followedDepartmentIdsArray)) {
                         $departmentfollowedbyuser[] = [$value];
@@ -1300,7 +1300,7 @@ class UserController extends Controller
                 # code...
                 if ($is_followed_by_user == 1) {
                     $badgefollowedbyuser = [];
-                    $followedBadge = UserDepartmentBadgeFollow::where('badge_id', $badge->badge_id)->where('user_id', Auth::user()->id)->get()->toArray();
+                    $followedBadge = UserDepartmentBadgeFollow::where('user_id', Auth::user()->id)->get()->toArray();
                     $followedBadgeIdsArray     =   array_column($followedBadge, 'badge_id');
                     if (in_array($value->badge_id, $followedBadgeIdsArray)) {
                         $badgefollowedbyuser[] = [$value];
