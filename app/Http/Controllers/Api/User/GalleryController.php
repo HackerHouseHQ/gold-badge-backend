@@ -38,10 +38,12 @@ class GalleryController extends Controller
                     $path = storage_path() . '/app/public/uploads/gallery_image';
                     $file->move($path, $filename);
                     $videoFile = $videoFile[$j];
-                    $videoExtension = $videoFile->getClientOriginalExtension();
-                    $videoFilename = time()  . "$i" . "." . $videoExtension;
-                    $videoPath = storage_path() . '/app/public/uploads/gallery_video';
-                    $videoFile->move($videoPath, $videoFilename);
+                    if (!empty($videoFile)) {
+                        $videoExtension = $videoFile->getClientOriginalExtension();
+                        $videoFilename = time()  . "$i" . "." . $videoExtension;
+                        $videoPath = storage_path() . '/app/public/uploads/gallery_video';
+                        $videoFile->move($videoPath, $videoFilename);
+                    }
                     $insertArray = [
                         'user_id' => Auth::user()->id,
                         'image'  => $filename,
