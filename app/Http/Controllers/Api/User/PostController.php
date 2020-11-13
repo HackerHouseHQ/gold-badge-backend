@@ -293,7 +293,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 1;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -308,7 +308,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 1;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postLiked as $liked) {
                 if ($post->id == $liked['post_id']) {
@@ -360,7 +360,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 2;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -375,7 +375,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 2;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             unset($post->rating);
             unset($post->reason_id);
@@ -413,7 +413,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 3;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -428,7 +428,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 3;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             unset($post->rating);
             unset($post->reason_id);
@@ -473,7 +473,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 4;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -488,7 +488,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 4;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postCommented as $commented) {
                 if ($post->id == $commented['post_id']) {
@@ -539,7 +539,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 4;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -554,7 +554,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 4;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postSubComment as $subCommented) {
                 if ($post->id == $subCommented['post_id']) {
@@ -605,7 +605,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 5;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -620,7 +620,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 5;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postSubCommentLike as $subCommented) {
                 if ($post->id == $subCommented['post_id']) {
@@ -671,7 +671,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 5;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -686,7 +686,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 5;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postCommented as $commented) {
                 if ($post->id == $commented['post_id']) {
@@ -737,7 +737,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 6;
-                $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
                 $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -752,7 +752,7 @@ class PostController extends Controller
                 $post->is_liked          = ($post_liked) ? 1 : 0;
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 6;
-                $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
             }
             foreach ($postVoted as $vote) {
                 if ($post->id == $vote['post_id']) {

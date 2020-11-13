@@ -656,7 +656,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                        $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -671,7 +671,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                        $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -724,7 +724,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                        $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -739,7 +739,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                        $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
@@ -793,7 +793,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_department) ? $user_followed_department->status : 0;
+                        $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
@@ -808,7 +808,7 @@ class UserController extends Controller
                         $post->is_liked          = ($post_liked) ? 1 : 0;
                         $post->is_shared          = ($post_shared) ? 1 : 0;
                         $post->user_status       = 1;
-                        $post->is_followed_by_user = ($user_followed_badge) ? $user_followed_badge->status : 0;
+                        $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
                     }
                     unset($post->rating);
                     unset($post->reason_id);
