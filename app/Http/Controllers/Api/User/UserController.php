@@ -1306,7 +1306,7 @@ class UserController extends Controller
                 $followedBadge = UserDepartmentBadgeFollow::where('user_id', Auth::user()->id)->get()->toArray();
                 $followedBadgeIdsArray     =   array_column($followedBadge, 'badge_id');
                 if (in_array($badge->badge_id, $followedBadgeIdsArray)) {
-                    $badgefollowedbyuser[] = $value;
+                    $badgefollowedbyuser[] = $badge;
                 }
             }
         }
