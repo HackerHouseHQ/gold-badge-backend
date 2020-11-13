@@ -88,5 +88,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 		Route::post('/editProfile', 'UserController@editProfile');
 		Route::get('/getEditprofileData', 'UserController@getEditprofileData');
 		Route::get('/notificationStatus', 'LoginController@change_notification_status');
+		Route::post('/getBadgesOfDepartment', 'DepartmentController@getBadgesOfDepartment');
+		Route::post('/getDepartmentOfBadge', 'DepartmentController@getDepartmentOfBadge');
 	});
 });
