@@ -121,21 +121,31 @@ class LoginController extends Controller
      */
     public function change_notification_status()
     {
-        //get user notification status
-        $user = User::whereId(Auth::user()->id)->first();
-        $user_notification_status = $user->notification_status;
+        try {
+            //get user notification status
+            $user = User::whereId(Auth::user()->id)->first();
+            $user_notification_status = $user->notification_status;
 
-        //update user notification status
-        if ($user_notification_status == ACTIVE) {
-            $update = User::whereId(Auth::user()->id)->update(['notification_status' => INACTIVE]);
-        } else {
-            $update = User::whereId(Auth::user()->id)->update(['notification_status' => ACTIVE]);
+            //update user notification status
+            if ($user_notification_status == ACTIVE) {
+                $update = User::whereId(Auth::user()->id)->update(['notification_status' => INACTIVE]);
+            } else {
+                $update = User::whereId(Auth::user()->id)->update(['notification_status' => ACTIVE]);
+            }
+            return res_success(trans('messages.notificationStatus'));
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
-        return res_success(trans('messages.notificationStatus'));
     }
     public function read_notification()
-    { // update status of read notification
-        $update = User::whereId(Auth::user()->id)->update(['read_notification' => 1]);
-        return res_success('Read the notification.');
+
+    {
+        try {
+            // update status of read notification
+            $update = User::whereId(Auth::user()->id)->update(['read_notification' => 1]);
+            return res_success('Read the notification.');
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
     }
 }

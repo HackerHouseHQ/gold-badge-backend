@@ -15,7 +15,6 @@
         border-radius: 1px;
         border-bottom: 2px solid #01AFAA;
     }
-
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -48,12 +47,16 @@
                         <li class="show" style="margin-right: 0px !important"><a
                                 href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-danger"
                                 data-toggle="notify" data-placement="top" data-align="center" data-type="success"
-                                data-icon="ni ni-bell-55">Pending</a></li>
+                                data-icon="ni ni-bell-55">Pending <span
+                                    class="badge badge-md badge-circle badge-floating badge-danger border-white">{{$pending}}</span></a>
+                        </li>
                         @else
                         <li class="show" style="margin-right: 0px !important"><a
                                 href="{{route('deprtmentPendingRequest')}}" id="pending" class="btn btn-secondary"
                                 data-toggle="notify" data-placement="top" data-align="center" data-type="success"
-                                data-icon="ni ni-bell-55">Pending</a></li>
+                                data-icon="ni ni-bell-55">Pending <span
+                                    class="badge badge-md badge-circle badge-floating badge-danger border-white">{{$pending}}</span></a>
+                        </li>
                         @endif
                         <li class="show" style="margin-right: 0px !important"><a
                                 href="{{route('deprtmentRejectRequest')}}" id="reject" class="btn btn-secondary"
