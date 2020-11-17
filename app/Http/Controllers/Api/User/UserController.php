@@ -1483,7 +1483,7 @@ class UserController extends Controller
             $data['badge_number'] = $badge->badge_number;
             $data['department_id'] = $badge->department_id;
             $data['department_name'] = $badge->department_data->department_name;
-            $data['avgRating'] = $badgerating;
+            $data['avgRating'] = ($badgerating) ? ($badgerating) : 0.0;
             $data['total_reviews'] = $totalpost;
             $data['reasons_percentage'] = [];
             foreach ($reasons as $key => $reason) {
