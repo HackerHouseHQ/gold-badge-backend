@@ -137,15 +137,4 @@ class LoginController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function read_notification()
-
-    {
-        try {
-            // update status of read notification
-            $update = User::whereId(Auth::user()->id)->update(['read_notification' => 1]);
-            return res_success('Read the notification.');
-        } catch (Exception $e) {
-            return res_failed($e->getMessage(), $e->getCode());
-        }
-    }
 }

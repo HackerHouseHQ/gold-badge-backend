@@ -42,4 +42,25 @@ class InformationManagementController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
+    public function read_notification()
+
+    {
+        try {
+            // update status of read notification
+            $update = User::whereId(Auth::user()->id)->update(['read_notification' => 1]);
+            return res_success('Read the notification.');
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
+
+    public function getStatusOfNotification()
+    {
+        try {
+            $getUsernotificationStatus = User::select('read_notification')->whereId(Auth::user()->id)->first();
+            return res_success('Notification status .', $getUsernotificationStatus);
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
 }
