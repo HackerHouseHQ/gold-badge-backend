@@ -152,7 +152,7 @@ class PostController extends Controller
                     $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
                     $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                     $post->total_reviews    =   $departmentPostData->count();
-                    $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : 0;
+                    $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : '0';
                     $post->badge_name       =   null;
                     $post->is_liked          = ($post_liked) ? 1 : 0;
                     $post->is_shared          = ($post_shared) ? 1 : 0;
@@ -165,7 +165,7 @@ class PostController extends Controller
                     //get department w.r.t given badge id with consider rating == 1
                     $badgePostAvgRating = Post::where('badge_id', $post->badge_id)->where('consider_rating', 1)->get();
                     $post->total_reviews    =   $badgePostData->count();
-                    $post->avg_rating       =   ($badgePostAvgRating->avg('rating')) ? number_format($badgePostAvgRating->avg('rating'), 1) : 0;
+                    $post->avg_rating       =   ($badgePostAvgRating->avg('rating')) ? number_format($badgePostAvgRating->avg('rating'), 1) : '0';
                     $post->badge_name       =   DepartmentBadge::find($post->badge_id)->badge_number;
                     $post->is_liked          = ($post_liked) ? 1 : 0;
                     $post->is_shared          = ($post_shared) ? 1 : 0;
