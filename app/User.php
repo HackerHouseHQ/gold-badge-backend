@@ -33,9 +33,15 @@ class User extends Authenticatable
    {
       return $this->belongsTo('App\City', 'city_id');
    }
-   public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id)
+   public function getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id, $search)
    {
       $query = self::query()->orderBy('created_at', 'asc');
+      if (!empty($search)) {
+         $query->where('first_name', 'like', '%' . $search . '%');
+         $query->orwhere('mobil_no', 'like', '%' . $search . '%');
+         $query->orwhere('email', 'like', '%' . $search . '%');
+         $query->orwhere('user_name', 'like', '%' . $search . '%');
+      }
       if (!empty($fromdate) &&  !empty($todate)) {
          $fromdate =  date('Y-m-d', strtotime($fromdate));
          $todate =  date('Y-m-d', strtotime($todate));
@@ -70,9 +76,15 @@ class User extends Authenticatable
       }
       return $data;
    }
-   public function getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id)
+   public function getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id, $search)
    {
       $query = self::query()->orderBy('created_at', 'asc');
+      if (!empty($search)) {
+         $query->where('first_name', 'like', '%' . $search . '%');
+         $query->orwhere('mobil_no', 'like', '%' . $search . '%');
+         $query->orwhere('email', 'like', '%' . $search . '%');
+         $query->orwhere('user_name', 'like', '%' . $search . '%');
+      }
       if (!empty($fromdate) &&  !empty($todate)) {
          $fromdate =  date('Y-m-d', strtotime($fromdate));
          $todate =  date('Y-m-d', strtotime($todate));

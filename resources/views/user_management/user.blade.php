@@ -211,7 +211,7 @@
                     }
                 }
             },
-            "searching": false,
+            "searching": true,
             'processing': true,
             'serverSide': true,
             "bFilter": true,

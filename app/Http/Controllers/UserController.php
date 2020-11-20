@@ -44,11 +44,12 @@ class UserController extends Controller
     $status_id = $_GET['status_id'];
     $state_id = $_GET['state_id'];
     $country_id = $_GET['country_id'];
-
     $fromdate = $_GET['fromdate'];
     $todate = $_GET['todate'];
-    $data = $this->user->getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id);
-    $count = $this->user->getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id);
+    $search_arr = $request->get('search');
+    $search = $search_arr['value'];
+    $data = $this->user->getdata_table($order_by, $offset, $limit_t, $fromdate, $todate, $status_id, $country_id, $state_id, $search);
+    $count = $this->user->getdata_count($order_by, $fromdate, $todate, $status_id, $country_id, $state_id, $search);
     $getuser = $this->manage_data($data);
     $results = [
       "draw" => intval($draw),
