@@ -25,7 +25,7 @@ class InformationManagementController extends Controller
             }
             $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
             foreach ($data as $key => $value) {
-                $notifications = SendNotification::whereDate('created_at', date('Y-m-d', strtotime($value->date)))->get();
+                $notifications = SendNotification::whereDate('created_at', date('Y-m-d', strtotime($value->date)))->latest()->get();
                 $value->notifications  = $notifications;
             }
             return res_success(trans('messages.successFetchList'), array('notificationList' => $data));
