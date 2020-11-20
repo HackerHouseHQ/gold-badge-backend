@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Api\User;
 
-use Exception;
-use Carbon\Carbon;
-
-use App\UserOtpLogin;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\User;
+use Exception;
+
+use Carbon\Carbon;
+use App\UserOtpLogin;
+use Lcobucci\JWT\Parser;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -136,5 +138,20 @@ class LoginController extends Controller
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
+    }
+    public function __construct()
+    {
+        $this->middleware('guest:api')->except('logout');
+    }
+    protected function guard()
+    {
+        return Auth::guard('guest:api');
+    }
+    public function logout(Request $request)
+    {
+        $token = $request->user()->token();
+        $token->revoke();
+        $response = ['message' => 'You have been successfully logged out!'];
+        return response($response, 200);
     }
 }

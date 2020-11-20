@@ -58,6 +58,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
 	Route::post('/updateDeviceToken', 'UserController@updateDeviceToken');
 	Route::get('/information', 'InformationManagementController@information');
 	Route::group(['middleware' => ['auth:api']], function () {
+		Route::post('/logout', 'LoginController@logout');
 		Route::post('/savePostReview', 'UserController@savePostReview');
 		Route::post('/getPostDepartment', 'UserController@getPostDepartment');
 		Route::post('/savePostDepartmentLike', 'UserController@savePostDepartmentLike');
