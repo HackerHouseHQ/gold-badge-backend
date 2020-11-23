@@ -199,8 +199,10 @@ class PostController extends Controller
             $postSubComment = $this->postSubComment($user_id)->toArray();
             $postSubCommentLike = $this->postSubCommenLike($user_id)->toArray();
             $postVoted = $this->postVoted($user_id)->toArray();
+
             $arr = array_merge($postLiked, $postShared, $postPosted, $postCommented, $postCommentedLike, $postSubComment, $postSubCommentLike, $postVoted);
             // Desc sort
+
             usort($arr, function ($time1, $time2) {
                 if (strtotime($time1['created_at']) < strtotime($time2['created_at']))
                     return 1;
@@ -342,7 +344,6 @@ class PostController extends Controller
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
-
             ->get();
         foreach ($posts as $post) {
             //flag =1 , 1 => department , 2 => badge 
@@ -376,6 +377,12 @@ class PostController extends Controller
                 $post->is_shared          = ($post_shared) ? 1 : 0;
                 $post->user_status       = 2;
                 $post->is_follow = ($user_followed_badge) ? $user_followed_badge->status : 0;
+            }
+            foreach ($postShared as $shared) {
+                if ($post->id == $shared['post_id']) {
+                    unset($post->created_at);
+                    $post->created_at = $shared['created_at'];
+                }
             }
             unset($post->rating);
             unset($post->reason_id);
