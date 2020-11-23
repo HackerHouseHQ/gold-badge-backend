@@ -139,14 +139,7 @@ class LoginController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function __construct()
-    {
-        $this->middleware('guest:api')->except('logout');
-    }
-    protected function guard()
-    {
-        return Auth::guard('guest:api');
-    }
+
     public function logout(Request $request)
     {
         $token = $request->user()->token();
