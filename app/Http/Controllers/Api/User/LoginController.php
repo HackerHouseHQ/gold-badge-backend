@@ -144,7 +144,8 @@ class LoginController extends Controller
     {
         $token = $request->user()->token();
         $token->revoke();
-        $response = ['message' => 'You have been successfully logged out!'];
-        return response($response, 404);
+        // $response = ['message' => 'You have been successfully logged out!'];
+        // return response($response, 404);
+        return res_success('You have been successfully logged out!');
     }
 }
