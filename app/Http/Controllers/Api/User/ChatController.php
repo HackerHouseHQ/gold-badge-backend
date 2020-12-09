@@ -5,11 +5,13 @@ namespace App\Http\Controllers\Api\User;
 use App\Chat;
 use App\User;
 use Exception;
+use App\DestoryChat;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Factory;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 
 class ChatController extends Controller
@@ -74,5 +76,33 @@ class ChatController extends Controller
         //thats only
         $data = Chat::select('room_id', 'receiver_id', 'sender_id', 'message', 'created_at')->where('sender_id', 2)->where('receiver_id', 5)->get();
         return res(true, 'SUCCESS', $data);
+    }
+    public function destory_chat(Request $request)
+    {
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'sender_id' => 'required|numeric',
+                'receiver_id' => 'required|numeric',
+                'room_id' => 'required|numeric'
+            ]
+        );
+        /**
+         * Check input parameter validation
+         */
+
+
+        if ($validator->fails()) {
+            return res_validation_error($validator); //Sending Validation Error Message
+        }
+        $insertData = ['sender_id' => $request->sender_id, 'receiver_id' => $request->receiver_id, 'room_id' => $request->room_id, 'destroy_time' => CURRENT_DATE];
+        $data = DestoryChat::where($insertData)->first();
+        if ($data) {
+            DestoryChat::where($insertData)->update($insertData);
+            return res_success('Data Added Successfully');
+        } else {
+            DestoryChat::create($insertData);
+            return res_success('Data Added Successfully');
+        }
     }
 }
