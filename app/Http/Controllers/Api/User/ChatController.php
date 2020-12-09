@@ -37,10 +37,10 @@ class ChatController extends Controller
             $room_id_array = [];
             foreach ($data as $key => $value) {
                 if (!in_array($value['room_id'], $room_id_array)) {
-                    $destroyTime = DestoryChat::where('sender_id', $value['sender_id'])->where('receiver_id', $value['receiver_id'])->first();
+                    $destroyTime = DestoryChat::where('sender_id', $value['sender_id'])->where('receiver_id', $value['receiver_id'])->where('room_id', $value['room_id'])->first();
                     $chatCount = 0;
                     if ($destroyTime) {
-                        $chatCount = Chat::where('sender_id', $value['sender_id'])->where('receiver_id', $value['receiver_id'])->where('created_at', '>', $destroyTime->destroy_time)->count();
+                        $chatCount = Chat::where('sender_id', $value['sender_id'])->where('receiver_id', $value['receiver_id'])->where('room_id', $value['room_id'])->where('created_at', '>', $destroyTime->destroy_time)->count();
                     }
                     $value['count'] = $chatCount;
                     $room_id_array[] = $value['room_id'];
