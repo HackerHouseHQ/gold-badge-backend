@@ -296,12 +296,12 @@ class Post extends Model
 
    public function post_like()
    {
-      return $this->hasMany('App\DepartmentLike', 'post_id')->having('status', 1);
+      return $this->hasMany('App\DepartmentLike', 'post_id');
    }
 
    public function post_share()
    {
-      return $this->hasMany('App\DepartmentShare', 'post_id')->having('status', 1);
+      return $this->hasMany('App\DepartmentShare', 'post_id');
    }
 
    public function follow_check()
