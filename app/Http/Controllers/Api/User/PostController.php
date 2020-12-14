@@ -25,6 +25,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Builder;
+
 
 class PostController extends Controller
 {
@@ -136,7 +138,9 @@ class PostController extends Controller
                 ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
                 ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                 ->withCount('post_comment')
-                ->withCount('post_like')
+                ->withCount(['post_like' => function (Builder $query) {
+                    $query->where('status', 1);
+                }])
                 ->withCount('post_share')
                 ->where('user_id', $user_id)
                 ->where('stay_anonymous', 0)
@@ -274,7 +278,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -340,7 +346,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -400,7 +408,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->where('posts.user_id', $user_id)
             ->get();
@@ -459,7 +469,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -525,7 +537,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -591,7 +605,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -657,7 +673,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
@@ -723,7 +741,9 @@ class PostController extends Controller
             ->leftJoin('departments', 'departments.id', '=', 'posts.department_id')
             ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
             ->withCount('post_comment')
-            ->withCount('post_like')
+            ->withCount(['post_like' => function (Builder $query) {
+                $query->where('status', 1);
+            }])
             ->withCount('post_share')
             ->whereIn('posts.id', $postIdsArray)
             ->whereNotIn('posts.id', $reportArray)
