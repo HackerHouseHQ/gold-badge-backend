@@ -627,12 +627,8 @@ class UserController extends Controller
                     ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
-                    ->withCount([
-                        'post_like',
-                        'post_like as post_like_count' => function ($query) {
-                            $query->where('post_like_count.status', '==', 1);
-                        }
-                    ])
+
+                    ->withCount('post_like')
                     ->withCount('post_share')
                     ->whereIn('posts.department_id', $departmentIdsArray)
                     ->whereNotIn('posts.id', $reportArray);
