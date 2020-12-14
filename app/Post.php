@@ -296,7 +296,7 @@ class Post extends Model
 
    public function post_like()
    {
-      return $this->hasMany('App\DepartmentLike', 'post_id');
+      return $this->hasMany('App\DepartmentLike', 'post_id')->having('status', 1);
    }
 
    public function post_share()
