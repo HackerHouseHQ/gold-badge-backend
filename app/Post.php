@@ -301,7 +301,7 @@ class Post extends Model
 
    public function post_share()
    {
-      return $this->hasMany('App\DepartmentShare', 'post_id');
+      return $this->hasMany('App\DepartmentShare', 'post_id')->having('status', 1);
    }
 
    public function follow_check()
