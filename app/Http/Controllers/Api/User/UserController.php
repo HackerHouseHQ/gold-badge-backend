@@ -648,7 +648,7 @@ class UserController extends Controller
                         //get department w.r.t given department id with consider rating == 1
                         $departmentAvgRating = Post::where('department_id', $post->department_id)->where('consider_rating', 1)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
-                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $user_followed_department = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $post->department_id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : '0';
@@ -716,7 +716,7 @@ class UserController extends Controller
                         //get department w.r.t given department id with consider rating == 1
                         $departmentAvgRating = Post::where('department_id', $post->department_id)->where('consider_rating', 1)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
-                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $user_followed_department = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $post->department_id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : '0';
@@ -727,7 +727,7 @@ class UserController extends Controller
                         $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
-                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         // get department w.r.t given badge id
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
                         //get department w.r.t given badge id with consider rating == 1
@@ -785,7 +785,7 @@ class UserController extends Controller
                         //get department w.r.t given department id with consider rating == 1
                         $departmentAvgRating = Post::where('department_id', $post->department_id)->where('consider_rating', 1)->get();
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
-                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $user_followed_department = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $post->department_id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
                         $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : '0';
@@ -796,7 +796,7 @@ class UserController extends Controller
                         $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
                     } else if ($post->flag == 2) {
                         $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
-                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         // get department w.r.t given badge id
                         $badgePostData = Post::where('badge_id', $post->badge_id)->get();
                         //get department w.r.t given badge id with consider rating == 1
