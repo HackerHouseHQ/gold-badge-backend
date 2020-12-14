@@ -375,7 +375,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         // 'upLoadFile' => 'nullable|array',
-                        'media_type' =>  'boolean|nullable', // 0 =>video , 1 => image
+                        'media_type' =>  'nullable', // 0 =>video , 1 => image
                         'consider_rating' => 'boolean'  // 0 => d'nt consider rating  , 1=> consider rating
                     ]
                 );
@@ -479,7 +479,7 @@ class UserController extends Controller
                         'user_id' => 'required|numeric',
                         'stay_anonymous' => 'required|boolean',
                         // 'upLoadFile' => 'required|array',
-                        'media_type' => 'boolean|nullable', // 0 =>video , 1 => image
+                        'media_type' => 'nullable', // 0 =>video , 1 => image
                         'consider_rating' => 'boolean'  // 0 => d'nt consider rating  , 1=> consider rating
                         // 'upLoadFile.*' => 'required'
                     ]
