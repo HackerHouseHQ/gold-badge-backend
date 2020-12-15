@@ -46,13 +46,13 @@ class ChatController extends Controller
                     $chatData1 = Chat::where('sender_id', $value['user_id'])->where('receiver_id', Auth::user()->id)->get();
                     $chatData2 = Chat::where('receiver_id', $value['user_id'])->where('sender_id', Auth::user()->id)->get();
                     if (count($chatData1) > 0 && count($chatData2) == 0) {
-                        if ($chatCount != 0) {
+                        if ($chatCount > 0) {
                             $value['count'] = $chatCount;
                         } else {
                             $value['count'] = count($chatData1);
                         }
                     } elseif (count($chatData2) > 0 && count($chatData1) == 0) {
-                        if ($chatCount != 0) {
+                        if ($chatCount > 0) {
                             $value['count'] = $chatCount;
                         } else {
                             $value['count'] = 0;
