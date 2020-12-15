@@ -43,6 +43,14 @@ class ChatController extends Controller
                         $chatCount = Chat::where('sender_id', $value['user_id'])->where('receiver_id', Auth::user()->id)->where('room_id', $value['room_id'])->where('created_at', '>', $destroyTime->destroy_time)->count();
                     }
                     $value['count'] = $chatCount;
+                    $chatData1 = Chat::where('sender_id', $value['user_id'])->where('receiver_id', Auth::user()->id)->get();
+                    $chatData2 = Chat::where('receiver_id', $value['user_id'])->where('sender_id', Auth::user()->id)->get();
+                    if (count($chatData1) > 0 && count($chatData2) == 0) {
+                        $value['count'] = count($chatData1);
+                    } elseif (count($chatData2) > 0 && count($chatData1) == 0) {
+                        $value['count'] = count($chatData2);
+                    }
+
                     $room_id_array[] = $value['room_id'];
                     $arr[] = $value;
                 }
