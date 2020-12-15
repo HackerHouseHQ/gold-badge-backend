@@ -48,7 +48,7 @@ class ChatController extends Controller
                     if (count($chatData1) > 0 && count($chatData2) == 0) {
                         $value['count'] = count($chatData1);
                     } elseif (count($chatData2) > 0 && count($chatData1) == 0) {
-                        $value['count'] = count($chatData2);
+                        $value['count'] = 0;
                     } elseif (count($chatData1) > 0 && count($chatData2) > 0) {
                         $value['count'] = $chatCount;
                     }
