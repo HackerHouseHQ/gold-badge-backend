@@ -863,6 +863,9 @@ class UserController extends Controller
                 if ($statusLike->status) {
                     $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                     $notification = sendFCM('Gold Badge', $user->first_name . ' liked your post.', $userNotify);
+                } else {
+                    $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                    $notification = sendFCM('Gold Badge', $user->first_name . ' unliked your post.', $userNotify);
                 }
                 return res_success('Your like has been saved successfully.');
             }
