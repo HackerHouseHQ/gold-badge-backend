@@ -52,7 +52,11 @@ class ChatController extends Controller
                             $value['count'] = count($chatData1);
                         }
                     } elseif (count($chatData2) > 0 && count($chatData1) == 0) {
-                        $value['count'] = 0;
+                        if ($chatCount != 0) {
+                            $value['count'] = $chatCount;
+                        } else {
+                            $value['count'] = 0;
+                        }
                     } elseif (count($chatData1) > 0 && count($chatData2) > 0) {
                         $value['count'] = $chatCount;
                     }
