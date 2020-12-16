@@ -53,7 +53,7 @@ class ChatController extends Controller
                         }
                     } elseif (count($chatData2) > 0 && count($chatData1) == 0) {
                         if ($destroyTime) {
-                            $value['count'] = Chat::where('sender_id', $value['user_id'])->where('receiver_id', Auth::user()->id)->where('room_id', $value['room_id'])->where('created_at', '>', $destroyTime->destroy_time)->count();
+                            $value['count'] = Chat::where('receiver_id', $value['user_id'])->where('sender_id', Auth::user()->id)->where('room_id', $value['room_id'])->where('created_at', '>', $destroyTime->destroy_time)->count();
                         } else {
                             $value['count'] = 0;
                         }
