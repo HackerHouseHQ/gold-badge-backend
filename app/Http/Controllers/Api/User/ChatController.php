@@ -108,7 +108,7 @@ class ChatController extends Controller
             [
                 'sender_id' => 'required|numeric',
                 'receiver_id' => 'required|numeric',
-                'room_id' => 'required|numeric'
+                'room_id' => 'numeric|nullable'
             ]
         );
         /**
