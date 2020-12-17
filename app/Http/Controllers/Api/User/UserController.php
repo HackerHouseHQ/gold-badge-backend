@@ -357,6 +357,14 @@ class UserController extends Controller
      * @author Ratnesh Kumar 
      * 
      */
+    function compress_image($source_url, $destination_url, $quality)
+    {
+        $info = getimagesize($source_url);
+        if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($source_url);
+        elseif ($info['mime'] == 'image/gif') $image = imagecreatefromgif($source_url);
+        elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
+        return imagejpeg($image, $destination_url, $quality);
+    }
     public function savePostReview(Request $request)
     {
 
@@ -420,7 +428,11 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-                        $file->move($path, $filename);
+                        // $file->move($path, $filename);
+                        if (!file_exists($path)) {
+                            mkdir($path, 0777, true);
+                        }
+                        $filenames = $this->compress_image($file, $path . '/' . $filename, 50);
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,

@@ -1211,7 +1211,7 @@
                       if (i == 1) {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-                                <video width="320" height="240" controls autoplay id="myVideo">
+                                <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
@@ -1225,7 +1225,7 @@
                     } else {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item">
-                                <video width="320" height="240" controls autoplay id="myVideo">
+                                <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
@@ -1301,7 +1301,7 @@
                       if (i == 1) {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-                                <video width="320" height="240" controls autoplay id="myVideo">
+                                <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
@@ -1315,7 +1315,7 @@
                     } else {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item">
-                                <video width="320" height="240" controls autoplay id="myVideo">
+                                <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
@@ -1381,7 +1381,7 @@
                     if (i == 1) {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item active">
-                              <video width="320" height="240" controls autoplay id="myVideo">
+                              <video width="320" height="240" controls  id="myVideo">
                                   <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                   <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                               </video>
@@ -1395,7 +1395,7 @@
                     } else {
                         if (image.media_type == 0) {
                             rowImage += ` <div class="carousel-item">
-                              <video width="320" height="240" controls autoplay id="myVideo">
+                              <video width="320" height="240" controls  id="myVideo">
                                   <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                   <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                               </video>
