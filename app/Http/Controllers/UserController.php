@@ -95,7 +95,7 @@ class UserController extends Controller
     if (!$data) {
       return $data;
     }
-    $likeCount =  DepartmentLike::where('post_id', $data->id)->count();
+    $likeCount =  DepartmentLike::where('post_id', $data->id)->where('status', 1)->count();
     $shareCount = DepartmentShare::where('post_id', $data->id)->count();
     $commentCount  = DepartmentComment::where('post_id', $data->id)->count();
     $reportCount = DepartmentReport::where('post_id', $data->id)->count();
