@@ -119,7 +119,7 @@ class ChatController extends Controller
         if ($validator->fails()) {
             return res_validation_error($validator); //Sending Validation Error Message
         }
-        $insertData = ['sender_id' => $request->sender_id, 'receiver_id' => $request->receiver_id, 'room_id' => $request->room_id];
+        $insertData = ['sender_id' => $request->sender_id, 'receiver_id' => $request->receiver_id];
         $data = DestoryChat::where($insertData)->first();
         if ($data) {
             $updateData = ['sender_id' => $request->sender_id, 'receiver_id' => $request->receiver_id, 'room_id' => $request->room_id, 'destroy_time' => CURRENT_DATE];
