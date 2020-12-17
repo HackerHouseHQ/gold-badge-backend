@@ -713,7 +713,9 @@ class UserController extends Controller
                     ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
-                    ->withCount('post_like')
+                    ->withCount(['post_like' => function (Builder $query) {
+                        $query->where('status', 1);
+                    }])
                     ->withCount('post_share')
                     ->whereNotIn('posts.id', $reportArray);
 
@@ -782,7 +784,9 @@ class UserController extends Controller
                     ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
-                    ->withCount('post_like')
+                    ->withCount(['post_like' => function (Builder $query) {
+                        $query->where('status', 1);
+                    }])
                     ->withCount('post_share')
                     ->whereNotIn('posts.id', $reportArray);
 
@@ -879,9 +883,6 @@ class UserController extends Controller
                 if ($statusLike->status) {
                     $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                     $notification = sendFCM('Gold Badge', $user->first_name . ' liked your post.', $userNotify);
-                } else {
-                    $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                    $notification = sendFCM('Gold Badge', $user->first_name . ' unliked your post.', $userNotify);
                 }
                 return res_success('Your like has been saved successfully.');
             }
