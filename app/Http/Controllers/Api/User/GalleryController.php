@@ -87,7 +87,7 @@ class GalleryController extends Controller
                     'media_type',
                     DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_video/', video) as video"),
                     'created_at'
-                )->where('user_id', Auth::user()->id)->where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->get();
+                )->where('user_id', Auth::user()->id)->where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->latest()->get();
                 $value->images  = $images;
             }
             return res_success(trans('messages.successFetchList'), array('galleryImages' => $data));
