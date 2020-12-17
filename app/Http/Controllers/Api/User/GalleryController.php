@@ -17,6 +17,7 @@ class GalleryController extends Controller
     {
         try {
             // check user is active or in active 
+
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
