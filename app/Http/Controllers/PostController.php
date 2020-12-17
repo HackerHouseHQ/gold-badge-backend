@@ -5,27 +5,27 @@ namespace App\Http\Controllers;
 use Auth;
 
 use Session;
-use Storage;
 use App\Post;
 use App\User;
 use Validator;
+use App\PostImage;
 
 
 use App\Department;
 use App\DepartmentLike;
+use App\DepartmentVote;
 use App\DepartmentBadge;
 use App\DepartmentShare;
 use App\DepartmentReport;
 use App\DepartmentComment;
-use App\DepartmentCommentLike;
 use Illuminate\Http\Request;
 use App\DepartmentSubComment;
-use App\DepartmentSubCommentLike;
-use App\DepartmentVote;
-use App\PostImage;
 use App\UserDepartmentFollow;
+use App\DepartmentCommentLike;
+use App\DepartmentSubCommentLike;
 use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -322,7 +322,7 @@ class PostController extends Controller
       // }
 
       foreach ($postData as $key => $data) {
-         $Like = DepartmentLike::where('post_id', $data->post_id)->count();
+         $Like = DepartmentLike::where('post_id', $data->post_id)->where('status', 1)->count();
          $share = DepartmentShare::where('post_id', $data->post_id)->count();
          $report = DepartmentReport::where('post_id', $data->post_id)->count();
          $comment = DepartmentComment::where('post_id', $data->post_id)->count();
@@ -352,7 +352,7 @@ class PostController extends Controller
    margin: 0px auto;
    display: flex;
    height: 204px;
-   margin-top: -40px;' controls autoplay id='myVideo'>
+   margin-top: -40px;' controls  id='myVideo'>
                             <source src='" . $images . "' type='video/mp4'>
                             <source src='" . $images . "' type='video/ogg'>
                         </video>
@@ -370,7 +370,7 @@ class PostController extends Controller
                     margin: 0px auto;
                     display: flex;
                     height: 204px;
-                    margin-top: -40px;' controls autoplay id='myVideo'>
+                    margin-top: -40px;' controls  id='myVideo'>
                     <source src='" . $images . "' type='video/mp4'>
                     <source src='" . $images . "' type='video/ogg'>
                 </video>
