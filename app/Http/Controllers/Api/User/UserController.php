@@ -1152,8 +1152,9 @@ class UserController extends Controller
             $insertVote = DepartmentVote::insert($insertArray);
             if ($insertVote) {
                 $post = Post::whereId($post_id)->first();
-                $userNotify = User::whereId($user_id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', $userNotify->user_name . ' voted on your post.', $userNotify);
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                $user  =  User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+                $notification = sendFCM('Gold Badge', $user->user_name . ' voted on your post.', $userNotify);
                 return res_success('Vote saved successfully.');
             }
         } catch (Exception $e) {
