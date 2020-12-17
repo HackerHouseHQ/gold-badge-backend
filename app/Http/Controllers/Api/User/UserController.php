@@ -919,9 +919,10 @@ class UserController extends Controller
             ];
             $insertData = DepartmentShare::insert($insertArray);
             if ($insertData) {
-                // $post = Post::whereId($post_id)->first();
-                // $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                // $notification = sendFCM('Gold Badge', 'Someone shared your post.', $userNotify);
+                $post = Post::whereId($post_id)->first();
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                $user  =  User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+                $notification = sendFCM('Gold Badge', $user->user_name . ' shared  your post.', $userNotify);
                 return res_success('Your share has been saved successfully.');
             }
         } catch (Exception $e) {
