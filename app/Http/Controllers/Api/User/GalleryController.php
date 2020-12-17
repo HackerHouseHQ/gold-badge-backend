@@ -36,12 +36,12 @@ class GalleryController extends Controller
                     $extension = $file->getClientOriginalExtension();
                     $filename = time()  . "$i" . "." . $extension;
                     $path = storage_path() . '/app/public/uploads/gallery_image';
-                    // if (!file_exists($path)) {
-                    //     mkdir($path, 0777, true);
-                    // }
-                    // app(\App\Http\Controllers\Api\User\UserController::class)->compress_image($file, $path . '/' . $filename, 50);
+                    if (!file_exists($path)) {
+                        mkdir($path, 0777, true);
+                    }
+                    app(\App\Http\Controllers\Api\User\UserController::class)->compress_image($file, $path . '/' . $filename, 80);
 
-                    $file->move($path, $filename);
+                    // $file->move($path, $filename);
                     $videoFile = $videoFile[$j];
                     if (!empty($videoFile)) {
                         $videoExtension = $videoFile->getClientOriginalExtension();
