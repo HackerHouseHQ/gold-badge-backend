@@ -13,35 +13,35 @@ use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
-    function correctImageOrientation($filename)
-    {
-        if (function_exists('exif_read_data')) {
-            $exif = exif_read_data($filename);
-            if ($exif && isset($exif['Orientation'])) {
-                $orientation = $exif['Orientation'];
-                if ($orientation != 1) {
-                    $img = imagecreatefromjpeg($filename);
-                    $deg = 0;
-                    switch ($orientation) {
-                        case 3:
-                            $deg = 180;
-                            break;
-                        case 6:
-                            $deg = 270;
-                            break;
-                        case 8:
-                            $deg = 90;
-                            break;
-                    }
-                    if ($deg) {
-                        $img = imagerotate($img, $deg, 0);
-                    }
-                    // then rewrite the rotated image back to the disk as $filename 
-                    imagejpeg($img, $filename, 95);
-                } // if there is some rotation necessary
-            } // if have the exif orientation info
-        } // if function exists      
-    }
+    // function correctImageOrientation($filename)
+    // {
+    //     if (function_exists('exif_read_data')) {
+    //         $exif = exif_read_data($filename);
+    //         if ($exif && isset($exif['Orientation'])) {
+    //             $orientation = $exif['Orientation'];
+    //             if ($orientation != 1) {
+    //                 $img = imagecreatefromjpeg($filename);
+    //                 $deg = 0;
+    //                 switch ($orientation) {
+    //                     case 3:
+    //                         $deg = 180;
+    //                         break;
+    //                     case 6:
+    //                         $deg = 270;
+    //                         break;
+    //                     case 8:
+    //                         $deg = 90;
+    //                         break;
+    //                 }
+    //                 if ($deg) {
+    //                     $img = imagerotate($img, $deg, 0);
+    //                 }
+    //                 // then rewrite the rotated image back to the disk as $filename 
+    //                 imagejpeg($img, $filename, 95);
+    //             } // if there is some rotation necessary
+    //         } // if have the exif orientation info
+    //     } // if function exists      
+    // }
     public function saveGalleryImage(Request $request)
     {
         // try {
@@ -66,13 +66,13 @@ class GalleryController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = time()  . "$i" . "." . $extension;
                 $path = storage_path() . '/app/public/uploads/gallery_image';
-                if (!file_exists($path)) {
-                    mkdir($path, 0777, true);
-                }
-                app(\App\Http\Controllers\Api\User\UserController::class)->compress_image($file, $path . '/' . $filename, 80);
-                $this->correctImageOrientation($path . '/' . $filename);
+                // if (!file_exists($path)) {
+                //     mkdir($path, 0777, true);
+                // }
+                // app(\App\Http\Controllers\Api\User\UserController::class)->compress_image($file, $path . '/' . $filename, 80);
+                // $this->correctImageOrientation($path . '/' . $filename);
 
-                // $file->move($path, $filename);
+                $file->move($path, $filename);
 
                 if (!empty($videoFile)) {
                     $videoFile = $videoFile[$j];
