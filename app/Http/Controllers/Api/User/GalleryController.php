@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
@@ -66,11 +67,10 @@ class GalleryController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = time()  . "$i" . "." . $extension;
                 $path = storage_path() . '/app/public/uploads/gallery_image';
-                // if (!file_exists($path)) {
-                //     mkdir($path, 0777, true);
-                // }
-                // app(\App\Http\Controllers\Api\User\UserController::class)->compress_image($file, $path . '/' . $filename, 80);
-                // $this->correctImageOrientation($path . '/' . $filename);
+                $img = Image::make($file->getRealPath());
+                $img->resize(100, 100, function ($constraint) {
+                    $constraint->aspectRatio();
+                })->save($path . '/' . $filename);
 
                 $file->move($path, $filename);
 
