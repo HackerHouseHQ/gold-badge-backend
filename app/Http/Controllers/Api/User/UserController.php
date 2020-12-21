@@ -428,11 +428,11 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-                        // $file->move($path, $filename);
-                        if (!file_exists($path)) {
-                            mkdir($path, 0777, true);
-                        }
-                        $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
+                        $file->move($path, $filename);
+                        // if (!file_exists($path)) {
+                        //     mkdir($path, 0777, true);
+                        // }
+                        // $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,
@@ -556,11 +556,11 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-                        // $file->move($path, $filename);
-                        if (!file_exists($path)) {
-                            mkdir($path, 0777, true);
-                        }
-                        $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
+                        $file->move($path, $filename);
+                        // if (!file_exists($path)) {
+                        //     mkdir($path, 0777, true);
+                        // }
+                        // $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
                         $insertArray = [
                             'post_id' => $insertPostBadgeId,
                             'image'  => $filename,
