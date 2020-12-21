@@ -68,9 +68,12 @@ class GalleryController extends Controller
                 $filename = time()  . "$i" . "." . $extension;
                 $path = storage_path() . '/app/public/uploads/gallery_image';
                 $img = Image::make($file->getRealPath());
+                $img->orientate();
                 $img->resize(1000, 1000, function ($constraint) {
                     $constraint->aspectRatio();
+                    $constraint->upsize();
                 })->save($path . '/' . $filename);
+
 
                 // $file->move($path, $filename);
 
