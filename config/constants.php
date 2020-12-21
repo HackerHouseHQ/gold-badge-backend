@@ -17,9 +17,7 @@ define("PUBLIC", 1);
 define("PRIVATE", 0);
 
 defined("DELETED") or define("DELETED", 3);
-// Change the line below to your timezone!
-date_default_timezone_set('Asia/Kolkata');
-defined("CURRENT_DATE") or define("CURRENT_DATE", date('Y-m-d H:i:s', time()));
+defined("CURRENT_DATE") or define("CURRENT_DATE", date('Y-m-d H:i:s'));
 defined("ITEM_PER_PAGE") or define("ITEM_PER_PAGE", 50);
 defined("PER_PAGE_ITEM") or define("PER_PAGE_ITEM", 50);
 defined("IS_COMPLETE") or define("IS_COMPLETE", "IS_COMPLETE");
