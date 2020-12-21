@@ -68,10 +68,9 @@ class GalleryController extends Controller
                 $filename = time()  . "$i" . "." . $extension;
                 $path = storage_path() . '/app/public/uploads/gallery_image';
                 $img = Image::make($file->getRealPath());
-                $img->resize(100, 100, function ($constraint) {
+                $img->resize(50, 50, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save($path . '/' . $filename);
-
                 $file->move($path, $filename);
 
                 if (!empty($videoFile)) {
