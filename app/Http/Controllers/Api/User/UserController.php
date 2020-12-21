@@ -658,7 +658,7 @@ class UserController extends Controller
                         $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                     });
                 }
-                $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
+                $posts = $query->orderBy('posts.created_at', 'DESC')->paginate(10);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge 
                     if ($post->flag == 1) {
