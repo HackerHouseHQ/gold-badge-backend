@@ -1,7 +1,5 @@
 <?php
 
-use Carbon\Carbon;
-
 return [
 
     /*
@@ -69,7 +67,7 @@ return [
     |
     */
 
-    'timezone' => Carbon::now(),
+    'timezone' => date_default_timezone_get(),
 
     /*
     |--------------------------------------------------------------------------
