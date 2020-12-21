@@ -429,12 +429,13 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-                        $file->move($path, $filename);
+                        // $file->move($path, $filename);
                         $img = Image::make($file->getRealPath());
-                        $img->resize(50, 50, function ($constraint) {
+                        $img->resize(1000, 1000, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save($path . '/' . $filename);
-                        $file->move($path, $filename);
+                        $img->destory();
+                        // $file->move($path, $filename);
 
                         // if (!file_exists($path)) {
                         //     mkdir($path, 0777, true);
@@ -563,12 +564,13 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-                        $file->move($path, $filename);
+
                         $img = Image::make($file->getRealPath());
-                        $img->resize(50, 50, function ($constraint) {
+                        $img->resize(1000, 1000, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save($path . '/' . $filename);
-                        $file->move($path, $filename);
+                        $img->destory();
+                        // $file->move($path, $filename);
                         // if (!file_exists($path)) {
                         //     mkdir($path, 0777, true);
                         // }
