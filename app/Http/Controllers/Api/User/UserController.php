@@ -361,7 +361,7 @@ class UserController extends Controller
     function compress_image($source_url, $destination_url, $quality)
     {
         if ($destination_url === null) {
-            $destination = $source_url;
+            $destination_url = $source_url;
         }
         $info = getimagesize($source_url);
         if ($info['mime'] === 'image/jpeg') {
@@ -380,7 +380,7 @@ class UserController extends Controller
                 if (in_array($exif['Orientation'], [2, 5, 7, 4])) {
                     imageflip($image, IMG_FLIP_HORIZONTAL);
                 }
-                imagejpeg($image, $destination, $quality);
+                imagejpeg($image, $destination_url, $quality);
             }
         }
     }
