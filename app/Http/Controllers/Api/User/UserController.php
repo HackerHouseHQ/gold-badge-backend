@@ -7,33 +7,34 @@ use App\Post;
 use App\User;
 use Exception;
 use App\Country;
+use App\Ethnicity;
 use App\PostImage;
 use Carbon\Carbon;
 use App\Department;
 use App\CountryState;
+use App\GalleryImages;
+use App\ReportReasson;
+use App\ReviewReasons;
 use App\DepartmentLike;
+use App\DepartmentVote;
 use App\PostBadgeImage;
 use App\DepartmentBadge;
 use App\DepartmentShare;
-use App\DepartmentComment;
-use App\DepartmentCommentLike;
 use App\DepartmentReport;
+use App\DepartmentComment;
 use Illuminate\Http\Request;
 use App\DepartmentSubComment;
-use App\DepartmentSubCommentLike;
-use App\DepartmentVote;
-use App\Ethnicity;
-use App\GalleryImages;
 use App\UserDepartmentFollow;
+use App\DepartmentCommentLike;
+use App\DepartmentSubCommentLike;
+use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\ReportReasson;
-use App\ReviewReasons;
-use App\UserDepartmentBadgeFollow;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
 {
@@ -428,7 +429,12 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
+                        $img = Image::make($file->getRealPath());
+                        $img->resize(100, 100, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save($path . '/' . $filename);
                         $file->move($path, $filename);
+
                         // if (!file_exists($path)) {
                         //     mkdir($path, 0777, true);
                         // }
@@ -556,6 +562,10 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
+                        $img = Image::make($file->getRealPath());
+                        $img->resize(100, 100, function ($constraint) {
+                            $constraint->aspectRatio();
+                        })->save($path . '/' . $filename);
                         $file->move($path, $filename);
                         // if (!file_exists($path)) {
                         //     mkdir($path, 0777, true);
