@@ -434,7 +434,7 @@ class UserController extends Controller
                         $img->resize(1000, 1000, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save($path . '/' . $filename);
-                        $img->destory();
+
                         // $file->move($path, $filename);
 
                         // if (!file_exists($path)) {
@@ -569,7 +569,7 @@ class UserController extends Controller
                         $img->resize(1000, 1000, function ($constraint) {
                             $constraint->aspectRatio();
                         })->save($path . '/' . $filename);
-                        $img->destory();
+
                         // $file->move($path, $filename);
                         // if (!file_exists($path)) {
                         //     mkdir($path, 0777, true);

@@ -71,7 +71,7 @@ class GalleryController extends Controller
                 $img->resize(1000, 1000, function ($constraint) {
                     $constraint->aspectRatio();
                 })->save($path . '/' . $filename);
-                $img->destroy();
+
                 // $file->move($path, $filename);
 
                 if (!empty($videoFile)) {
