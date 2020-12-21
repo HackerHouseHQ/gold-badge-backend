@@ -455,9 +455,9 @@ class UserController extends Controller
 
                         // $file->move($path, $filename);
 
-                        // if (!file_exists($path)) {
-                        //     mkdir($path, 0777, true);
-                        // }
+                        if (!file_exists($path)) {
+                            mkdir($path, 0777, true);
+                        }
                         $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
                         $insertArray = [
                             'post_id' => $insertPostId,
