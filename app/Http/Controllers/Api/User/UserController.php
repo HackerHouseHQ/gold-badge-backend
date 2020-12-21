@@ -360,29 +360,11 @@ class UserController extends Controller
      */
     function compress_image($source_url, $destination_url, $quality)
     {
-        if ($destination_url === null) {
-            $destination_url = $source_url;
-        }
         $info = getimagesize($source_url);
-        if ($info['mime'] === 'image/jpeg') {
-            $exif = exif_read_data($source_url);
-            if (!empty($exif['Orientation']) && in_array($exif['Orientation'], [2, 3, 4, 5, 6, 7, 8])) {
-                $image = imagecreatefromjpeg($source_url);
-                if (in_array($exif['Orientation'], [3, 4])) {
-                    $image = imagerotate($image, 180, 0);
-                }
-                if (in_array($exif['Orientation'], [5, 6])) {
-                    $image = imagerotate($image, -90, 0);
-                }
-                if (in_array($exif['Orientation'], [7, 8])) {
-                    $image = imagerotate($image, 90, 0);
-                }
-                if (in_array($exif['Orientation'], [2, 5, 7, 4])) {
-                    imageflip($image, IMG_FLIP_HORIZONTAL);
-                }
-                imagejpeg($image, $destination_url, $quality);
-            }
-        }
+        if ($info['mime'] == 'image/jpeg') $image = imagecreatefromjpeg($source_url);
+        elseif ($info['mime'] == 'image/gif') $image = imagecreatefromgif($source_url);
+        elseif ($info['mime'] == 'image/png') $image = imagecreatefrompng($source_url);
+        return imagejpeg($image, $destination_url, $quality);
     }
     public function savePostReview(Request $request)
     {
@@ -448,17 +430,19 @@ class UserController extends Controller
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
                         // $file->move($path, $filename);
-                        // $img = Image::make($file->getRealPath());
-                        // $img->resize(1000, 1000, function ($constraint) {
-                        //     $constraint->aspectRatio();
-                        // })->save($path . '/' . $filename);
+                        $img = Image::make($file->getRealPath());
+                        $img->orientate();
+                        $img->resize(1000, 1000, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })->save($path . '/' . $filename);
 
                         // $file->move($path, $filename);
 
-                        if (!file_exists($path)) {
-                            mkdir($path, 0777, true);
-                        }
-                        $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
+                        // if (!file_exists($path)) {
+                        //     mkdir($path, 0777, true);
+                        // }
+                        // $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
                         $insertArray = [
                             'post_id' => $insertPostId,
                             'image'  => $filename,
@@ -583,16 +567,18 @@ class UserController extends Controller
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
 
-                        // $img = Image::make($file->getRealPath());
-                        // $img->resize(1000, 1000, function ($constraint) {
-                        //     $constraint->aspectRatio();
-                        // })->save($path . '/' . $filename);
+                        $img = Image::make($file->getRealPath());
+                        $img->orientate();
+                        $img->resize(1000, 1000, function ($constraint) {
+                            $constraint->aspectRatio();
+                            $constraint->upsize();
+                        })->save($path . '/' . $filename);
 
-                        $file->move($path, $filename);
-                        if (!file_exists($path)) {
-                            mkdir($path, 0777, true);
-                        }
-                        $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
+                        // $file->move($path, $filename);
+                        // if (!file_exists($path)) {
+                        //     mkdir($path, 0777, true);
+                        // }
+                        // $filenames = $this->compress_image($file, $path . '/' . $filename, 80);
                         $insertArray = [
                             'post_id' => $insertPostBadgeId,
                             'image'  => $filename,
