@@ -44,16 +44,10 @@ module.exports = {
                 });
             });
             socket.on("user_chat_list", function (input, result) {
-                console.log(input);
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
                 connection.query(get_chat_user_list, (error, rows, fields) => {
                     if (error) {
                         console.log(error);
-                        // socket.emit("user_chat_list", {
-                        //     status: false,
-                        //     message: error,
-                        //     result: rows
-                        // });
                     } else {
                         if (rows.length <= 0) {
                             var genrate_room_id = Math.floor(
