@@ -938,7 +938,8 @@ class UserController extends Controller
             $user_id = $request->user_id;
             $alreadyShared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post_id)->first();
             if ($alreadyShared) {
-                throw new Exception('You have already shared this post.', DATA_EXISTS);
+                $alreadyShared->delete();
+                throw new Exception('You have unshared this post successfully.', DATA_EXISTS);
             }
             $insertArray = [
                 'post_id' => $post_id,
