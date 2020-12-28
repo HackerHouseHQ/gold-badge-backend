@@ -42,8 +42,8 @@ class UserController extends Controller
      * Show country List.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function getCountryList()
     {
@@ -64,8 +64,8 @@ class UserController extends Controller
      *
      * @param int $countryId
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function getStateList(Request $request)
     {
@@ -86,8 +86,8 @@ class UserController extends Controller
      *
      * @param int $countryId , $stateId
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function getCityList(Request $request)
     {
@@ -112,8 +112,8 @@ class UserController extends Controller
      *
      * @param int $mobileNumber
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function checkMobileNoExistence(Request $request)
     {
@@ -135,8 +135,8 @@ class UserController extends Controller
      *
      * @param int $countryId , $stateId , $cityId
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function DepartmentList(Request $request)
     {
@@ -201,14 +201,14 @@ class UserController extends Controller
             $total_field_filled += 1;
         }
         return $total_field_filled / 11 * 100;
-        // end of calculate profile percentage 
+        // end of calculate profile percentage
     }
     /**
      * sign up user.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
 
     public function signUp(Request $request)
@@ -293,7 +293,7 @@ class UserController extends Controller
 
 
             $user = User::where('id', $userInsetId)->first();
-            // calculate profile percentage 
+            // calculate profile percentage
             $percentage = $this->calculatProfilePercentage($user);
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
@@ -313,8 +313,8 @@ class UserController extends Controller
      * Check username  and email existence.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function checkUserNameEmail(Request $request)
     {
@@ -355,8 +355,8 @@ class UserController extends Controller
      * save post review .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     function compress_image($source_url, $destination_url, $quality)
     {
@@ -370,12 +370,12 @@ class UserController extends Controller
     {
 
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
-            if ($request->type == 1) { //department 
+            if ($request->type == 1) { //department
                 $validator = Validator::make(
                     $request->all(),
                     [
@@ -641,13 +641,13 @@ class UserController extends Controller
      * get post department .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function getPostDepartment(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -687,7 +687,7 @@ class UserController extends Controller
                 }
                 $posts = $query->orderBy('posts.created_at', 'DESC')->paginate(10);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -741,7 +741,7 @@ class UserController extends Controller
                     ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                     ->withCount('post_comment')
                     ->withCount(['post_like' => function (Builder $query) {
-                        $query->where('status', 1);
+                        $query->where('status', 1)->whereDate('created_at', date('Y-m-d'));
                     }])
                     ->withCount('post_share')
                     ->whereNotIn('posts.id', $reportArray);
@@ -757,7 +757,7 @@ class UserController extends Controller
                 $posts = $query->orderBy('post_like_count', 'desc')
                     ->paginate(10);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -814,7 +814,9 @@ class UserController extends Controller
                     ->withCount(['post_like' => function (Builder $query) {
                         $query->where('status', 1);
                     }])
-                    ->withCount('post_share')
+                    ->withCount(['post_share' =>  function (Builder $query) {
+                        $query->whereDate('created_at', date('Y-m-d'));
+                    }])
                     ->whereNotIn('posts.id', $reportArray);
 
                 if (!empty($search)) {
@@ -828,7 +830,7 @@ class UserController extends Controller
                 $posts  = $query->orderBy('post_share_count', 'desc')
                     ->paginate(10);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -876,13 +878,13 @@ class UserController extends Controller
      * save post department Like .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function savePostDepartmentLike(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -921,13 +923,13 @@ class UserController extends Controller
      * save post department Share .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function savePostDepartmentShare(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -962,13 +964,13 @@ class UserController extends Controller
      * save post department comment .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function  savePostDepartmentComment(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1016,13 +1018,13 @@ class UserController extends Controller
      * save post department sub comment .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function  savePostDepartmentSubComment(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1074,13 +1076,13 @@ class UserController extends Controller
      *  post department  comment  list.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function getPostDepartmentCommentList(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1123,13 +1125,13 @@ class UserController extends Controller
      * save post department  report.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function savePostReport(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1155,13 +1157,13 @@ class UserController extends Controller
      * save post department  vote.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function savePostVote(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1193,8 +1195,8 @@ class UserController extends Controller
      * login.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
 
     public function login(Request $request)
@@ -1233,8 +1235,8 @@ class UserController extends Controller
                     throw new Exception(trans('Email does not exists.'), NOT_EXISTS);
                 }
             }
-            // calculate profile percentage 
-            // calculate profile percentage 
+            // calculate profile percentage
+            // calculate profile percentage
             $percentage = $this->calculatProfilePercentage($user);
             $resulToken = $user->createToken('');
             $token = $resulToken->token;
@@ -1253,8 +1255,8 @@ class UserController extends Controller
      * department badge list.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function departmentBadgeList(Request $request)
     {
@@ -1407,7 +1409,7 @@ class UserController extends Controller
         try {
             $department_id = $request->department_id;
             $siteUrl = env('APP_URL');
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1463,7 +1465,7 @@ class UserController extends Controller
             }
             $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
             foreach ($posts as $post) {
-                //flag =1 , 1 => department , 2 => badge 
+                //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
                     // get department w.r.t given department id
                     $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -1553,7 +1555,7 @@ class UserController extends Controller
                 ];
                 # code...
             }
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -1608,7 +1610,7 @@ class UserController extends Controller
             }
             $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
             foreach ($posts as $post) {
-                //flag =1 , 1 => department , 2 => badge 
+                //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
                     // get department w.r.t given department id
                     $departmentPostData = Post::where('department_id', $post->department_id)->get();

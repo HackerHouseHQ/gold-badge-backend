@@ -13,14 +13,15 @@ module.exports = {
                     "INSERT INTO chats(`sender_id` , `receiver_id` ,`socket_id`, `room_id` , `message`) VALUES (?,?,?,?,?)";
                 var room_id = input.room_id;
                 let current = new Date();
-                let output = [{
-                    sender_id: input.sender_id,
-                    receiver_id: input.receiver_id,
-                    room_id: input.room_id,
-                    message: input.message,
-                    created_at: current
-                }];
-
+                let output = [
+                    {
+                        sender_id: input.sender_id,
+                        receiver_id: input.receiver_id,
+                        room_id: input.room_id,
+                        message: input.message,
+                        created_at: current
+                    }
+                ];
                 console.log(users);
                 io.to(room_id).emit("receive_message", {
                     status: true,
@@ -39,7 +40,7 @@ module.exports = {
                     if (error) {
                         console.error(error);
                     } else {
-                        console.log('inserted');
+                        console.log("inserted");
                     }
                 });
             });
@@ -68,13 +69,15 @@ module.exports = {
                                 1000000000 + Math.random() * 9000000000
                             );
                             var room_id = genrate_room_id.toString();
-                            var room = [{
-                                sender_id: input.sender_id,
-                                receiver_id: input.receiver_id,
-                                room_id: room_id,
-                                message: "",
-                                created_at: ""
-                            }];
+                            var room = [
+                                {
+                                    sender_id: input.sender_id,
+                                    receiver_id: input.receiver_id,
+                                    room_id: room_id,
+                                    message: "",
+                                    created_at: ""
+                                }
+                            ];
                             cart = [];
                             input.id = socket.id;
                             input.room_id = room_id;

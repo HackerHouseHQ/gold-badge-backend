@@ -3,7 +3,8 @@ var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "gold_badge"
+    database: "gold_badge",
+    charset: "utf8mb4"
 });
 connection.connect(function (err) {
     if (err) {
@@ -12,5 +13,6 @@ connection.connect(function (err) {
     }
     console.log("connected as id " + connection.threadId);
 });
+
 
 module.exports = connection;

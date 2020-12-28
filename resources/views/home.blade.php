@@ -49,7 +49,6 @@
         .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
             background: #e2b52dd1 !important;
         }
-
     </style>
 </head>
 
@@ -1074,8 +1073,8 @@
 
     <script>
         //
-        // Bars chart
-        //
+        // Bars char
+
 
         var BarsChart = (function () {
             //
