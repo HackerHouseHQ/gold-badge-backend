@@ -439,6 +439,9 @@ class UserController extends Controller
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
                         // $file->move($path, $filename);
+                        if (!file_exists($path)) {
+                            mkdir($path, 777, true);
+                        }
                         if ($request->media_type == 1) {
                             $img = Image::make($file->getRealPath());
                             $img->orientate();
@@ -447,6 +450,7 @@ class UserController extends Controller
                                 $constraint->upsize();
                             })->save($path . '/' . $filename);
                         } else {
+
                             $file->move($path, $filename);
                         }
 
@@ -580,7 +584,9 @@ class UserController extends Controller
                         $extension = $file->getClientOriginalExtension();
                         $filename = time()  . "$i" . "." . $extension;
                         $path = storage_path() . '/app/public/uploads/post_department_image';
-
+                        if (!file_exists($path)) {
+                            mkdir($path, 777, true);
+                        }
                         if ($request->media_type == 1) {
                             $img = Image::make($file->getRealPath());
                             $img->orientate();

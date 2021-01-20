@@ -37,16 +37,16 @@ class GalleryController extends Controller
     //                 if ($deg) {
     //                     $img = imagerotate($img, $deg, 0);
     //                 }
-    //                 // then rewrite the rotated image back to the disk as $filename 
+    //                 // then rewrite the rotated image back to the disk as $filename
     //                 imagejpeg($img, $filename, 95);
     //             } // if there is some rotation necessary
     //         } // if have the exif orientation info
-    //     } // if function exists      
+    //     } // if function exists
     // }
     public function saveGalleryImage(Request $request)
     {
         // try {
-        // check user is active or in active 
+        // check user is active or in active
 
         $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
         if (!$checkActive) {
@@ -67,6 +67,9 @@ class GalleryController extends Controller
                 $extension = $file->getClientOriginalExtension();
                 $filename = time()  . "$i" . "." . $extension;
                 $path = storage_path() . '/app/public/uploads/gallery_image';
+                if (!file_exists($path)) {
+                    mkdir($path, 777, true);
+                }
                 $img = Image::make($file->getRealPath());
                 $img->orientate();
                 $img->resize(1000, 1000, function ($constraint) {
@@ -82,6 +85,9 @@ class GalleryController extends Controller
                     $videoExtension = $videoFile->getClientOriginalExtension();
                     $videoFilename = time()  . "$i" . "." . $videoExtension;
                     $videoPath = storage_path() . '/app/public/uploads/gallery_video';
+                    if (!file_exists($videoPath)) {
+                        mkdir($videoPath, 777, true);
+                    }
                     $videoFile->move($videoPath, $videoFilename);
                 }
                 $insertArray = [
@@ -107,7 +113,7 @@ class GalleryController extends Controller
     public function getGalleryImage(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -132,7 +138,7 @@ class GalleryController extends Controller
     public function deleteGalleryImage(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
