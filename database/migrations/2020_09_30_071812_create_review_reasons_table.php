@@ -16,6 +16,7 @@ class CreateReviewReasonsTable extends Migration
         Schema::create('review_reasons', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('reason_id');
             $table->integer('rating');
             $table->timestamps();

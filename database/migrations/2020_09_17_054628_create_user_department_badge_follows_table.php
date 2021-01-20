@@ -16,9 +16,10 @@ class CreateUserDepartmentBadgeFollowsTable extends Migration
         Schema::create('user_department_badge_follows', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('badge_id');
-            $table->foreign('badge_id')->references('id')->on('department_badges');
+            $table->foreign('badge_id')->references('id')->on('department_badges')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->boolean('status')->default(1)->comment('1=> follow , 2=>unfollow');
             $table->timestamps();
         });
     }

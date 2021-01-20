@@ -15,10 +15,14 @@ class CreatePostBadgeImagesTable extends Migration
     {
         Schema::create('post_badge_images', function (Blueprint $table) {
             $table->id();
-            $table->integer('user_id');
-            $table->integer('department_id');
-            $table->integer('badge_id');
-            $table->string('image');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
+            $table->unsignedBigInteger('badge_id');
+            $table->foreign('badge_id')->references('id')->on('department_badges')->onDelete('cascade');
+            $table->string('image')->nullable();
+            $table->string('video')->nullable();
             $table->boolean('media_type')->comment(' 0 => video 1=>image');
             $table->timestamps();
         });

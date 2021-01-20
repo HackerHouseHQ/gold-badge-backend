@@ -16,7 +16,9 @@ class CreateDestoryChatsTable extends Migration
         Schema::create('destory_chats', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('sender_id');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('receiver_id');
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('room_id');
             $table->timestamp('destroy_time')->useCurrent();
             $table->timestamps();

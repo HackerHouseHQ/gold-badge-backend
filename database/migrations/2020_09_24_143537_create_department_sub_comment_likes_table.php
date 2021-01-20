@@ -23,7 +23,7 @@ class CreateDepartmentSubCommentLikesTable extends Migration
             $table->foreign('comment_id')->references('id')->on('department_comments')->onDelete('cascade');
             $table->unsignedBigInteger('sub_comment_id');
             $table->foreign('sub_comment_id')->references('id')->on('department_sub_comments')->onDelete('cascade');
-            $table->boolean('status')->default(1);
+            $table->boolean('status')->default(1)->comment('1=like , 0=>unlike');
             $table->timestamps();
         });
     }

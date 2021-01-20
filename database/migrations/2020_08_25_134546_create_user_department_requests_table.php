@@ -16,15 +16,15 @@ class CreateUserDepartmentRequestsTable extends Migration
         Schema::create('user_department_requests', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('country_id');
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->unsignedBigInteger('state_id');
+            $table->foreign('state_id')->references('id')->on('country_states')->onDelete('cascade');
             $table->unsignedBigInteger('city_id');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->string('department_name')->nullable();
-            $table->boolean('status')->comment('0=>pending , 1=>approve, 2=>reject');
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('state_id')->references('id')->on('country_states');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->boolean('status')->comment('0=>pending , 1=>approve, 2=>reject')->nullable();
             $table->timestamps();
         });
     }

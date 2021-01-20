@@ -19,11 +19,11 @@ class CreateDepartmentsTable extends Migration
             $table->unsignedBigInteger('state_id');
             $table->unsignedBigInteger('city_id');
             $table->string('department_name');
-            $table->string('image');
-            $table->boolean('status')->comment('1=>active, 2=>inactive');
-            $table->foreign('country_id')->references('id')->on('countries');
-            $table->foreign('state_id')->references('id')->on('country_states');
-            $table->foreign('city_id')->references('id')->on('cities');
+            $table->string('image')->nullable();
+            $table->boolean('status')->comment('1=>active, 2=>inactive')->nullable();
+            $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
+            $table->foreign('state_id')->references('id')->on('country_states')->onDelete('cascade');
+            $table->foreign('city_id')->references('id')->on('cities')->onDelete('cascade');
             $table->timestamps();
         });
     }

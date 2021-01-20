@@ -17,7 +17,6 @@ class CreateSendNotificationsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('message');
-            $table->integer('user_id');
             $table->timestamps();
         });
     }

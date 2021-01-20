@@ -16,12 +16,12 @@ class CreateDepartmentCommentLikesTable extends Migration
         Schema::create('department_comment_likes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('comment_id');
-            $table->foreign('comment_id')->references('id')->on('department_comments');
-            $table->boolean('status')->default(1);
+            $table->foreign('comment_id')->references('id')->on('department_comments')->onDelete('cascade');
+            $table->boolean('status')->default(1)->comment('1=like , 0=>unlike');
             $table->timestamps();
         });
     }

@@ -17,7 +17,9 @@ class CreateGalleryImagesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('image');
+            $table->string('image')->nullable();
+            $table->string('video')->nullable();
+            $table->boolean('media_type')->default(1)->comment('1=>image , 0=>video');
             $table->timestamps();
         });
     }

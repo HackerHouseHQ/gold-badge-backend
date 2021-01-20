@@ -16,11 +16,11 @@ class CreateDepartmentSubCommentsTable extends Migration
         Schema::create('department_sub_comments', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('post_id');
-            $table->foreign('post_id')->references('id')->on('posts');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->unsignedBigInteger('comment_id');
-            $table->foreign('comment_id')->references('id')->on('department_comments');
+            $table->foreign('comment_id')->references('id')->on('department_comments')->onDelete('cascade');
             $table->string('sub_comment');
             $table->timestamps();
         });

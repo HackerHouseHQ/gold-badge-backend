@@ -17,7 +17,7 @@ class CreateUserOtpLoginsTable extends Migration
             $table->id();
             $table->string('email');
             $table->string('otp');
-            $table->boolean('status')->default(0);
+            $table->boolean('status')->default(0)->comment('0=> otp not matched , 1=> otp matched');
             $table->timestamps();
         });
     }

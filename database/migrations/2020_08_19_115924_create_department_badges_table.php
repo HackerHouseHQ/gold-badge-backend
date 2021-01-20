@@ -16,10 +16,9 @@ class CreateDepartmentBadgesTable extends Migration
         Schema::create('department_badges', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('department_id');
+            $table->foreign('department_id')->references('id')->on('departments')->onDelete('cascade');
             $table->string('badge_number');
             $table->boolean('status')->comment('1=>active, 2=>inactive');
-            $table->string('rating')->nullable();
-            $table->foreign('department_id')->references('id')->on('departments');
             $table->timestamps();
         });
     }

@@ -15,7 +15,7 @@ class CreateInformationDataTable extends Migration
     {
         Schema::create('information_data', function (Blueprint $table) {
             $table->id();
-            $table->string('about_uss')->nullable();
+            $table->string('about_us')->nullable();
             $table->string('privacy')->nullable();
             $table->text('terms')->nullable();
             // $table->boolean('terms')->comment('1=>yes, 0=>no');
