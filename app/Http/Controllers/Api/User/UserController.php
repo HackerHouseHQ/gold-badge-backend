@@ -245,7 +245,16 @@ class UserController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time()  . "." . $extension;
             $path = storage_path() . '/app/public/uploads/user_image';
-            $file->move($path, $filename);
+            if (!file_exists($path)) {
+                mkdir($path, 777, true);
+            }
+            $img = Image::make($file->getRealPath());
+            $img->orientate();
+            $img->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path . '/' . $filename);
+            //$file->move($path, $filename);
             $insertData = [
                 'first_name' => $request->name,
                 'user_name' => $request->user_name,
@@ -1698,7 +1707,16 @@ class UserController extends Controller
             $extension = $file->getClientOriginalExtension();
             $filename = time()  . "." . $extension;
             $path = storage_path() . '/app/public/uploads/user_image';
-            $file->move($path, $filename);
+            if (!file_exists($path)) {
+                mkdir($path, 777, true);
+            }
+            $img = Image::make($file->getRealPath());
+            $img->orientate();
+            $img->resize(1000, 1000, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->save($path . '/' . $filename);
+            // $file->move($path, $filename);
             $insertData = [
                 'first_name' => $request->name,
                 'user_name' => $request->user_name,
