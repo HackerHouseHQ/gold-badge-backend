@@ -28,4 +28,4 @@ pool.on('connection', function (_conn) {
         _conn.query('SET SESSION auto_increment_increment=1');
     }
 });
-module.exports = connection;
+module.exports = pool;

@@ -1,3 +1,4 @@
+const pool = require("./database");
 const connection = require("./database");
 require("dotenv").config();
 const { Users } = require("./user");
@@ -35,7 +36,7 @@ module.exports = {
                     room_id,
                     input.message
                 ];
-                connection.query(insert, values, (error, rows, fields) => {
+                pool.query(insert, values, (error, rows, fields) => {
                     if (error) {
                         console.error(error);
                     } else {
@@ -45,7 +46,7 @@ module.exports = {
             });
             socket.on("user_chat_list", function (input, result) {
                 var get_chat_user_list = "SELECT `room_id`, `sender_id`, `receiver_id`, `message` , `created_at` FROM `chats` WHERE `sender_id` = " + input.sender_id + " AND `receiver_id` = " + input.receiver_id + " OR  `sender_id` = " + input.receiver_id + " AND `receiver_id` = " + input.sender_id;
-                connection.query(get_chat_user_list, (error, rows, fields) => {
+                pool.query(get_chat_user_list, (error, rows, fields) => {
                     if (error) {
                         console.log(error);
                     } else {
