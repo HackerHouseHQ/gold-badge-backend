@@ -14,5 +14,12 @@ connection.connect(function (err) {
     console.log("connected as id " + connection.threadId);
 });
 
+let pool = mysql.createPool(connection);
 
+pool.on('connection', function (_conn) {
+    if (_conn) {
+        logger.info('Connected the database via threadId %d!!', _conn.threadId);
+        _conn.query('SET SESSION auto_increment_increment=1');
+    }
+});
 module.exports = connection;
