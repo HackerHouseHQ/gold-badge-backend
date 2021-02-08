@@ -17,6 +17,10 @@ class AppServiceProvider extends ServiceProvider
         if (file_exists($file)) {
             require_once $file;
         }
+        $file = base_path('config/constants.php');
+        if (file_exists($file)) {
+            require_once $file;
+        }
     }
 
     /**

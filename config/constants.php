@@ -3,7 +3,7 @@
 defined("PARAM_ERROR") or define('PARAM_ERROR', 418);
 defined("NOT_EXISTS") or define('NOT_EXISTS', 402);
 defined("FATAL_ERROR") or define('FATAL_ERROR', 500);
-defined("DATA_EXISTS") or define('DATA_EXISTS', 411);
+define('DATA_EXISTS', 411);
 defined("SUCCESS") or define('SUCCESS', 200);
 defined("YES") or define('YES', 1);
 
@@ -28,19 +28,4 @@ defined("VISIBLE") or define("VISIBLE", 1);
 
 defined("INVISIBLE") or define("INVISIBLE", 0);
 
-return [
 
-    'LINKTYPE' => [
-        1 => "web",
-        2 => "facebook",
-        3 => "linked",
-        4 => "twitter",
-        5 => "instagram"
-    ],
-    'HIRE' => [
-        'REQUESTED' => 1,
-        'ONGOING' => 2,
-        'CONFIRMED' => 3,
-        'CANCELLED' => 4
-    ],
-];
