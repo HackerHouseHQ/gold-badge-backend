@@ -18,7 +18,7 @@ class InformationManagementController extends Controller
     public function getNotification(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -57,7 +57,12 @@ class InformationManagementController extends Controller
     public function getStatusOfNotification()
     {
         try {
-            $getUsernotificationStatus = User::select('read_notification')->whereId(Auth::user()->id)->first();
+           $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
+           $getUsernotificationStatus = User::select('read_notification')->whereId(Auth::user()->id)->first();
+           if(empty($data))
+           {
+            $getUsernotificationStatus->read_notification = 1;
+           }
             return res_success('Notification status .', $getUsernotificationStatus);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
