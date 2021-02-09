@@ -1,5 +1,5 @@
 const firebase = require("firebase-admin");
-var serviceAccount = require("google.json");
+var serviceAccount = require("../google.json");
 firebase.initializeApp({
 	credential: firebase.credential.cert(serviceAccount)
 	// databaseURL: "https://examarly-291907.firebaseio.com"
