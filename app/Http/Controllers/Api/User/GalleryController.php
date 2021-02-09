@@ -119,17 +119,18 @@ class GalleryController extends Controller
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $siteUrl = env('APP_URL');
-            $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->latest('date', 'DESC')->get();
+            $data  = GalleryImages::select(DB::raw('DISTINCT(created_at)'))->where('user_id', Auth::user()->id)->latest('created_at', 'DESC')->get();
             foreach ($data as $key => $value) {
-                $value->date->formatLocalized();
+                $value->date = $value->created_at;
                 $images = GalleryImages::select(
                     'id as image_id',
                     DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_image/', image) as image"),
                     'media_type',
                     DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_video/', video) as video"),
                     'created_at'
-                )->where('user_id', Auth::user()->id)->where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->latest()->get();
+                )->where('user_id', Auth::user()->id)->whereDate('created_at',  date('Y-m-d', strtotime($value->created_at)) )->latest()->get();
                 $value->images  = $images;
+                unset($value->created_at);
             }
             return res_success(trans('messages.successFetchList'), array('galleryImages' => $data));
         } catch (Exception $e) {

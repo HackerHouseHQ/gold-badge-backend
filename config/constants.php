@@ -3,7 +3,7 @@
 defined("PARAM_ERROR") or define('PARAM_ERROR', 418);
 defined("NOT_EXISTS") or define('NOT_EXISTS', 402);
 defined("FATAL_ERROR") or define('FATAL_ERROR', 500);
-define('DATA_EXISTS', 411);
+defined("DATA_EXISTS") or define('DATA_EXISTS', 411);
 defined("SUCCESS") or define('SUCCESS', 200);
 defined("YES") or define('YES', 1);
 
