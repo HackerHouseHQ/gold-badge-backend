@@ -1,13 +1,16 @@
 @extends('admin_dash.main')
 <style>
-        img {
-    transition:transform 0.25s ease;
+
+#imgViewer::-webkit-scrollbar {
+    -webkit-appearance: none;
+    height: 10px;
+}
+#imgViewer::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: rgba(0,0,0,.5);
+    box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 
-img:hover {
-    -webkit-transform:scale(1.5);
-    transform:scale(1.5);
-}
     #myPostImg {
         border-radius: 5px;
         cursor: pointer;
@@ -523,6 +526,22 @@ img:hover {
         </div>
     </div>
 </div>
+<div class="modal in" id="viewImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title text-capitalize">View Image</h4>
+
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+        </div>
+        <div class="modal-body">
+          <div id="imgViewer" style="overflow-x: scroll;">
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 <div class="modal fade" id="viewUserDetailBadgeRating" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -639,6 +658,7 @@ console.log(err);
 }
 </script> --}}
 <script type="text/javascript">
+
     $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
             language: {
@@ -1008,6 +1028,12 @@ console.log(err);
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
-
+    $('img').on('click', function(e) {
+  $('#imgViewer').html('').append( $(e.currentTarget).clone().removeClass('img-responsive').removeClass('img-thumbnail') )
+  $('#viewImg').modal('show')
+})
+$('img').each(function(i,e) {
+  $(e).wrap('<div class="img-wrapper"></div>')
+})
 </script>
 @endsection
