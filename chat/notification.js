@@ -1,15 +1,15 @@
 const firebase = require("firebase-admin");
 var serviceAccount = require("../google.json");
 firebase.initializeApp({
-	credential: firebase.credential.cert(serviceAccount),
-	databaseURL: "https://examarly-291907.firebaseio.com"
+	credential: firebase.credential.cert(serviceAccount)
+	// databaseURL: "https://examarly-291907.firebaseio.com"
 	//   databaseURL: "https://ivs-admin-d0d01.firebaseio.com"
 });
 module.exports = {
 	sendNotification: async (token, message = 'you have got new msg') => {
 		try {
 			var deviceToken = token;
-			let title = 'Examarly'
+			let title = 'Gold Badge'
 			const payload = {
 				notification: {
 					title: title,
