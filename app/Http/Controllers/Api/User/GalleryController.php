@@ -121,6 +121,7 @@ class GalleryController extends Controller
             $siteUrl = env('APP_URL');
             $data  = GalleryImages::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->where('user_id', Auth::user()->id)->latest('date', 'DESC')->get();
             foreach ($data as $key => $value) {
+                $value->date->formatLocalized();
                 $images = GalleryImages::select(
                     'id as image_id',
                     DB::raw("CONCAT('$siteUrl','storage/uploads/gallery_image/', image) as image"),
