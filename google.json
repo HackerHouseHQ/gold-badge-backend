@@ -1,0 +1,47 @@
+{
+    "project_info": {
+      "project_number": "182362945274",
+      "firebase_url": "https://goldbadge-dc58b.firebaseio.com",
+      "project_id": "goldbadge-dc58b",
+      "storage_bucket": "goldbadge-dc58b.appspot.com"
+    },
+    "client": [
+      {
+        "client_info": {
+          "mobilesdk_app_id": "1:182362945274:android:62ccd62a8915a5d6aabb43",
+          "android_client_info": {
+            "package_name": "com.ripenapps.goldbadge"
+          }
+        },
+        "oauth_client": [
+          {
+            "client_id": "182362945274-dpd45m7s13trt3tulc52nbvcm81ba2tf.apps.googleusercontent.com",
+            "client_type": 3
+          }
+        ],
+        "api_key": [
+          {
+            "current_key": "AIzaSyDNRVkjc745zYgQuqxjN8MhiJ3uDzR_IUs"
+          }
+        ],
+        "services": {
+          "appinvite_service": {
+            "other_platform_oauth_client": [
+              {
+                "client_id": "182362945274-dpd45m7s13trt3tulc52nbvcm81ba2tf.apps.googleusercontent.com",
+                "client_type": 3
+              },
+              {
+                "client_id": "182362945274-17kpfgn38hqntkhr2uionj55neggqim5.apps.googleusercontent.com",
+                "client_type": 2,
+                "ios_info": {
+                  "bundle_id": "com.ripenaspps.goldbadge"
+                }
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "configuration_version": "1"
+  }
