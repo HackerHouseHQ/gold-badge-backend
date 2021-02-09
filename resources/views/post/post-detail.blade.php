@@ -1,5 +1,13 @@
 @extends('admin_dash.main')
 <style>
+        img {
+    transition:transform 0.25s ease;
+}
+
+img:hover {
+    -webkit-transform:scale(1.5);
+    transform:scale(1.5);
+}
     #myPostImg {
         border-radius: 5px;
         cursor: pointer;
@@ -441,12 +449,12 @@
                                                 <p>
                                                     <a href="#" class="link-black text-sm mr-2">View Post</a>
                                                 </p>
-        
+
                                                 <p>
                                                     No Post Available !
                                                 </p>
-        
-        
+
+
                                             </div>
                                         </div>
                                     </div>
@@ -475,7 +483,7 @@
                 <div class="modal-body" id="">
                     <div class="row">
                         {{-- <div class="col-6" id="userImage2">
-  
+
             </div> --}}
                         <div class="col-12" id="viewDepartmentComment">
 
@@ -499,13 +507,13 @@
                       </tr>
                     </thead>
                     <tbody id="viewDepartment">
-  
+
                     </tbody>
-  
+
                   </table>
-  
-  
-  
+
+
+
                 </div>
               </div>
             </div>
@@ -538,7 +546,7 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
@@ -572,7 +580,7 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
@@ -587,7 +595,7 @@
 @section('script')
 {{-- <script type="text/javascript">
     function viewDepartmentBadgeModel1(id){
-   // alert(id); 
+   // alert(id);
 
        $.ajax({
           url: "{{ route('viewDepartmentBadgeModel') }}/" + id,
@@ -800,7 +808,7 @@ console.log(err);
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#vote_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
                                     <div>
@@ -867,7 +875,7 @@ console.log(err);
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#reason_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
               <div>
@@ -952,7 +960,7 @@ console.log(err);
         <span class="font2">${value.date}</span>
       </div>
       <div class="comment_partion_div1">
-        <span class="font1">${value.comment}</span> 
+        <span class="font1">${value.comment}</span>
         <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
     padding-left: 5px;
     font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
@@ -967,14 +975,14 @@ console.log(err);
                 <div class="sub_comment_div">
                   <div class="comment_partion_div">
         <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
-        
+
         <span class="font1">${v.user_name}</span>
         <span class ="font2">${v.date}</span>
         </div>
         <div class="comment_partion_div1">
-        <span class= "font1">${v.sub_comment}</span> 
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
-         
+        <span class= "font1">${v.sub_comment}</span>
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
+
       </div> `;
 
 

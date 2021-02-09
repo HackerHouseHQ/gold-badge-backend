@@ -1,13 +1,6 @@
 @extends('admin_dash.main')
 <style type="text/css">
-    img {
-    transition:transform 0.25s ease;
-}
 
-img:hover {
-    -webkit-transform:scale(1.5);
-    transform:scale(1.5);
-}
     .show {
         margin-left: 31px;
         margin-right: 92px;
