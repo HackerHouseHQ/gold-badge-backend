@@ -586,8 +586,10 @@
         </div>
     </div>
 </div>
+
 @endsection
 @section('script')
+
 {{-- <script type="text/javascript">
     function viewDepartmentBadgeModel1(id){
    // alert(id);
@@ -634,6 +636,10 @@ console.log(err);
 }
 </script> --}}
 <script type="text/javascript">
+$('.carousel').on('slide.bs.carousel', function () {
+    number
+  // do something…
+})
     $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
             language: {

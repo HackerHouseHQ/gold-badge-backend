@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-    <meta name="author" content="Creative Tim">
+    <meta name="description" content="Gold Badge">
+    <meta name="author" content="Gold Badge">
     <title>Gold Badge</title>
     <!-- Favicon -->
     <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">

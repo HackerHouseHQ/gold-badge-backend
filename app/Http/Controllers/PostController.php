@@ -127,7 +127,7 @@ class PostController extends Controller
       $data['data'] = $getDetail;
       return view('department_managenment.departmentProfile', $data);
    }
-   // *******view as modalview in departmentprofile page of all badge data 
+   // *******view as modalview in departmentprofile page of all badge data
    public function viewDepartmentBadgeModel($id)
    {
       $DepartmentBadgeModelData = DepartmentBadge::where('department_id', $id)->get();
@@ -338,54 +338,26 @@ class PostController extends Controller
          if (count($data->post_imagess) > 0) {
             $j = 1;
             $rowImage = "";
-            $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'>
-            <div class='carousel-inner'>";
+            $rowImage = "<div id='carouselExampleControls" . $data->post_id  . "' class='carousel slide' data-ride='carousel'><div class='carousel-inner'>";
             foreach ($data->post_imagess   as $k => $postimage) {
-
                $images = ($postimage->image) ? $postimage->image : asset("admin_new/assets/img/goldbadge_logo.png");
                if ($j == 1) {
-
                   if ($postimage->media_type == 0) {
-                     $rowImage .= " <div class='carousel-item active'>
-   <video style = '    width: 68%;
-   text-align: center;
-   margin: 0px auto;
-   display: flex;
-   height: 204px;
-   margin-top: -40px;' controls  id='myVideo'>
-                            <source src='" . $images . "' type='video/mp4'>
-                            <source src='" . $images . "' type='video/ogg'>
-                        </video>
-      </div>";
+                     $rowImage .= " <div class='carousel-item active'><video style = '    width: 68%; text-align: center; margin: 0px auto; display: flex; height: 204px;margin-top: -40px;' controls  id='myVideo'><source src='" . $images . "' type='video/mp4'><source src='" . $images . "' type='video/ogg'></video></div>";
                   } else {
-                     $rowImage .= " <div class='carousel-item active'>
-   <img class='d-block' id='myPostImg' src='" . $images . "'  alt='First slide'>
- </div>";
+                     $rowImage .= " <div class='carousel-item active'><img class='d-block' id='myPostImg' src='" . $images . "'  alt='First slide'></div>";
                   }
                } else {
                   if ($postimage->media_type == 0) {
-                     $rowImage .= " <div class='carousel-item'>
-                    <video style = '    width: 68%;
-                    text-align: center;
-                    margin: 0px auto;
-                    display: flex;
-                    height: 204px;
-                    margin-top: -40px;' controls  id='myVideo'>
-                    <source src='" . $images . "' type='video/mp4'>
-                    <source src='" . $images . "' type='video/ogg'>
-                </video>
-                  </div>";
+                     $rowImage .= " <div class='carousel-item'><video style = '    width: 68%;text-align: center; margin: 0px auto;display: flex;height: 204px;margin-top: -40px;' controls  id='myVideo'> <source src='" . $images . "' type='video/mp4'><source src='" . $images . "' type='video/ogg'></video></div>";
                   } else {
-                     $rowImage .= " <div class='carousel-item'>
-                     <img class='d-block id='myPostImg' ' src='" . $images . "'  alt='Second slide'>
-                   </div>";
+                     $rowImage .= " <div class='carousel-item'> <img class='d-block id='myPostImg' ' src='" . $images . "'  alt='Second slide'></div>";
                   }
                }
 
                $j++;
             }
-            $rowImage .= "</div>
-            <a class='carousel-control-prev' href='#carouselExampleControls" . $data->post_id  . "' role='button' data-slide='prev'>
+            $rowImage .= "</div> <a class='carousel-control-prev' href='#carouselExampleControls" . $data->post_id  . "' role='button' data-slide='prev'>
               <span class='carousel-control-prev-icon' aria-hidden='true'></span>
               <span class='sr-only'>Previous</span>
             </a>
