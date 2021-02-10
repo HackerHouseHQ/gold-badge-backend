@@ -1518,13 +1518,13 @@ class UserController extends Controller
 
             $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
                 ->whereId($department_id)->first();
-            $avgrating = Post::where('department_id', $department_id)->where('flag', 1)->where('consider_rating', 1)->avg('rating');
-            $totalReviews = Post::where('department_id', $department_id)->where('flag', 1)->count();
-            $onerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 1)->count();
-            $tworating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 2)->count();
-            $threerating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 3)->count();
-            $fourrating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 4)->count();
-            $fiverating = Post::where('department_id', $department_id)->where('flag', 1)->where('rating', 5)->count();
+            $avgrating = Post::where('department_id', $department_id)->where('consider_rating', 1)->avg('rating');
+            $totalReviews = Post::where('department_id', $department_id)->count();
+            $onerating = Post::where('department_id', $department_id)->where('rating', 1)->count();
+            $tworating = Post::where('department_id', $department_id)->where('rating', 2)->count();
+            $threerating = Post::where('department_id', $department_id)->where('rating', 3)->count();
+            $fourrating = Post::where('department_id', $department_id)->where('rating', 4)->count();
+            $fiverating = Post::where('department_id', $department_id)->where('rating', 5)->count();
             $data['country_name'] = $data->country_data->country_name;
             $data['state_name'] = $data->state_data->state_name;
             $data['city_name'] = $data->city_data->city_name;
