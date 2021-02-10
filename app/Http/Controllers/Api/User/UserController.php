@@ -1351,8 +1351,9 @@ class UserController extends Controller
             $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
             foreach ($department as $k => $v) {
                 if ($v->department_id  == $value->department_id) {
-                    $value['total_reviews'] = $v->total_reviews;
-                    $value['rating'] = ($v->rating) ? $v->rating : 0;
+                    $value['total_reviews'] = Post::where('department_id', $v->department_id)->count();
+                    $rating =Post::where('department_id', $v->department_id)->avg();
+                    $value['rating'] = ($rating) ? $rating : 0;
                 }
             }
             if ($is_followed_by_user == 1) {
