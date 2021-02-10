@@ -1352,7 +1352,7 @@ class UserController extends Controller
             foreach ($department as $k => $v) {
                 if ($v->department_id  == $value->department_id) {
                     $value['total_reviews'] = Post::where('department_id', $v->department_id)->count();
-                    $rating =Post::where('department_id', $v->department_id)->avg();
+                    $rating =Post::where('department_id', $v->department_id)->avg('rating');
                     $value['rating'] = ($rating) ? $rating : 0;
                 }
             }
