@@ -1,13 +1,6 @@
 @extends('admin_dash.main')
 <style>
-    img {
-        transition: transform 0.25s ease;
-    }
 
-    img:hover {
-        -webkit-transform: scale(2.0);
-        transform: scale(2.0);
-    }
 
     #myPostImg {
         border-radius: 5px;
