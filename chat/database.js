@@ -2,7 +2,7 @@ var mysql = require("mysql");
 var connection = mysql.createConnection({
     host: "localhost",
     user: "root",
-    password: "parcelo@123",
+    password: "goldbadge@!!!1",
     database: "gold_badge",
     charset: "utf8mb4"
 });
@@ -16,7 +16,7 @@ connection.connect(function (err) {
 let dbConfig ={
     host: "localhost",
     user: "root",
-    password: "parcelo@123",
+    password: "goldbadge@!!!1",
     database: "gold_badge",
     charset: "utf8mb4"
 }
