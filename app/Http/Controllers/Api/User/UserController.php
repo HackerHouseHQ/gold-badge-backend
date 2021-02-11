@@ -1448,7 +1448,9 @@ class UserController extends Controller
                 ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                 ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                 ->withCount('post_comment')
-                ->withCount('post_like')
+                ->withCount(['post_like' => function (Builder $query) {
+                    $query->where('status', 1);
+                }])
                 ->withCount('post_share')
                 ->where('posts.department_id', $department_id)
                 ->whereNotIn('posts.id', $reportArray);
@@ -1593,7 +1595,9 @@ class UserController extends Controller
                 ->leftJoin('department_badges', 'department_badges.id', '=', 'posts.badge_id')
                 ->select('posts.*', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'departments.department_name', DB::raw("CONCAT('$siteUrl','storage/departname/', departments.image ) as department_image"))
                 ->withCount('post_comment')
-                ->withCount('post_like')
+                ->withCount(['post_like' => function (Builder $query) {
+                    $query->where('status', 1);
+                }])
                 ->withCount('post_share')
                 ->where('posts.badge_id', $badge_id)
                 ->whereNotIn('posts.id', $reportArray);
