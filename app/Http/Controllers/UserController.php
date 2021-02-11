@@ -109,7 +109,7 @@ class UserController extends Controller
   }
   public function viewUserDetailLikeModel(Request  $request)
   {
-    $data = DepartmentLike::with('post_images')->where('post_id', $request->id)->where('status' , 1)
+    $data = DepartmentLike::with('post_images')->where('post_id', $request->id)
       ->leftjoin("users", function ($join) {
         $join->on('department_likes.user_id', '=', 'users.id');
       })->get();
