@@ -15,11 +15,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
-  <meta name="author" content="Creative Tim">
+  <meta name="description" content="Gold Badge">
+  <meta name="author" content="Gold Badge">
   <title>Gold Badge</title>
-  <!-- Favicon -->
-  <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">
+      <!-- Favicon -->
+      <link rel="icon" href="{{asset('admin_css/images/follow_logo.png')}}" type="image/png">
   <!-- Fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
   <!-- Icons -->
@@ -126,7 +126,7 @@
         <div class="header-body text-center mb-7" style="margin-top:50px;">
           <div class="row justify-content-center">
             <div class="col-xl-5 col-lg-6 col-md-8 px-5">
-             
+
               {{-- <h1 class="text-white">Welcome!</h1> --}}
               {{-- <p class="text-lead text-white">Welcome To Gold Badge Login</p> --}}
             </div>
