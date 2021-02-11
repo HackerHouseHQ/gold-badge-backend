@@ -1,7 +1,5 @@
 @extends('admin_dash.main')
 <style>
-
-
     #myPostImg {
         border-radius: 5px;
         cursor: pointer;
@@ -107,9 +105,10 @@
     }
 
     td.sorting_1 {
-        width: 47%;
+        width: 50%;
         padding: 0;
     }
+
 
     img.d-block {
         width: 65%;
@@ -202,6 +201,21 @@
         margin-left: 2px;
     }
 
+    .alignleft {
+        float: left;
+    }
+
+    .alignright {
+        float: right;
+
+    }
+
+    .table td, .table th {
+    font-size: .8125rem;
+    white-space: pre-wrap !important;
+}
+
+
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -212,7 +226,8 @@
                     <h6 class="h2 text-white d-inline-block mb-0">Post</h6>
                     <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
                         <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-                            <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{ route('home') }}"><i class="fas fa-home"></i></a>
+                            </li>
                             <li class="breadcrumb-item active" aria-current="page">PostDetails</li>
                         </ol>
                     </nav>
@@ -240,45 +255,45 @@
                                     <div class="card-body box-profile">
                                         <div class="text-center">
 
-                                            <img class="avatar1" src="../storage/uploads/user_image/{{$data->image}}"
+                                            <img class="avatar1" src="../storage/uploads/user_image/{{ $data->image }}"
                                                 alt="User profile picture">
                                         </div>
-                                        <input type="hidden" id="user_id" value="{{$data->id}}">
+                                        <input type="hidden" id="user_id" value="{{ $data->id }}">
 
                                         <ul class="list-group list-group-unbordered mb-3">
                                             <li class="list-group-item">
                                                 Full Name <a
-                                                    class="float-right">{{$data->first_name ." ". $data->last_name}}</a>
+                                                    class="float-right">{{ $data->first_name . ' ' . $data->last_name }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Username <a class="float-right">{{@$data->user_name}}</a>
+                                                Username <a class="float-right">{{ @$data->user_name }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Mobile No. <a class="float-right">{{@$data->mobil_no}}</a>
+                                                Mobile No. <a class="float-right">{{ @$data->mobil_no }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Gender <a class="float-right">{{@$data->gender}}</a>
+                                                Gender <a class="float-right">{{ @$data->gender }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Ethnicity <a class="float-right">{{@$data->ethnicity}}</a>
+                                                Ethnicity <a class="float-right">{{ @$data->ethnicity }}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 D.O.B.<a
-                                                    class="float-right">{{date("d-m-y", strtotime(@$data->dob))}}</a>
+                                                    class="float-right">{{ date('d-m-y', strtotime(@$data->dob)) }}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Following Departments <a
-                                                    class="float-right">{{@$data->total_department_follows}}</a>
+                                                    class="float-right">{{ @$data->total_department_follows }}</a>
                                             </li>
                                             <li class="list-group-item">
                                                 Following Badges <a
-                                                    class="float-right">{{@$data->total_department_badge_follows}}</a>
+                                                    class="float-right">{{ @$data->total_department_badge_follows }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Reported Reviews <a class="float-right">{{@$data->total_report}}</a>
+                                                Reported Reviews <a class="float-right">{{ @$data->total_report }}</a>
                                             </li>
                                             <li class="list-group-item">
-                                                Total Reviews <a class="float-right">{{@$data->total_reviews}}</a>
+                                                Total Reviews <a class="float-right">{{ @$data->total_reviews }}</a>
                                             </li>
                                         </ul>
                                     </div>
@@ -302,21 +317,23 @@
                                                         <select class="form-control" name="department_id"
                                                             id="department_id">
                                                             <option value="">Department</option>
-                                                            @foreach($departmentList as $departmenntList)
-                                                            <option value="{{$departmenntList->id}}">
-                                                                {{$departmenntList->department_name}}</option>
+                                                            @foreach ($departmentList as $departmenntList)
+                                                            <option value="{{ $departmenntList->id }}">
+                                                                {{ $departmenntList->department_name }}</option>
                                                             @endforeach
                                                         </select>
                                                     </div>
                                                 </div>
                                                 <div class='col-6'>
-                                                    <?php $departmentBadgeList = App\DepartmentBadge::get(); ?>
+                                                    <?php $departmentBadgeList =
+                                                        App\DepartmentBadge::get(); ?>
                                                     <div class="form-group">
                                                         <select class="form-control" name="badge_id" id="badge_id">
                                                             <option value="">Badge</option>
-                                                            @foreach($departmentBadgeList as $departmenntBadgeList)
-                                                            <option value="{{$departmenntBadgeList->id}}">
-                                                                {{$departmenntBadgeList->badge_number}}</option>
+                                                            @foreach ($departmentBadgeList as $departmenntBadgeList)
+                                                            <option value="{{ $departmenntBadgeList->id }}">
+                                                                {{ $departmenntBadgeList->badge_number }}
+                                                            </option>
                                                             @endforeach
                                                         </select>
                                                     </div>
@@ -359,43 +376,43 @@
                                                 </div>
                                             </div>
                                             <!--                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
+                                                        <thead>
+                                                            <tr>
 
-                                                        <span class="div_cover_sell">
-                                                            <span>
-                                                                <select name="department_id" id="department_id">
-                                                                    <option value="">Department</option>
-                                                                    <option value="1">Department1</option>
-                                                                    <option value="2">Department2</option>
-                                                                </select>
-                                                            </span>
-                                                        </span>
-                                                        <span class="div_cover_sell">
-                                                            <span>
-                                                                <select name="badge_id" id="badge_id">
-                                                                    <option value="">Badge</option>
-                                                                    <option value="1">Badge1</option>
-                                                                    <option value="2">Badge2</option>
-                                                                </select>
-                                                            </span>
-                                                        </span>
-                                                        <span class="from_to_select">
-                                                            <label for="from_text" class="serach_by_text">From</label>
+                                                                <span class="div_cover_sell">
+                                                                    <span>
+                                                                        <select name="department_id" id="department_id">
+                                                                            <option value="">Department</option>
+                                                                            <option value="1">Department1</option>
+                                                                            <option value="2">Department2</option>
+                                                                        </select>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="div_cover_sell">
+                                                                    <span>
+                                                                        <select name="badge_id" id="badge_id">
+                                                                            <option value="">Badge</option>
+                                                                            <option value="1">Badge1</option>
+                                                                            <option value="2">Badge2</option>
+                                                                        </select>
+                                                                    </span>
+                                                                </span>
+                                                                <span class="from_to_select">
+                                                                    <label for="from_text" class="serach_by_text">From</label>
 
-                                                            <input type="date" class="from_control" name="fromdate"
-                                                                id="fromdate" style="-webkit-appearance: media-slider;">
-                                                            <label for="to_text" class="serach_by_text">To</label>
-                                                            <input type="date" class="from_control" name="todate"
-                                                                id="todate" style="-webkit-appearance: media-slider;">
-                                                        </span>
-                                                        <input type="hidden" placeholder="Look for user" name="search2"
-                                                            id="search2" class="search_input">
-                                                        <button type="button" id="search_data1"
-                                                            class="apply_btnn">Apply</button>
-                                                    </tr>
-                                                </thead>
-                                            </table>-->
+                                                                    <input type="date" class="from_control" name="fromdate"
+                                                                        id="fromdate" style="-webkit-appearance: media-slider;">
+                                                                    <label for="to_text" class="serach_by_text">To</label>
+                                                                    <input type="date" class="from_control" name="todate"
+                                                                        id="todate" style="-webkit-appearance: media-slider;">
+                                                                </span>
+                                                                <input type="hidden" placeholder="Look for user" name="search2"
+                                                                    id="search2" class="search_input">
+                                                                <button type="button" id="search_data1"
+                                                                    class="apply_btnn">Apply</button>
+                                                            </tr>
+                                                        </thead>
+                                                    </table>-->
                                         </form>
                                     </div>
                                 </div>
@@ -403,19 +420,19 @@
                                     <div class="col-12">
                                         <div class="card class_scroll ">
                                             <div class="card-body p-0">
-                                                <table id="data1" class="table ">
+                                                <table id="data1" class="table" style="width: 100%;">
                                                     <!--                                                    <thead>
-                                                        <tr>
-                                                            {{-- <th><span class="tbl_row">Username</span></th>
+                                                                <tr>
+                                                                    {{-- <th><span class="tbl_row">Username</span></th>
                                                         <th><span class="tbl_row">Full Name</span></th>
                                                         <th><span class="tbl_row">Posted on </span></th>
                                                         <th><span class="tbl_row">posted About</span></th>
                                                         <th><span class="tbl_row">Rating</span></th> --}}
-                                                            {{-- <th><span class="tbl_row">Username</span></th> --}}
-                                                            {{-- <th><span class="tbl_row">Action</span></th> --}}
+                                                                    {{-- <th><span class="tbl_row">Username</span></th> --}}
+                                                                    {{-- <th><span class="tbl_row">Action</span></th> --}}
 
-                                                        </tr>
-                                                    </thead>-->
+                                                                </tr>
+                                                            </thead>-->
                                                     <tbody>
                                                     </tbody>
                                                 </table>
@@ -636,10 +653,14 @@ console.log(err);
 }
 </script> --}}
 <script type="text/javascript">
-$('.carousel').on('slide.bs.carousel', function () {
-    number
-  // do something…
-})
+var allSlides = document.querySelectorAll('.slide img');
+
+allSlides.forEach(function(slide) {
+  slide.addEventListener("click", function(){
+    console.log(slide.src);
+  });
+});
+
     $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
             language: {
@@ -664,9 +685,8 @@ $('.carousel').on('slide.bs.carousel', function () {
             "bAutoWidth": false,
             "pageLength": 2,
             "orderable": false,
-            "scrollX": true,
             'ajax': {
-                'url': "{{route('PostDepartmentDetail')}}",
+                'url': "{{ route('PostDepartmentDetail') }}",
                 'data': function (data) {
                     //       var status_id = $('#status_id').val();
                     //     data.status_id = status_id;
@@ -690,12 +710,13 @@ $('.carousel').on('slide.bs.carousel', function () {
 
                 }
             },
+
             columnDefs: [{
-                className: "cancel",
+                className:"cancel",
                 "targets": [-1]
             }],
             'columns': [{
-                    data: 'image'
+                    data: 'image' ,
                 },
                 {
                     data: 'userName'
@@ -745,7 +766,7 @@ $('.carousel').on('slide.bs.carousel', function () {
 <script type="text/javascript">
     function status(id) {
         $.ajax({
-            url: "{{route('delete_post')}}",
+            url: "{{ route('delete_post') }}",
             type: "post",
             data: {
                 'post_id': id,
@@ -777,26 +798,26 @@ $('.carousel').on('slide.bs.carousel', function () {
             var ratingIcon = "";
             if (rating >= 1 && rating < 2) {
                 ratingIcon =
-                    `<img src="{{asset('admin_new/assets/img/pinkbadge_icon.png')}}" alt="" class="modal_rating_icon">`
+                    `<img src="{{ asset('admin_new/assets/img/pinkbadge_icon.png') }}" alt="" class="modal_rating_icon">`
             }
             if (rating >= 2 && rating < 3) {
                 ratingIcon =
-                    `<img src="{{asset('admin_new/assets/img/purplebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+                    `<img src="{{ asset('admin_new/assets/img/purplebadge_icon.png') }}" alt="" class="modal_rating_icon">`;
             }
 
 
             if (rating >= 3 && rating < 4) {
                 ratingIcon =
-                    `<img src="{{asset('admin_new/assets/img/bronzebadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+                    `<img src="{{ asset('admin_new/assets/img/bronzebadge_icon.png') }}" alt="" class="modal_rating_icon">`;
             }
             if (rating >=
                 4 && rating < 5) {
                 ratingIcon =
-                    `<img src="{{asset('admin_new/assets/img/silverbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+                    `<img src="{{ asset('admin_new/assets/img/silverbadge_icon.png') }}" alt="" class="modal_rating_icon">`;
             }
             if (rating == 5) {
                 ratingIcon =
-                    `<img src="{{asset('admin_new/assets/img/goldbadge_icon.png')}}" alt="" class="modal_rating_icon">`;
+                    `<img src="{{ asset('admin_new/assets/img/goldbadge_icon.png') }}" alt="" class="modal_rating_icon">`;
             }
             return ratingIcon;
         }
@@ -813,50 +834,50 @@ $('.carousel').on('slide.bs.carousel', function () {
                     // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
-                                    <div>
-                                        <table class="table table-bordered table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th><span class="tbl_row">SN.</span></th>
-                                                    <th> <span class="tbl_row">Department</span> </th>
-                                                    <th> <span class="tbl_row">Badge Number</span> </th>
-                                                    <th> <span class="tbl_row">User Name</span> </th>
-                                                    <th> <span class="tbl_row">Rating</span> </th>
-                                                </tr>
-                                            </thead>
-                                        <tbody id="businessDetails">`;
+                                            <div>
+                                                <table class="table table-bordered table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th><span class="tbl_row">SN.</span></th>
+                                                            <th> <span class="tbl_row">Department</span> </th>
+                                                            <th> <span class="tbl_row">Badge Number</span> </th>
+                                                            <th> <span class="tbl_row">User Name</span> </th>
+                                                            <th> <span class="tbl_row">Rating</span> </th>
+                                                        </tr>
+                                                    </thead>
+                                                <tbody id="businessDetails">`;
                     $.each(response, function (key, value) {
                         row += `<tr>
-                                    <td> ${++i} </td>
-                                    <td class="text-capitalize">${value.department_name}</td>
-                                    <td class="text-capitalize">${value.badge_number}</td>
-                                    <td class="text-capitalize">${value.user_name}</td>
-                                    <td class="text-capitalize">${value.rating} <span>${ratingImage.ratings(value.rating)}</span></td>
-                                </tr>`;
+                                            <td> ${++i} </td>
+                                            <td class="text-capitalize">${value.department_name}</td>
+                                            <td class="text-capitalize">${value.badge_number}</td>
+                                            <td class="text-capitalize">${value.user_name}</td>
+                                            <td class="text-capitalize">${value.rating} <span>${ratingImage.ratings(value.rating)}</span></td>
+                                        </tr>`;
                     })
                     row += `</tbody>
-                            </table>
-                        </div>
-                    </div>`;
+                                    </table>
+                                </div>
+                            </div>`;
                     $('#vote_list').append(row)
                 } else {
                     $('#vote_list').html('');
                     let row = `<div class="table-responsive">
-                                <div>
-                                    <table class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th><span class="tbl_row">SN.</span></th>
-                                                <th> <span class="tbl_row">Department</span> </th>
-                                                <th> <span class="tbl_row">Badge Number</span> </th>
-                                                <th> <span class="tbl_row">User Name</span> </th>
-                                                <th> <span class="tbl_row">Rating</span> </th>
-                                            </tr>
-                                        </thead>
-                                        <tbody id="businessDetails">
-                                            <tr>
-                                              <td colspan="7"> Record not found! </td>
-                                            </tr>`;
+                                        <div>
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th><span class="tbl_row">SN.</span></th>
+                                                        <th> <span class="tbl_row">Department</span> </th>
+                                                        <th> <span class="tbl_row">Badge Number</span> </th>
+                                                        <th> <span class="tbl_row">User Name</span> </th>
+                                                        <th> <span class="tbl_row">Rating</span> </th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="businessDetails">
+                                                    <tr>
+                                                      <td colspan="7"> Record not found! </td>
+                                                    </tr>`;
                     $('#vote_list').append(row)
                 }
                 $('#viewUserDetailVoteRating').modal('show');
@@ -880,51 +901,51 @@ $('.carousel').on('slide.bs.carousel', function () {
                     // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Reason Question</span> </th>
-                      <th> <span class="tbl_row">Rating</span> </th>
-                      <th> <span class="tbl_row">Badge Number</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="businessDetails">`;
+                      <div>
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th><span class="tbl_row">SN.</span></th>
+                              <th> <span class="tbl_row">Reason Question</span> </th>
+                              <th> <span class="tbl_row">Rating</span> </th>
+                              <th> <span class="tbl_row">Badge Number</span> </th>
+                            </tr>
+                          </thead>
+                          <tbody id="businessDetails">`;
                     $.each(response, function (key, value) {
                         row += `
-                <tr>
-                  <td> ${++i} </td>
-                  <td class="text-capitalize">${value.name}</td>
-                  <td class="text-capitalize">${value.rating}<span>${ratingImage.ratings(value.rating)}</span></td>
-                  <td class="text-capitalize">${value.badge_number}</td>
-                 </tr>
-                `;
+                        <tr>
+                          <td> ${++i} </td>
+                          <td class="text-capitalize">${value.name}</td>
+                          <td class="text-capitalize">${value.rating}<span>${ratingImage.ratings(value.rating)}</span></td>
+                          <td class="text-capitalize">${value.badge_number}</td>
+                         </tr>
+                        `;
 
                     })
                     row += `    </tbody>
-                </table>
-              </div>
-            </div>`;
+                        </table>
+                      </div>
+                    </div>`;
                     $('#reason_list').append(row)
                 } else {
                     $('#reason_list').html('');
                     let row = `<div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
+                      <div>
+                        <table class="table table-bordered table-hover">
+                          <thead>
+                            <tr>
+                              <th><span class="tbl_row">SN.</span></th>
+                              <th> <span class="tbl_row">Reason Question</span> </th>
+                              <th> <span class="tbl_row">Rating</span> </th>
+                              <th> <span class="tbl_row">Badge Number</span> </th>
+                            </tr>
+                          </thead>
+                          <tbody id="businessDetails">
                     <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Reason Question</span> </th>
-                      <th> <span class="tbl_row">Rating</span> </th>
-                      <th> <span class="tbl_row">Badge Number</span> </th>
+                      <td colspan="7"> Record not found! </td>
                     </tr>
-                  </thead>
-                  <tbody id="businessDetails">
-            <tr>
-              <td colspan="7"> Record not found! </td>
-            </tr>
-            `;
+                    `;
                     $('#reason_list').append(row)
                     // $('#noData').css("display","none");
                 }
@@ -955,37 +976,37 @@ $('.carousel').on('slide.bs.carousel', function () {
                 $('#viewDepartmentComment').html('');
                 response.forEach(value => {
                     row += ` <div class="col">
-                <div class="comment_div">
-                  <div class="comment_partion_div">
-        <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
-        <span class="font1">${value.user_name}</span>
-        <span class="font2">${value.date}</span>
-      </div>
-      <div class="comment_partion_div1">
-        <span class="font1">${value.comment}</span>
-        <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
-    padding-left: 5px;
-    font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
-        </div>
-         </div>
-            </div>`;
+                        <div class="comment_div">
+                          <div class="comment_partion_div">
+                <span><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+                <span class="font1">${value.user_name}</span>
+                <span class="font2">${value.date}</span>
+              </div>
+              <div class="comment_partion_div1">
+                <span class="font1">${value.comment}</span>
+                <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
+            padding-left: 5px;
+            font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
+                </div>
+                 </div>
+                    </div>`;
 
                     row +=
                         `<div class="col" style="display:none;" id="view_sub_comment${value.comment_id}">`;
                     value.sub_comment.forEach(v => {
                         row += `
-                <div class="sub_comment_div">
-                  <div class="comment_partion_div">
-        <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
+                        <div class="sub_comment_div">
+                          <div class="comment_partion_div">
+                <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
 
-        <span class="font1">${v.user_name}</span>
-        <span class ="font2">${v.date}</span>
-        </div>
-        <div class="comment_partion_div1">
-        <span class= "font1">${v.sub_comment}</span>
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
+                <span class="font1">${v.user_name}</span>
+                <span class ="font2">${v.date}</span>
+                </div>
+                <div class="comment_partion_div1">
+                <span class= "font1">${v.sub_comment}</span>
+               <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
 
-      </div> `;
+              </div> `;
 
 
                     });

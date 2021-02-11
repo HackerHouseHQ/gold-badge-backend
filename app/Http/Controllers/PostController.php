@@ -330,7 +330,7 @@ class PostController extends Controller
          $total_media = count($data->post_imagess);
          $badge_number = ($data->badge_number) ? $data->badge_number : '------';
          $active = "<button  class='btn btn-danger btn-sm' onclick ='status(" . $data->post_id . ")'><span style='color:#fff' class='tbl_row_new1 view_modd_dec'>DELETE</span></button>";
-         $data1 = "Department:- " . $data->department_name . " </br>Badge Number:- " . $badge_number . " </br>Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>  Likes:- " . $Like . " </br> Share:- " . $share . " </br> Report:-  " . $report . " </br>Rating:- $data->rating <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailBadgeRating($data->post_id)'>view list</a> </br> Comments:- $comment <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailCommentModel($data->post_id)'>view list</a> </br> Vote:- $vote <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailVoteRating($data->post_id)'>view list</a></br> Total media:- $total_media</br> Review:- $data->comment";
+         $data1 = "Department:- " . $data->department_name . " </br>Badge Number:- " . $badge_number . " </br>Posted On:- " . date("d/m/y", strtotime($data->created_at)) . " </br>Likes:- " . $Like . " </br>Share:- " . $share . " </br>Report:-  " . $report . " </br>Rating:- $data->rating <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailBadgeRating($data->post_id)'>view list</a> </br>Comments:- $comment <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailCommentModel($data->post_id)'>view list</a> </br>Vote:- $vote <a href='javascript:void(0)'style='padding-left:5px' onclick ='viewUserDetailVoteRating($data->post_id)'>view list</a></br>Total media:- $total_media</br>Review:- $data->comment";
          $flag = ($data->flag == 1) ? 'department' : 'badges';
          // $image = ($data->image) ? '../storage/departname/' . $data->image : '';
 
@@ -394,7 +394,7 @@ class PostController extends Controller
           </div>";
          }
          $arr[$key]['image'] = "<td class='xyz' style=''>" . $rowImage . "</td>";
-         $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data1 . "</span></br></td>";
+         $arr[$key]['userName'] = $data1;
          $view1 =  $active;
          $arr[$key]['action'] = "<td><span class='tbl_row_new'>" . $view1 . "</span></td>";
       }
