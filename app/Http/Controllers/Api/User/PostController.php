@@ -34,13 +34,13 @@ class PostController extends Controller
      * save post department Like .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function saveCommentLike(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -78,13 +78,13 @@ class PostController extends Controller
      * save sub comment Like .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function saveSubCommentLike(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -124,7 +124,7 @@ class PostController extends Controller
     {
 
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -147,13 +147,13 @@ class PostController extends Controller
                 ->orderBy('created_at', 'DESC')
                 ->paginate(50);
             foreach ($posts as $post) {
-                //flag =1 , 1 => department , 2 => badge 
+                //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
                     // get department w.r.t given department id
                     $departmentPostData = Post::where('department_id', $post->department_id)->get();
                     //get department w.r.t given department id with consider rating == 1
                     $departmentAvgRating = Post::where('department_id', $post->department_id)->where('consider_rating', 1)->get();
-                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
                     $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                     $post->total_reviews    =   $departmentPostData->count();
                     $post->avg_rating       =  ($departmentAvgRating->avg('rating')) ? number_format($departmentAvgRating->avg('rating'), 1) : '0';
@@ -162,7 +162,7 @@ class PostController extends Controller
                     $post->is_shared          = ($post_shared) ? 1 : 0;
                     $post->user_status       = 1;
                 } else if ($post->flag == 2) {
-                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                    $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
                     $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                     // get department w.r.t given badge id
                     $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -189,7 +189,7 @@ class PostController extends Controller
     public function myActivity(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -265,10 +265,10 @@ class PostController extends Controller
     }
 
     private function postLiked($user_id)
-    { // post like by user 
+    { // post like by user
         $postLiked = DepartmentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postLiked, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -286,7 +286,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -336,7 +336,7 @@ class PostController extends Controller
         // post shared by user
         $postShared = DepartmentShare::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postShared, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -354,7 +354,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -371,7 +371,7 @@ class PostController extends Controller
                 $post->user_status       = 2;
                 $post->is_follow = ($user_followed_department) ? $user_followed_department->status : 0;
             } else if ($post->flag == 2) {
-                $post_liked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post->id)->first();
+                $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
                 $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                 // get department w.r.t given badge id
                 $badgePostData = Post::where('badge_id', $post->badge_id)->get();
@@ -415,7 +415,7 @@ class PostController extends Controller
             ->where('posts.user_id', $user_id)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -456,10 +456,10 @@ class PostController extends Controller
     }
     private function postCommented($user_id)
     {
-        // post comment by user 
+        // post comment by user
         $postCommented = DepartmentComment::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postCommented, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -477,7 +477,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -527,7 +527,7 @@ class PostController extends Controller
         //post sub commeted by user
         $postSubComment = DepartmentSubComment::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postSubComment, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -545,7 +545,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -595,7 +595,7 @@ class PostController extends Controller
         // post sub comment like by user
         $postSubCommentLike = DepartmentSubCommentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postSubCommentLike, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -613,7 +613,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -660,10 +660,10 @@ class PostController extends Controller
     }
     private function postCommentLike($user_id)
     {
-        // post comment Like by user 
+        // post comment Like by user
         $postCommented = DepartmentCommentLike::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postCommented, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -681,7 +681,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -728,10 +728,10 @@ class PostController extends Controller
     }
     private function postVoted($user_id)
     {
-        // post voted by user 
+        // post voted by user
         $postVoted = DepartmentVote::where('user_id', $user_id)->get()->toArray();
         $postIdsArray     =   array_column($postVoted, 'post_id');
-        //get all reported posts reported 
+        //get all reported posts reported
         $reportId = DepartmentReport::select('post_id')->whereIn('post_id', $postIdsArray)->get()->toArray();
         // create array of post_id from reported posts array
         $reportArray = array_column($reportId, 'post_id');
@@ -749,7 +749,7 @@ class PostController extends Controller
             ->whereNotIn('posts.id', $reportArray)
             ->get();
         foreach ($posts as $post) {
-            //flag =1 , 1 => department , 2 => badge 
+            //flag =1 , 1 => department , 2 => badge
             if ($post->flag == 1) {
                 // get department w.r.t given department id
                 $departmentPostData = Post::where('department_id', $post->department_id)->get();
