@@ -664,6 +664,7 @@ $('.carousel').on('slide.bs.carousel', function () {
             "bAutoWidth": false,
             "pageLength": 2,
             "orderable": false,
+            "scrollX": true,
             'ajax': {
                 'url': "{{route('PostDepartmentDetail')}}",
                 'data': function (data) {
