@@ -4,7 +4,7 @@
     <div class="sidenav-header  d-flex  align-items-center">
       <a class="navbar-brand" href="{{route('home')}}">
         <!--<img src="{{asset('admin_new/assets/img/brand/blue.png')}}" class="navbar-brand-img" alt="...">-->
-        <img src="http://13.235.176.85/gold_badge/public/admin_css/images/follow_logo.png" class="navbar-brand-img"
+        <img src="{{asset('admin_css/images/follow_logo.png')}}" class="navbar-brand-img"
           alt="..."> Gold Badge
       </a>
       <div class=" ml-auto ">
@@ -39,7 +39,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('department') }}" class="nav-link 
+            <a href="{{ route('department') }}" class="nav-link
               @if(request()->route()->getName()=='department') active
               @elseif(request()->route()->getName()=='badge') active
               @elseif(request()->route()->getName()=='DepartmentDetail') active
@@ -78,8 +78,8 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ route('countries') }}" class="nav-link  @if(request()->route()->getName()=='countries' 
-                 || request()->route()->getName()=='ethnicity' || request()->route()->getName()=='gender' 
+            <a href="{{ route('countries') }}" class="nav-link  @if(request()->route()->getName()=='countries'
+                 || request()->route()->getName()=='ethnicity' || request()->route()->getName()=='gender'
                  || request()->route()->getName()=='report' || request()->route()->getName()=='add_country') active
             @endif">
               <i class="far fa-chart-bar text-primary"></i>

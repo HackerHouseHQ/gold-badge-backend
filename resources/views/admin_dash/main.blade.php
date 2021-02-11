@@ -7,7 +7,7 @@
     <meta name="author" content="Gold Badge">
     <title>Gold Badge</title>
     <!-- Favicon -->
-    <link rel="icon" href="{{asset('admin_new/assets/img/brand/favicon.png')}}" type="image/png">
+    <link rel="icon" href="{{asset('admin_css/images/follow_logo.png')}}" type="image/png">
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
