@@ -273,7 +273,7 @@ class User extends Authenticatable
       $arr = [];
       $post_data = [];
       foreach ($query as $key => $value) {
-         $likeCount =  DepartmentLike::where('post_id', $value->post_id)->count();
+         $likeCount =  DepartmentLike::where('post_id', $value->post_id)->where('status' ,1)->count();
          $shareCount = DepartmentShare::where('post_id', $value->post_id)->count();
          $commentCount  = DepartmentComment::where('post_id', $value->post_id)->count();
          $reportCount = DepartmentReport::where('post_id', $value->post_id)->count();

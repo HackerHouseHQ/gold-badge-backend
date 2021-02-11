@@ -47,8 +47,8 @@ class UserDepartmentFollow extends Model
         $siteUrl = env('APP_URL');
         $query = Post::with('departments', 'badges', 'users')->orderBy('created_at', 'desc')->get();
         foreach ($query as $value) {
-            $is_liked = DepartmentLike::where('post_id', $value->id)->where('user_id', $user_id)->first();
-            $like_count = DepartmentLike::where('post_id', $value->id)->count();
+            $is_liked = DepartmentLike::where('post_id', $value->id)->where('status' ,1)->where('user_id', $user_id)->first();
+            $like_count = DepartmentLike::where('post_id', $value->id)->where('status' ,1)->count();
             $share_count = DepartmentShare::where('post_id', $value->id)->count();
             $comment_count  = DepartmentComment::where('post_id', $value->id)->count();
             $value['department_name'] = $value->departments->department_name;
