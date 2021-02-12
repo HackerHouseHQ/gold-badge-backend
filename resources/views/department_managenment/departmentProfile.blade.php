@@ -1,7 +1,7 @@
 @extends('admin_dash.main')
 @section('content')
 <style>
-        #myPostImg {
+    #myPostImg {
         border-radius: 5px;
         cursor: pointer;
         transition: 0.3s;
@@ -96,6 +96,7 @@
             width: 100%;
         }
     }
+
     p.number_ratings_grey {
         color: grey;
     }
@@ -312,6 +313,7 @@
         word-break: break-all;
         vertical-align: top;
     } */
+
 </style>
 <div class="header bg-primary pb-6">
     <div class="container-fluid">
@@ -328,15 +330,6 @@
                         </ol>
                     </nav>
                 </div>
-                <!--                <div class="col-lg-6 col-5 text-right">
-                    <a class="btn btn-sm btn-neutral" href="{{ route('UserDetail',['id' => $data->id])}}"> Reviews</a>
-                    <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}">
-                        Followings</a>
-                    <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowing',['id' => $data->id])}}">
-                        Department</a>
-                    <a class="btn btn-sm btn-neutral" href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}">
-                        Badge</a>
-                </div>-->
             </div>
         </div>
     </div>
@@ -351,7 +344,7 @@
                 <div class="card-body">
                     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
                                         <div class="text-center">
@@ -416,20 +409,22 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-sm-8">
                                 <div class="card">
                                     <div class="card-body">
 
                                         <form action="" id="search_data" class="search_data_row_class">
                                             <div class='row'>
-                                                <div class='col-12'>
+                                                <div class='col-sm-12'>
                                                     <div class="form-group">
                                                         <input class="form-control form-control-sm" type="text"
                                                             placeholder="Search By User Name">
 
                                                     </div>
                                                 </div>
-                                                <div class='col-5'>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-sm-6'>
                                                     <div class="form-group">
                                                         <select class="form-control" name="status_id" id="status_id">
                                                             <option value="">status</option>
@@ -438,7 +433,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                                <div class='col-sm-6'>
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -451,7 +446,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                            </div>
+                                            <div class='row'>
+                                                <div class='col-sm-6'>
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -477,38 +474,6 @@
 
                                                 </div>
                                             </div>
-
-                                            <!--                                            <table class="table table-striped">
-                                                <thead>
-                                                    <tr>
-                                                        <span class="div_cover_sell">
-                                                            <span>
-                                                                <select class="" name="status_id" id="status_id">
-                                                                    <option value="">Status</option>
-                                                                    <option value="1">Active</option>
-                                                                    <option value="2">Inactive</option>
-                                                                </select>
-                                                            </span>
-                                                        </span>
-
-                                                        <span class="from_to_select">
-                                                            <label for="from_text" class="serach_by_text">From</label>
-
-                                                            <input type="date" class="from_control" name="fromdate"
-                                                                id="fromdate" style="-webkit-appearance: media-slider;">
-                                                            <label for="to_text" class="serach_by_text">To</label>
-                                                            <input type="date" class="from_control" name="todate"
-                                                                id="todate" style="-webkit-appearance: media-slider;">
-                                                        </span>
-                                                        <input type="hidden" placeholder="Look for user" name="search2"
-                                                            id="search2" class="search_input">
-                                                        <button type="button" id="search_data1"
-                                                            class="apply_btnn">Apply</button>
-
-
-                                                    </tr>
-                                                </thead>
-                                            </table>-->
                                         </form>
                                         <div class="wrapper_ratings_review">
                                             <div class="row">
@@ -541,11 +506,7 @@
 
                                                                             @endif
                                                         </span>
-                                                        {{-- <span class="star_icon">
-                                                            <i class="fas fa-star custom_star_iconn"
-                                                                style="margin:3px;"></i>
-                                                            <!--                       <i class="fa fa-star custom_star_iconn" aria-hidden="true"></i>-->
-                                                        </span> --}}
+
                                                     </div>
                                                     <p class="number_ratings_grey" style="margin-top:-20px;">
                                                         {{($totalRating) ? $totalRating : "" }}</p>
@@ -668,7 +629,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col-xl-12 col-md-6">
+                                <div class="col-xl-12 ">
                                     <div class="card bg-gradient-info border-0">
                                         <!-- Card body -->
                                         <div class="card-body">
@@ -1747,29 +1708,30 @@
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
-    $(document).on('click','img',function(){
+    $(document).on('click', 'img', function () {
         var postmodal = document.getElementById("myPostModal");
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var imgPost = document.getElementById("myPostImg");
-    console.log(imgPost);
-    var modalPostImg = document.getElementById("imgPost01");
-    // var captionText = document.getElementById("caption");
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var imgPost = document.getElementById("myPostImg");
+        console.log(imgPost);
+        var modalPostImg = document.getElementById("imgPost01");
+        // var captionText = document.getElementById("caption");
 
         postmodal.style.display = "block";
         modalPostImg.src = $(this).clone()[0].src;
         // captionText.innerHTML = this.alt;
 
 
-    // Get the <span> element that closes the modal
-    var spanPost = document.getElementsByClassName("post-img-close")[0];
+        // Get the <span> element that closes the modal
+        var spanPost = document.getElementsByClassName("post-img-close")[0];
 
-    // When the user clicks on <span> (x), close the modal
-    spanPost.onclick = function () {
-        postmodal.style.display = "none";
-    }
-	// $('#modal .modal-body').html($(this).clone()[0]);
-//   $('#modal').modal('show');
-})
+        // When the user clicks on <span> (x), close the modal
+        spanPost.onclick = function () {
+            postmodal.style.display = "none";
+        }
+        // $('#modal .modal-body').html($(this).clone()[0]);
+        //   $('#modal').modal('show');
+    })
+
 </script>
 @endsection

@@ -223,7 +223,7 @@
     .table td,
     .table th {
         font-size: .8125rem;
-        white-space: pre-wrap !important;
+        white-space: normal !important;
     }
 
 </style>

@@ -344,7 +344,7 @@
                 <div class="card-body">
                     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
                                         <div class="text-center">
@@ -414,20 +414,22 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-sm-8">
                             <div class="card">
                                 <div class="card-body">
 
                                     <form action="" id="search_data" class="search_data_row_class">
                                         <div class='row'>
-                                            <div class='col-12'>
+                                            <div class='col-sm-12'>
                                                 <div class="form-group">
                                                     <input class="form-control form-control-sm" type="text"
                                                         placeholder="Search By User Name">
 
                                                 </div>
                                             </div>
-                                            <div class='col-5'>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-sm-6'>
                                                 <div class="form-group">
                                                     <select class="form-control" name="status_id" id="status_id">
                                                         <option value="">status</option>
@@ -436,7 +438,8 @@
                                                     </select>
                                                 </div>
                                             </div>
-                                            <div class='col-6'>
+
+                                            <div class='col-sm-6'>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -449,7 +452,9 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class='col-6'>
+                                        </div>
+                                        <div class='row'>
+                                            <div class='col-sm-6'>
                                                 <div class="form-group">
                                                     <div class="input-group">
                                                         <div class="input-group-prepend">
@@ -464,7 +469,7 @@
                                             </div>
                                             <input type="hidden" placeholder="Look for user" name="search2" id="search2"
                                                 class="search_input">
-                                            <div class='col-2'>
+                                            <div class='col-sm-2'>
                                                 <div class="d-flex">
                                                     <button type="button" id="search_data1"
                                                         class="btn btn-primary apply_btnn">Apply</button>
@@ -622,7 +627,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-12 col-md-6">
+                            <div class="col-xl-12">
                                 <div class="card bg-gradient-info border-0">
                                     <!-- Card body -->
                                     <div class="card-body">
