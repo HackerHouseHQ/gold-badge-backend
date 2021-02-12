@@ -474,8 +474,16 @@
         </div>
     </div>
 </div>
+<div id="myPostModal" class="post-img-modal">
 
-<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <!-- The Close Button -->
+    <span class="post-img-close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="post-img-modal-content" id="imgPost01">
+
+</div>
+<div class="modal fade" tabindex="-1" class="post-img-modal" role="dialog" id="modal">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -483,6 +491,8 @@
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         </div>
         <div class="modal-body">
+    <img class="post-img-modal-content" id="imgPost01">
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -858,8 +868,28 @@
         $('#view_sub_comment' + id).toggle();
     }
     $(document).on('click','img',function(){
-	$('#modal .modal-body').html($(this).clone()[0]);
-  $('#modal').modal('show');
+        var postmodal = document.getElementById("myPostModal");
+
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgPost = document.getElementById("myPostImg");
+    console.log(imgPost);
+    var modalPostImg = document.getElementById("imgPost01");
+    // var captionText = document.getElementById("caption");
+
+        postmodal.style.display = "block";
+        modalPostImg.src = $(this).clone()[0].src;
+        // captionText.innerHTML = this.alt;
+
+
+    // Get the <span> element that closes the modal
+    var spanPost = document.getElementsByClassName("post-img-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    spanPost.onclick = function () {
+        postmodal.style.display = "none";
+    }
+	// $('#modal .modal-body').html($(this).clone()[0]);
+//   $('#modal').modal('show');
 })
 </script>
 @endsection
