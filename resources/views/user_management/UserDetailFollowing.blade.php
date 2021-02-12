@@ -1,49 +1,49 @@
 @extends('admin_dash.main')
 <style type="text/css">
-  #myVideo {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
+    #myVideo {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-  #myVideo:hover {
-    opacity: 0.7;
-  }
+    #myVideo:hover {
+        opacity: 0.7;
+    }
 
-  /* The Modal (background) */
-  .video-modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 3;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.9);
-    /* Black w/ opacity */
-  }
+    /* The Modal (background) */
+    .video-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
 
-  /* Modal Content (Image) */
-  .video-modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-  }
+    /* Modal Content (Image) */
+    .video-modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
 
-  /* Caption of Modal Image (Image Text) - Same Width as the Image */
-  /* #caption {
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    /* #caption {
         margin: auto;
         display: block;
         width: 80%;
@@ -54,535 +54,541 @@
         height: 150px;
     } */
 
-  /* Add Animation - Zoom in the Modal */
-  .video-modal-content,
-  /* #caption {
+    /* Add Animation - Zoom in the Modal */
+    .video-modal-content,
+    /* #caption {
         animation-name: zoom;
         animation-duration: 0.6s;
     } */
 
-  @keyframes zoom {
-    from {
-      transform: scale(0)
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
     }
 
-    to {
-      transform: scale(1)
-    }
-  }
-
-  /* The Close Button */
-  .video-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
-
-  .video-close:hover,
-  .video-close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  /* 100% Image Width on Smaller Screens */
-  @media only screen and (max-width: 700px) {
-    .video-modal-content {
-      width: 100%;
-    }
-  }
-
-  #myPostImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #myPostImg:hover {
-    opacity: 0.7;
-  }
-
-  /* The Modal (background) */
-  .post-img-modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 3;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.9);
-    /* Black w/ opacity */
-  }
-
-  /* Modal Content (Image) */
-  .post-img-modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-  }
-
-  /* Caption of Modal Image (Image Text) - Same Width as the Image */
-  #caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-  }
-
-  /* Add Animation - Zoom in the Modal */
-  .post-img-modal-content,
-  #caption {
-    animation-name: zoom;
-    animation-duration: 0.6s;
-  }
-
-  @keyframes zoom {
-    from {
-      transform: scale(0)
+    /* The Close Button */
+    .video-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
     }
 
-    to {
-      transform: scale(1)
+    .video-close:hover,
+    .video-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
     }
-  }
 
-  /* The Close Button */
-  .post-img-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .video-modal-content {
+            width: 100%;
+        }
+    }
 
-  .post-img-close:hover,
-  .post-img-close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
+    #myPostImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
 
-  /* 100% Image Width on Smaller Screens */
-  @media only screen and (max-width: 700px) {
+    #myPostImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .post-img-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 9999;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
     .post-img-modal-content {
-      width: 100%;
-    }
-  }
-
-  /* Style the Image Used to Trigger the Modal */
-  #myImg {
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-  }
-
-  #myImg:hover {
-    opacity: 0.7;
-  }
-
-  /* The Modal (background) */
-  .img-modal {
-    display: none;
-    /* Hidden by default */
-    position: fixed;
-    /* Stay in place */
-    z-index: 3;
-    /* Sit on top */
-    padding-top: 100px;
-    /* Location of the box */
-    left: 0;
-    top: 0;
-    width: 100%;
-    /* Full width */
-    height: 100%;
-    /* Full height */
-    overflow: auto;
-    /* Enable scroll if needed */
-    background-color: rgb(0, 0, 0);
-    /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.9);
-    /* Black w/ opacity */
-  }
-
-  /* Modal Content (Image) */
-  .img-modal-content {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-  }
-
-  /* Caption of Modal Image (Image Text) - Same Width as the Image */
-  #caption {
-    margin: auto;
-    display: block;
-    width: 80%;
-    max-width: 700px;
-    text-align: center;
-    color: #ccc;
-    padding: 10px 0;
-    height: 150px;
-  }
-
-  /* Add Animation - Zoom in the Modal */
-  .img-modal-content,
-  #caption {
-    animation-name: zoom;
-    animation-duration: 0.6s;
-  }
-
-  @keyframes zoom {
-    from {
-      transform: scale(0)
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
     }
 
-    to {
-      transform: scale(1)
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
     }
-  }
 
-  /* The Close Button */
-  .img-close {
-    position: absolute;
-    top: 15px;
-    right: 35px;
-    color: #f1f1f1;
-    font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-  }
+    /* Add Animation - Zoom in the Modal */
+    .post-img-modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
 
-  .img-close:hover,
-  .img-close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-  }
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
 
-  /* 100% Image Width on Smaller Screens */
-  @media only screen and (max-width: 700px) {
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .post-img-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .post-img-close:hover,
+    .post-img-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .post-img-modal-content {
+            width: 100%;
+        }
+    }
+
+    /* Style the Image Used to Trigger the Modal */
+    #myImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .img-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 3;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
     .img-modal-content {
-      width: 100%;
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
     }
-  }
 
-  .leftpane {
-    width: 20%;
-    height: 100%;
-    float: left;
-    border-collapse: collapse;
-  }
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
 
-  .modal-content {
-    padding: 20px;
-  }
+    /* Add Animation - Zoom in the Modal */
+    .img-modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
 
-  .form_div {
-    display: flex;
-    justify-content: space-between;
-  }
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
 
-  .modal-header {
-    padding: 0;
-  }
+        to {
+            transform: scale(1)
+        }
+    }
 
-  .comment_partion_div1 {
-    display: flex;
-    flex-direction: column;
-    padding-left: 70px;
-    margin-top: -10px
-  }
+    /* The Close Button */
+    .img-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
 
-  .font1 {
-    font-size: 15px;
-    color: #000;
-    font-weight: 600;
-  }
+    .img-close:hover,
+    .img-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
 
-  .font2 {
-    color: #000;
-    font-size: 10px;
-  }
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .img-modal-content {
+            width: 100%;
+        }
+    }
 
-  .font3 {
-    font-size: 14px;
-    color: #000;
-  }
+    .leftpane {
+        width: 20%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+    }
 
-  .sub_comment_div {
-    margin-bottom: 20px;
-    /* position: absolute; */
-    margin-left: 56px;
-  }
+    .modal-content {
+        padding: 20px;
+    }
 
-  .comment_div {
-    margin-bottom: 20px;
-  }
+    .form_div {
+        display: flex;
+        justify-content: space-between;
+    }
 
-  p.form_fields {
-    margin: 0;
-    padding-left: 4px;
-    color: #000;
-    font-size: 15px;
-    font-weight: 400;
-    overflow-wrap: break-word;
-    width: 50%;
-    text-align: left;
-  }
+    .modal-header {
+        padding: 0;
+    }
 
-  .custom_col_class {
-    width: 85%;
-    text-align: center;
-    margin: 0 auto;
-  }
+    .comment_partion_div1 {
+        display: flex;
+        flex-direction: column;
+        padding-left: 70px;
+        margin-top: -10px
+    }
 
-  .middlepane {
-    width: 40%;
-    height: 100%;
-    float: left;
-    border-collapse: collapse;
-  }
+    .font1 {
+        font-size: 15px;
+        color: #000;
+        font-weight: 600;
+    }
 
-  .rightpane {
-    width: 40%;
-    height: 100%;
-    position: relative;
-    float: right;
-    border-collapse: collapse;
-  }
+    .font2 {
+        color: #000;
+        font-size: 10px;
+    }
 
-  .img-r {
-    /*height: 200px; */
-    /*width: 200px; */
-    /*margin:0 auto;*/
-    height: 118px;
-    width: 119px;
-    margin-top: 0px;
-    margin-bottom: 38px;
-    margin-left: -14px;
-    border-radius: 100px;
-    overflow: hidden;
-    border: 7px solid #f6f6f6;
-  }
+    .font3 {
+        font-size: 14px;
+        color: #000;
+    }
 
-  .card-header1 {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #a6a392;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-  }
+    .sub_comment_div {
+        margin-bottom: 20px;
+        /* position: absolute; */
+        margin-left: 56px;
+    }
 
-  .card-header2 {
-    padding: .75rem 1.25rem;
-    margin-bottom: 0;
-    background-color: #fff;
-    border-bottom: 1px solid rgba(0, 0, 0, .125);
-  }
+    .comment_div {
+        margin-bottom: 20px;
+    }
 
-  .modal_rating_icon {
-    width: 10px;
-    margin-top: -2px;
-    margin-left: 2px;
-  }
+    p.form_fields {
+        margin: 0;
+        padding-left: 4px;
+        color: #000;
+        font-size: 15px;
+        font-weight: 400;
+        overflow-wrap: break-word;
+        width: 50%;
+        text-align: left;
+    }
+
+    .custom_col_class {
+        width: 85%;
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .middlepane {
+        width: 40%;
+        height: 100%;
+        float: left;
+        border-collapse: collapse;
+    }
+
+    .rightpane {
+        width: 40%;
+        height: 100%;
+        position: relative;
+        float: right;
+        border-collapse: collapse;
+    }
+
+    .img-r {
+        /*height: 200px; */
+        /*width: 200px; */
+        /*margin:0 auto;*/
+        height: 118px;
+        width: 119px;
+        margin-top: 0px;
+        margin-bottom: 38px;
+        margin-left: -14px;
+        border-radius: 100px;
+        overflow: hidden;
+        border: 7px solid #f6f6f6;
+    }
+
+    .card-header1 {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #a6a392;
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .card-header2 {
+        padding: .75rem 1.25rem;
+        margin-bottom: 0;
+        background-color: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, .125);
+    }
+
+    .modal_rating_icon {
+        width: 10px;
+        margin-top: -2px;
+        margin-left: 2px;
+    }
+
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
-  <div class="container-fluid">
-    <div class="header-body">
-      <div class="row align-items-center py-4">
-        <div class="col-lg-6 col-7">
-          <h6 class="h2 text-white d-inline-block mb-0">User Management</h6>
-          <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
-            <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
-              <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
-              <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
-              <li class="breadcrumb-item"><a href={{route('user')}}>User</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Following Department</li>
-            </ol>
-          </nav>
-        </div>
+    <div class="container-fluid">
+        <div class="header-body">
+            <div class="row align-items-center py-4">
+                <div class="col-lg-6 col-7">
+                    <h6 class="h2 text-white d-inline-block mb-0">User Management</h6>
+                    <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
+                        <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
+                            <li class="breadcrumb-item"><a href="{{route('home')}}"><i class="fas fa-home"></i></a></li>
+                            <!--<li class="breadcrumb-item"><a href="#">Tables</a></li>-->
+                            <li class="breadcrumb-item"><a href={{route('user')}}>User</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Following Department</li>
+                        </ol>
+                    </nav>
+                </div>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="container-fluid mt--6">
-  <!-- Table -->
-  <input type="hidden" value="{{$data->id}}" id="user_id">
-  <div class="row">
-    <div class="col">
-      <div class="card">
-        <div class="card-body ">
+    <!-- Table -->
+    <input type="hidden" value="{{$data->id}}" id="user_id">
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body ">
 
-          <div class="leftpane">
-            <div class="img-r">
-              <img src="../storage/uploads/user_image/{{$data->image}}" id="myImg" alt="user-image">
+                    <div class="leftpane">
+                        <div class="img-r">
+                            <img src="../storage/uploads/user_image/{{$data->image}}" id="myImg" alt="user-image">
+                        </div>
+                    </div>
+                    <div class="middlepane">
+                        <div class="key_value_box">
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">Full Name:</label>
+                                <span class="tbl_row value userDetailsColor">{{@$data->first_name}}
+                                    {{@$data->last_name}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">Username:</label>
+                                <span class="tbl_row value userDetailsColor">{{$data->user_name}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">MOB. NO.:</label>
+                                <span
+                                    class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobil_no}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">Email:</label>
+                                <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">Gender:</label>
+                                <span class="tbl_row value userDetailsColor">{{$data->gender}}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="rightpane">
+                        <div class="key_value_box">
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">Ethnicity:</label>
+                                <span class="tbl_row value userDetailsColor">{{$data->ethnicity}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <label class="tbl_row labell">DOB:</label>
+                                <?php $r_date = date("d/m/Y", strtotime($data->dob)); ?>
+                                <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <?php $followcount =  App\UserDepartmentFollow::where('user_id', $data->id)->count(); ?>
+                                <label class="tbl_row labell">Following Department:</label>
+                                <span
+                                    class="tbl_row value userDetailsColor">{{ ($followcount) >0 ? $followcount : 0}}</span>
+                            </div>
+
+                            <div class="key_value_box_div">
+                                <?php $followBadgecount =  App\UserDepartmentBadgeFollow::where('user_id', $data->id)->count(); ?>
+                                <label class="tbl_row labell">Following Badge:</label>
+                                <span class="tbl_row value userDetailsColor">{{$followBadgecount}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+
+                            </div>
+                            <div class="key_value_box_div">
+                                <?php $Reviewcount =  App\Post::where('user_id', $data->id)->count(); ?>
+
+                                <label class="tbl_row labell">Total Reviews:</label>
+                                <span
+                                    class="tbl_row value userDetailsColor">{{ ($Reviewcount) >0 ? $Reviewcount : 0}}</span>
+                            </div>
+                            <div class="key_value_box_div">
+                                <?php $reportedCount =  App\DepartmentReport::where('user_id', $data->id)->count(); ?>
+                                <label class="tbl_row labell">Reported Reviews:</label>
+                                <span class="tbl_row value userDetailsColor">{{$reportedCount}}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- tab-->
+                <!-- tab-->
+                <div class="card-body"
+                    style="background-color: #e8d84cc2;border-radius: 5px; border: 3px solid #6b6c7d;">
+
+                    <div class="middlepane" style="float:right">
+
+                        <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success"
+                            data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+                            data-icon="ni ni-bell-55">Followings</a>
+                    </div>
+                    <div class="rightpane">
+                        <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
+                            data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">
+                            Reviews</a>
+                    </div>
+                </div>
+                <div class="card-body">
+
+                    <div class="middlepane" style="float:right">
+                        <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info"
+                            data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+                            data-icon="ni ni-bell-55">Badge</a>
+                    </div>
+                    <div class="rightpane">
+                        <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success"
+                            data-toggle="notify" data-placement="top" data-align="center" data-type="info"
+                            data-icon="ni ni-bell-55"> Department</a>
+                    </div>
+                </div>
+
+
+                <div class="table-responsive py-4">
+                    <table class="table table-flush" id="datatable-basic">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>Department Name</th>
+                                <th>Number of reviews</th>
+                                <th>Rating</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
             </div>
-          </div>
-          <div class="middlepane">
-            <div class="key_value_box">
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">Full Name:</label>
-                <span class="tbl_row value userDetailsColor">{{@$data->first_name}}
-                  {{@$data->last_name}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">Username:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->user_name}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">MOB. NO.:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->mobile_country_code}}-{{$data->mobil_no}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">Email:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->email}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">Gender:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->gender}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="rightpane">
-            <div class="key_value_box">
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">Ethnicity:</label>
-                <span class="tbl_row value userDetailsColor">{{$data->ethnicity}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <label class="tbl_row labell">DOB:</label>
-                <?php $r_date = date("d/m/Y", strtotime($data->dob)); ?>
-                <span class="tbl_row value userDetailsColor">{{$r_date}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <?php $followcount =  App\UserDepartmentFollow::where('user_id', $data->id)->count(); ?>
-                <label class="tbl_row labell">Following Department:</label>
-                <span class="tbl_row value userDetailsColor">{{ ($followcount) >0 ? $followcount : 0}}</span>
-              </div>
-
-              <div class="key_value_box_div">
-                <?php $followBadgecount =  App\UserDepartmentBadgeFollow::where('user_id', $data->id)->count(); ?>
-                <label class="tbl_row labell">Following Badge:</label>
-                <span class="tbl_row value userDetailsColor">{{$followBadgecount}}</span>
-              </div>
-              <div class="key_value_box_div">
-
-              </div>
-              <div class="key_value_box_div">
-                <?php $Reviewcount =  App\Post::where('user_id', $data->id)->count(); ?>
-
-                <label class="tbl_row labell">Total Reviews:</label>
-                <span class="tbl_row value userDetailsColor">{{ ($Reviewcount) >0 ? $Reviewcount : 0}}</span>
-              </div>
-              <div class="key_value_box_div">
-                <?php $reportedCount =  App\DepartmentReport::where('user_id', $data->id)->count(); ?>
-                <label class="tbl_row labell">Reported Reviews:</label>
-                <span class="tbl_row value userDetailsColor">{{$reportedCount}}</span>
-              </div>
-            </div>
-          </div>
-
         </div>
-        <!-- tab-->
-        <!-- tab-->
-        <div class="card-body" style="background-color: #e8d84cc2;border-radius: 5px; border: 3px solid #6b6c7d;">
-
-          <div class="middlepane" style="float:right">
-
-            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
-              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">Followings</a>
-          </div>
-          <div class="rightpane">
-            <a href="{{ route('UserDetail',['id' => $data->id])}}" class="btn btn-info" data-toggle="notify"
-              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55">
-              Reviews</a>
-          </div>
-        </div>
-        <div class="card-body">
-
-          <div class="middlepane" style="float:right">
-            <a href="{{ route('UserDetailFollowingBadge',['id' => $data->id])}}" class="btn btn-info"
-              data-toggle="notify" data-placement="top" data-align="center" data-type="info"
-              data-icon="ni ni-bell-55">Badge</a>
-          </div>
-          <div class="rightpane">
-            <a href="{{ route('UserDetailFollowing',['id' => $data->id])}}" class="btn btn-success" data-toggle="notify"
-              data-placement="top" data-align="center" data-type="info" data-icon="ni ni-bell-55"> Department</a>
-          </div>
-        </div>
-
-
-        <div class="table-responsive py-4">
-          <table class="table table-flush" id="datatable-basic">
-            <thead class="thead-light">
-              <tr>
-                <th>Department Name</th>
-                <th>Number of reviews</th>
-                <th>Rating</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-
-            <tbody>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
     </div>
-  </div>
 
 </div>
 
 {{-- model view department --}}
 <div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
-  aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
 
-        <h4 class="modal-title text-capitalize">Post Detail</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-4">
-            <img
-              src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
-              alt="" style="width: 245px; height:245px;">
-          </div>
-          <div class="col-8" id="viewDepartment">
+                <h4 class="modal-title text-capitalize">Post Detail</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
+                            alt="" style="width: 245px; height:245px;">
+                    </div>
+                    <div class="col-8" id="viewDepartment">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -610,32 +616,32 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {{-- end model view department --}}
 <div class="modal fade" id="viewUserDetailLikeModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="businessName1"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-6" id="userImage1">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="businessName1"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-6" id="userImage1">
 
-          </div>
-          <div class="col-6" id="viewDepartmentLike">
+                    </div>
+                    <div class="col-6" id="viewDepartmentLike">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -663,31 +669,31 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailShareModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content" style="padding: 0;">
-      <div class="modal-header">
-        <h4 class="modal-title text-capitalize" id="share"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="share">
-        <div class="row">
-          <div class="col-6" id="userImage2">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content" style="padding: 0;">
+            <div class="modal-header">
+                <h4 class="modal-title text-capitalize" id="share"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="share">
+                <div class="row">
+                    <div class="col-6" id="userImage2">
 
-          </div>
-          <div class="col-6" id="viewDepartmentShare">
+                    </div>
+                    <div class="col-6" id="viewDepartmentShare">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -715,31 +721,31 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailCommentModel" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header" style="padding: 0;">
-        <h4 class="modal-title text-capitalize" id="comment"></h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="">
-        <div class="row">
-          {{-- <div class="col-6" id="userImage2">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="padding: 0;">
+                <h4 class="modal-title text-capitalize" id="comment"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="">
+                <div class="row">
+                    {{-- <div class="col-6" id="userImage2">
 
           </div> --}}
-          <div class="col-12" id="viewDepartmentComment">
+                    <div class="col-12" id="viewDepartmentComment">
 
 
-          </div>
-        </div>
-        {{-- <div class="row">
+                    </div>
+                </div>
+                {{-- <div class="row">
           <div class="col-md-12">
             <div class="table-responsive">
               <div>
@@ -767,24 +773,24 @@
             </div>
           </div>
         </div> --}}
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailBadgeRating" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header custom_modal_header">
-        <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12" id="reason_list">
-            {{-- <div class="table-responsive">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Review Reason List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="reason_list">
+                        {{-- <div class="table-responsive">
                 <div>
                   <table class="table table-bordered table-hover">
                     <thead>
@@ -794,31 +800,31 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
               </div> --}}
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 <div class="modal fade" id="viewUserDetailVoteRating" tabindex="-1" role="dialog"
-  aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header custom_modal_header">
-        <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-12" id="vote_list">
-            {{-- <div class="table-responsive">
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header custom_modal_header">
+                <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-12" id="vote_list">
+                        {{-- <div class="table-responsive">
                 <div>
                   <table class="table table-bordered table-hover">
                     <thead>
@@ -828,16 +834,16 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
               </div> --}}
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>
 
 {{-- end model view city --}}
@@ -847,39 +853,39 @@
 <!-- The Modal -->
 <div id="myModal" class="img-modal">
 
-  <!-- The Close Button -->
-  <span class="img-close">&times;</span>
+    <!-- The Close Button -->
+    <span class="img-close">&times;</span>
 
-  <!-- Modal Content (The Image) -->
-  <img class="img-modal-content" id="img01">
+    <!-- Modal Content (The Image) -->
+    <img class="img-modal-content" id="img01">
 
 </div>
 <div id="myPostModal" class="post-img-modal">
 
-  <!-- The Close Button -->
-  <span class="post-img-close">&times;</span>
+    <!-- The Close Button -->
+    <span class="post-img-close">&times;</span>
 
-  <!-- Modal Content (The Image) -->
-  <img class="post-img-modal-content" id="imgPost01">
+    <!-- Modal Content (The Image) -->
+    <img class="post-img-modal-content" id="imgPost01">
 
 </div>
 <div id="videoModal" class="video-modal">
 
-  <!-- The Close Button -->
-  <span class="video-close">&times;</span>
+    <!-- The Close Button -->
+    <span class="video-close">&times;</span>
 
-  <!-- Modal Content (The Image) -->
-  <video width="320" height="240" controls id="video01">
-    <source src="" type="video/mp4">
-    <source src="" type="video/ogg">
-  </video>
-  {{-- <video class="video-modal-content" id="video01"> --}}
+    <!-- Modal Content (The Image) -->
+    <video width="320" height="240" controls id="video01">
+        <source src="" type="video/mp4">
+        <source src="" type="video/ogg">
+    </video>
+    {{-- <video class="video-modal-content" id="video01"> --}}
 
 </div>
 @endsection
 @section('script')
 <script type="text/javascript">
-  $(document).ready(function () {
+    $(document).ready(function () {
 
         var dataTable = $('#datatable-basic').DataTable({
             language: {
@@ -941,7 +947,7 @@
 
 </script>
 <script>
-  var ratingImage = {
+    var ratingImage = {
         ratings: function (rating) {
             var ratingIcon = "";
             if (rating >= 1 && rating < 2) {
@@ -979,7 +985,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#vote_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
                                     <div>
@@ -1046,7 +1052,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#reason_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
       <div>
@@ -1131,7 +1137,7 @@
         <span class="font2">${value.date}</span>
       </div>
       <div class="comment_partion_div1">
-        <span class="font1">${value.comment}</span> 
+        <span class="font1">${value.comment}</span>
         <p style="margin:0;"><span class="font3">${value.comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
     padding-left: 5px;
     font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
@@ -1146,14 +1152,14 @@
                 <div class="sub_comment_div">
                   <div class="comment_partion_div">
         <span><img src="${v.user_image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 40px; height: 40px; border-radius: 50%; margin-right: 15px;"></span>
-        
+
         <span class="font1">${v.user_name}</span>
         <span class ="font2">${v.date}</span>
         </div>
         <div class="comment_partion_div1">
-        <span class= "font1">${v.sub_comment}</span> 
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
-         
+        <span class= "font1">${v.sub_comment}</span>
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
+
       </div> `;
 
 
@@ -1198,36 +1204,36 @@
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
-                      if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                        if (i == 1) {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
                         i++;
                     });
                 });
@@ -1281,36 +1287,36 @@
                 let i = 1;
                 response.forEach(value => {
                     value.post_images.forEach(image => {
-                      if (i == 1) {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item active">
+                        if (i == 1) {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item active">
                                 <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
 
-                        } else {
-                            rowImage += ` <div class="carousel-item active">
+                            } else {
+                                rowImage += ` <div class="carousel-item active">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}" id="myPostImg" style="width: 245px; height:245px;" alt="First slide">
                                 </div>`;
-                        }
-                    } else {
-                        if (image.media_type == 0) {
-                            rowImage += ` <div class="carousel-item">
+                            }
+                        } else {
+                            if (image.media_type == 0) {
+                                rowImage += ` <div class="carousel-item">
                                 <video width="320" height="240" controls  id="myVideo">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/mp4">
                                     <source src="../storage/uploads/post_department_image/${image.image}" type="video/ogg">
                                 </video>
                                 </div>`;
-                        } else {
-                            rowImage += ` <div class="carousel-item">
+                            } else {
+                                rowImage += ` <div class="carousel-item">
                                         <img class="d-block w-100" src="../storage/uploads/post_department_image/${image.image}"  id="myPostImg" style="width: 245px; height:245px;" alt="Second slide">
                                          </div>`;
 
-                        }
+                            }
 
-                    }
+                        }
 
                         i++;
                     });
@@ -1418,7 +1424,7 @@
               alt="" style="width: 245px; height:245px;">`);
 
                 }
-                //   if(typeof response.departments.image != "undefined"){ 
+                //   if(typeof response.departments.image != "undefined"){
 
                 //   $('#userImage').html(`<img
                 //     src="../storage/departname/${response.departments.image}"
@@ -1432,7 +1438,7 @@
                 // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
                 let row = ` <div class="custom_col_class">
                                  <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
-    
+
              <div class="form_div">
               <p class="form_fields">Full Name:</p>
               <p class="form_fields">${response.users.first_name}</p>
@@ -1441,27 +1447,27 @@
               <p class="form_fields">Posted On:</p>
               <p class="form_fields">${response.created_at.substr(0,10).split('-').reverse().join('/')}</p>
               </div>
-          
+
               <div class="form_div">
               <p class="form_fields">Likes:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_like}<a href='javascript:void(0)' style="padding-left:10px;" onclick ='viewUserDetailLikeModel(${response.id})'>view list</a></p>
               </div>
-           
+
               <div class="form_div">
               <p class="form_fields">Share:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_share}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailShareModel(${response.id})'>view list</a></p>
               </div>
-             
+
               <div class="form_div">
               <p class="form_fields">Comments:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Report:</p>
               <p class="form_fields">${response.department_report} </p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Rating:</p>
               <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
@@ -1470,12 +1476,12 @@
               <p class="form_fields">Vote:</p>
               <p class="form_fields">${response.vote}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Review:</p>
               <p class="form_fields">${(response.comment) ? response.comment : " " }</p>
               </div>
-           
+
           </div>`;
 
                 $('#viewDepartment').append(row)
@@ -1490,7 +1496,7 @@
 
 </script>
 <script type="text/javascript">
-  function status(id) {
+    function status(id) {
         $.ajax({
             url: "{{route('delete_post')}}",
             type: "post",
@@ -1513,63 +1519,84 @@
         $('#view_sub_comment' + id).toggle();
     }
     // Get the modal
-    var modal = document.getElementById("myModal");
+    // var modal = document.getElementById("myModal");
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var img = document.getElementById("myImg");
-    var modalImg = document.getElementById("img01");
-    // var captionText = document.getElementById("caption");
-    img.onclick = function () {
-        modal.style.display = "block";
-        modalImg.src = this.src;
-        // captionText.innerHTML = this.alt;
-    }
+    // // Get the image and insert it inside the modal - use its "alt" text as a caption
+    // var img = document.getElementById("myImg");
+    // var modalImg = document.getElementById("img01");
+    // // var captionText = document.getElementById("caption");
+    // img.onclick = function () {
+    //     modal.style.display = "block";
+    //     modalImg.src = this.src;
+    //     // captionText.innerHTML = this.alt;
+    // }
 
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("img-close")[0];
+    // // Get the <span> element that closes the modal
+    // var span = document.getElementsByClassName("img-close")[0];
 
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
+    // // When the user clicks on <span> (x), close the modal
+    // span.onclick = function () {
+    //     modal.style.display = "none";
+    // }
     ///////////////////////VIDEO/////////////////////////////////////////
     //////////////////////VIDEO???????????????
     // Get the modal
-    var video_modal = document.getElementById("videoModal");
+    // var video_modal = document.getElementById("videoModal");
 
-    // Get the image and insert it inside the modal - use its "alt" text as a caption
-    var video = document.getElementById("myVideo");
-    var modalVideo = document.getElementById("video01");
-    // var captionText = document.getElementById("caption");
-    video.onclick = function () {
-        video_modal.style.display = "block";
-        modalVideo.src = this.src;
-        // captionText.innerHTML = this.alt;
-    }
+    // // Get the image and insert it inside the modal - use its "alt" text as a caption
+    // var video = document.getElementById("myVideo");
+    // var modalVideo = document.getElementById("video01");
+    // // var captionText = document.getElementById("caption");
+    // video.onclick = function () {
+    //     video_modal.style.display = "block";
+    //     modalVideo.src = this.src;
+    //     // captionText.innerHTML = this.alt;
+    // }
 
-    // Get the <span> element that closes the modal
-    var span1 = document.getElementsByClassName("video-close")[0];
+    // // Get the <span> element that closes the modal
+    // var span1 = document.getElementsByClassName("video-close")[0];
 
-    // When the user clicks on <span> (x), close the modal
-    span2.onclick = function () {
-        video_modal.style.display = "none";
-    }
+    // // When the user clicks on <span> (x), close the modal
+    // span2.onclick = function () {
+    //     video_modal.style.display = "none";
+    // }
     ///////////////////////MY POST IMAGE/////////////////////////////////////////
     //////////////////////MY POST IMAGE???????????????
     // Get the modal
-    var postmodal = document.getElementById("myPostModal");
+    // var postmodal = document.getElementById("myPostModal");
+
+    // // Get the image and insert it inside the modal - use its "alt" text as a caption
+    // var imgPost = document.getElementById("myPostImg");
+    // console.log(imgPost);
+    // var modalPostImg = document.getElementById("imgPost01");
+    // // var captionText = document.getElementById("caption");
+    // imgPost.onclick = function () {
+    //     alert('hello');
+    //     postmodal.style.display = "block";
+    //     modalPostImg.src = this.src;
+    //     // captionText.innerHTML = this.alt;
+    // }
+
+    // // Get the <span> element that closes the modal
+    // var spanPost = document.getElementsByClassName("post-img-close")[0];
+
+    // // When the user clicks on <span> (x), close the modal
+    // spanPost.onclick = function () {
+    //     postmodal.style.display = "none";
+    // }
+    $(document).on('click','img',function(){
+        var postmodal = document.getElementById("myPostModal");
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
     var imgPost = document.getElementById("myPostImg");
     console.log(imgPost);
     var modalPostImg = document.getElementById("imgPost01");
     // var captionText = document.getElementById("caption");
-    imgPost.onclick = function () {
-        alert('hello');
+
         postmodal.style.display = "block";
-        modalPostImg.src = this.src;
+        modalPostImg.src = $(this).clone()[0].src;
         // captionText.innerHTML = this.alt;
-    }
+
 
     // Get the <span> element that closes the modal
     var spanPost = document.getElementsByClassName("post-img-close")[0];
@@ -1578,6 +1605,8 @@
     spanPost.onclick = function () {
         postmodal.style.display = "none";
     }
-
+	// $('#modal .modal-body').html($(this).clone()[0]);
+//   $('#modal').modal('show');
+})
 </script>
 @endsection
