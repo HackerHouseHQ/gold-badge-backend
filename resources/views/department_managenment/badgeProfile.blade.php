@@ -1,6 +1,102 @@
 @extends('admin_dash.main')
 @section('content')
 <style>
+        #myPostImg {
+        border-radius: 5px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    #myPostImg:hover {
+        opacity: 0.7;
+    }
+
+    /* The Modal (background) */
+    .post-img-modal {
+        display: none;
+        /* Hidden by default */
+        position: fixed;
+        /* Stay in place */
+        z-index: 9999;
+        /* Sit on top */
+        padding-top: 100px;
+        /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%;
+        /* Full width */
+        height: 100%;
+        /* Full height */
+        overflow: auto;
+        /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0);
+        /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.9);
+        /* Black w/ opacity */
+    }
+
+    /* Modal Content (Image) */
+    .post-img-modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+    }
+
+    /* Caption of Modal Image (Image Text) - Same Width as the Image */
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+    }
+
+    /* Add Animation - Zoom in the Modal */
+    .post-img-modal-content,
+    #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+    }
+
+    @keyframes zoom {
+        from {
+            transform: scale(0)
+        }
+
+        to {
+            transform: scale(1)
+        }
+    }
+
+    /* The Close Button */
+    .post-img-close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+    }
+
+    .post-img-close:hover,
+    .post-img-close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* 100% Image Width on Smaller Screens */
+    @media only screen and (max-width: 700px) {
+        .post-img-modal-content {
+            width: 100%;
+        }
+    }
+
     p.number_ratings_grey {
         color: grey;
     }
@@ -204,6 +300,11 @@
         width: 10px;
         margin-top: -2px;
         margin-left: 2px;
+    }
+    .table td,
+    .table th {
+        font-size: .8125rem;
+        white-space: normal;
     }
 </style>
 <div class="header bg-primary pb-6">
@@ -830,7 +931,7 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
@@ -864,7 +965,7 @@
                       </tr>
                     </thead>
                     <tbody id="businessDetails">
-  
+
                     </tbody>
                   </table>
                 </div>
@@ -874,6 +975,15 @@
             </div>
         </div>
     </div>
+</div>
+<div id="myPostModal" class="post-img-modal">
+
+    <!-- The Close Button -->
+    <span class="post-img-close">&times;</span>
+
+    <!-- Modal Content (The Image) -->
+    <img class="post-img-modal-content" id="imgPost01">
+
 </div>
 @endsection
 @section('script')
@@ -995,7 +1105,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#vote_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
                                     <div>
@@ -1062,7 +1172,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#reason_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
               <div>
@@ -1147,7 +1257,7 @@
                             <span class="font2">${value.date}</span>
                           </div>
                           <div class="comment_partion_div1">
-                            <span class="font1">${value.comment}</span> 
+                            <span class="font1">${value.comment}</span>
                             <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
                                 padding-left: 5px;
                                 font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
@@ -1166,9 +1276,9 @@
                     <span class ="font2">${v.date}</span>
                 </div>
                 <div class="comment_partion_div1">
-                    <span class= "font1">${v.sub_comment}</span> 
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
-         
+                    <span class= "font1">${v.sub_comment}</span>
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
+
       </div> `;
 
 
@@ -1436,7 +1546,7 @@
               alt="" style="width: 245px; height:245px;">`);
 
                 }
-                //   if(typeof response.departments.image != "undefined"){ 
+                //   if(typeof response.departments.image != "undefined"){
 
                 //   $('#userImage').html(`<img
                 //     src="../storage/departname/${response.departments.image}"
@@ -1450,7 +1560,7 @@
                 // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
                 let row = ` <div class="custom_col_class">
                                  <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
-    
+
              <div class="form_div">
               <p class="form_fields">Full Name:</p>
               <p class="form_fields">${response.users.first_name}</p>
@@ -1459,27 +1569,27 @@
               <p class="form_fields">Posted On:</p>
               <p class="form_fields">${response.created_at.substr(0,10).split('-').reverse().join('/')}</p>
               </div>
-          
+
               <div class="form_div">
               <p class="form_fields">Likes:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_like}<a href='javascript:void(0)' style="padding-left:10px;" onclick ='viewUserDetailLikeModel(${response.id})'>view list</a></p>
               </div>
-           
+
               <div class="form_div">
               <p class="form_fields">Share:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_share}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailShareModel(${response.id})'>view list</a></p>
               </div>
-             
+
               <div class="form_div">
               <p class="form_fields">Comments:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Report:</p>
               <p class="form_fields">${response.department_report} </p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Rating:</p>
               <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
@@ -1488,12 +1598,12 @@
               <p class="form_fields">Vote:</p>
               <p class="form_fields"><a href='javascript:void(0)'style="padding-left:0px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Review:</p>
               <p class="form_fields">${(response.comment) ? response.comment : " " }</p>
               </div>
-           
+
           </div>`;
 
                 $('#viewDepartment').append(row)
@@ -1509,6 +1619,29 @@
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
+    $(document).on('click','img',function(){
+        var postmodal = document.getElementById("myPostModal");
 
+    // Get the image and insert it inside the modal - use its "alt" text as a caption
+    var imgPost = document.getElementById("myPostImg");
+    console.log(imgPost);
+    var modalPostImg = document.getElementById("imgPost01");
+    // var captionText = document.getElementById("caption");
+
+        postmodal.style.display = "block";
+        modalPostImg.src = $(this).clone()[0].src;
+        // captionText.innerHTML = this.alt;
+
+
+    // Get the <span> element that closes the modal
+    var spanPost = document.getElementsByClassName("post-img-close")[0];
+
+    // When the user clicks on <span> (x), close the modal
+    spanPost.onclick = function () {
+        postmodal.style.display = "none";
+    }
+	// $('#modal .modal-body').html($(this).clone()[0]);
+//   $('#modal').modal('show');
+})
 </script>
 @endsection
