@@ -20,15 +20,15 @@
             Department</a> --}}
           {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
           <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-          <div class="row-lg-6 row-5">
-            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral">Manage Countries</a>
-            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
-            <a href="{{route('gender')}}" class="btn btn-sm btn-neutral"
+          {{-- <div class="row-lg-6 row-5"> --}}
+            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral mb-1">Manage Countries</a>
+            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral mb-1">Manage Ethnicity</a>
+            <a href="{{route('gender')}}" class="btn btn-sm btn-neutral mb-1"
               style="background-color:#fb6340;color:#fff;">Gender</a>
-            <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
-            <a href="{{route('report-message')}}" class="btn btn-sm btn-neutral">Report</a>
+            <a href="{{route('report')}}" class="btn btn-sm btn-neutral mb-1">Report Reason Type</a>
+            <a href="{{route('report-message')}}" class="btn btn-sm btn-neutral mb-1">Report</a>
 
-          </div>
+          {{-- </div> --}}
 
           {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
             Department</a> --}}
@@ -48,28 +48,30 @@
         <div class="card-body">
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <div class="row">
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #e4bd46; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}"
                     class="btn btn-sm btn-neutral">Add Country +</a></button>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}"
                     class="btn btn-sm btn-neutral">Add State +</a></button>
               </div>
 
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}"
                     class="btn btn-sm btn-neutral">Add City +</a></button>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"><a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
                     href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
               </div>
-              <div class="col-3 py-2">
+            </div>
+            <div class="row">
+              <div class="col-sm-3 py-2">
                 <button type="button" class="btn btn-default"><a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
                     href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
@@ -90,18 +92,18 @@
           <table class="table table-flush" id="datatable-basic">
             <thead class="thead-light">
               <tr>
-                <th><span class="tbl_row">Gender Name</span></th>
-                <th><span class="tbl_row">Edit</span></th>
-                <th><span class="tbl_row">Delete</span></th>
+                <th>Gender Name</th>
+                <th>Edit</th>
+                <th>Delete</th>
               </tr>
             </thead>
             <tbody>
               @foreach($data as $genderData)
               <tr>
-                <td><span class='tbl_row_new'>{{$genderData->name}}</span></td>
-                <td><span class='tbl_row_new'> <button class="btn btn-info btn-sm" data-toggle="modal"
+                <td>{{$genderData->name}}</td>
+                <td> <button class="btn btn-info btn-sm" data-toggle="modal"
                       data-target="#exampleModalCenter" onclick="openModal({{$genderData->id}})">
-                      Edit</button><span class='tbl_row_new'></td>
+                      Edit</button></td>
                 <td><button class="btn btn-danger btn-sm"><a style="color:#fff;"
                       href="{{route('DeleteGender',$genderData->id)}}">Delete</a></button></td>
               </tr>
@@ -190,12 +192,12 @@
 
         $('#businessDetails').html('');
         let row = `
-              
+
                 <b>Gender Name</b>
                 <input type="hidden" name="id" value = "${response.id}">
                 <input type="text" name="name" value = "${response.name}">
-              
- 
+
+
             `;
         $('#businessDetails').append(row);
         // $('#businessDetails').html(row);

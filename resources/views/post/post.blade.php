@@ -1,6 +1,5 @@
 @extends('admin_dash.main')
 <style type="text/css">
-
     .show {
         margin-left: 31px;
         margin-right: 92px;
@@ -67,7 +66,7 @@
                     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
                         <form action="" id="search_data" class="search_data_row_class">
                             <div class='row'>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="status_id" id="status_id">
                                             <option value="">status</option>
@@ -76,7 +75,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <?php $departmentList = App\Department::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="department_id" id="department_id">
@@ -88,7 +87,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <?php $departmentBadgeList = App\DepartmentBadge::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="badge_id" id="badge_id">
@@ -100,7 +99,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                            </div>
+                            <div class="row">
+                                <div class='col-sm-4'>
                                     <?php $countryList = App\Country::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="country_id" id="country_id">
@@ -112,21 +113,23 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="state_id" id="state_id">
                                             <option value="">Select State</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="city_id" id="city_id">
                                             <option value="">City</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-5'>
+                            </div>
+                            <div class="row">
+                                <div class='col-sm-5'>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -138,7 +141,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class='col-5'>
+                                <div class='col-sm-5'>
                                     <div class="form-group">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
@@ -150,9 +153,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" placeholder="Look for user" name="search2" id="search2"
-                                    class="search_input">
-                                <div class='col-2'>
+                                <div class='col-sm-2'>
                                     <div class="row">
                                         <button type="button" id="search_data1"
                                             class="btn btn-primary apply_btnn">Apply</button>
@@ -163,6 +164,10 @@
 
                                 </div>
                             </div>
+                            <input type="hidden" placeholder="Look for user" name="search2" id="search2"
+                                class="search_input">
+
+
                         </form>
 
                     </div>

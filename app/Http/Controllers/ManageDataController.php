@@ -59,7 +59,7 @@ class ManageDataController extends Controller
         // $search= $request->role;
         $data = $this->state->getdata_table($order_by, $offset, $limit_t, $search);
         $count = $this->state->getdata_count($order_by, $search);
-        $getuser = $this->manage_data($data);
+        $getuser = $this->manage_data($data , $offset);
         $results = [
             "draw" => intval($draw),
             "iTotalRecords" => $count,
@@ -68,10 +68,10 @@ class ManageDataController extends Controller
         ];
         echo json_encode($results);
     }
-    public function manage_data($data)
+    public function manage_data($data , $offset)
     {
         $arr = array();
-        $i = 0;
+        $i = $offset;
         foreach ($data as $key => $data) {
             // $view = "<a href='".route('UserDetail',['id' => $data->id])."'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
             //  $view = "<a href='javascript:void(0)' onclick ='viewDepartmentModel1(".$data->id.")'><span class='tbl_row_new1 view_modd_dec'>View Country Department</span></a><br>";
@@ -89,19 +89,19 @@ class ManageDataController extends Controller
 
 
 
-            $arr[$key]['SN'] = "<td><span class='line_heightt'>" . ++$i . "</span></td>";
-            $arr[$key]['country_name'] = "<td><span class='tbl_row_new'>" . $data->country_name . "</span></td>";
-            $arr[$key]['state_name'] = "<td><span class='tbl_row_new'>" . ($data->state_name) ?? "" . "</span></td>";
+            $arr[$key]['SN'] =  ++$i ;
+            $arr[$key]['country_name'] =  $data->country_name;
+            $arr[$key]['state_name'] =  ($data->state_name) ?? "" ;
             $array_city = array();
             array_push($array_city, $data->city_name);
             $array_city = implode(",", $array_city);
 
 
-            $arr[$key]['city_name'] = "<td class='tdcalss'><span>" . $viewCity . "</span></td>";
+            $arr[$key]['city_name'] =  $viewCity ;
 
             $view1 = $view . $EditCity . $EditCountry . $EditState;
             // $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';
-            $arr[$key]['view'] = "<td class='tdcalss'><span class='line_heightt'>" . $view1 . "</span></td>";
+            $arr[$key]['view'] =  $view1;
         }
         return $arr;
     }
@@ -125,7 +125,7 @@ class ManageDataController extends Controller
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
             for ($i = 1; $i < $datacount; $i++) {
-                // echo"<pre>"; print_r($data[$i][0]); 
+                // echo"<pre>"; print_r($data[$i][0]);
                 $data['country_name'] = $data1[$i][0];
                 $insertCountry = Country::create($data);
             }
@@ -147,7 +147,7 @@ class ManageDataController extends Controller
     }
     public function editCityModelView(Request $request)
     {
-        // echo"<pre>"; print_r($request->all()); die;  
+        // echo"<pre>"; print_r($request->all()); die;
         $data['city_name'] = $request->city_name;
         $updatedata = City::where('id', $request->city_id)->update($data);
         return redirect('/manage_data/countries');
@@ -178,7 +178,7 @@ class ManageDataController extends Controller
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
             for ($i = 1; $i < $datacount; $i++) {
-                // echo"<pre>"; print_r($data[$i][0]); 
+                // echo"<pre>"; print_r($data[$i][0]);
                 $data['country_id'] = $request->country_id;
                 $data['state_name'] = $data1[$i][0];
                 $insertCountry = CountryState::create($data);
@@ -290,7 +290,7 @@ class ManageDataController extends Controller
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
             for ($i = 1; $i < $datacount; $i++) {
-                // echo"<pre>"; print_r($data[$i][0]); 
+                // echo"<pre>"; print_r($data[$i][0]);
                 $data['ethnicity_name'] = $data1[$i][0];
                 $insertCountry = Ethnicity::create($data);
             }
@@ -349,7 +349,7 @@ class ManageDataController extends Controller
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
             for ($i = 1; $i < $datacount; $i++) {
-                // echo"<pre>"; print_r($data[$i][0]); 
+                // echo"<pre>"; print_r($data[$i][0]);
                 $data['message'] = $data1[$i][0];
                 $insertCountry = ReportMessage::create($data);
             }
@@ -457,7 +457,7 @@ class ManageDataController extends Controller
             $data1 =  Importer::make('Csv')->load($path)->getCollection();
             $datacount = count($data1);
             for ($i = 1; $i < $datacount; $i++) {
-                // echo"<pre>"; print_r($data[$i][0]); 
+                // echo"<pre>"; print_r($data[$i][0]);
                 $data['name'] = $data1[$i][0];
                 $insertReason = ReportReasson::create($data);
             }

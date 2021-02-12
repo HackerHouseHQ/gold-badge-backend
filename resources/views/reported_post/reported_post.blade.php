@@ -452,6 +452,7 @@
     }
 
     /*}*/
+
 </style>
 @section('content')
 <div class="header bg-primary pb-6">
@@ -486,7 +487,7 @@
                     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
                         <form action="" id="search_data" class="search_data_row_class">
                             <div class='row'>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="status_id" id="status_id">
                                             <option value="">status</option>
@@ -495,7 +496,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <?php $departmentList = App\Department::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="department_id" id="department_id">
@@ -507,7 +508,7 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <?php $departmentBadgeList = App\DepartmentBadge::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="badge_id" id="badge_id">
@@ -519,7 +520,9 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                            </div>
+                            <div class="row">
+                                <div class='col-sm-4'>
                                     <?php $countryList = App\Country::get(); ?>
                                     <div class="form-group">
                                         <select class="form-control" name="country_id" id="country_id">
@@ -531,20 +534,24 @@
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="state_id" id="state_id">
                                             <option value="">Select State</option>
                                         </select>
                                     </div>
                                 </div>
-                                <div class='col-4'>
+                                <div class='col-sm-4'>
                                     <div class="form-group">
                                         <select class="form-control" name="city_id" id="city_id">
                                             <option value="">City</option>
                                         </select>
                                     </div>
                                 </div>
+                            </div>
+
+
+                            <div class="row">
                                 <div class='col-5'>
                                     <div class="form-group">
                                         <div class="input-group">
@@ -569,8 +576,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <input type="hidden" placeholder="Look for user" name="search2" id="search2"
-                                    class="search_input">
                                 <div class='col-2'>
                                     <div class="row">
                                         <button type="button" id="search_data1"
@@ -579,9 +584,14 @@
                                             class="btn btn-info apply_btnn">Reset</button>
                                     </div>
 
-
                                 </div>
                             </div>
+
+
+                            <input type="hidden" placeholder="Look for user" name="search2" id="search2"
+                                class="search_input">
+
+
                         </form>
 
                     </div>
@@ -714,6 +724,7 @@
   </footer> --}}
 </div>
 {{-- model view department --}}
+
 <div class="modal fade" id="viewUserDetailModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
     aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -726,42 +737,14 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-4" id="userImage">
+                    <div class="col-sm-4" id="userImage">
                         <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
                             alt="" style="width: 240px; height:240px;">
                     </div>
-                    <div class="col-8" id="viewDepartment">
+                    <div class="col-sm-8" id="viewDepartment">
 
                     </div>
                 </div>
-                {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
-
-                  </tbody>
-
-                </table>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div> --}}
             </div>
         </div>
     </div>
@@ -780,43 +763,16 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-6" id="userImage1">
+                    <div class="col-sm-6" id="userImage1">
                         <img src="https://png.pngtree.com/png-clipart/20190924/original/pngtree-user-vector-avatar-png-image_4830521.jpg"
                             alt="" style="width: 300px; height:300px;">
                     </div>
-                    <div class="col-6" id="viewDepartmentLike">
+                    <div class="col-sm-6" id="viewDepartmentLike">
 
 
                     </div>
                 </div>
-                {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
 
-                  </tbody>
-
-                </table>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div> --}}
             </div>
         </div>
     </div>
@@ -841,34 +797,7 @@
 
                     </div>
                 </div>
-                {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
 
-                  </tbody>
-
-                </table>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div> --}}
             </div>
         </div>
     </div>
@@ -895,34 +824,7 @@
 
                     </div>
                 </div>
-                {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
 
-                  </tbody>
-
-                </table>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div> --}}
             </div>
         </div>
     </div>
@@ -939,42 +841,13 @@
             </div>
             <div class="modal-body" id="">
                 <div class="row">
-                    {{-- <div class="col-6" id="userImage2">
 
-          </div> --}}
                     <div class="col-12" id="viewDepartmentComment">
 
 
                     </div>
                 </div>
-                {{-- <div class="row">
-          <div class="col-md-12">
-            <div class="table-responsive">
-              <div>
-                <table class="table table-bordered table-hover">
-                  <thead>
-                    <tr>
-                      <th><span class="tbl_row">SN.</span></th>
-                      <th> <span class="tbl_row">Department Name</span> </th>
-                      <th> <span class="tbl_row">State</span> </th>
-                      <th> <span class="tbl_row">City</span> </th>
-                      <th> <span class="tbl_row">Avg Rating</span> </th>
-                      <th> <span class="tbl_row">Reviews</span> </th>
-                      <th> <span class="tbl_row">No. of badges</span> </th>
-                    </tr>
-                  </thead>
-                  <tbody id="viewDepartment">
 
-                  </tbody>
-
-                </table>
-
-
-
-              </div>
-            </div>
-          </div>
-        </div> --}}
             </div>
         </div>
     </div>
@@ -994,21 +867,7 @@
             <div class="modal-body">
                 <div class="row">
                     <div class="col-12" id="reason_list">
-                        {{-- <div class="table-responsive">
-                <div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">SN.</span></th>
-                        <th> <span class="tbl_row">City Name</span> </th>
-                      </tr>
-                    </thead>
-                    <tbody id="businessDetails">
-  
-                    </tbody>
-                  </table>
-                </div>
-              </div> --}}
+
                     </div>
                 </div>
             </div>
@@ -1027,22 +886,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12" id="vote_list">
-                        {{-- <div class="table-responsive">
-                <div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">SN.</span></th>
-                        <th> <span class="tbl_row">City Name</span> </th>
-                      </tr>
-                    </thead>
-                    <tbody id="businessDetails">
-  
-                    </tbody>
-                  </table>
-                </div>
-              </div> --}}
+                    <div class="col-sm-12" id="vote_list">
+
                     </div>
                 </div>
             </div>
@@ -1345,7 +1190,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#vote_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
                                     <div>
@@ -1412,7 +1257,7 @@
                 if (response.length) {
                     console.log('aaa--', response);
                     $('#reason_list').html('');
-                    // $('#noData').css("display","block"); 
+                    // $('#noData').css("display","block");
                     var i = 0;
                     let row = `<div class="table-responsive">
               <div>
@@ -1497,7 +1342,7 @@
                             <span class="font2">${value.date}</span>
                           </div>
                           <div class="comment_partion_div1">
-                            <span class="font1">${value.comment}</span> 
+                            <span class="font1">${value.comment}</span>
                             <p style="margin:0;"><span class="font3">${value.comment_like_count}</span> <span class="font3" style="padding-left: 3px;">Likes</span> <span class="font3">${value.reply_count}</span><span class="font3" style="padding-left: 3px;">Reply</span><a href='javascript:void(0)' style=" font-size: 13px;
                                 padding-left: 5px;
                                 font-weight: 500;" onclick ='viewSubcomment(${value.comment_id})'>view more</a></p>
@@ -1516,9 +1361,9 @@
                     <span class ="font2">${v.date}</span>
                 </div>
                 <div class="comment_partion_div1">
-                    <span class= "font1">${v.sub_comment}</span> 
-       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div> 
-         
+                    <span class= "font1">${v.sub_comment}</span>
+       <p style ="margin:0;"><span class="font3" >${v.sub_comment_like_count}</span><span class="font3" style="padding-left: 3px;">Likes</span></p>  </div>
+
       </div> `;
 
 
@@ -1790,23 +1635,23 @@
 
                 $('#userImage2').append(rowImage);
                 $('#viewDepartmentReport').html('');
-                            let row =`<div class="scroll_bar_div">`;
+                let row = `<div class="scroll_bar_div">`;
                 response.forEach(value => {
-                     row += ` <div class="col">
+                    row += ` <div class="col">
                     <div class="username_div"><p><img src="../storage/uploads/user_image/${value.image}" alt="user_image" class="avatar" style=" vertical-align: middle; width: 50px; height: 50px; border-radius: 50%;"></p>
                                     <p style="padding-left: 0px; margin: 10px; font-weight: 900;">${value.user_name}</p></div>
                                 <div class="message_div">
                                 <p><strong><i>message:-</i></strong></p>
                                     <p style="padding-left: 5px;  word-break: break-all;">${value.message}</p>
                                 </div>
-                                   
+
 
                                     <br>
                                      </div>`;
-                    
+
                 });
-row += `</div>`;
-$('#viewDepartmentReport').append(row)
+                row += `</div>`;
+                $('#viewDepartmentReport').append(row)
                 console.log(response);
 
                 $('#viewUserDetailReportModel').modal('show');
@@ -1883,7 +1728,7 @@ $('#viewDepartmentReport').append(row)
               alt="" style="width: 245px; height:245px;">`);
 
                 }
-                //   if(typeof response.departments.image != "undefined"){ 
+                //   if(typeof response.departments.image != "undefined"){
 
                 //   $('#userImage').html(`<img
                 //     src="../storage/departname/${response.departments.image}"
@@ -1897,7 +1742,7 @@ $('#viewDepartmentReport').append(row)
                 // <a href='javascript:void(0)' onclick ='viewUserDetailCommentModel(${response.id})'>view list</a>
                 let row = ` <div class="custom_col_class">
                                  <img src="../storage/uploads/user_image/${response.users.image}"  id="myImg" alt="user-image" class="avatar"  data-toggle="modal" data-target="img-modal" style=" vertical-align: middle; width: 66px; height: 66px; border-radius: 50%; margin-bottom:20px;   margin-left: -7rem;">
-    
+
              <div class="form_div">
               <p class="form_fields">Full Name:</p>
               <p class="form_fields">${response.users.first_name}</p>
@@ -1906,28 +1751,28 @@ $('#viewDepartmentReport').append(row)
               <p class="form_fields">Posted On:</p>
               <p class="form_fields">${response.created_at.substr(0,10).split('-').reverse().join('/')}</p>
               </div>
-          
+
               <div class="form_div">
               <p class="form_fields">Likes:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_like}<a href='javascript:void(0)' style="padding-left:10px;" onclick ='viewUserDetailLikeModel(${response.id})'>view list</a></p>
               </div>
-           
+
               <div class="form_div">
               <p class="form_fields">Share:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_share}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailShareModel(${response.id})'>view list</a></p>
               </div>
-             
+
               <div class="form_div">
               <p class="form_fields">Comments:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_comment}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailCommentModel(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Report:</p>
               <p class="form_fields" style="padding-right:5px;">${response.department_report}<a href='javascript:void(0)' style="padding-left:10px;" onclick ='viewUserDetailReportModel(${response.id})'>view list</a></p>
               </div>
-             
-            
+
+
               <div class="form_div">
               <p class="form_fields">Rating:</p>
               <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
@@ -1936,12 +1781,12 @@ $('#viewDepartmentReport').append(row)
               <p class="form_fields">Vote:</p>
               <p class="form_fields">${response.vote}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
               </div>
-            
+
               <div class="form_div">
               <p class="form_fields">Review:</p>
               <p class="form_fields">${(response.comment) ? response.comment : " " }</p>
               </div>
-           
+
           </div>`;
 
                 $('#viewDepartment').append(row)

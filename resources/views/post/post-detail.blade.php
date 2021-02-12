@@ -1,5 +1,15 @@
 @extends('admin_dash.main')
 <style>
+    /* img {
+  transition: transform .5s;
+  transform: scale(.5);
+} */
+
+/* img:hover, img:focus {
+    transform: scale(2);
+    opacity: 5;
+
+} */
     #myPostImg {
         border-radius: 5px;
         cursor: pointer;
@@ -210,11 +220,11 @@
 
     }
 
-    .table td, .table th {
-    font-size: .8125rem;
-    white-space: pre-wrap !important;
-}
-
+    .table td,
+    .table th {
+        font-size: .8125rem;
+        white-space: pre-wrap !important;
+    }
 
 </style>
 @section('content')
@@ -232,10 +242,6 @@
                         </ol>
                     </nav>
                 </div>
-                {{-- <div class="col-lg-6 col-5 text-right">
-            <a href="#" class="btn btn-sm btn-neutral">New</a>
-            <a href="#" class="btn btn-sm btn-neutral">Filters</a>
-          </div> --}}
             </div>
         </div>
     </div>
@@ -250,7 +256,7 @@
                     <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
                         <div class="row">
 
-                            <div class="col-md-4">
+                            <div class="col-sm-4">
                                 <div class="card card-primary card-outline">
                                     <div class="card-body box-profile">
                                         <div class="text-center">
@@ -299,19 +305,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8">
+                            <div class="col-sm-8">
                                 <div class="card">
                                     <div class="card-body">
                                         <form action="" id="search_data" class="search_data_row_class">
                                             <div class='row'>
-                                                <div class='col-12'>
+                                                <div class='col-sm-12'>
                                                     <div class="form-group">
-                                                        <input class="form-control form-control-sm" type="text"
+                                                        <input class="form-control form-control" type="text"
                                                             placeholder="Search By Name.Badge,Department,Country,State,City....">
 
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                            </div>
+                                            <div class="row">
+                                                <div class='col-sm-6'>
                                                     <?php $departmentList = App\Department::get(); ?>
                                                     <div class="form-group">
                                                         <select class="form-control" name="department_id"
@@ -324,7 +332,7 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                                <div class='col-sm-6'>
                                                     <?php $departmentBadgeList =
                                                         App\DepartmentBadge::get(); ?>
                                                     <div class="form-group">
@@ -338,7 +346,10 @@
                                                         </select>
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class='col-sm-6'>
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -351,7 +362,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class='col-6'>
+                                                <div class='col-sm-6'>
                                                     <div class="form-group">
                                                         <div class="input-group">
                                                             <div class="input-group-prepend">
@@ -364,9 +375,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <input type="hidden" placeholder="Look for user" name="search2"
-                                                    id="search2" class="search_input">
-                                                <div class='col-2 d-flex'>
+                                            </div>
+                                            <input type="hidden" placeholder="Look for user" name="search2" id="search2"
+                                                class="search_input">
+                                            <div class="row">
+                                                <div class='col-sm-2 d-flex'>
 
                                                     <button type="button" id="search_data1"
                                                         class="btn btn-primary apply_btnn">Apply</button>
@@ -375,64 +388,14 @@
 
                                                 </div>
                                             </div>
-                                            <!--                                            <table class="table table-striped">
-                                                        <thead>
-                                                            <tr>
-
-                                                                <span class="div_cover_sell">
-                                                                    <span>
-                                                                        <select name="department_id" id="department_id">
-                                                                            <option value="">Department</option>
-                                                                            <option value="1">Department1</option>
-                                                                            <option value="2">Department2</option>
-                                                                        </select>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="div_cover_sell">
-                                                                    <span>
-                                                                        <select name="badge_id" id="badge_id">
-                                                                            <option value="">Badge</option>
-                                                                            <option value="1">Badge1</option>
-                                                                            <option value="2">Badge2</option>
-                                                                        </select>
-                                                                    </span>
-                                                                </span>
-                                                                <span class="from_to_select">
-                                                                    <label for="from_text" class="serach_by_text">From</label>
-
-                                                                    <input type="date" class="from_control" name="fromdate"
-                                                                        id="fromdate" style="-webkit-appearance: media-slider;">
-                                                                    <label for="to_text" class="serach_by_text">To</label>
-                                                                    <input type="date" class="from_control" name="todate"
-                                                                        id="todate" style="-webkit-appearance: media-slider;">
-                                                                </span>
-                                                                <input type="hidden" placeholder="Look for user" name="search2"
-                                                                    id="search2" class="search_input">
-                                                                <button type="button" id="search_data1"
-                                                                    class="apply_btnn">Apply</button>
-                                                            </tr>
-                                                        </thead>
-                                                    </table>-->
                                         </form>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">
+                                    <div class="col-sm-12">
                                         <div class="card class_scroll ">
                                             <div class="card-body p-0">
                                                 <table id="data1" class="table" style="width: 100%;">
-                                                    <!--                                                    <thead>
-                                                                <tr>
-                                                                    {{-- <th><span class="tbl_row">Username</span></th>
-                                                        <th><span class="tbl_row">Full Name</span></th>
-                                                        <th><span class="tbl_row">Posted on </span></th>
-                                                        <th><span class="tbl_row">posted About</span></th>
-                                                        <th><span class="tbl_row">Rating</span></th> --}}
-                                                                    {{-- <th><span class="tbl_row">Username</span></th> --}}
-                                                                    {{-- <th><span class="tbl_row">Action</span></th> --}}
-
-                                                                </tr>
-                                                            </thead>-->
                                                     <tbody>
                                                     </tbody>
                                                 </table>
@@ -440,41 +403,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                {{-- <div class="card">
-                                <div class="card-body">
-                                    <div class="tab-content">
-                                        <div class="active tab-pane" id="activity">
-                                            <div class="post">
-                                                <div class="user-block">
-                                                    <img class="img-circle img-bordered-sm"
-                                                        src="../../dist/img/user1-128x128.jpg" alt="user image">
-                                                    <span class="username">
-                                                        <a href="#">Jonathan Burke Jr.</a>
-                                                        <a href="#" class="float-right btn-tool"></a>
-                                                    </span>
-                                                    <span class="description">Shared publicly - 7:30 PM today</span>
-                                                </div>
-                                                <p>
-                                                    No Post Available !
-                                                </p>
-                                                <p>
-                                                    <a href="#" class="link-black text-sm mr-2">View Post</a>
-                                                </p>
 
-                                                <p>
-                                                    No Post Available !
-                                                </p>
-
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> --}}
                             </div>
                         </div>
-
-
                     </div>
                 </div>
 
@@ -493,42 +424,11 @@
                 </div>
                 <div class="modal-body" id="">
                     <div class="row">
-                        {{-- <div class="col-6" id="userImage2">
-
-            </div> --}}
-                        <div class="col-12" id="viewDepartmentComment">
-
+                        <div class="col-sm-12" id="viewDepartmentComment">
 
                         </div>
                     </div>
-                    {{-- <div class="row">
-            <div class="col-md-12">
-              <div class="table-responsive">
-                <div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">SN.</span></th>
-                        <th> <span class="tbl_row">Department Name</span> </th>
-                        <th> <span class="tbl_row">State</span> </th>
-                        <th> <span class="tbl_row">City</span> </th>
-                        <th> <span class="tbl_row">Avg Rating</span> </th>
-                        <th> <span class="tbl_row">Reviews</span> </th>
-                        <th> <span class="tbl_row">No. of badges</span> </th>
-                      </tr>
-                    </thead>
-                    <tbody id="viewDepartment">
 
-                    </tbody>
-
-                  </table>
-
-
-
-                </div>
-              </div>
-            </div>
-          </div> --}}
                 </div>
             </div>
         </div>
@@ -547,22 +447,7 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12" id="reason_list">
-                        {{-- <div class="table-responsive">
-                <div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">SN.</span></th>
-                        <th> <span class="tbl_row">City Name</span> </th>
-                      </tr>
-                    </thead>
-                    <tbody id="businessDetails">
-
-                    </tbody>
-                  </table>
-                </div>
-              </div> --}}
+                    <div class="col-sm-12" id="reason_list">
                     </div>
                 </div>
             </div>
@@ -581,22 +466,8 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-12" id="vote_list">
-                        {{-- <div class="table-responsive">
-                <div>
-                  <table class="table table-bordered table-hover">
-                    <thead>
-                      <tr>
-                        <th><span class="tbl_row">SN.</span></th>
-                        <th> <span class="tbl_row">City Name</span> </th>
-                      </tr>
-                    </thead>
-                    <tbody id="businessDetails">
+                    <div class="col-sm-12" id="vote_list">
 
-                    </tbody>
-                  </table>
-                </div>
-              </div> --}}
                     </div>
                 </div>
             </div>
@@ -604,62 +475,26 @@
     </div>
 </div>
 
+<div class="modal fade" tabindex="-1" role="dialog" id="modal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Modal title</h4>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="modal-body">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          {{-- <button type="button" class="btn btn-primary">Save changes</button> --}}
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+  </div><!-- /.modal -->
 @endsection
 @section('script')
-
-{{-- <script type="text/javascript">
-    function viewDepartmentBadgeModel1(id){
-   // alert(id);
-
-       $.ajax({
-          url: "{{ route('viewDepartmentBadgeModel') }}/" + id,
-type: 'get',
-success: function (response) {
-// console.log(response);
-if(response[0]) {
-$('#businessDetails').html('');
-var i = 0;
-$.each(response, function(key, value){
-
-var url = '{{ route("BadgeDetail", ":id") }}';
-url = url.replace(':id','id='+value.id);
-
-let row = `
-<tr>
-    <td> ${++i} </td>
-    <td class="text-capitalize">${value.badge_number}</td>
-    <td class="text-capitalize">0</td>
-    <td class="text-capitalize">0</td>
-    <td class="text-capitalize"><a href="${url}">View Profile</a></td>
-    <td></td>
-</tr>
-`;
-$('#businessDetails').append(row)
-})
-} else {
-let row = `
-<tr>
-    <td colspan="7"> Record not found! </td>
-</tr>
-`;
-$('#businessDetails').html(row);
-}
-$('#exampleModalCenter').modal('show');
-},
-error: function(err) {
-console.log(err);
-}
-});
-}
-</script> --}}
 <script type="text/javascript">
-var allSlides = document.querySelectorAll('.slide img');
 
-allSlides.forEach(function(slide) {
-  slide.addEventListener("click", function(){
-    console.log(slide.src);
-  });
-});
 
     $(document).ready(function () {
         var dataTable = $('#data1').DataTable({
@@ -688,14 +523,6 @@ allSlides.forEach(function(slide) {
             'ajax': {
                 'url': "{{ route('PostDepartmentDetail') }}",
                 'data': function (data) {
-                    //       var status_id = $('#status_id').val();
-                    //     data.status_id = status_id;
-                    //     var state_id = $('#state_id').val();
-                    //     data.state_id = state_id;
-                    //     var country_id = $('#country_id').val();
-                    //     data.country_id = country_id;
-                    //     var city_id = $('#city_id').val();
-                    //     data.city_id = city_id;
                     var user_id = $('#user_id').val();
                     data.user_id = user_id;
                     var department_id = $('#department_id').val();
@@ -707,16 +534,15 @@ allSlides.forEach(function(slide) {
                     var todate = $('#todate').val();
                     data.todate = todate;
 
-
                 }
             },
 
             columnDefs: [{
-                className:"cancel",
+                className: "cancel",
                 "targets": [-1]
             }],
             'columns': [{
-                    data: 'image' ,
+                    data: 'image',
                 },
                 {
                     data: 'userName'
@@ -1031,6 +857,9 @@ allSlides.forEach(function(slide) {
     function viewSubcomment(id) {
         $('#view_sub_comment' + id).toggle();
     }
-
+    $(document).on('click','img',function(){
+	$('#modal .modal-body').html($(this).clone()[0]);
+  $('#modal').modal('show');
+})
 </script>
 @endsection

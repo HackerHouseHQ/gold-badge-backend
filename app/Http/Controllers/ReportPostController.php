@@ -56,16 +56,16 @@ class ReportPostController extends Controller
             $active = "<a style='margin-left:5px;' href='javascript:void(0)' onclick ='status(" . $data->id . ")'><button type='button' class='btn btn-danger btn-sm'>Delete</button></a>";
             // $inactive = "<a href='javascript:void(0)' onclick = 'status(" . $data->id . ")'><span class='tbl_row_new1 view_modd_dec'>INACTIVATE</span></a>";
             $flag = ($data->flag == 1) ? 'department' : 'badges';
-            $arr[$key]['userName'] = "<td><span class='tbl_row_new'>" . $data->user_name . "</span></td>";
-            $arr[$key]['fullName'] = "<td><span class='tbl_row_new'>" . $data->first_name . " " . $data->last_name . "</span></td>";
-            $arr[$key]['postedAbout'] = "<td><span class='tbl_row_new'>" . $flag . "</span></td>";
-            $arr[$key]['postedOn'] = "<td><span class='tbl_row_new'>" . date("d/m/y", strtotime($data->created_at)) . "</span></td>";
-            $arr[$key]['rating'] = "<td><span class='tbl_row_new'>" .  number_format((float)$data->rating, 1, '.', '') . "</span></td>";
-            $arr[$key]['report'] = "<td><span class='tbl_row_new'>" . $data->report_count . "</span></td>";
+            $arr[$key]['userName'] =  $data->user_name ;
+            $arr[$key]['fullName'] =  $data->first_name . " " . $data->last_name ;
+            $arr[$key]['postedAbout'] =  $flag ;
+            $arr[$key]['postedOn'] =  date("d/m/y", strtotime($data->created_at)) ;
+            $arr[$key]['rating'] =   number_format((float)$data->rating, 1, '.', '') ;
+            $arr[$key]['report'] =  $data->report_count ;
 
             $view1 = $view . $active;
 
-            $arr[$key]['action'] = "<td><span class='line_heightt'>" . $view1 . "</span></td>";
+            $arr[$key]['action'] = $view1 ;
         }
         return $arr;
     }

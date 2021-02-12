@@ -35,7 +35,7 @@
   <div class="container-fluid">
     <div class="header-body">
       <div class="row align-items-center py-4">
-        <div class="col-lg-6 col-7">
+        <div class="col-sm-6 col-7">
           <h6 class="h2 text-white d-inline-block mb-0">Manage Data</h6>
           <nav aria-label="breadcrumb" class="d-none d-md-inline-block ml-md-4">
             <ol class="breadcrumb breadcrumb-links breadcrumb-dark">
@@ -46,34 +46,13 @@
         </div>
 
 
-        <div class="col-lg-6 col-5 text-right">
-          {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
-            Department</a> --}}
-          {{-- <a href="#" class="btn btn-sm btn-neutral">New</a>
-          <a href="#" class="btn btn-sm btn-neutral">Filters</a> --}}
-          <div class="row-lg-6 row-5">
-            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral"
+        <div class="col-sm-6 col-5 text-right">
+            <a href="{{route('countries')}}" class="btn btn-sm btn-neutral  mb-1"
               style="background-color:#fb6340;color:#fff;">Manage Countries</a>
-            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral">Manage Ethnicity</a>
-            <a href="{{route('gender')}}" class="btn btn-sm btn-neutral">Gender</a>
-            <a href="{{route('report')}}" class="btn btn-sm btn-neutral">Report Reason Type</a>
-            <a href="{{route('report-message')}}" class="btn btn-sm btn-neutral">Report</a>
-
-
-          </div>
-          <!--          <div class="row-lg-6  row-5" style="float: right;">
-            <div class="btn-toolbar">
-              <div class="btn-group">
-                <a href="{{route('add_country_page')}}" class="btn btn-sm btn-neutral">add new country</a>
-                <a href="{{route('add_state_page')}}" class="btn btn-sm btn-neutral">add new state</a>
-                <a href="{{route('add_city_page')}}" class="btn btn-sm btn-neutral">add new city</a>
-                <a href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">add new ethnicity</a>
-              </div>
-            </div>
-          </div>-->
-
-          {{-- <a href="#" class="btn btn-sm btn-neutral" data-toggle="modal" data-target="#department" id="sideshow">Add
-            Department</a> --}}
+            <a href="{{route('ethnicity')}}" class="btn btn-sm btn-neutral mb-1">Manage Ethnicity</a>
+            <a href="{{route('gender')}}" class="btn btn-sm btn-neutral mb-1">Gender</a>
+            <a href="{{route('report')}}" class="btn btn-sm btn-neutral mb-1">Report Reason Type</a>
+            <a href="{{route('report-message')}}" class="btn btn-sm btn-neutral mb-1">Report</a>
         </div>
 
       </div>
@@ -92,34 +71,36 @@
         <div class="card-body">
           <div class="card-header" style="border-bottom: 1px solid #6073e4 ">
             <div class="row">
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #fb6340; color:#fff;font-size: 15px;" href="{{route('add_country_page')}}"
                     class="btn btn-sm btn-neutral">Add Country +</a></button>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_state_page')}}"
                     class="btn btn-sm btn-neutral">Add State +</a></button>
               </div>
 
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"> <a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;" href="{{route('add_city_page')}}"
                     class="btn btn-sm btn-neutral">Add City +</a></button>
               </div>
-              <div class="col-3">
+              <div class="col-sm-3">
                 <button type="button" class="btn btn-default"><a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
                     href="{{route('add_ethnicity_page')}}" class="btn btn-sm btn-neutral">Add Ethnicity +</a></button>
               </div>
-              <div class="col-3 py-2">
+            </div>
+            <div class="row">
+              <div class="col-sm-3 py-2">
                 <button type="button" class="btn btn-default"><a
                     style="background-color: #e4bd46;  color:#fff;font-size: 15px;"
                     href="{{route('showAddReportform')}}" class="btn btn-sm btn-neutral">Add Rating Question
                     +</a></button>
               </div>
-              <div class="col-3 py-2">
+              <div class="col-sm-3 py-2">
                 <button type="button" class="btn btn-default"><a
                     style="background-color: #e4bd46;;  color:#fff;font-size: 15px;"
                     href="{{route('add_report_message_page')}}" class="btn btn-sm btn-neutral">Add
@@ -391,7 +372,7 @@
         if (response.length) {
           console.log('aaa--', response);
           $('#noData').html('');
-          // $('#noData').css("display","block"); 
+          // $('#noData').css("display","block");
           var i = 0;
           let row = `<div class="table-responsive">
               <div>
@@ -447,12 +428,12 @@
           var i = 0;
           $.each(response, function(key, value) {
             let row = `
-                
+
                     <form action="{{route('editCityModelView')}}" method ="GET">
-                 
+
                    <div class="row">
                    <div class="col-2">
-          ${++i} 
+          ${++i}
                   <input type="hidden" value="${value.id}" name="city_id">
                           </div>
                       <div class="col-7">
@@ -462,7 +443,7 @@
                   <button type="submit" class="btn btn-primary">Save</button>
                       </div>
                   </form>
-                
+
                 `;
             $('#EditCity').append(row)
           })

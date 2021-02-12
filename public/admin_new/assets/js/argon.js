@@ -953,7 +953,6 @@ var SalesChart = (function () {
 
 var Datepicker = (function () {
     // Variables
-
     var $datepicker = $(".datepicker");
 
     // Methods
@@ -961,9 +960,8 @@ var Datepicker = (function () {
     function init($this) {
         var options = {
             disableTouchKeyboard: true,
-            autoclose: false,
+            autoclose: true,
         };
-
         $this.datepicker(options);
     }
 

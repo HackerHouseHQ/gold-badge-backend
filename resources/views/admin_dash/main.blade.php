@@ -11,7 +11,6 @@
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
-    <!--<link rel="stylesheet" href="{{asset('admin_new/assets/vendor/nucleo/css/nucleo.css')}}" type="text/css">-->
     <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
         type="text/css">
 
@@ -36,23 +35,7 @@
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('admin_new/assets/css/summernote-bs4.css') }}">
 
-    <!-- <script>
-    (function (w, d, s, l, i) {
-              w[l] = w[l] || [];
-              w[l].push({
-                  'gtm.start': new Date().getTime(),
-                  event: 'gtm.js'
-              });
-              var f = d.getElementsByTagName(s)[0],
-                  j = d.createElement(s),
-                  dl = l != 'dataLayer' ? '&l=' + l : '';
-              j.async = true;
-              j.src =
-                  'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-              f.parentNode.insertBefore(j, f);
-          })(window, document, 'script', 'dataLayer', 'GTM-NKDMSK6');
-  </script> -->
-    <!-- End Google Tag Manager -->
+
     <style>
         .navbar-vertical.navbar-expand-xs .navbar-nav>.nav-item>.nav-link.active {
             background: #e2b52dd1 !important;
@@ -95,7 +78,7 @@
     <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons/js/dataTables.buttons.min.js')}}"></script>
     <script src="{{asset('admin_new/assets/vendor/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js')}}"></script>
     <!-- Datepicker -->
-    <script src="{{asset('admin_new/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}">
+    <script src="{{asset('new_asset/assets/vendor/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js')}}">
     </script>
 
     <script src="{{ asset('admin_new/assets/js/summernote-bs4.min.js') }}"></script>
@@ -106,13 +89,14 @@
     <script src="{{asset('admin_new/assets/vendor/datatables.net-select/js/dataTables.select.min.js')}}"></script>
     <!-- Argon JS -->
     <script src="{{asset('admin_new/assets/vendor/sweetalert2/dist/sweetalert2.min.js')}}"></script>
-    <script src="{{asset('admin_new/assets/js/argon.min.js?v=1.2.0')}}"></script>
 
     {{-- --}}
 
     <!-- Optional JS -->
 
     <!-- Argon JS -->
+    <script src="{{asset('admin_new/assets/js/argon.min.js?v=1.2.0')}}"></script>
+
     <script src="{{asset('admin_new/assets/js/argon.js?v=1.2.0')}}"></script>
 
     <script>

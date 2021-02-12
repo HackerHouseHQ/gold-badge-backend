@@ -33,6 +33,14 @@
     .wysihtml5-toolbar li {
         display: inline-block;
     }
+    .bg-primary {
+    background-color: #5e72e4 !important;
+}
+.text-primary {
+    color: #5e72e4!important;
+}
+
+
 
 </style>
 <div class="header bg-primary pb-6">
