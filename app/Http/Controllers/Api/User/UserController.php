@@ -34,6 +34,7 @@ use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -1024,6 +1025,7 @@ class UserController extends Controller
             ];
             $post = Post::whereId($post_id)->first();
             $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+            Log::info($user->first_name);
             $notification = sendFCM('Gold Badge', $user->first_name . ' commented on your post.', $userNotify);
             return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
