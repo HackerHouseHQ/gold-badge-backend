@@ -778,7 +778,7 @@ class UserController extends Controller
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
                         //get department w.r.t given department id with consider rating == 1
                         $departmentAvgRating = Post::where('department_id', $post->department_id)->where('consider_rating', 1)->get();
-                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->first();
+                        $post_liked = DepartmentLike::where('user_id', $user_id)->where('status', 1)->where('post_id', $post->id)->whereDate('created_at', date('Y-m-d'))->first();
                         $post_shared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post->id)->first();
                         $user_followed_department = UserDepartmentFollow::where('user_id', $user_id)->where('department_id', $post->department_id)->first();
                         $post->total_reviews    =   $departmentPostData->count();
