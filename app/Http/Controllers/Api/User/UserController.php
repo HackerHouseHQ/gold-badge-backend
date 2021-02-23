@@ -1011,7 +1011,7 @@ class UserController extends Controller
             $comment_like_count  = DepartmentCommentLike::where('comment_id', $insertDataId)->count();
             $comment_reply_count = DepartmentSubComment::where('comment_id', $insertDataId)->count();
             $is_comment_like = DepartmentCommentLike::where('comment_id', $insertDataId)->first();
-            $user = User::select('user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
+            $user = User::select('first_name', 'user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
             $data = [
                 "comment_id" => $insertDataId,
                 "user_id" => $user_id,
@@ -1025,8 +1025,7 @@ class UserController extends Controller
             ];
             $post = Post::whereId($post_id)->first();
             $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-            Log::info($user);
-            Log::info($request->all());
+
 
             $notification = sendFCM('Gold Badge', $user->first_name . ' commented on your post.', $userNotify);
             return res_success('Your comment has been saved successfully.', $data);
@@ -1070,7 +1069,7 @@ class UserController extends Controller
             $siteUrl = env('APP_URL');
             $sub_comment_like_count = DepartmentSubCommentLike::where('sub_comment_id', $insertDataId)->count();
             $is_sub_commment_like = DepartmentSubCommentLike::where('sub_comment_id', $insertDataId)->first();
-            $user = User::select('user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
+            $user = User::select('first_name', 'user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"))->whereId($user_id)->first();
 
             $data = [
                 "sub_comment_id" =>  $insertDataId,
