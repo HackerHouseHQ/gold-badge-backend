@@ -1025,8 +1025,8 @@ class UserController extends Controller
             ];
             $post = Post::whereId($post_id)->first();
             $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-            Log::info($userNotify->first_name);
-            $notification = sendFCM('Gold Badge', $user->first_name . ' commented on your post.', $userNotify);
+            // Log::info($userNotify->first_name);
+            $notification = sendFCM('Gold Badge', $userNotify->first_name . ' commented on your post.', $userNotify);
             return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
