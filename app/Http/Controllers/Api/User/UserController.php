@@ -1352,7 +1352,7 @@ class UserController extends Controller
             foreach ($department as $k => $v) {
                 if ($v->department_id  == $value->department_id) {
                     $value['total_reviews'] = Post::where('department_id', $v->department_id)->count();
-                    $rating =Post::where('department_id', $v->department_id)->where('consider_rating', 1)->avg('rating');
+                    $rating = Post::where('department_id', $v->department_id)->where('consider_rating', 1)->avg('rating');
                     $value['rating'] = ($rating) ? $rating : 0;
                 }
             }
@@ -1432,7 +1432,7 @@ class UserController extends Controller
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
 
-            $user_id = $request->user_id;
+            $user_id = Auth::user()->id ?? "";
             $search = $request->search;
             $filter_by_date = $request->filter_date;
 
@@ -1580,7 +1580,7 @@ class UserController extends Controller
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
 
-            $user_id = $request->user_id;
+            $user_id = Auth::user()->id ?? "";
             $search = $request->search;
 
             //get all reported posts reported by user
