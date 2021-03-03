@@ -23,9 +23,10 @@ class InformationManagementController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
-            if ($checkActive->notification_status == INACTIVE) {
+            if ($checkActive->notification_status == ACTIVE) {
                 return res_success(trans('messages.successFetchList'), array('notificationList' => []));
             }
+
             $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
             foreach ($data as $key => $value) {
                 $notifications = SendNotification::whereDate('created_at', date('Y-m-d', strtotime($value->date)))->latest()->get();
