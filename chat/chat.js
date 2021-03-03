@@ -36,16 +36,16 @@ module.exports = {
                     room_id,
                     input.message
                 ];
-                // var get_token ="SELECT `id`, `device_token` FROM `users` WHERE `id` = " + input.receiver_id ;
-                // pool.query(get_token,(error, rows, fields) => {
-                //     if (error) {
-                //         console.error(error);
-                //     }else{
-                //         device_token = rows[0].device_token
-                //         notification.sendNotification(device_token ,input.message)
-                //     }
-                // }
-                // );
+                var get_token = "SELECT `id`, `device_token` FROM `users` WHERE `id` = " + input.receiver_id;
+                pool.query(get_token, (error, rows, fields) => {
+                    if (error) {
+                        console.error(error);
+                    } else {
+                        device_token = rows[0].device_token
+                        notification.sendNotification(device_token, input.message)
+                    }
+                }
+                );
                 pool.query(insert, values, (error, rows, fields) => {
                     if (error) {
                         console.error(error);
