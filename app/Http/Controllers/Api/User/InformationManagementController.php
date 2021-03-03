@@ -23,6 +23,9 @@ class InformationManagementController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            if ($checkActive->notification_status == INACTIVE) {
+                return res_success(trans('messages.successFetchList'), array('notificationList' => []));
+            }
             $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
             foreach ($data as $key => $value) {
                 $notifications = SendNotification::whereDate('created_at', date('Y-m-d', strtotime($value->date)))->latest()->get();
@@ -57,12 +60,11 @@ class InformationManagementController extends Controller
     public function getStatusOfNotification()
     {
         try {
-           $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
-           $getUsernotificationStatus = User::select('read_notification')->whereId(Auth::user()->id)->first();
-           if(empty($data))
-           {
-            $getUsernotificationStatus->read_notification = 1;
-           }
+            $data = SendNotification::select(DB::raw('DISTINCT(DATE(created_at)) as date'))->latest()->get();
+            $getUsernotificationStatus = User::select('read_notification')->whereId(Auth::user()->id)->first();
+            if (empty($data)) {
+                $getUsernotificationStatus->read_notification = 1;
+            }
             return res_success('Notification status .', $getUsernotificationStatus);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
