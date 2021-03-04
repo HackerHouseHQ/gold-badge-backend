@@ -125,6 +125,7 @@ class LoginController extends Controller
     {
         try {
             //get user notification status
+            Log::info($request->all());
             $user = User::whereId(Auth::user()->id)->first();
             $user_notification_status = $request->notification_status;
             //update user notification status
