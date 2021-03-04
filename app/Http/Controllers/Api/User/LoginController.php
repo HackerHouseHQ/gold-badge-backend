@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
@@ -126,7 +125,6 @@ class LoginController extends Controller
     {
         try {
             //get user notification status
-            Log::info($request->all());
             $user = User::whereId(Auth::user()->id)->first();
             $user_notification_status = $request->notification_status;
             //update user notification status
