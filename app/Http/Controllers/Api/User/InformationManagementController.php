@@ -23,7 +23,7 @@ class InformationManagementController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
-            if ($checkActive->notification_status == ACTIVE) {
+            if ($checkActive->notification_status == INACTIVE) {
                 return res_success(trans('messages.successFetchList'), array('notificationList' => []));
             }
 
