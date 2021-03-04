@@ -21,8 +21,8 @@ class LoginController extends Controller
      * send otp to mail .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function sendOtpToMail(Request $request)
     {
@@ -68,8 +68,8 @@ class LoginController extends Controller
      * verify otp .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
     public function verifyOtp(Request $request)
     {
@@ -118,22 +118,17 @@ class LoginController extends Controller
      * change notification status .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     * @author Ratnesh Kumar
+     *
      */
-    public function change_notification_status()
+    public function change_notification_status(Request $request)
     {
         try {
             //get user notification status
             $user = User::whereId(Auth::user()->id)->first();
-            $user_notification_status = $user->notification_status;
-
+            $user_notification_status = $request->notification_status;
             //update user notification status
-            if ($user_notification_status == ACTIVE) {
-                $update = User::whereId(Auth::user()->id)->update(['notification_status' => INACTIVE]);
-            } else {
-                $update = User::whereId(Auth::user()->id)->update(['notification_status' => ACTIVE]);
-            }
+            $update = User::whereId(Auth::user()->id)->update(['notification_status' => $user_notification_status]);
             return res_success(trans('messages.notificationStatus'));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
