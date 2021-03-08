@@ -1538,11 +1538,11 @@ class UserController extends Controller
                 ->whereId($department_id)->first();
             $avgrating = Post::where('department_id', $department_id)->where('consider_rating', 1)->avg('rating');
             $totalReviews = Post::where('department_id', $department_id)->where('consider_rating', 1)->count();
-            $onerating = Post::where('department_id', $department_id)->where('rating', 1)->count();
-            $tworating = Post::where('department_id', $department_id)->where('rating', 2)->count();
-            $threerating = Post::where('department_id', $department_id)->where('rating', 3)->count();
-            $fourrating = Post::where('department_id', $department_id)->where('rating', 4)->count();
-            $fiverating = Post::where('department_id', $department_id)->where('rating', 5)->count();
+            $onerating = Post::where('department_id', $department_id)->where('consider_rating', 1)->where('rating', 1)->count();
+            $tworating = Post::where('department_id', $department_id)->where('consider_rating', 1)->where('rating', 2)->count();
+            $threerating = Post::where('department_id', $department_id)->where('consider_rating', 1)->where('rating', 3)->count();
+            $fourrating = Post::where('department_id', $department_id)->where('consider_rating', 1)->where('rating', 4)->count();
+            $fiverating = Post::where('department_id', $department_id)->where('consider_rating', 1)->where('rating', 5)->count();
             $data['country_name'] = $data->country_data->country_name;
             $data['state_name'] = $data->state_data->state_name;
             $data['city_name'] = $data->city_data->city_name;
