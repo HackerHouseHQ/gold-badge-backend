@@ -926,8 +926,10 @@ class UserController extends Controller
                 $user = User::whereId($user_id)->first();
                 $statusLike = DepartmentLike::where('user_id', $user_id)->where('post_id', $post_id)->first();
                 if ($statusLike->status) {
-                    $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                    $notification = sendFCM('Gold Badge', $user->user_name . ' liked your post.', $userNotify);
+                    $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+                    if ($userNotify) {
+                        $notification = sendFCM('Gold Badge', $user->user_name . ' liked your post.', $userNotify);
+                    }
                 }
                 return res_success('Your like has been saved successfully.');
             }
@@ -966,9 +968,12 @@ class UserController extends Controller
             $insertData = DepartmentShare::insert($insertArray);
             if ($insertData) {
                 $post = Post::whereId($post_id)->first();
-                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+                // $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $user  =  User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', $user->user_name . ' shared  your post.', $userNotify);
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+                if ($userNotify) {
+                    $notification = sendFCM('Gold Badge', $user->user_name . ' shared  your post.', $userNotify);
+                }
                 return res_success('Your share has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -1024,10 +1029,12 @@ class UserController extends Controller
                 "is_commment_like" => ($is_comment_like) ? 1 : 0
             ];
             $post = Post::whereId($post_id)->first();
-            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+            // $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
 
-
-            $notification = sendFCM('Gold Badge', $user->user_name . ' commented on your post.', $userNotify);
+            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+            if ($userNotify) {
+                $notification = sendFCM('Gold Badge', $user->user_name . ' commented on your post.', $userNotify);
+            }
             return res_success('Your comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1084,8 +1091,11 @@ class UserController extends Controller
                 "is_sub_commment_like" => ($is_sub_commment_like) ? 1 : 0
             ];
             $post = Post::whereId($post_id)->first();
-            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-            $notification = sendFCM('Gold Badge', $user->user_name . ' commented on your post.', $userNotify);
+            // $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
+            $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+            if ($userNotify) {
+                $notification = sendFCM('Gold Badge', $user->user_name . ' commented on your post.', $userNotify);
+            }
             return res_success('Your sub comment has been saved successfully.', $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1201,9 +1211,11 @@ class UserController extends Controller
             $insertVote = DepartmentVote::insert($insertArray);
             if ($insertVote) {
                 $post = Post::whereId($post_id)->first();
-                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
                 $user  =  User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', $user->user_name . ' voted on your post.', $userNotify);
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+                if ($userNotify) {
+                    $notification = sendFCM('Gold Badge', $user->user_name . ' voted on your post.', $userNotify);
+                }
                 return res_success('Vote saved successfully.');
             }
         } catch (Exception $e) {
@@ -1291,10 +1303,10 @@ class UserController extends Controller
             $arrDepartment = [];
             foreach ($department as $key => $value) {
                 $departmentRating = Post::where('department_id', $value->department_id)->where('flag', 1)->where('consider_rating', 1)->avg('rating');
-                $departmentReviews =  Post::where('department_id', $value->department_id)->where('flag', 1)->count();
+                $departmentReviews =  Post::where('department_id', $value->department_id)->where('flag', 1)->where('consider_rating', 1)->count();
                 foreach ($value->departments->badges as $key => $badge) {
                     $badgeRating = Post::where('department_id', $badge->department_id)->where('badge_id', $badge->badge_id)->where('consider_rating', 1)->where('flag', 2)->avg('rating');
-                    $badgeReviews = Post::where('department_id', $badge->department_id)->where('badge_id', $badge->badge_id)->where('flag', 2)->count();
+                    $badgeReviews = Post::where('department_id', $badge->department_id)->where('badge_id', $badge->badge_id)->where('consider_rating', 1)->where('flag', 2)->count();
                     $badge['total_reviews'] = $badgeReviews;
                     $badge['rating'] = ($badgeRating) ? $badgeRating : 0;
                 }
@@ -1354,7 +1366,7 @@ class UserController extends Controller
             $value['is_follow'] = ($is_follow) ? $is_follow->status : 0;
             foreach ($department as $k => $v) {
                 if ($v->department_id  == $value->department_id) {
-                    $value['total_reviews'] = Post::where('department_id', $v->department_id)->count();
+                    $value['total_reviews'] = Post::where('department_id', $v->department_id)->where('consider_rating', 1)->count();
                     $rating = Post::where('department_id', $v->department_id)->where('consider_rating', 1)->avg('rating');
                     $value['rating'] = ($rating) ? $rating : 0;
                 }
@@ -1385,7 +1397,7 @@ class UserController extends Controller
         $badges = DepartmentBadge::getDepartmentBadge($countryId, $stateId, $cityId);
         $badgefollowedbyuser = [];
         foreach ($badges as $badge) {
-            $total_reviews = Post::where('badge_id', $badge->badge_id)->count();
+            $total_reviews = Post::where('badge_id', $badge->badge_id)->where('consider_rating', 1)->count();
             $badge['rating'] = 0;
             $badge['total_reviews'] = $total_reviews;
             $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->where('consider_rating', 1)->avg('rating');
@@ -1525,7 +1537,7 @@ class UserController extends Controller
             $data = Department::with('country_data')->with('city_data')->with('state_data')->select(DB::raw("CONCAT('$siteUrl','storage/departname/', image) as department_image"), 'department_name', 'country_id', 'state_id', 'city_id')
                 ->whereId($department_id)->first();
             $avgrating = Post::where('department_id', $department_id)->where('consider_rating', 1)->avg('rating');
-            $totalReviews = Post::where('department_id', $department_id)->count();
+            $totalReviews = Post::where('department_id', $department_id)->where('consider_rating', 1)->count();
             $onerating = Post::where('department_id', $department_id)->where('rating', 1)->count();
             $tworating = Post::where('department_id', $department_id)->where('rating', 2)->count();
             $threerating = Post::where('department_id', $department_id)->where('rating', 3)->count();
@@ -1558,7 +1570,7 @@ class UserController extends Controller
             $siteUrl = env('APP_URL');
             $badge = DepartmentBadge::with('department_data')->whereId($badge_id)->first();
             $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->get()->toArray();
-            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->count();
+            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
             $badgerating = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->avg('rating');
             $reasons =  ReportReasson::get();
             $postIdsArray     =   array_column($posts, 'id');

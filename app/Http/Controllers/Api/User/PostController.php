@@ -66,8 +66,10 @@ class PostController extends Controller
             if ($insertData) {
                 $post = Post::whereId($post_id)->first();
                 $user = User::whereId($user_id)->first();
-                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', $user->user_name . 'liked on your comment.', $userNotify);
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+                if ($userNotify) {
+                    $notification = sendFCM('Gold Badge', $user->user_name . 'liked on your comment.', $userNotify);
+                }
                 return res_success('Your like has been saved successfully.');
             }
         } catch (Exception $e) {
@@ -112,8 +114,10 @@ class PostController extends Controller
             if ($insertData) {
                 $post = Post::whereId($post_id)->first();
                 $user = User::whereId($user_id)->first();
-                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->first();
-                $notification = sendFCM('Gold Badge', $user->user_name . 'liked on your comment.', $userNotify);
+                $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
+                if ($userNotify) {
+                    $notification = sendFCM('Gold Badge', $user->user_name . 'liked on your comment.', $userNotify);
+                }
                 return res_success('Your like has been saved successfully.');
             }
         } catch (Exception $e) {

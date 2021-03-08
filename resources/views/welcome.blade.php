@@ -9,7 +9,10 @@
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script  defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Styles -->
     <style>
         html,
@@ -46,9 +49,7 @@
             text-align: center;
         }
 
-        .title {
-            font-size: 84px;
-        }
+
 
         .links>a {
             color: #636b6f;
@@ -60,9 +61,7 @@
             text-transform: uppercase;
         }
 
-        .m-b-md {
-            margin-bottom: 30px;
-        }
+
 
     </style>
 </head>
@@ -84,8 +83,12 @@
         @endif
 
         <div class="content">
-            <div class="title m-b-md">
-                <h6> WELCOM TO GOLD BADGE ADMIN PANEL</h6>
+
+            <div class="title">
+            <img style="width: 50% ; height:50%" src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt="Logo">
+<br>
+<br>
+                <h2> WELCOME TO GOLD BADGE ADMIN PANEL</h2>
             </div>
         </div>
     </div>
