@@ -53,15 +53,15 @@ class ForgotPasswordController extends Controller
         $newPassword = Hash::make(Str::random(10));
         $data = array('name' => 'goldbadge', 'link' => $newPassword);
         $to_name =  "goldbadge";
-        $to_email = 'rishabh.saxena@ripenapps.com';
-        // $to_email = 'vinod.thalwal@ripenapps.com';
+        // $to_email = 'rishabh.saxena@ripenapps.com';
+        $to_email = 'ratneshripenapps41@gmail.com';
         Mail::send('email-verify-user', $data, function ($message) use ($to_name, $to_email) {
             //
             $message->to($to_email, $to_name)->subject('Forgot Password');
             $message->from('abc@gmail.com', 'Gold badge');
         });
 
-        $updatePassword = Admin::where('email', 'golbadge.contact@gmail.com')->update(['password' => Hash::make($newPassword)]);
+        $updatePassword = Admin::where('email', 'goldbadge.contact@gmail.com')->update(['password' => Hash::make($newPassword)]);
         //  if ($updatePassword) {
         return redirect('forgot-password')->with('message', 'We have successfully e-mailed your password.');
         //}
