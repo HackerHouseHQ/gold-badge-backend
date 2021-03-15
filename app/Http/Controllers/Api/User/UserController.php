@@ -1624,6 +1624,7 @@ class UserController extends Controller
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                 });
             }
+            Log::info($request->all());
             if (!empty($filter_by_date) && $filter_by_date != 0) {
                 $todaydate = date("Y-m-d"); // current date
                 $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
@@ -1644,8 +1645,8 @@ class UserController extends Controller
                     $q->wheredate('posts.created_at', '<=', $todate1);
                 });
             }
-            $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
-            foreach ($posts as $post) {
+            $postList = $query->orderBy('created_at', 'DESC')->paginate(10);
+            foreach ($postList as $post) {
                 //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
                     // get department w.r.t given department id
@@ -1679,7 +1680,7 @@ class UserController extends Controller
                 unset($post->updated_at);
                 unset($post->consider_rating);
             }
-            $data['postList'] = $posts;
+            $data['postList'] = $postList;
 
             return res_success('Badge Data ', $data);
         } catch (Exception $e) {
