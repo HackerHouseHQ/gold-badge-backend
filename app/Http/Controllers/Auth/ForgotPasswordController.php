@@ -36,34 +36,34 @@ class ForgotPasswordController extends Controller
     */
 
 
-   public function forgotPasswordPage()
+    public function forgotPasswordPage()
     {
         return view('auth.forgot-password');
     }
-    public function forgot_password(Request $request){
-            $validator = Validator::make($request->all(), [
-                        'email' => 'required|max:255',
-                      //  'email' => 'required|email|exists:admins|max:255',
+    public function forgot_password(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|max:255',
+            //  'email' => 'required|email|exists:admins|max:255',
         ]);
         if ($validator->fails()) {
-          
+
             return Redirect::back()->withErrors($validator);
         }
-        $newPassword = Hash::make(Str::random(10)); 
-        $data = array('name' => 'example', 'link' => $newPassword);
-        $to_name =  "vinod";
+        $newPassword = Hash::make(Str::random(10));
+        $data = array('name' => 'goldbadge', 'link' => $newPassword);
+        $to_name =  "goldbadge";
         $to_email = 'rishabh.saxena@ripenapps.com';
-       // $to_email = 'vinod.thalwal@ripenapps.com';
-           Mail::send('email-verify-user', $data, function ($message) use ($to_name, $to_email) {
-                        // 
-                        $message->to($to_email, $to_name)->subject('Forgot Password');
-                        $message->from('abc@gmail.com', 'Gold badge');
-                    });
-     
-        $updatePassword = Admin::where('email', 'goldbadge@gmail.com')->update(['password' => Hash::make($newPassword)]);
-      //  if ($updatePassword) {
-            return redirect('forgot-password')->with('message', 'We have successfully e-mailed your password.');
+        // $to_email = 'vinod.thalwal@ripenapps.com';
+        Mail::send('email-verify-user', $data, function ($message) use ($to_name, $to_email) {
+            //
+            $message->to($to_email, $to_name)->subject('Forgot Password');
+            $message->from('abc@gmail.com', 'Gold badge');
+        });
+
+        $updatePassword = Admin::where('email', 'golbadge.contact@gmail.com')->update(['password' => Hash::make($newPassword)]);
+        //  if ($updatePassword) {
+        return redirect('forgot-password')->with('message', 'We have successfully e-mailed your password.');
         //}
     }
-
 }

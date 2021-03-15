@@ -1214,7 +1214,7 @@ class UserController extends Controller
                 $user  =  User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
                 $userNotify = User::whereId($post->user_id)->where('status', ACTIVE)->where('notification_status', ACTIVE)->first();
                 if ($userNotify) {
-                    $notification = sendFCM('Gold Badge', $user->user_name . ' voted on your post.', $userNotify);
+                    $notification = sendFCM('Gold Badge', $user->user_name . ' rated on your post.', $userNotify);
                 }
                 return res_success('Vote saved successfully.');
             }
