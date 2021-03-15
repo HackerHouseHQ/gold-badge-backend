@@ -23,7 +23,7 @@
     <meta name="description" content="Gold Badge">
     <meta name="author" content="Gold Badge">
     <title>Gold Badge</title>
-  
+
         <!-- Favicon -->
         <link rel="icon" href="{{asset('admin_css/images/follow_logo.png')}}" type="image/png">
     <link rel="stylesheet" href="{{asset('admin_new/assets/vendor/fortawesome/fontawesome-free/css/all.min.css')}}"
@@ -1192,27 +1192,27 @@
         // let date_ob = new Date();
         // var time = '10:02:10';
         // var room_id = '34322312';
-        var port_url = "{{env('PORT_URL')}}";
-        var socket = io.connect(port_url);
-        $(".send-msg").click(function (e) {
-            var room_id = 8621516254; //$('#room').val();
-            var sender_id = 4; //$('#user').val();
-            var receiver_id = 2; //$('#user').val();
-            var message = "Hello user";
-            var array = {
-                "room_id": '6136404595',
-                "sender_id": 2,
-                "receiver_id": 5,
-                "message": "testing......"
-            };
-            socket.emit('send_message', array);
+        // var port_url = "{{env('PORT_URL')}}";
+        // var socket = io.connect(port_url);
+        // $(".send-msg").click(function (e) {
+        //     var room_id = 8621516254; //$('#room').val();
+        //     var sender_id = 4; //$('#user').val();
+        //     var receiver_id = 2; //$('#user').val();
+        //     var message = "Hello user";
+        //     var array = {
+        //         "room_id": '6136404595',
+        //         "sender_id": 2,
+        //         "receiver_id": 5,
+        //         "message": "testing......"
+        //     };
+        //     socket.emit('send_message', array);
 
-        });
+        // });
         //hello
-        socket.on('receive_message',
-            function (val) {
-                console.log(val);
-            });
+        // socket.on('receive_message',
+        //     function (val) {
+        //         console.log(val);
+        //     });
 
         // $(".user-list").click(function (e) {
         //     var array = {
@@ -1223,16 +1223,16 @@
         //         console.log(val);
         //     });
         // });
-        $(".user-list").click(function (e) {
-            var array = {
-                "sender_id": 2,
-                "receiver_id": 5
-            };
-            socket.emit('user_chat_list', array);
-            socket.on('user_chat_list', function (val) {
-                console.log(val);
-            });
-        });
+        // $(".user-list").click(function (e) {
+        //     var array = {
+        //         "sender_id": 2,
+        //         "receiver_id": 5
+        //     };
+        //     socket.emit('user_chat_list', array);
+        //     socket.on('user_chat_list', function (val) {
+        //         console.log(val);
+        //     });
+        // });
 
     </script>
 
