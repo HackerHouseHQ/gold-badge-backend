@@ -817,7 +817,7 @@
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header custom_modal_header">
-        <h4 class="modal-title text-capitalize" id="reason">Post Vote List</h4>
+        <h4 class="modal-title text-capitalize" id="reason">Post Rate List</h4>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -987,7 +987,7 @@
             type: 'get',
             success: function (response) {
                 if (response.length) {
-                    console.log('aaa--', response);
+                    // console.log('aaa--', response);
                     $('#vote_list').html('');
                     // $('#noData').css("display","block");
                     var i = 0;
@@ -1054,7 +1054,7 @@
             type: 'get',
             success: function (response) {
                 if (response.length) {
-                    console.log('aaa--', response);
+                    // console.log('aaa--', response);
                     $('#reason_list').html('');
                     // $('#noData').css("display","block");
                     var i = 0;
@@ -1264,7 +1264,7 @@
                     $('#viewDepartmentShare').append(row)
                 });
 
-                console.log(response);
+                // console.log(response);
 
                 $('#viewUserDetailShareModel').modal('show');
             },
@@ -1354,7 +1354,7 @@
                     $('#viewDepartmentLike').append(row)
                 });
 
-                console.log(response);
+                // console.log(response);
 
                 $('#viewUserDetailLikeModel').modal('show');
             },
@@ -1479,7 +1479,7 @@
             <p class="form_fields">${response.rating} <a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailBadgeRating(${response.id})'>view list</a></p>
             </div>
             <div class="form_div">
-            <p class="form_fields">Vote:</p>
+            <p class="form_fields">Rate:</p>
             <p class="form_fields">${response.vote}<a href='javascript:void(0)'style="padding-left:10px;" onclick ='viewUserDetailVoteRating(${response.id})'>view list</a></p>
             </div>
 
@@ -1595,7 +1595,7 @@
 
     // Get the image and insert it inside the modal - use its "alt" text as a caption
     var imgPost = document.getElementById("myPostImg");
-    console.log(imgPost);
+    // console.log(imgPost);
     var modalPostImg = document.getElementById("imgPost01");
     // var captionText = document.getElementById("caption");
 

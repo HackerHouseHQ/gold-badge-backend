@@ -344,7 +344,7 @@
             url: "{{ route('viewUserDetailModel') }}/" + id,
             type: 'get',
             success: function (response) {
-                console.log(response.departments.image);
+                // console.log(response.departments.image);
                 if (typeof response.departments.image != "undefined") {
                     $('#userImage').html(`<img
               src="${response.departments.image}"

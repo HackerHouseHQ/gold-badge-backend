@@ -290,7 +290,7 @@
             url: "{{ route('viewNotificationModel') }}/" + id,
             type: 'get',
             success: function (response) {
-                console.log(response);
+                // console.log(response);
                 var space = " ";
                 if (response) {
 
@@ -300,7 +300,7 @@
                 } else {
                     let row = `
                 <span>
-                  Record not found! 
+                  Record not found!
                 </span>
                 `;
                     $('#notificationDetail').html(row);
