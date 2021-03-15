@@ -1565,12 +1565,13 @@ class UserController extends Controller
     public function getBadgeData(Request $request)
     {
         try {
+            Log::info($request->all());
             $badge_id = $request->badge_id;
             $filter_by_date = $request->filter_date;
             $siteUrl = env('APP_URL');
             $badge = DepartmentBadge::with('department_data')->whereId($badge_id)->first();
             $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->get()->toArray();
-            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
+            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->count();
             $badgerating = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->avg('rating');
             $reasons =  ReportReasson::get();
             $postIdsArray     =   array_column($posts, 'id');
@@ -1624,7 +1625,7 @@ class UserController extends Controller
                     $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                 });
             }
-            Log::info($request->all());
+
             if (!empty($filter_by_date) && $filter_by_date != 0) {
                 $todaydate = date("Y-m-d"); // current date
                 $after_one_week_date = date("Y-m-d", strtotime("-1 week"));
