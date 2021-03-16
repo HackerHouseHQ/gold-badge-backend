@@ -45,70 +45,70 @@ class GalleryController extends Controller
     // }
     public function saveGalleryImage(Request $request)
     {
-        // try {
-        // check user is active or in active
+        try {
+            // check user is active or in active
 
-        $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
-        if (!$checkActive) {
-            throw new Exception(trans('messages.contactAdmin'), 401);
-        }
-        $saveFile = $request->saveFile;
-        $media_type = $request->media_type;
-        $videoFile = $request->videoFile;
-        if (isset($saveFile) && !empty($saveFile)) {
-            $arr = $saveFile;
-            if (!is_array($arr)) {
-                $arr = json_decode($arr, true);
+            $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
+            if (!$checkActive) {
+                throw new Exception(trans('messages.contactAdmin'), 401);
             }
-            $i = 1;
-            $j = 0;
-            foreach ($arr as $image) {
-                $file = $image;
-                $extension = $file->getClientOriginalExtension();
-                $filename = time()  . "$i" . "." . $extension;
-                $path = storage_path() . '/app/public/uploads/gallery_image';
-                if (!file_exists($path)) {
-                    mkdir($path, 777, true);
+            $saveFile = $request->saveFile;
+            $media_type = $request->media_type;
+            $videoFile = $request->videoFile;
+            if (isset($saveFile) && !empty($saveFile)) {
+                $arr = $saveFile;
+                if (!is_array($arr)) {
+                    $arr = json_decode($arr, true);
                 }
-                $img = Image::make($file->getRealPath());
-                $img->orientate();
-                $img->resize(1000, 1000, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
-                })->save($path . '/' . $filename);
-
-
-                // $file->move($path, $filename);
-
-                if (!empty($videoFile)) {
-                    $videoFile = $videoFile[$j];
-                    $videoExtension = $videoFile->getClientOriginalExtension();
-                    $videoFilename = time()  . "$i" . "." . $videoExtension;
-                    $videoPath = storage_path() . '/app/public/uploads/gallery_video';
-                    if (!file_exists($videoPath)) {
-                        mkdir($videoPath, 777, true);
+                $i = 1;
+                $j = 0;
+                foreach ($arr as $image) {
+                    $file = $image;
+                    $extension = $file->getClientOriginalExtension();
+                    $filename = time()  . "$i" . "." . $extension;
+                    $path = storage_path() . '/app/public/uploads/gallery_image';
+                    if (!file_exists($path)) {
+                        mkdir($path, 777, true);
                     }
-                    $videoFile->move($videoPath, $videoFilename);
+                    $img = Image::make($file->getRealPath());
+                    $img->orientate();
+                    $img->resize(1000, 1000, function ($constraint) {
+                        $constraint->aspectRatio();
+                        $constraint->upsize();
+                    })->save($path . '/' . $filename);
+
+
+                    // $file->move($path, $filename);
+
+                    if (!empty($videoFile)) {
+                        $videoFile = $videoFile[$j];
+                        $videoExtension = $videoFile->getClientOriginalExtension();
+                        $videoFilename = time()  . "$i" . "." . $videoExtension;
+                        $videoPath = storage_path() . '/app/public/uploads/gallery_video';
+                        if (!file_exists($videoPath)) {
+                            mkdir($videoPath, 777, true);
+                        }
+                        $videoFile->move($videoPath, $videoFilename);
+                    }
+                    $insertArray = [
+                        'user_id' => Auth::user()->id,
+                        'image'  => $filename,
+                        'video' => (!empty($videoFile)) ? $videoFilename : null,
+                        'media_type' => $media_type,
+                        'created_at' => CURRENT_DATE,
+                        'updated_at' => CURRENT_DATE
+                    ];
+                    $insertData = GalleryImages::insert($insertArray);
+                    $i++;
+                    $j++;
                 }
-                $insertArray = [
-                    'user_id' => Auth::user()->id,
-                    'image'  => $filename,
-                    'video' => (!empty($videoFile)) ? $videoFilename : null,
-                    'media_type' => $media_type,
-                    'created_at' => CURRENT_DATE,
-                    'updated_at' => CURRENT_DATE
-                ];
-                $insertData = GalleryImages::insert($insertArray);
-                $i++;
-                $j++;
             }
+            if ($insertData) {
+                return  res_success('Images saved successfully.');
+            }
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
         }
-        if ($insertData) {
-            return  res_success('Images saved successfully.');
-        }
-        // } catch (Exception $e) {
-        //     return res_failed($e->getMessage(), $e->getCode());
-        // }
     }
     public function getGalleryImage(Request $request)
     {

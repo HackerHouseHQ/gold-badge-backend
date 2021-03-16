@@ -1565,7 +1565,7 @@ class UserController extends Controller
     public function getBadgeData(Request $request)
     {
         try {
-            Log::info($request->all());
+            // Log::info($request->all());
             $badge_id = $request->badge_id;
             $filter_by_date = $request->filter_date;
             $siteUrl = env('APP_URL');
