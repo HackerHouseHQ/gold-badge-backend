@@ -9,8 +9,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class GalleryController extends Controller
 {
@@ -47,13 +49,30 @@ class GalleryController extends Controller
     {
         try {
             // check user is active or in active
-
+            Log::info($request->all());
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+
+            $validator = Validator::make(
+                $request->all(),
+                [
+
+                    'media_type' => 'required',
+                    'saveFile' =>  'required|array',
+                    'videoFile' => 'nullable|array'
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $saveFile = $request->saveFile;
-            $media_type = $request->media_type;
+            $media_type = $request->media_type; //0 => video 1=>image
             $videoFile = $request->videoFile;
             if (isset($saveFile) && !empty($saveFile)) {
                 $arr = $saveFile;
@@ -104,7 +123,11 @@ class GalleryController extends Controller
                 }
             }
             if ($insertData) {
-                return  res_success('Images saved successfully.');
+                if ($media_type) {
+                    return  res_success('Image saved successfully.');
+                } else {
+                    return  res_success('Video saved successfully.');
+                }
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
