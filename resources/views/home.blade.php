@@ -1193,7 +1193,7 @@
         // var time = '10:02:10';
         // var room_id = '34322312';
         // var port_url = "{{env('PORT_URL')}}";
-        // var socket = io.connect(port_url);
+        // var socket = io.connect('https://www.goldbadge.com:4005', {secure: true});
         // $(".send-msg").click(function (e) {
         //     var room_id = 8621516254; //$('#room').val();
         //     var sender_id = 4; //$('#user').val();
