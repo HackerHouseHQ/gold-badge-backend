@@ -1216,7 +1216,7 @@ class UserController extends Controller
                 if ($userNotify) {
                     $notification = sendFCM('Gold Badge', $user->user_name . ' rated on your post.', $userNotify);
                 }
-                return res_success('Vote saved successfully.');
+                return res_success('Rate saved successfully.');
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
