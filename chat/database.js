@@ -6,6 +6,7 @@ var connection = mysql.createConnection({
     database: "gold_badge",
     charset: "utf8mb4"
 });
+
 connection.connect(function (err) {
     if (err) {
         console.error("error connecting: " + err.stack);
@@ -13,7 +14,7 @@ connection.connect(function (err) {
     }
     console.log("connected as id " + connection.threadId);
 });
-let dbConfig ={
+let dbConfig = {
     host: "localhost",
     user: "root",
     password: "goldbadge@!!!1",

@@ -839,7 +839,6 @@ class PostController extends Controller
             DepartmentVote::where('post_id', $request->post_id)->delete();
             DepartmentSubComment::where('post_id', $request->post_id)->delete();
             DepartmentComment::where('post_id', $request->post_id)->delete();
-
             $deletePost = Post::where('id', $request->post_id)->delete();
             return res_success('Your post is deleted successfully.');
         } catch (Exception $e) {
