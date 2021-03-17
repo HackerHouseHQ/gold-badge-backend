@@ -1102,7 +1102,7 @@ class UserController extends Controller
                 [
                     'post_id' => 'required|numeric|exists:posts,id',
                     'user_id' => 'required|numeric|exists:users,id',
-                    'comment_id' => 'required|numeric|exists:department_coments,id',
+                    'comment_id' => 'required|numeric|exists:department_comments,id',
 
                 ]
             );
