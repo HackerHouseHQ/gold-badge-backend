@@ -18,7 +18,7 @@ class DepartmentReport extends Model
     public function getdata_table($order_by, $offset, $limit_t, $status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id)
     {
         $query  = self::query()->select(
-            'posts.id',
+            'posts.id as post_id',
             'users.user_name',
             'users.first_name',
             'users.last_name',
@@ -83,7 +83,7 @@ class DepartmentReport extends Model
     public function getdata_count($status_id, $state_id, $country_id, $fromdate, $todate, $search, $department_id, $badge_id)
     {
         $query  = self::query()->select(
-            'posts.id',
+            'posts.id as post_id',
             'users.user_name',
             'users.first_name',
             'users.last_name',
