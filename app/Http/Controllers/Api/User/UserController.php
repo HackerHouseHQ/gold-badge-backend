@@ -389,10 +389,10 @@ class UserController extends Controller
                 $validator = Validator::make(
                     $request->all(),
                     [
-                        'department_id' => 'required|numeric',
+                        'department_id' => 'required|numeric|exists:departments,id',
                         'rating' => 'required|numeric',
                         'comment' => 'required|string',
-                        'user_id' => 'required|numeric',
+                        'user_id' => 'required|numeric|exists:users,id',
                         'stay_anonymous' => 'required|boolean',
                         // 'upLoadFile' => 'nullable|array',
                         'media_type' =>  'nullable', // 0 =>video , 1 => image
@@ -512,13 +512,13 @@ class UserController extends Controller
                 $validator = Validator::make(
                     $request->all(),
                     [
-                        'department_id' => 'required|numeric',
-                        'badge_id' => 'required|numeric',
+                        'department_id' => 'required|numeric|exists:departments,id',
+                        'badge_id' => 'required|numeric|exists:department_badges,id',
                         'ratingArr' => 'required|array',
                         // 'ratingArr.*.reason_id' => 'required|numeric',
                         // 'ratingArr.*.rating' => 'required|numeric',
                         'comment' => 'required|string',
-                        'user_id' => 'required|numeric',
+                        'user_id' => 'required|numeric|exists:users,id',
                         'stay_anonymous' => 'required|boolean',
                         // 'upLoadFile' => 'required|array',
                         'media_type' => 'nullable', // 0 =>video , 1 => image
@@ -905,6 +905,20 @@ class UserController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $alreadyLiked = DepartmentLike::where('user_id', $user_id)->where('post_id', $post_id)->first();
@@ -952,6 +966,20 @@ class UserController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $alreadyShared = DepartmentShare::where('user_id', $user_id)->where('post_id', $post_id)->first();
@@ -996,6 +1024,20 @@ class UserController extends Controller
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -1054,6 +1096,21 @@ class UserController extends Controller
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+                    'comment_id' => 'required|numeric|exists:department_coments,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
@@ -1116,6 +1173,20 @@ class UserController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
             $siteUrl = env('APP_URL');
@@ -1165,6 +1236,20 @@ class UserController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $user_id = $request->user_id;
             $post_id = $request->post_id;
             $report_message_id = $request->report_message_id;
@@ -1196,6 +1281,20 @@ class UserController extends Controller
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
             }
             $user_id = $request->user_id;
             $post_id = $request->post_id;

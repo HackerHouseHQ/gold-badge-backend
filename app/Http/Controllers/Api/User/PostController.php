@@ -45,6 +45,21 @@ class PostController extends Controller
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+                    'comment_id' => 'required|numeric|exists:department_comments,id'
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
+            }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
             $comment_id = $request->comment_id;
@@ -90,6 +105,22 @@ class PostController extends Controller
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
+            }
+            $validator = Validator::make(
+                $request->all(),
+                [
+                    'post_id' => 'required|numeric|exists:posts,id',
+                    'user_id' => 'required|numeric|exists:users,id',
+                    'comment_id' => 'required|numeric|exists:department_comments,id',
+                    'sub_comment_id' => 'required|numeric|exists:department_sub_comments,id'
+
+                ]
+            );
+            /**
+             * Check input parameter validation
+             */
+            if ($validator->fails()) {
+                return res_validation_error($validator); //Sending Validation Error Message
             }
             $post_id = $request->post_id;
             $user_id = $request->user_id;
