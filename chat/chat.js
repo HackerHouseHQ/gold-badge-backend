@@ -22,7 +22,6 @@ module.exports = {
                         created_at: current
                     }
                 ];
-                console.log(users);
                 io.to(room_id).emit("receive_message", {
                     status: true,
                     message: "SUCCESS",
@@ -104,6 +103,9 @@ module.exports = {
                     }
                     // connected!
                 });
+            });
+            socket.on('disconnect', () => {
+                console.log('user disconnected');
             });
         });
     }
