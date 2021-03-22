@@ -191,7 +191,6 @@ class Department extends Model
         if ($city_id) {
             $query->Where('departments.city_id', $city_id);
         }
-        $query->where('posts.consider_rating', 1);
         $data = $query->get();
         return $data;
     }
