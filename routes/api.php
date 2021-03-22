@@ -90,6 +90,7 @@ Route::group(['prefix' => 'user', 'namespace' => 'Api\User'], function () {
         Route::post('/editProfile', 'UserController@editProfile');
         Route::get('/getEditprofileData', 'UserController@getEditprofileData');
         Route::post('/notificationStatus', 'LoginController@change_notification_status');
+        Route::post('/chatStatus', 'LoginController@change_chat_status');
         Route::post('/getBadgesOfDepartment', 'DepartmentController@getBadgesOfDepartment');
         Route::post('/getDepartmentOfBadge', 'DepartmentController@getDepartmentOfBadge');
         Route::get('/read_notification', 'InformationManagementController@read_notification');

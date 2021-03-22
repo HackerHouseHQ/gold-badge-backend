@@ -131,7 +131,24 @@ class LoginController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-
+    /**
+     * change notification status .
+     *
+     * @return Json
+     *
+     */
+    public function change_chat_status(Request $request)
+    {
+        try {
+            $user = User::whereId(Auth::user()->id)->first();
+            $chat_status = $request->chat_status;
+            //update user chat status
+            $update = User::whereId(Auth::user()->id)->update(['chat_status' => $chat_status]);
+            return res_success(trans('messages.chatStatus'));
+        } catch (Exception $e) {
+            return res_failed($e->getMessage(), $e->getCode());
+        }
+    }
     public function logout(Request $request)
     {
         $token = $request->user()->token();

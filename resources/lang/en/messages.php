@@ -23,5 +23,7 @@ return [
     "requestInProcess" => "Your request in process.",
     "numberNotExists"  =>  "Mobile number does not exits.",
     "contactAdmin" => "Contact to admin.",
-    "notificationStatus" => "Notification status changed successfully,"
+    "notificationStatus" => "Notification status changed successfully.",
+    "chatStatus" => "Chat status changed successfully."
+
 ];
