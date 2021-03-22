@@ -181,7 +181,7 @@ class Department extends Model
         )->leftjoin("posts", function ($join) {
             $join->on('departments.id', '=', 'posts.department_id');
         })->groupBy('departments.id')
-            ->where('posts.flag', 1)->where('posts.consider_rating', 1);
+            ->where('flag', 1);
         if ($country_id) {
             $query->Where('departments.country_id', $country_id);
         }
