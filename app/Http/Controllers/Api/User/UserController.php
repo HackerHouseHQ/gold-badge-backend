@@ -1439,6 +1439,7 @@ class UserController extends Controller
         $is_followed_by_user = $request->is_followed_by_user;
         $departmentAll = Department::getDepartmentListAll($countryId, $stateId, $cityId);
         $department = Department::getDepartmentList($countryId, $stateId, $cityId);
+        Log::info($department);
         $departmentfollowedbyuser = [];
         foreach ($departmentAll as $value) {
             $value['total_reviews'] = 0;
