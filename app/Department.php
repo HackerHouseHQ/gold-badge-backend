@@ -174,7 +174,7 @@ class Department extends Model
     {
         $query = self::query()->select(
             'departments.id as department_id',
-            'departments.department_name',
+            'departments.department_nam',
             'posts.flag',
             DB::raw('COUNT(posts.department_id) as total_reviews'),
             DB::raw('AVG(posts.rating) as rating')
@@ -191,7 +191,6 @@ class Department extends Model
         if ($city_id) {
             $query->Where('departments.city_id', $city_id);
         }
-        $query->where('posts.consider_rating', 1);
         $data = $query->get();
         return $data;
     }
