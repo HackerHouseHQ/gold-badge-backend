@@ -17,13 +17,12 @@ class ManageDataController extends Controller
      * reason question list .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
     public function reasonQuestionList()
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -38,8 +37,7 @@ class ManageDataController extends Controller
      * Show ethnicity List.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
 
     public function getEthnicity()
@@ -55,8 +53,7 @@ class ManageDataController extends Controller
      * Show report List.
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
 
     public function getReport()

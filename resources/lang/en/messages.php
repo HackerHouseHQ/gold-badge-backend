@@ -1,7 +1,7 @@
 <?php
 
 return [
-
+    'emailExist' => 'Email already exists.',
     'userNotExists' => 'User does not exists.',
     'vendorNotExists' => 'Vendor does not exists.',
     'vendorAlreadyHired' => 'Vendor is already hired.',

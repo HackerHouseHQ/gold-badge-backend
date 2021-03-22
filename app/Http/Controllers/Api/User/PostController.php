@@ -34,7 +34,6 @@ class PostController extends Controller
      * save post department Like .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function saveCommentLike(Request $request)
@@ -95,7 +94,6 @@ class PostController extends Controller
      * save sub comment Like .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function saveSubCommentLike(Request $request)

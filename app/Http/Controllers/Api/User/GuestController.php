@@ -24,8 +24,7 @@ class GuestController extends Controller
      * guest Login .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
     public function guestLogin(Request $request)
     {
@@ -61,8 +60,7 @@ class GuestController extends Controller
      * homepage .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
     public function homepage(Request $request)
     {
@@ -86,7 +84,7 @@ class GuestController extends Controller
                     ->orderBy('created_at', 'DESC')
                     ->paginate(50);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -132,7 +130,7 @@ class GuestController extends Controller
                     ->orderBy('post_like_count', 'desc')
                     ->paginate(50);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();
@@ -179,7 +177,7 @@ class GuestController extends Controller
                     ->orderBy('post_share_count', 'desc')
                     ->paginate(50);
                 foreach ($posts as $post) {
-                    //flag =1 , 1 => department , 2 => badge 
+                    //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
                         // get department w.r.t given department id
                         $departmentPostData = Post::where('department_id', $post->department_id)->get();

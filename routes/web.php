@@ -8,12 +8,14 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/logout', 'Auth\LoginController@logout');
-Route::get('/privacy_policy', function () {
-    return view('privacy_policy');
-});
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/privacy_policy', 'privacy_policy');
+// Route::get('/privacy_policy', function () {
+//     return view('privacy_policy');
+// });
+Route::view('/', 'welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/forgot-password', 'Auth\ForgotPasswordController@forgotPasswordPage')->name('forgot-password');
 Route::post('/forgot-mail', 'Auth\ForgotPasswordController@forgot_password')->name('forgot-mail');
 

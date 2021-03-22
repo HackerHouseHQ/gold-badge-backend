@@ -23,13 +23,12 @@ class DepartmentController extends Controller
      * save department request .
      *
      * @return Json
-     * @author Ratnesh Kumar 
-     * 
+     *
      */
     public function saveDepartmentRequest(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -73,7 +72,7 @@ class DepartmentController extends Controller
     public function departmentFollow(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
@@ -130,7 +129,7 @@ class DepartmentController extends Controller
     public function getBadgesOfDepartment(Request $request)
     {
         try {
-            //get  badges w.r.t given department_id 
+            //get  badges w.r.t given department_id
 
             $department_id = $request->department_id;
             $badges =  DepartmentBadge::select(

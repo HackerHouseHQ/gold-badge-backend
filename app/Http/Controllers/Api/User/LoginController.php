@@ -21,7 +21,6 @@ class LoginController extends Controller
      * send otp to mail .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function sendOtpToMail(Request $request)
@@ -68,7 +67,6 @@ class LoginController extends Controller
      * verify otp .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function verifyOtp(Request $request)
@@ -118,7 +116,6 @@ class LoginController extends Controller
      * change notification status .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function change_notification_status(Request $request)

@@ -43,7 +43,6 @@ class UserController extends Controller
      * Show country List.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function getCountryList()
@@ -53,7 +52,7 @@ class UserController extends Controller
             if (count($country) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('countryList' => $country));
             } else {
-                return res_success('No record found', (object) array('countryList' => $country));
+                return res_success(trans('messages.dataNotExists'), (object) array('countryList' => $country));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -65,7 +64,6 @@ class UserController extends Controller
      *
      * @param int $countryId
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function getStateList(Request $request)
@@ -76,7 +74,7 @@ class UserController extends Controller
             if (count($state) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('stateList' => $state));
             } else {
-                return res_success('No record found', (object) array('stateList' => $state));
+                return res_success(trans('messages.dataNotExists'), (object) array('stateList' => $state));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -87,7 +85,6 @@ class UserController extends Controller
      *
      * @param int $countryId , $stateId
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function getCityList(Request $request)
@@ -102,7 +99,7 @@ class UserController extends Controller
             if (count($city) > 0) {
                 return res_success(trans('messages.successFetchList'), (object) array('cityList' => $city));
             } else {
-                return res_success('No record found', (object) array('cityList' => $city));
+                return res_success(trans('messages.dataNotExists'), (object) array('cityList' => $city));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -113,7 +110,6 @@ class UserController extends Controller
      *
      * @param int $mobileNumber
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function checkMobileNoExistence(Request $request)
@@ -136,7 +132,6 @@ class UserController extends Controller
      *
      * @param int $countryId , $stateId , $cityId
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function DepartmentList(Request $request)
@@ -208,7 +203,6 @@ class UserController extends Controller
      * sign up user.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
 
@@ -240,7 +234,7 @@ class UserController extends Controller
             }
             $checkemail = User::where('email', $request->email)->first();
             if ($checkemail) {
-                throw new Exception('Email already exists.', DATA_EXISTS);
+                throw new Exception(trans('messages.emailExist'), DATA_EXISTS);
             }
             $file = $request->image;
             $extension = $file->getClientOriginalExtension();
@@ -323,7 +317,6 @@ class UserController extends Controller
      * Check username  and email existence.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function checkUserNameEmail(Request $request)
@@ -365,7 +358,6 @@ class UserController extends Controller
      * save post review .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     function compress_image($source_url, $destination_url, $quality)
@@ -657,7 +649,6 @@ class UserController extends Controller
      * get post department .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function getPostDepartment(Request $request)
@@ -894,7 +885,6 @@ class UserController extends Controller
      * save post department Like .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function savePostDepartmentLike(Request $request)
@@ -955,7 +945,6 @@ class UserController extends Controller
      * save post department Share .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function savePostDepartmentShare(Request $request)
@@ -1014,7 +1003,6 @@ class UserController extends Controller
      * save post department comment .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function  savePostDepartmentComment(Request $request)
@@ -1086,7 +1074,6 @@ class UserController extends Controller
      * save post department sub comment .
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function  savePostDepartmentSubComment(Request $request)
@@ -1162,7 +1149,6 @@ class UserController extends Controller
      *  post department  comment  list.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function getPostDepartmentCommentList(Request $request)
@@ -1225,7 +1211,6 @@ class UserController extends Controller
      * save post department  report.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function savePostReport(Request $request)
@@ -1271,7 +1256,6 @@ class UserController extends Controller
      * save post department  vote.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function savePostVote(Request $request)
@@ -1325,7 +1309,6 @@ class UserController extends Controller
      * login.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
 
@@ -1385,7 +1368,6 @@ class UserController extends Controller
      * department badge list.
      *
      * @return Json
-     * @author Ratnesh Kumar
      *
      */
     public function departmentBadgeList(Request $request)
@@ -1679,7 +1661,7 @@ class UserController extends Controller
             $data['department_id'] = $badge->department_id;
             $data['department_name'] = $badge->department_data->department_name;
             $data['avgRating'] = ($badgerating) ? ($badgerating) : 0.0;
-            $data['total_reviews'] = $totalpost;
+            $data['total_reviews'] = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
             $data['reasons_percentage'] = [];
             foreach ($reasons as $key => $reason) {
                 $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->count();
