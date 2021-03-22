@@ -174,7 +174,7 @@ class Department extends Model
     {
         $query = self::query()->select(
             'departments.id as department_id',
-            'departments.department_nam',
+            'departments.department_name',
             'posts.flag',
             DB::raw('COUNT(posts.department_id) as total_reviews'),
             DB::raw('AVG(posts.rating) as rating')
