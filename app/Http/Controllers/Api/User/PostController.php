@@ -248,7 +248,7 @@ class PostController extends Controller
                 else
                     return 0;
             });
-            $data = paginateWithoutKey($request, $arr);
+            $data = paginateWithoutKey($request, $arr, 10);
 
             // // Get current page form url e.x. &page=1
             // $currentPage = LengthAwarePaginator::resolveCurrentPage();
