@@ -153,7 +153,7 @@ class GalleryController extends Controller
                 )->where('user_id', Auth::user()->id)->where('created_at', 'LIKE', '%' . date('Y-m-d', strtotime($value->date)) . '%')->latest()->get();
                 $value->images  = $images;
             }
-            return res_success(trans('messages.successFetchList'), array('galleryImages' => paginateWithoutKey($request, $data)));
+            return res_success(trans('messages.successFetchList'), array('galleryImages' => paginateWithoutKey($request, $data, 2)));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
