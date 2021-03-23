@@ -19,13 +19,13 @@ class ChatController extends Controller
     public function user_list(Request $request)
     {
         try {
-            // check user is active or in active 
+            // check user is active or in active
             $checkActive = User::whereId(Auth::user()->id)->where('status', ACTIVE)->first();
             if (!$checkActive) {
                 throw new Exception(trans('messages.contactAdmin'), 401);
             }
             $siteUrl = env('APP_URL');
-            $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
+            $chat_list1 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at',  'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
                 ->leftJoin('users', 'users.id', '=', 'chats.sender_id')
                 ->where('receiver_id', $request->user_id);
             $chat_list2 = Chat::select('room_id', 'message', 'sender_id', 'receiver_id', 'chats.created_at', 'users.user_name', DB::raw("CONCAT('$siteUrl','storage/uploads/user_image/', users.image) as user_image"), 'users.id as user_id')
@@ -36,6 +36,15 @@ class ChatController extends Controller
             $arr = [];
             $room_id_array = [];
             foreach ($data as $key => $value) {
+                $sender = User::whereId($value->sender_id)->first();
+                $receiver = User::whereId($value->receiver_id)->first();
+                if ($sender->chat_status == 0 || $receiver->chat_status == 0) {
+                    $value->chat_status = 0;
+                } else {
+                    $value->chat_status  = 1;
+                }
+
+
                 if (!in_array($value['room_id'], $room_id_array)) {
                     $destroyTime = DestoryChat::where('sender_id', Auth::user()->id)->where('receiver_id', $value['user_id'])->first();
                     $chatCount = 0;
