@@ -1667,10 +1667,10 @@ class UserController extends Controller
             $data['total_reviews'] = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
             $data['reasons_percentage'] = [];
             foreach ($reasons as $key => $reason) {
-                $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->count();
+                $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->avg('rating');
                 $data['reasons_percentage'][] = [
                     'reason_name' => $reason->name,
-                    'percentage' => ($total / ($totalpost * $reasons->count())) * 100
+                    'percentage' => ($total / 5) * 100
                 ];
                 # code...
             }
