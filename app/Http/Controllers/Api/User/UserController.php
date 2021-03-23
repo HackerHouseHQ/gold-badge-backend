@@ -1670,7 +1670,7 @@ class UserController extends Controller
                 $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->avg('rating');
                 $data['reasons_percentage'][] = [
                     'reason_name' => $reason->name,
-                    'percentage' => ($total / 5) * 100
+                    'percentage' => ($total / ($totalpost * 5)) * 100
                 ];
                 # code...
             }
