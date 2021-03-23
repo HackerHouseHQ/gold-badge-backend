@@ -5,6 +5,9 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+
 
 if (!function_exists('res')) {
     function res($status = 200, $msg = '', $data = [])
@@ -156,5 +159,31 @@ if (!function_exists('sendFCM')) {
             return null;
         } catch (Exception $e) {
         }
+    }
+}
+if (!function_exists('paginateWithoutKey')) {
+    function paginateWithoutKey($request, $items, $perPage = 30, $page = null, $options = [])
+    {
+
+        $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
+
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+        $lap->setPath($request->url());
+
+        return [
+            'current_page' => $lap->currentPage(),
+            'data' => $lap->values(),
+            'first_page_url' => $lap->url(1),
+            'from' => $lap->firstItem(),
+            'last_page' => $lap->lastPage(),
+            'last_page_url' => $lap->url($lap->lastPage()),
+            'next_page_url' => $lap->nextPageUrl(),
+            'per_page' => $lap->perPage(),
+            'prev_page_url' => $lap->previousPageUrl(),
+            'to' => $lap->lastItem(),
+            'total' => $lap->total(),
+        ];
     }
 }

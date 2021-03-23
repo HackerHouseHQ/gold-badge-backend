@@ -248,7 +248,7 @@ class PostController extends Controller
                 else
                     return 0;
             });
-            $data = $this->paginateWithoutKey($request, $arr);
+            $data = paginateWithoutKey($request, $arr);
 
             // // Get current page form url e.x. &page=1
             // $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -272,30 +272,30 @@ class PostController extends Controller
             return res_failed($e->getMessage(), $e->getCode());
         }
     }
-    public function paginateWithoutKey($request, $items, $perPage = 30, $page = null, $options = [])
-    {
+    // public function paginateWithoutKey($request, $items, $perPage = 30, $page = null, $options = [])
+    // {
 
-        $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
+    //     $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);
 
-        $items = $items instanceof Collection ? $items : Collection::make($items);
+    //     $items = $items instanceof Collection ? $items : Collection::make($items);
 
-        $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
-        $lap->setPath($request->url());
+    //     $lap = new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
+    //     $lap->setPath($request->url());
 
-        return [
-            'current_page' => $lap->currentPage(),
-            'data' => $lap->values(),
-            'first_page_url' => $lap->url(1),
-            'from' => $lap->firstItem(),
-            'last_page' => $lap->lastPage(),
-            'last_page_url' => $lap->url($lap->lastPage()),
-            'next_page_url' => $lap->nextPageUrl(),
-            'per_page' => $lap->perPage(),
-            'prev_page_url' => $lap->previousPageUrl(),
-            'to' => $lap->lastItem(),
-            'total' => $lap->total(),
-        ];
-    }
+    //     return [
+    //         'current_page' => $lap->currentPage(),
+    //         'data' => $lap->values(),
+    //         'first_page_url' => $lap->url(1),
+    //         'from' => $lap->firstItem(),
+    //         'last_page' => $lap->lastPage(),
+    //         'last_page_url' => $lap->url($lap->lastPage()),
+    //         'next_page_url' => $lap->nextPageUrl(),
+    //         'per_page' => $lap->perPage(),
+    //         'prev_page_url' => $lap->previousPageUrl(),
+    //         'to' => $lap->lastItem(),
+    //         'total' => $lap->total(),
+    //     ];
+    // }
 
     private function postLiked($user_id)
     { // post like by user
