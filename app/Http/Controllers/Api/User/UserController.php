@@ -1654,8 +1654,8 @@ class UserController extends Controller
             $filter_by_date = $request->filter_date;
             $siteUrl = env('APP_URL');
             $badge = DepartmentBadge::with('department_data')->whereId($badge_id)->first();
-            $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->get()->toArray();
-            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->count();
+            $posts  = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->get()->toArray();
+            $totalpost = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
             $badgerating = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->avg('rating');
             $reasons =  ReportReasson::get();
             $postIdsArray     =   array_column($posts, 'id');
@@ -1667,11 +1667,18 @@ class UserController extends Controller
             $data['total_reviews'] = Post::where('badge_id', $badge_id)->where('flag', 2)->where('consider_rating', 1)->count();
             $data['reasons_percentage'] = [];
             foreach ($reasons as $key => $reason) {
-                $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->avg('rating');
-                $data['reasons_percentage'][] = [
-                    'reason_name' => $reason->name,
-                    'percentage' => ($total / ($totalpost * 5)) * 100
-                ];
+                $total = ReviewReasons::where('reason_id', $reason->id)->whereIn('post_id', $postIdsArray)->sum('rating');
+                if ($total) {
+                    $data['reasons_percentage'][] = [
+                        'reason_name' => $reason->name,
+                        'percentage' => ($total / ($totalpost * 5)) * 100
+                    ];
+                } else {
+                    $data['reasons_percentage'][] = [
+                        'reason_name' => $reason->name,
+                        'percentage' => 0
+                    ];
+                }
                 # code...
             }
             // check user is active or in active
