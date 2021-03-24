@@ -142,7 +142,7 @@ class DepartmentController extends Controller
                 ->where('department_badges.status', ACTIVE)->where('department_id', $department_id)->get();
 
             foreach ($badges as $badge) {
-                $total_reviews = Post::where('badge_id', $badge->badge_id)->count();
+                $total_reviews = Post::where('badge_id', $badge->badge_id)->where('consider_rating', 1)->count();
                 $badge['rating'] = 0;
                 $badge['total_reviews'] = $total_reviews;
                 $rating = Post::select('rating')->where('badge_id', $badge->badge_id)->where('consider_rating', 1)->avg('rating');
@@ -180,7 +180,7 @@ class DepartmentController extends Controller
                 ->where('department_badges.status', ACTIVE)->where('department_badges.id', $badge_id)->get();
 
             foreach ($badges as $badge) {
-                $total_reviews = Post::where('department_id', $badge->department_id)->count();
+                $total_reviews = Post::where('department_id', $badge->department_id)->where('consider_rating', 1)->count();
                 $badge['rating'] = 0;
                 $badge['total_reviews'] = $total_reviews;
                 $rating = Post::select('rating')->where('department_id', $badge->department_id)->where('consider_rating', 1)->avg('rating');
