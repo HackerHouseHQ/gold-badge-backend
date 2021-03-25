@@ -88,8 +88,7 @@
                 <br>
                 <br>
                 <h2> WELCOME TO GOLD BADGE</h2>
-                <h6>Contact us: <a href="mailto:goldbadge.contact@gmail.com "> goldbadge.contact@gmail.com <a>
-                </h6>
+                <h6>Contact us: <a href="mailto:goldbadge.contact@gmail.com"> goldbadge.contact@gmail.com <a></h6>
             </div>
         </div>
     </div>
