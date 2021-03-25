@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script defer src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script  defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+    <script defer src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
     <!-- Styles -->
     <style>
         html,
@@ -61,34 +61,35 @@
             text-transform: uppercase;
         }
 
-
-
     </style>
 </head>
 
 <body>
     <div class="flex-center position-ref full-height">
         @if (Route::has('login'))
-        <div class="top-right links">
-            @auth
-            <a href="{{ url('/home') }}">Home</a>
-            @else
-            <a href="{{ route('login') }}">Login</a>
+            <div class="top-right links">
+                @auth
+                    <a href="{{ url('/home') }}">Home</a>
+                @else
+                    <a href="{{ route('login') }}">Login</a>
 
-            @if (Route::has('register'))
-            {{-- <a href="{{ route('register') }}">Register</a> --}}
-            @endif
-            @endauth
-        </div>
+                    @if (Route::has('register'))
+                        {{-- <a href="{{ route('register') }}">Register</a> --}}
+                    @endif
+                @endauth
+            </div>
         @endif
 
         <div class="content">
 
             <div class="title">
-            <img style="width: 50% ; height:50%" src="{{asset('admin_new/assets/img/goldbadge_logo.png')}}" alt="Logo">
-<br>
-<br>
-                <h2> WELCOME TO GOLD BADGE ADMIN PANEL</h2>
+                <img style="width: 50% ; height:50%" src="{{ asset('admin_new/assets/img/goldbadge_logo.png') }}"
+                    alt="Logo">
+                <br>
+                <br>
+                <h2> WELCOME TO GOLD BADGE</h2>
+                <h6>Contact us: <a href="mailto:goldbadge.contact@gmail.com "> goldbadge.contact@gmail.com <a>
+                </h6>
             </div>
         </div>
     </div>
