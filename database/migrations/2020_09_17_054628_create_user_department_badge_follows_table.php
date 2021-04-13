@@ -19,7 +19,7 @@ class CreateUserDepartmentBadgeFollowsTable extends Migration
             $table->foreign('badge_id')->references('id')->on('department_badges')->onDelete('cascade');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('status')->default(1)->comment('1=> follow , 2=>unfollow');
+            $table->boolean('status')->default(1)->comment('1=> follow , 2=> unFollow');
             $table->timestamps();
         });
     }

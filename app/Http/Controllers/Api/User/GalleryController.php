@@ -91,6 +91,8 @@ class GalleryController extends Controller
                     }
                     $img = Image::make($file->getRealPath());
                     $img->orientate();
+                    $height = Image::make($file->getRealPath())->height();
+                    $width = Image::make($file->getRealPath())->width();
                     $img->resize(1000, 1000, function ($constraint) {
                         $constraint->aspectRatio();
                         $constraint->upsize();

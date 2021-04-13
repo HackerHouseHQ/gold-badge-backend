@@ -245,7 +245,7 @@ class UserController extends Controller
             }
             $img = Image::make($file->getRealPath());
             $img->orientate();
-            $img->resize(1000, 1000, function ($constraint) {
+            $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path . '/' . $filename);
@@ -1831,7 +1831,7 @@ class UserController extends Controller
             }
             $img = Image::make($file->getRealPath());
             $img->orientate();
-            $img->resize(1000, 1000, function ($constraint) {
+            $img->resize(300, 300, function ($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             })->save($path . '/' . $filename);

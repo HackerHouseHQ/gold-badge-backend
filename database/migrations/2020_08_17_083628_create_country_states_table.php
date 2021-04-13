@@ -16,7 +16,7 @@ class CreateCountryStatesTable extends Migration
         Schema::create('country_states', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('country_id');
-            $table->string('state_name');
+            $table->string('state_name', 100);
             $table->foreign('country_id')->references('id')->on('countries')->onDelete('cascade');
             $table->timestamps();
         });
