@@ -162,7 +162,7 @@ if (!function_exists('sendFCM')) {
     }
 }
 if (!function_exists('paginateWithoutKey')) {
-    function paginateWithoutKey($request, $items, $perPage = 30, $page = null, $options = [])
+    function paginateWithoutKey($request, $items, $perPage = PER_PAGE_ITEM, $page = null, $options = [])
     {
 
         $page = $page ?: (LengthAwarePaginator::resolveCurrentPage() ?: 1);

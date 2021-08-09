@@ -178,7 +178,7 @@ class PostController extends Controller
                 ->where('user_id', $user_id)
                 ->where('stay_anonymous', 0)
                 ->orderBy('created_at', 'DESC')
-                ->paginate(50);
+                ->paginate(PER_PAGE_ITEM);
             foreach ($posts as $post) {
                 //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
@@ -213,7 +213,7 @@ class PostController extends Controller
                 unset($post->consider_rating);
                 unset($post->updated_at);
             }
-            return res_success('Fetch List', array('postUserData' => $user_data,  'postList' => $posts));
+            return res_success(trans('messages.successFetchList'), array('postUserData' => $user_data,  'postList' => $posts));
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
@@ -248,7 +248,7 @@ class PostController extends Controller
                 else
                     return 0;
             });
-            $data = paginateWithoutKey($request, $arr, 10);
+            $data = paginateWithoutKey($request, $arr, PER_PAGE_ITEM);
 
             // // Get current page form url e.x. &page=1
             // $currentPage = LengthAwarePaginator::resolveCurrentPage();

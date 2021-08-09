@@ -59,7 +59,7 @@ class ManageDataController extends Controller
         // $search= $request->role;
         $data = $this->state->getdata_table($order_by, $offset, $limit_t, $search);
         $count = $this->state->getdata_count($order_by, $search);
-        $getuser = $this->manage_data($data , $offset);
+        $getuser = $this->manage_data($data, $offset);
         $results = [
             "draw" => intval($draw),
             "iTotalRecords" => $count,
@@ -68,7 +68,7 @@ class ManageDataController extends Controller
         ];
         echo json_encode($results);
     }
-    public function manage_data($data , $offset)
+    public function manage_data($data, $offset)
     {
         $arr = array();
         $i = $offset;
@@ -89,15 +89,15 @@ class ManageDataController extends Controller
 
 
 
-            $arr[$key]['SN'] =  ++$i ;
+            $arr[$key]['SN'] =  ++$i;
             $arr[$key]['country_name'] =  $data->country_name;
-            $arr[$key]['state_name'] =  ($data->state_name) ?? "" ;
+            $arr[$key]['state_name'] =  ($data->state_name) ?? "";
             $array_city = array();
             array_push($array_city, $data->city_name);
             $array_city = implode(",", $array_city);
 
 
-            $arr[$key]['city_name'] =  $viewCity ;
+            $arr[$key]['city_name'] =  $viewCity;
 
             $view1 = $view . $EditCity . $EditCountry . $EditState;
             // $arr[$key]['view'] = '<a href="#">view country department/<br>edit city list</a>';

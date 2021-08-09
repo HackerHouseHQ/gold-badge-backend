@@ -82,7 +82,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('created_at', 'DESC')
-                    ->paginate(50);
+                    ->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
@@ -128,7 +128,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('post_like_count', 'desc')
-                    ->paginate(50);
+                    ->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
@@ -175,7 +175,7 @@ class GuestController extends Controller
                     ->withCount('post_like')
                     ->withCount('post_share')
                     ->orderBy('post_share_count', 'desc')
-                    ->paginate(50);
+                    ->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {

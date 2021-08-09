@@ -24,6 +24,17 @@ return [
     "numberNotExists"  =>  "Mobile number does not exits.",
     "contactAdmin" => "Contact to admin.",
     "notificationStatus" => "Notification status changed successfully.",
-    "chatStatus" => "Chat status changed successfully."
+    "chatStatus" => "Chat status changed successfully.",
+    "signUpSuccess" => "User Signup Successfully.",
+    "usernameEmailExists" => "This username and email already exists.",
+    "usernameEmailNotExists" => "This username and email does not exists.",
+    "usernameExists" => "This username already exists.",
+    "usernameNotExists" => "This username does not exists.",
+    "emailExist" => "This email already exists.",
+    "emailNotExist" => "This email does not exists.",
+    "postSaved" => "Post Saved Successfully.",
+    "likeSaved" => "Your like has been saved successfully."
+
+
 
 ];

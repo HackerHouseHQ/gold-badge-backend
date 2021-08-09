@@ -307,7 +307,7 @@ class UserController extends Controller
             $user->expire_at = Carbon::parse($resulToken->token->expires_at)->toDateTimeString();
             $user->image = ($user->image) ? env('APP_URL')  . '/public/storage/uploads/user_image/' . $user->image : "";
             $user->percentage =  $percentage;
-            return res_success('User  Signup Successfully', $user);
+            return res_success(trans('messages.signUpSuccess'), $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
@@ -327,27 +327,27 @@ class UserController extends Controller
             if (!empty($email) && !empty($username)) {
                 $checkEmail = User::where('email', $email)->where('user_name', $username)->first();
                 if (!empty($checkEmail)) {
-                    throw new Exception('This username and email already exists.', DATA_EXISTS);
+                    throw new Exception(trans('messages.usernameEmailExists'), DATA_EXISTS);
                 } else {
-                    throw new Exception('This username and email does not exists.', NOT_EXISTS);
+                    throw new Exception(trans('messages.usernameEmailNotExists.'), NOT_EXISTS);
                 }
             }
             if ($username) {
                 $checkUsername = User::where('user_name', $username)->first();
 
                 if (!empty($checkUsername)) {
-                    throw new Exception('This username already exists.', DATA_EXISTS);
+                    throw new Exception(trans('messages.usernameExists'), DATA_EXISTS);
                 } else {
-                    throw new Exception('This username does not exists.', NOT_EXISTS);
+                    throw new Exception(trans('messages.usernameNotExists'), NOT_EXISTS);
                 }
             }
             if ($email) {
                 $checkEmail = User::where('email', $email)->first();
 
                 if (!empty($checkEmail)) {
-                    throw new Exception('This email already exists.', DATA_EXISTS);
+                    throw new Exception(trans('messages.emailExist'), DATA_EXISTS);
                 } else {
-                    throw new Exception('This email does not exists.', NOT_EXISTS);
+                    throw new Exception(trans('messages.emailNotExist'), NOT_EXISTS);
                 }
             }
         } catch (Exception $e) {
@@ -497,7 +497,7 @@ class UserController extends Controller
                     }
                 }
                 if ($insertPostId || $insertData) {
-                    return res_success('Post Saved Successfully');
+                    return res_success(trans('messages.postSaved'));
                 }
             }
             if ($request->type == 2) {
@@ -638,7 +638,7 @@ class UserController extends Controller
                         $i++;
                     }
                 }
-                return res_success('Post Saved Successfully');
+                return res_success(trans('messages.postSaved'));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -692,7 +692,7 @@ class UserController extends Controller
                         $q->orwhere('department_badges.badge_number', 'like', '%' . $search . '%');
                     });
                 }
-                $posts = $query->orderBy('posts.created_at', 'DESC')->paginate(10);
+                $posts = $query->orderBy('posts.created_at', 'DESC')->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
@@ -731,7 +731,7 @@ class UserController extends Controller
                     unset($post->updated_at);
                     unset($post->consider_rating);
                 }
-                return res_success('Fetch List', array('postList' => $posts));
+                return res_success(trans('messages.successFetchList'), array('postList' => $posts));
             }
             if ($request->type == 2) { //most liked post list
                 $user_id = $request->user_id;
@@ -762,7 +762,7 @@ class UserController extends Controller
                     });
                 }
                 $posts = $query->orderBy('post_like_count', 'desc')
-                    ->paginate(10);
+                    ->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
@@ -801,7 +801,7 @@ class UserController extends Controller
                     unset($post->updated_at);
                     unset($post->consider_rating);
                 }
-                return res_success('Fetch List', array('postList' => $posts));
+                return res_success(trans('messages.successFetchList'), array('postList' => $posts));
             }
             if ($request->type == 3) //most shared post list
             {
@@ -835,7 +835,7 @@ class UserController extends Controller
                     });
                 }
                 $posts  = $query->orderBy('post_share_count', 'desc')
-                    ->paginate(10);
+                    ->paginate(PER_PAGE_ITEM);
                 foreach ($posts as $post) {
                     //flag =1 , 1 => department , 2 => badge
                     if ($post->flag == 1) {
@@ -874,7 +874,7 @@ class UserController extends Controller
                     unset($post->updated_at);
                     unset($post->consider_rating);
                 }
-                return res_success('Fetch List', array('postList' => $posts));
+                return res_success(trans('messages.successFetchList'), array('postList' => $posts));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -935,7 +935,7 @@ class UserController extends Controller
                         $notification = sendFCM('Gold Badge', $user->user_name . ' liked your post.', $userNotify);
                     }
                 }
-                return res_success('Your like has been saved successfully.');
+                return res_success(trans('messages.likeSaved'));
             }
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
@@ -1581,7 +1581,7 @@ class UserController extends Controller
                     $q->wheredate('posts.created_at', '<=', $todate1);
                 });
             }
-            $posts = $query->orderBy('created_at', 'DESC')->paginate(10);
+            $posts = $query->orderBy('created_at', 'DESC')->paginate(PER_PAGE_ITEM);
             foreach ($posts as $post) {
                 //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
@@ -1641,7 +1641,7 @@ class UserController extends Controller
             $data['fourRating'] = $fourrating;
             $data['fiveRating'] = $fiverating;
             $data['postList'] = $posts;
-            return res_success('Department Data', $data);
+            return res_success(trans('messages.successFetchList'), $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
@@ -1737,7 +1737,7 @@ class UserController extends Controller
                     $q->wheredate('posts.created_at', '<=', $todate1);
                 });
             }
-            $postList = $query->orderBy('created_at', 'DESC')->paginate(10);
+            $postList = $query->orderBy('created_at', 'DESC')->paginate(PER_PAGE_ITEM);
             foreach ($postList as $post) {
                 //flag =1 , 1 => department , 2 => badge
                 if ($post->flag == 1) {
@@ -1774,7 +1774,7 @@ class UserController extends Controller
             }
             $data['postList'] = $postList;
 
-            return res_success('Badge Data ', $data);
+            return res_success(trans('messages.successFetchList'), $data);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
@@ -1870,7 +1870,7 @@ class UserController extends Controller
             if ($user->image != null) {
                 $user->image =  env('APP_URL') .  'storage/uploads/user_image/' . $user->image;
             }
-            return res_success('Successfully List.', $user);
+            return res_success(trans('messages.successFetchList'), $user);
         } catch (Exception $e) {
             return res_failed($e->getMessage(), $e->getCode());
         }
